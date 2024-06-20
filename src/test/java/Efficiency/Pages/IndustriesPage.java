@@ -3,6 +3,7 @@ package Efficiency.Pages;
 import Efficiency.CommonFunctions;
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.WebDriverRunner;
+import io.qameta.allure.Step;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.testng.Assert;
@@ -29,29 +30,15 @@ public class IndustriesPage extends CommonFunctions {
 
 
 
-
+    @Step("Проверка совпадения описания для блока 'Обрабатывающая промышленность'")
     public void AssertionManufacturingIndustriesDescription(String desc){
         Assert.assertEquals(desc, ManufacturingIndustriesHeader.shouldBe(visible).getText(), "Видимый текст не совпадает с текстом в запросе");
     }
 
+    @Step("Принимаем куки")
     public void AddCookies(){
         CookieButton.shouldBe(visible).click();
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
