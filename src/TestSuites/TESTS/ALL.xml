@@ -1,0 +1,15 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="ALL">
+
+    <parameter name="environment" value="local"/><!--${environment}-->
+    <parameter name="browser" value="Chrome"/>
+    <listeners>
+        <listener class-name="Efficiency.TestListener.TestListener" />
+    </listeners>
+
+    <test name="INDUSTRIES_TEST">
+        <classes>
+        <class name="Efficiency.Tests.INDUSTRIES_TEST"/>
+        </classes>
+    </test>
+</suite>
