@@ -1,5 +1,6 @@
 package Efficiency.Pages;
 
+import Efficiency.CommonFunctions;
 import com.codeborne.selenide.SelenideElement;
 import org.testng.Assert;
 
@@ -8,7 +9,7 @@ import java.util.HashMap;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$x;
 
-public class HomePage {
+public class HomePage extends CommonFunctions {
 
     //header
     private static final SelenideElement WebSiteLabel = $x("//*[@id=\"root\"]/div/header/div[1]/span");

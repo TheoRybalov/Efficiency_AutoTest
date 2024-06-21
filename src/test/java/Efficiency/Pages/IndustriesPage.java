@@ -42,4 +42,20 @@ public class IndustriesPage extends CommonFunctions {
 
 
 
+    public void TakeScreenshotOfFullPage() throws IOException {
+        String screenshotPath = "src/test/resources/screenshots/industries/current.png";
+        super.TakeScreenshotOfFullPage(screenshotPath);
+    }
+
+
+    public boolean compareScreenshots() throws IOException{
+        String screenshotPath = "src/test/resources/screenshots/industries/current.png";
+        String referencePath = "src/test/resources/screenshots/reference.png";
+        return super.compareScreenshots(screenshotPath, referencePath);
+    }
+
+
+
+
+
 }
