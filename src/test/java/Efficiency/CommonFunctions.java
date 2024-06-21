@@ -38,33 +38,33 @@ public class CommonFunctions {
         return apiDescription;
     }
 
-    public void takeScreenshot2() throws IOException {
+    public void TakeScreenshotOfFullPage(String screenshotPath) throws IOException {
         JavascriptExecutor js = (JavascriptExecutor) WebDriverRunner.getWebDriver();
         js.executeScript("document.body.style.overflow = 'hidden';");
 
 
-        Screenshot screenshot = new AShot()
+        Screenshot fullPageScreenshot = new AShot()
                 .shootingStrategy(ShootingStrategies.viewportPasting(1000))
                 .takeScreenshot(WebDriverRunner.getWebDriver());
 
-        BufferedImage screensht = screenshot.getImage();
+        BufferedImage screenshotImage = fullPageScreenshot.getImage();
 
-        File outputfile = new File("src/test/resources/screenshots/current.png");
-        outputfile.getParentFile().mkdirs();
-        ImageIO.write(screensht, "PNG", outputfile);
+        File screenshotFile = new File(screenshotPath);
+        screenshotFile.getParentFile().mkdirs();
+        ImageIO.write(screenshotImage, "PNG", screenshotFile);
 
         js.executeScript("document.body.style.overflow = 'auto';");
     }
 
-    public boolean compareScreenshots() throws IOException {
-        BufferedImage img1 = ImageIO.read(new File("src/test/resources/screenshots/current.png"));
-        BufferedImage img2 = ImageIO.read(new File("src/test/resources/screenshots/etalon.png"));
-        if (img1.getWidth() != img2.getWidth() || img1.getHeight() != img2.getHeight()) {
+    public boolean compareScreenshots(String screenshotPath, String referencePath) throws IOException {
+        BufferedImage currentPageImage = ImageIO.read(new File(screenshotPath));
+        BufferedImage referencePageImage = ImageIO.read(new File(referencePath));
+        if (currentPageImage.getWidth() != referencePageImage.getWidth() || currentPageImage.getHeight() != referencePageImage.getHeight()) {
             return true;
         }
-        for (int y = 0; y < img1.getHeight(); y++) {
-            for (int x = 0; x < img1.getWidth(); x++) {
-                if (img1.getRGB(x, y) != img2.getRGB(x, y)) {
+        for (int y = 0; y < currentPageImage.getHeight(); y++) {
+            for (int x = 0; x < currentPageImage.getWidth(); x++) {
+                if (currentPageImage.getRGB(x, y) != referencePageImage.getRGB(x, y)) {
                     return true;
                 }
             }
