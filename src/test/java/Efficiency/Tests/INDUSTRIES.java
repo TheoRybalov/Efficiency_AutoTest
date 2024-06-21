@@ -9,7 +9,7 @@ import java.io.IOException;
 
 import static com.codeborne.selenide.Selenide.open;
 
-public class INDUSTRIES_TEST extends TestBase {
+public class INDUSTRIES extends TestBase {
 
     @Test(priority = 1, description = "Отрасли. Проверка данных на плитках")
     public void PlatesCorrectData_TEST(){
@@ -18,12 +18,11 @@ public class INDUSTRIES_TEST extends TestBase {
         industriesPage.AssertionManufacturingIndustriesDescription(Desc_From_API);
     }
 
-
     @Test(priority = 11, description = "Отрасли. Сравнение вёрстки по скриншотам")
     public void MarkupScreenShot_TEST() throws IOException {
         IndustriesPage industriesPage = open(ConfigProviderInterface.industriesURL, IndustriesPage.class);
         industriesPage.AddCookies();
-        industriesPage.takeScreenshot2();
+        industriesPage.TakeScreenshotOfFullPage();
         Boolean result_of_comparing = industriesPage.compareScreenshots();
         industriesPage.AssertionCompareScreenshots(result_of_comparing);
     }
