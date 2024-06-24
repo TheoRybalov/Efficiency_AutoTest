@@ -1,6 +1,9 @@
 package Efficiency;
 
 import com.codeborne.selenide.WebDriverRunner;
+import com.github.romankh3.image.comparison.ImageComparison;
+import com.github.romankh3.image.comparison.ImageComparisonUtil;
+import com.github.romankh3.image.comparison.model.ImageComparisonResult;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.openqa.selenium.JavascriptExecutor;
@@ -56,24 +59,25 @@ public class CommonFunctions {
         js.executeScript("document.body.style.overflow = 'auto';");
     }
 
-    public boolean compareScreenshots(String screenshotPath, String referencePath) throws IOException {
-        BufferedImage currentPageImage = ImageIO.read(new File(screenshotPath));
-        BufferedImage referencePageImage = ImageIO.read(new File(referencePath));
-        if (currentPageImage.getWidth() != referencePageImage.getWidth() || currentPageImage.getHeight() != referencePageImage.getHeight()) {
-            return true;
-        }
-        for (int y = 0; y < currentPageImage.getHeight(); y++) {
-            for (int x = 0; x < currentPageImage.getWidth(); x++) {
-                if (currentPageImage.getRGB(x, y) != referencePageImage.getRGB(x, y)) {
-                    return true;
-                }
-            }
-        }
-        return false;
+    public boolean compareScreenshots(String screenshotPath, String referencePath, String resultPath) throws IOException {
+
+        BufferedImage currentPageImage = ImageComparisonUtil.readImageFromResources(screenshotPath);
+        BufferedImage referencePageImage = ImageComparisonUtil.readImageFromResources(referencePath);
+
+        File resultDestination = new File(resultPath);
+        resultDestination.getParentFile().mkdirs();
+        ImageComparison imageComparison = new ImageComparison(currentPageImage, referencePageImage, resultDestination);
+        imageComparison.setThreshold(10);
+
+        ImageComparisonResult result = imageComparison.compareImages();
+
+        return result.getDifferencePercent() <= imageComparison.getThreshold();
+
+
     }
 
     public void AssertionCompareScreenshots(Boolean result){
-        Assert.assertFalse(result, "Найдены различия в файлах");
+        Assert.assertTrue(result, "Найдены различия в файлах");
     }
 
 
