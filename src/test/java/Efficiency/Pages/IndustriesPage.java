@@ -50,7 +50,7 @@ public class IndustriesPage extends CommonFunctions {
     }
 
 
-    public boolean compareScreenshots(String environment) throws IOException{
+    public boolean compareScreenshotsOfFullPage(String environment) throws IOException{
         String screenshotPath = null;
         String referencePath = null;
         String resultPath = null;

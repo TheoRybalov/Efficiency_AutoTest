@@ -1,5 +1,6 @@
 package Efficiency;
 
+import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.WebDriverRunner;
 import com.github.romankh3.image.comparison.ImageComparison;
 import com.github.romankh3.image.comparison.ImageComparisonUtil;
@@ -7,11 +8,13 @@ import com.github.romankh3.image.comparison.model.ImageComparisonResult;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import ru.yandex.qatools.ashot.AShot;
 import ru.yandex.qatools.ashot.Screenshot;
 import ru.yandex.qatools.ashot.shooting.ShootingStrategies;
-
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -58,6 +61,26 @@ public class CommonFunctions {
 
         js.executeScript("document.body.style.overflow = 'auto';");
     }
+
+    public void TakeScreenshotOfElement(SelenideElement element, String screenshotPath) throws IOException {
+        WebDriver driver = WebDriverRunner.getWebDriver();
+
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].scrollIntoView();", element);
+        js.executeScript("document.body.style.overflow = 'hidden';");
+
+        File screenshotFile = element.screenshot();
+
+        BufferedImage fullImg = ImageIO.read(screenshotFile);
+
+        File outputFile = new File(screenshotPath);
+        outputFile.getParentFile().mkdirs();
+
+        ImageIO.write(fullImg, "PNG", outputFile);
+
+        js.executeScript("document.body.style.overflow = 'auto';");
+    }
+
 
     public boolean compareScreenshots(String screenshotPath, String referencePath, String resultPath) throws IOException {
 

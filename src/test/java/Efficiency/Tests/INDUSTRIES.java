@@ -28,7 +28,7 @@ public class INDUSTRIES extends TestBase {
         IndustriesPage industriesPage = open(ConfigProviderInterface.industriesURL, IndustriesPage.class);
         industriesPage.AddCookies();
         industriesPage.TakeScreenshotOfFullPage(getEnvironment());
-        Boolean result_of_comparing = industriesPage.compareScreenshots(getEnvironment());
+        Boolean result_of_comparing = industriesPage.compareScreenshotsOfFullPage(getEnvironment());
         industriesPage.AssertionCompareScreenshots(result_of_comparing);
     }
 
