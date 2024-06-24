@@ -11,6 +11,11 @@ import static com.codeborne.selenide.Selenide.open;
 
 public class INDUSTRIES extends TestBase {
 
+    //для метода MarkupScreenshot мы должны получать окружение
+    public String getEnvironment(){
+        return super.getEnv();
+    }
+
     @Test(priority = 1, description = "Отрасли. Проверка данных на плитках")
     public void PlatesCorrectData_TEST(){
         IndustriesPage industriesPage = open(ConfigProviderInterface.industriesURL, IndustriesPage.class);
@@ -18,12 +23,12 @@ public class INDUSTRIES extends TestBase {
         industriesPage.AssertionManufacturingIndustriesDescription(Desc_From_API);
     }
 
-    @Test(priority = 11, description = "Отрасли. Сравнение вёрстки по скриншотам")
+    @Test(priority = 2, description = "Отрасли. Сравнение вёрстки по скриншотам")
     public void MarkupScreenShot_TEST() throws IOException {
         IndustriesPage industriesPage = open(ConfigProviderInterface.industriesURL, IndustriesPage.class);
         industriesPage.AddCookies();
-        industriesPage.TakeScreenshotOfFullPage();
-        Boolean result_of_comparing = industriesPage.compareScreenshots();
+        industriesPage.TakeScreenshotOfFullPage(getEnvironment());
+        Boolean result_of_comparing = industriesPage.compareScreenshots(getEnvironment());
         industriesPage.AssertionCompareScreenshots(result_of_comparing);
     }
 

@@ -41,16 +41,47 @@ public class IndustriesPage extends CommonFunctions {
     }
 
 
+    //Получение скриншота полной страницы
+    public void TakeScreenshotOfFullPage(String environment) throws IOException {
+        String screenshotPath = null;
 
-    public void TakeScreenshotOfFullPage() throws IOException {
-        String screenshotPath = "src/test/resources/screenshots/industries/current.png";
+        switch (environment) {
+            case "PC":
+                //Если мы получаем скриншот в кофигурации ПК, то сохранение будет идти в эту папку
+                screenshotPath = "src/test/resources/screenshots/industries/PC/current.png";
+                break;
+            case "phone":
+                //Если мы получаем скриншот в кофигурации телефон, то сохранение будет идти в эту папку
+                screenshotPath = "src/test/resources/screenshots/industries/phone/current.png";
+                break;
+            default:
+                throw new IllegalArgumentException("Неверный параметр окружения: " + environment);
+        }
+
+        //вызывается метод создания и сохранения такого скриншота, куда мы передаём путь до папки
         super.TakeScreenshotOfFullPage(screenshotPath);
     }
 
 
-    public boolean compareScreenshots() throws IOException{
-        String screenshotPath = "src/test/resources/screenshots/industries/current.png";
-        String referencePath = "src/test/resources/screenshots/reference.png";
+    public boolean compareScreenshots(String environment) throws IOException{
+        String screenshotPath = null;
+        String referencePath = null;
+
+        switch (environment) {
+            case "PC":
+                //Если мы получаем скриншот в кофигурации ПК, то для сравнения current и reference нужно вытащить из этих папок
+                screenshotPath = "src/test/resources/screenshots/industries/PC/current.png";
+                referencePath = "src/test/resources/screenshots/industries/PC/reference.png";
+                break;
+            case "phone":
+                //Если мы получаем скриншот в кофигурации телефона, то для сравнения current и reference нужно вытащить из этих папок
+                screenshotPath = "src/test/resources/screenshots/industries/phone/current.png";
+                referencePath = "src/test/resources/screenshots/industries/phone/reference.png";
+                break;
+            default:
+                throw new IllegalArgumentException("Неверный параметр окружения: " + environment);
+        }
+        //вызывается сравнения скриншотов, куда мы передаём пути до папок
         return super.compareScreenshots(screenshotPath, referencePath);
     }
 
