@@ -3,25 +3,29 @@ package Efficiency;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.WebDriverRunner;
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.Parameters;
+import org.testng.annotations.*;
 
 public class TestBase {
     protected static WebDriver driver;
+    protected String env;
 
-    @BeforeSuite(description = "Set up driver.")
+    @BeforeClass(description = "Set up driver.")
     @Parameters({"environment", "browser"})
     public void preConditions(String environment, String browser){
         Configuration.timeout = 8000;
 
-
+        this.env = environment;
         BrowserDriverFactory bdf = new BrowserDriverFactory();
-        driver = bdf.createDriver(browser);
+        driver = bdf.createDriver(browser, environment);
+
         WebDriverRunner.setWebDriver(driver);
     }
 
-    @AfterSuite
+    public String getEnv(){
+        return env;
+    }
+
+    @AfterClass
     public void clearSelenideListener(){
         WebDriverRunner.getWebDriver().quit();
     }
