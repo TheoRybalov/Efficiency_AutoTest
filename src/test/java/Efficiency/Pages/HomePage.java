@@ -21,6 +21,7 @@ public class HomePage extends CommonFunctions {
     private static final SelenideElement ProvidersLink = $x("//*[@id=\"root\"]/div/header/div[2]/div/nav/ul/li[4]/a");
     private static final SelenideElement AboutProjectLink = $x("//*[@id=\"root\"]/div/header/div[2]/div/nav/ul/li[5]/span/span");
     public static final SelenideElement VideoAboutPlatformButton = $x("//*[@id=\"root\"]/div/main/section[1]/div/div/div[1]/div[4]");
+    public static final SelenideElement Carousel = $x("//*[@id=\"root\"]/div/main/section[9]");
     private HashMap<String, SelenideElement> selenideElementHashMap;
     public SelenideElement getHeaderElement(String key) {
         //Creating hash-map, like key-value List to get elements
@@ -70,9 +71,27 @@ public class HomePage extends CommonFunctions {
             default:
                 throw new IllegalArgumentException("Неверный параметр окружения: " + environment);
         }
-
         //вызывается метод создания и сохранения такого скриншота, куда мы передаём путь до папки
         super.TakeScreenshotOfElement(VideoAboutPlatformButton, screenshotPath);
+    }
+
+    public void TakeScreenshotOfCarousel(String environment) throws IOException {
+        String screenshotPath = null;
+        sleep(2000);
+        switch (environment) {
+            case "PC":
+                //Если мы получаем скриншот в кофигурации ПК, то сохранение будет идти в эту папку
+                screenshotPath = "src/test/resources/screenshots/HomePage/PC/Elements/current_carousel.png";
+                break;
+            case "phone":
+                //Если мы получаем скриншот в кофигурации телефон, то сохранение будет идти в эту папку
+                screenshotPath = "src/test/resources/screenshots/HomePage/PC/Elements/reference_carousel.png";
+                break;
+            default:
+                throw new IllegalArgumentException("Неверный параметр окружения: " + environment);
+        }
+        //вызывается метод создания и сохранения такого скриншота, куда мы передаём путь до папки
+        super.TakeScreenshotOfElement(Carousel, screenshotPath);
     }
 
 
