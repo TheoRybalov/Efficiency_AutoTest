@@ -3,9 +3,13 @@ package Efficiency.Pages;
 import Efficiency.CommonFunctions;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
+import io.restassured.RestAssured;
+import io.restassured.response.Response;
 import org.testng.Assert;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
@@ -73,6 +77,26 @@ public class IndustriesPage extends CommonFunctions {
         }
         //вызывается сравнения скриншотов, куда мы передаём пути до папок
         return super.compareScreenshots(screenshotPath, referencePath, resultPath);
+    }
+
+    public String GetManufacturingIndustriesFromApi(String title){
+        Response response = RestAssured.get("https://aksis.dev.qsupport.ru/api/Industry/GetDetailsIndustries?PageSize=12&PageNumber=0");
+        Assert.assertFalse(response.asString().isEmpty(), "Response is empty");
+
+        // Получаем JSON-ответ как Map
+        List<Map<String, Object>> items = response.jsonPath().getList("items");
+
+        // Ищем элемент с title "Обрабатывающая промышленность"
+        Map<String, Object> industry = items.stream()
+                .filter(item -> title.equals(item.get("title")))
+                .findFirst()
+                .orElseThrow(() -> new AssertionError("Информация не найдена"));
+
+        // Получаем описание из API
+        String apiDescription = (String) industry.get("description");
+        apiDescription = apiDescription.replaceAll("<p>|</p>", "");
+
+        return apiDescription;
     }
 
 
