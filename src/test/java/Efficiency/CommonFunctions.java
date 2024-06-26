@@ -19,30 +19,20 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
 public class CommonFunctions {
+    protected static final String DB_URL = System.getenv()
+            .getOrDefault("DB_URL", "jdbc:postgresql://172.16.4.238/minpromtorg_catalog");
+    protected static final String DB_USER = System.getenv()
+            .getOrDefault("DB_USER", "postgres");
+    protected static final String DB_PASSWORD = System.getenv()
+            .getOrDefault("DB_PASSWORD", "1q2w-p=[");
 
-    public String GetManufacturingIndustriesFromApi(String title){
-        Response response = RestAssured.get("https://aksis.dev.qsupport.ru/api/Industry/GetDetailsIndustries?PageSize=12&PageNumber=0");
-        Assert.assertFalse(response.asString().isEmpty(), "Response is empty");
-
-        // Получаем JSON-ответ как Map
-        List<Map<String, Object>> items = response.jsonPath().getList("items");
-
-        // Ищем элемент с title "Обрабатывающая промышленность"
-        Map<String, Object> industry = items.stream()
-                .filter(item -> title.equals(item.get("title")))
-                .findFirst()
-                .orElseThrow(() -> new AssertionError("Информация не найдена"));
-
-        // Получаем описание из API
-        String apiDescription = (String) industry.get("description");
-        apiDescription = apiDescription.replaceAll("<p>|</p>", "");
-
-        return apiDescription;
-    }
 
     public void TakeScreenshotOfFullPage(String screenshotPath) throws IOException {
         JavascriptExecutor js = (JavascriptExecutor) WebDriverRunner.getWebDriver();
