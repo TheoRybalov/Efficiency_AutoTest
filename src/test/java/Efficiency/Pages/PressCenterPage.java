@@ -1,7 +1,6 @@
 package Efficiency.Pages;
 
 import Efficiency.CommonFunctions;
-import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 import io.restassured.RestAssured;
@@ -9,8 +8,6 @@ import io.restassured.response.Response;
 import org.testng.Assert;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -66,7 +63,7 @@ public class PressCenterPage extends CommonFunctions {
     }
 
     @Step("Сравнить новость с сайта и из базы данных")
-    public void compareNews(String titleFromSite, String titleFromDB) throws SQLException {
+    public void compareNewsTitles(String titleFromSite, String titleFromDB) throws SQLException {
         Assert.assertEquals(titleFromSite, titleFromDB, "Titles do not match");
     }
 

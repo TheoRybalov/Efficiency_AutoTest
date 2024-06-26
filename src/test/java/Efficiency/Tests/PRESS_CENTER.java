@@ -7,8 +7,6 @@ import org.testng.annotations.Test;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.List;
-import java.util.Map;
 
 import static com.codeborne.selenide.Selenide.open;
 
@@ -21,7 +19,7 @@ public class PRESS_CENTER extends TestBase {
         long id = pressCenterPage.getIdFromApi(newsTitleFromSite);
         String newsTitleFromDB = pressCenterPage.getNewsTitleFromDatabase(id);
 
-        pressCenterPage.compareNews(newsTitleFromSite, newsTitleFromDB);
+        pressCenterPage.compareNewsTitles(newsTitleFromSite, newsTitleFromDB);
 
     }
 }
