@@ -4,6 +4,7 @@ import Efficiency.Pages.HomePage;
 import Efficiency.Pages.IndustriesPage;
 import Efficiency.Providers.ConfigProviderInterface;
 import Efficiency.TestBase;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
@@ -50,7 +51,7 @@ public class HOME extends TestBase {
 
     }
 
-    @Test(priority = 2, description = "Домашняя страница. Редиректы в разделе 'Наши отрасли'")
+    @Test(priority = 3, description = "Домашняя страница. Редиректы в разделе 'Наши отрасли'")
     public void OurIndustries_TEST() throws IOException {
         HomePage homePage = open(ConfigProviderInterface.baseURL, HomePage.class);
         homePage.SelskoyeHozaystvoLink_Redirect();
@@ -59,6 +60,17 @@ public class HOME extends TestBase {
         homePage.TradingLink_Redirect();
         homePage.TransportLink_Redirect();
     }
+
+    @Test(priority = 4, description = "Домашняя страница. Анимация кнопки 'Смотреть видео о платформе'")
+    public void VideoAboutPlatformAnimation_TEST() throws IOException {
+        HomePage homePage = open(ConfigProviderInterface.baseURL, HomePage.class);
+        homePage.TakeScreenshotOfVideoButtonBeforeAnimation(getEnvironment());
+        homePage.VideoAboutPlatformButton_Hover();
+        homePage.TakeScreenshotOfVideoButtonAfterAnimation(getEnvironment());
+        boolean ResultOfComparing = homePage.compareScreenshotsOfVideoButton(getEnvironment());
+        Assert.assertFalse(ResultOfComparing, "Скриншоты совпали. Анимация не сработала");
+    }
+
 
 
 }

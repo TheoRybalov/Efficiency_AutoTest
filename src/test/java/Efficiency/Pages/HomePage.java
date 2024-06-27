@@ -75,18 +75,18 @@ public class HomePage extends CommonFunctions {
         super.TakeScreenshotOfFullPage(screenshotPath);
     }
 
-    @Step("Создание скриншота кнопки видео о платформе")
-    public void TakeScreenshotOfVideoButton(String environment) throws IOException {
+    @Step("Создание скриншота кнопки 'Смотреть видео о платформе' до наведения курсора")
+    public void TakeScreenshotOfVideoButtonBeforeAnimation(String environment) throws IOException {
         String screenshotPath = null;
         sleep(2000);
         switch (environment) {
             case "PC":
                 //Если мы получаем скриншот в кофигурации ПК, то сохранение будет идти в эту папку
-                screenshotPath = "src/test/resources/screenshots/HomePage/PC/Elements/current_video_button.png";
+                screenshotPath = "src/test/resources/screenshots/HomePage/PC/Elements/VideoButton/current_video_button_before.png";
                 break;
             case "phone":
                 //Если мы получаем скриншот в кофигурации телефон, то сохранение будет идти в эту папку
-                screenshotPath = "src/test/resources/screenshots/HomePage/PC/Elements/reference_video_button.png";
+                screenshotPath = "src/test/resources/screenshots/HomePage/phone/Elements/VideoButton/current_video_button_before.png";
                 break;
             default:
                 throw new IllegalArgumentException("Неверный параметр окружения: " + environment);
@@ -94,6 +94,59 @@ public class HomePage extends CommonFunctions {
         //вызывается метод создания и сохранения такого скриншота, куда мы передаём путь до папки
         super.TakeScreenshotOfElement(VideoAboutPlatformButton, screenshotPath);
     }
+
+    @Step("Создание скриншота кнопки 'Смотреть видео о платформе' после наведения курсора")
+    public void TakeScreenshotOfVideoButtonAfterAnimation(String environment) throws IOException {
+        String screenshotPath = null;
+        sleep(2000);
+        switch (environment) {
+            case "PC":
+                //Если мы получаем скриншот в кофигурации ПК, то сохранение будет идти в эту папку
+                screenshotPath = "src/test/resources/screenshots/HomePage/PC/Elements/VideoButton/current_video_button_after.png";
+                break;
+            case "phone":
+                //Если мы получаем скриншот в кофигурации телефон, то сохранение будет идти в эту папку
+                screenshotPath = "src/test/resources/screenshots/HomePage/phone/Elements/VideoButton/current_video_button_after.png";
+                break;
+            default:
+                throw new IllegalArgumentException("Неверный параметр окружения: " + environment);
+        }
+        //вызывается метод создания и сохранения такого скриншота, куда мы передаём путь до папки
+        super.TakeScreenshotOfElement(VideoAboutPlatformButton, screenshotPath);
+    }
+
+    @Step("Сравнение скриншотов кнопки 'Смотреть видео о платформе' до и после наведения")
+    public boolean compareScreenshotsOfVideoButton(String environment) throws IOException{
+        String screenshotPath = null;
+        String referencePath = null;
+        String resultPath = null;
+
+        switch (environment) {
+            case "PC":
+                //Если мы получаем скриншот в кофигурации ПК, то для сравнения current и reference нужно вытащить из этих папок
+                screenshotPath = "src/test/resources/screenshots/HomePage/PC/Elements/VideoButton/current_video_button_before.png";
+                referencePath = "src/test/resources/screenshots/HomePage/PC/Elements/VideoButton/current_video_button_after.png";
+                resultPath = "src/test/resources/screenshots/HomePage/PC/Elements/VideoButton/differences.png";
+                break;
+            case "phone":
+                //Если мы получаем скриншот в кофигурации телефона, то для сравнения current и reference нужно вытащить из этих папок
+                screenshotPath = "src/test/resources/screenshots/HomePage/phone/Elements/VideoButton/current_video_button_before.png";
+                referencePath = "src/test/resources/screenshots/HomePage/phone/Elements/VideoButton/current_video_button_after.png";
+                resultPath = "src/test/resources/screenshots/HomePage/phone/Elements/VideoButton/differences.png";
+                break;
+            default:
+                throw new IllegalArgumentException("Неверный параметр окружения: " + environment);
+        }
+        //вызывается сравнения скриншотов, куда мы передаём пути до папок
+        return super.compareScreenshots(screenshotPath, referencePath, resultPath);
+    }
+
+    @Step("Навести курсор на кнопку 'Смотреть видео о платформе'")
+    public void VideoAboutPlatformButton_Hover(){
+        VideoAboutPlatformButton.scrollTo().shouldBe(visible).hover();
+    }
+
+
     @Step("Создание скриншота карусели")
     public void TakeScreenshotOfCarousel(String environment) throws IOException {
         String screenshotPath = null;
