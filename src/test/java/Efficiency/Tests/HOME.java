@@ -16,9 +16,39 @@ public class HOME extends TestBase {
         return super.getEnv();
     }
 
-    @Test(priority = 1, description = "Домашняя страница. Изменение кнопки 'Смотреть видео о платформе' ")
+    @Test(priority = 1, description = "Домашняя страница. Изменение кнопки 'Смотреть видео о платформе' ", enabled = false)
     public void PlatesCorrectData_TEST() throws IOException {
         HomePage homePage = open(ConfigProviderInterface.baseURL, HomePage.class);
 
     }
+
+    @Test(priority = 1, description = "Домашняя страница. Редиректы на хэдере")
+    public void Header_TEST() throws IOException {
+        HomePage homePage = open(ConfigProviderInterface.baseURL, HomePage.class);
+        homePage.Header_ServicesLink_Redirect();
+        homePage.Header_IndustriesLink_Redirect();
+        homePage.Header_EnterpriseLink_Redirect();
+        homePage.Header_ProvidersLink_Redirect();
+        homePage.Header_AboutProjectLink_Redirect();
+        homePage.Header_PressCenterLink_Redirect();
+
+    }
+
+    @Test(priority = 2, description = "Домашняя страница. Редиректы на футере ")
+    public void Footer_TEST() throws IOException {
+        HomePage homePage = open(ConfigProviderInterface.baseURL, HomePage.class);
+        homePage.Footer_ServicesLink_Redirect();
+        homePage.Footer_ProvidersLink_Redirect();
+        homePage.Footer_FAQLink();
+        homePage.Footer_IndustriesLink_Redirect();
+        homePage.Footer_PressCenterLink_Redirect();
+        homePage.Footer_ContactsLink_Redirect();
+        homePage.Footer_BecomeParticipantLink_Redirect();
+        homePage.Footer_BecomeProviderLink_Redirect();
+        homePage.Footer_VKLink_Redirect();
+        homePage.Footer_TelegramLink_Redirect();
+
+    }
+
+
 }

@@ -22,8 +22,13 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.WebDriverRunner.url;
 
 public class CommonFunctions {
     protected static final String DB_URL = System.getenv()
@@ -93,5 +98,25 @@ public class CommonFunctions {
         Assert.assertTrue(result, "Найдены различия в файлах");
     }
 
+    public void Check_Redirect_By_Link(SelenideElement link, String ExpectedUrl){
+        link.scrollTo().shouldBe(visible).click();
+        String ActualUrl = url();
+        Assert. assertEquals(ExpectedUrl, ActualUrl, "Ссылки не совпадают, редирект не корректен");
+        back();
+    }
+
+    public void Check_RedirectToOtherTab_By_Link(SelenideElement link, String ExpectedUrl){
+        String originalWindow = webdriver().object().getWindowHandle();
+
+        link.scrollTo().shouldBe(visible).click();
+        ArrayList<String> tabs = new ArrayList<>(webdriver().object().getWindowHandles());
+        switchTo().window(tabs.get(1));
+
+        String ActualUrl = url();
+        Assert. assertEquals(ExpectedUrl, ActualUrl, "Ссылки не совпадают, редирект не корректен");
+
+        closeWindow();
+        switchTo().window(originalWindow);
+    }
 
 }
