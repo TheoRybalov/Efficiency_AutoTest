@@ -6,26 +6,32 @@
         <listener class-name="Efficiency.TestListener.TestListener" />
     </listeners>
 
-    <test name="INDUSTRIES_TEST_PHONE">
-        <parameter name="environment" value="phone"/>
-        <parameter name="browser" value="chrome"/>
-        <classes>
-            <class name="Efficiency.Tests.INDUSTRIES">
-                <methods>
-                    <include name="MarkupScreenShot_TEST"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
+<!--    <test name="INDUSTRIES_TEST_PHONE">-->
+<!--        <parameter name="environment" value="phone"/>-->
+<!--        <parameter name="browser" value="chrome"/>-->
+<!--        <classes>-->
+<!--            <class name="Efficiency.Tests.INDUSTRIES">-->
+<!--                <methods>-->
+<!--                    <include name="MarkupScreenShot_TEST"/>-->
+<!--                </methods>-->
+<!--            </class>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <test name="INDUSTRIES_TEST_PС">
+<!--    <test name="INDUSTRIES_TEST_PС">-->
+<!--        <parameter name="environment" value="PC"/>-->
+<!--        <parameter name="browser" value="chrome"/>-->
+<!--        <classes>-->
+<!--        <class name="Efficiency.Tests.INDUSTRIES"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+    <test name="HOME_PAGE">
         <parameter name="environment" value="PC"/>
         <parameter name="browser" value="chrome"/>
         <classes>
-        <class name="Efficiency.Tests.INDUSTRIES"/>
+            <class name="Efficiency.Tests.HOME"/>
         </classes>
     </test>
-
 
 
 
