@@ -46,6 +46,13 @@ public class HomePage extends CommonFunctions {
     public static final SelenideElement VideoAboutPlatformButton = $x("//*[@id=\"root\"]/div/main/section[1]/div/div/div[1]/div[4]");
     public static final SelenideElement Carousel = $x("//*[@id=\"root\"]/div/main/section[9]");
 
+    //Наши отрасли
+    private static final SelenideElement SelskoyeHozaystvoLink = $x("//*[@id=\"root\"]/div/main/section[8]/ul/li[1]/a");
+    private static final SelenideElement ManufacrturingIndustriesLink = $x("//*[@id=\"root\"]/div/main/section[8]/ul/li[2]/a");
+    private static final SelenideElement ConstructionLink = $x("//*[@id=\"root\"]/div/main/section[8]/ul/li[3]/a");
+    private static final SelenideElement TradingLink = $x("//*[@id=\"root\"]/div/main/section[8]/ul/li[4]/a");
+    private static final SelenideElement TransportLink = $x("//*[@id=\"root\"]/div/main/section[8]/ul/li[5]/a");
+
 
     @Step("Создание скриншота всей страницы")
     public void TakeScreenshotOfFullPage(String environment) throws IOException {
@@ -203,6 +210,33 @@ public class HomePage extends CommonFunctions {
     public void Footer_TelegramLink_Redirect(){
         Assert.assertEquals(Footer_TelegramLink.getText(), "Telegram", "Текст элемента не соответствует заданному");
         super.Check_RedirectToOtherTab_By_Link(Footer_TelegramLink, "https://t.me/effekt_rf");
+    }
+
+    //Наши отрасли
+    @Step("Проверка редиректа по ссылке 'Сельское хозяйство' в разделе 'Отрасли'")
+    public void SelskoyeHozaystvoLink_Redirect(){
+        Assert.assertEquals(SelskoyeHozaystvoLink.getText(), "Сельское хозяйство", "Текст элемента не соответствует заданному");
+        super.Check_Redirect_By_Link(SelskoyeHozaystvoLink, "https://aksis.dev.qsupport.ru/industries/selskoye-hozaystvo");
+    }
+    @Step("Проверка редиректа по ссылке 'Обрабатывающая промышленность' в разделе 'Отрасли'")
+    public void ManufacrturingIndustriesLink_Redirect(){
+        Assert.assertEquals(ManufacrturingIndustriesLink.getText(), "Обрабатывающая промышленность", "Текст элемента не соответствует заданному");
+        super.Check_Redirect_By_Link(ManufacrturingIndustriesLink, "https://aksis.dev.qsupport.ru/industries/manufacturing-industries");
+    }
+    @Step("Проверка редиректа по ссылке 'Строительство' в разделе 'Отрасли'")
+    public void ConstructionLink_Redirect(){
+        Assert.assertEquals(ConstructionLink.getText(), "Строительство", "Текст элемента не соответствует заданному");
+        super.Check_Redirect_By_Link(ConstructionLink, "https://aksis.dev.qsupport.ru/industries/construction");
+    }
+    @Step("Проверка редиректа по ссылке 'Торговля' в разделе 'Отрасли'")
+    public void TradingLink_Redirect(){
+        Assert.assertEquals(TradingLink.getText(), "Торговля", "Текст элемента не соответствует заданному");
+        super.Check_Redirect_By_Link(TradingLink, "https://aksis.dev.qsupport.ru/industries/trading");
+    }
+    @Step("Проверка редиректа по ссылке 'Транспортировка и хранение' в разделе 'Отрасли'")
+    public void TransportLink_Redirect(){
+        Assert.assertEquals(TransportLink.getText(), "Транспортировка и хранение", "Текст элемента не соответствует заданному");
+        super.Check_Redirect_By_Link(TransportLink, "https://aksis.dev.qsupport.ru/industries/transport");
     }
 
 

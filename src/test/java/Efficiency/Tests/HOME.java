@@ -50,5 +50,15 @@ public class HOME extends TestBase {
 
     }
 
+    @Test(priority = 2, description = "Домашняя страница. Редиректы в разделе 'Наши отрасли'")
+    public void OurIndustries_TEST() throws IOException {
+        HomePage homePage = open(ConfigProviderInterface.baseURL, HomePage.class);
+        homePage.SelskoyeHozaystvoLink_Redirect();
+        homePage.ManufacrturingIndustriesLink_Redirect();
+        homePage.ConstructionLink_Redirect();
+        homePage.TradingLink_Redirect();
+        homePage.TransportLink_Redirect();
+    }
+
 
 }
