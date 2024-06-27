@@ -14,6 +14,8 @@ import static com.codeborne.selenide.Selenide.sleep;
 
 public class HomePage extends CommonFunctions {
 
+    public static final SelenideElement CookieButton = $x("//*[@id=\"rcc-confirm-button\"]");
+
     //header elements
     private static final SelenideElement Header_WebSiteLabel = $x("//*[@id=\"root\"]/div/header/div[1]/span");
     private static final SelenideElement Header_ServicesLink = $x("//*[@id=\"root\"]/div/header/div[2]/div/nav/ul/li[1]/a");
@@ -53,6 +55,10 @@ public class HomePage extends CommonFunctions {
     private static final SelenideElement TradingLink = $x("//*[@id=\"root\"]/div/main/section[8]/ul/li[4]/a");
     private static final SelenideElement TransportLink = $x("//*[@id=\"root\"]/div/main/section[8]/ul/li[5]/a");
 
+    @Step("Принимаем куки")
+    public void AddCookies(){
+        CookieButton.shouldBe(visible).click();
+    }
 
     @Step("Создание скриншота всей страницы")
     public void TakeScreenshotOfFullPage(String environment) throws IOException {
@@ -61,11 +67,11 @@ public class HomePage extends CommonFunctions {
         switch (environment) {
             case "PC":
                 //Если мы получаем скриншот в кофигурации ПК, то сохранение будет идти в эту папку
-                screenshotPath = "src/test/resources/screenshots/industries/PC/current.png";
+                screenshotPath = "src/test/resources/screenshots/HomePage/PC/FullPage/current.png";
                 break;
             case "phone":
                 //Если мы получаем скриншот в кофигурации телефон, то сохранение будет идти в эту папку
-                screenshotPath = "src/test/resources/screenshots/industries/phone/current.png";
+                screenshotPath = "src/test/resources/screenshots/HomePage/phone/FullPage/current.png";
                 break;
             default:
                 throw new IllegalArgumentException("Неверный параметр окружения: " + environment);
@@ -74,6 +80,32 @@ public class HomePage extends CommonFunctions {
         //вызывается метод создания и сохранения такого скриншота, куда мы передаём путь до папки
         super.TakeScreenshotOfFullPage(screenshotPath);
     }
+
+    public boolean compareScreenshotsOfFullPage(String environment) throws IOException{
+        String screenshotPath = null;
+        String referencePath = null;
+        String resultPath = null;
+
+        switch (environment) {
+            case "PC":
+                //Если мы получаем скриншот в кофигурации ПК, то для сравнения current и reference нужно вытащить из этих папок
+                screenshotPath = "src/test/resources/screenshots/HomePage/PC/FullPage/current.png";
+                referencePath = "src/test/resources/screenshots/HomePage/PC/FullPage/reference.png";
+                resultPath = "src/test/resources/screenshots/HomePage/PC/FullPage/differences.png";
+                break;
+            case "phone":
+                //Если мы получаем скриншот в кофигурации телефона, то для сравнения current и reference нужно вытащить из этих папок
+                screenshotPath = "src/test/resources/screenshots/HomePage/phone/FullPage/current.png";
+                referencePath = "src/test/resources/screenshots/HomePage/phone/FullPage/reference.png";
+                resultPath = "src/test/resources/screenshots/HomePage/phone/FullPage/differences.png";
+                break;
+            default:
+                throw new IllegalArgumentException("Неверный параметр окружения: " + environment);
+        }
+        //вызывается сравнения скриншотов, куда мы передаём пути до папок
+        return super.compareScreenshots(screenshotPath, referencePath, resultPath);
+    }
+
 
     @Step("Создание скриншота кнопки 'Смотреть видео о платформе' до наведения курсора")
     public void TakeScreenshotOfVideoButtonBeforeAnimation(String environment) throws IOException {
@@ -144,6 +176,7 @@ public class HomePage extends CommonFunctions {
     @Step("Навести курсор на кнопку 'Смотреть видео о платформе'")
     public void VideoAboutPlatformButton_Hover(){
         VideoAboutPlatformButton.scrollTo().shouldBe(visible).hover();
+        sleep(500);
     }
 
 

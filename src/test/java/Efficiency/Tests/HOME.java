@@ -71,6 +71,15 @@ public class HOME extends TestBase {
         Assert.assertFalse(ResultOfComparing, "Скриншоты совпали. Анимация не сработала");
     }
 
+    @Test(priority = 5, description = "Домашняя страница. Тест вёрстки через скриншот")
+    public void LayoutScreenshot_TEST() throws IOException {
+        HomePage homePage = open(ConfigProviderInterface.baseURL, HomePage.class);
+        homePage.AddCookies();
+        homePage.TakeScreenshotOfFullPage(getEnvironment());
+        boolean ResultOfComparing = homePage.compareScreenshotsOfFullPage(getEnvironment());
+        Assert.assertTrue(ResultOfComparing, "Скриншоты не совпали. Вёрстка не такая, как в макете");
+    }
+
 
 
 }
