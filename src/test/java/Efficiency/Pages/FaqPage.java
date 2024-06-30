@@ -1,16 +1,18 @@
 package Efficiency.Pages;
 
 import Efficiency.CommonFunctions;
-import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 import org.testng.Assert;
+
+import java.io.IOException;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$x;
 
 public class FaqPage extends CommonFunctions {
-    //Отправить сообщение
+    public static final SelenideElement CookieButton = $x("//*[@id=\"rcc-confirm-button\"]");
+    //Кнопка 'Отправить сообщение
     public static final SelenideElement SendMessageLink = $x("//*[@id=\"root\"]/div/main/div/article/footer/div/div/a");
     //Кнопка раскрытия вопроса 'С чего начать работу на платформе?'
     public static final SelenideElement StartWorkButton = $x("//*[@id=\"root\"]/div/main/div/article/div/div/ul/li[1]/button");
@@ -78,6 +80,101 @@ public class FaqPage extends CommonFunctions {
     public static final SelenideElement PrincipleWindow = $x("//*[@id=\"root\"]/div/main/div/article/div/div/ul/li[15]/div/div/div");
 
 
+    @Step("Принимаем куки")
+    public void AddCookies(){
+        CookieButton.shouldBe(visible).click();
+    }
+
+    @Step("Создание скриншота всей страницы")
+    public void TakeScreenshotOfFullPage(String environment) throws IOException {
+        String screenshotPath = null;
+        switch (environment) {
+            case "PC":
+                screenshotPath = "src/test/resources/screenshots/FaqPage/PC/FullPage/current.png";
+                break;
+            case "phone":
+                screenshotPath = "src/test/resources/screenshots/FaqPage/phone/FullPage/current.png";
+                break;
+            default:
+                throw new IllegalArgumentException("Неверный параметр окружения: " + environment);
+        }
+        super.TakeScreenshotOfFullPage(screenshotPath);
+    }
+    public boolean compareScreenshotsOfFullPage(String environment) throws IOException{
+        String screenshotPath = null;
+        String referencePath = null;
+        String resultPath = null;
+
+        switch (environment) {
+            case "PC":
+                screenshotPath = "src/test/resources/screenshots/FaqPage/PC/FullPage/current.png";
+                referencePath = "src/test/resources/screenshots/FaqPage/PC/FullPage/reference.png";
+                resultPath = "src/test/resources/screenshots/FaqPage/PC/FullPage/differences.png";
+                break;
+            case "phone":
+                screenshotPath = "src/test/resources/screenshots/FaqPage/phone/FullPage/current.png";
+                referencePath = "src/test/resources/screenshots/FaqPage/phone/FullPage/reference.png";
+                resultPath = "src/test/resources/screenshots/FaqPage/phone/FullPage/differences.png";
+                break;
+            default:
+                throw new IllegalArgumentException("Неверный параметр окружения: " + environment);
+        }
+        return super.compareScreenshots(screenshotPath, referencePath, resultPath);
+    }
+    @Step("Создание скриншота всей страницы с раскрытыми вопросами")
+    public void TakeScreenshotOfFullPageWithButtons(String environment) throws IOException {
+        String screenshotPath = null;
+        PrincipleButton.scrollTo().shouldBe(visible).click();
+        StartWorkButton.scrollTo().shouldBe(visible).click();
+        ExpertVisitButton.scrollTo().shouldBe(visible).click();
+        ExpertExperienceButton.scrollTo().shouldBe(visible).click();
+        BenefitPlatformButton.scrollTo().shouldBe(visible).click();
+        WorkOnPlatformButton.scrollTo().shouldBe(visible).click();
+        WhoUsePlatformButton.scrollTo().shouldBe(visible).click();
+        PurposePlatformButton.scrollTo().shouldBe(visible).click();
+        PlatformRecommendationsButton.scrollTo().shouldBe(visible).click();
+        ConnectionPlatformButton.scrollTo().shouldBe(visible).click();
+        AnalogsButton.scrollTo().shouldBe(visible).click();
+        DigitalizationButton.scrollTo().shouldBe(visible).click();
+        OveragingBusinessButton.scrollTo().shouldBe(visible).click();
+        WorkingGroupButton.scrollTo().shouldBe(visible).click();
+        BudgetButton.scrollTo().shouldBe(visible).click();
+        switch (environment) {
+            case "PC":
+                screenshotPath = "src/test/resources/screenshots/FaqPage/PC/FullPage/current_with_buttons.png";
+                break;
+            case "phone":
+                screenshotPath = "src/test/resources/screenshots/FaqPage/phone/FullPage/current_with_buttons.png";
+                break;
+            default:
+                throw new IllegalArgumentException("Неверный параметр окружения: " + environment);
+        }
+        super.TakeScreenshotOfFullPage(screenshotPath);
+    }
+    @Step("Сравнение скриншотов страницы с раскрытми кнопками вопросов")
+    public boolean compareScreenshotsOfWithButtons(String environment) throws IOException{
+        String screenshotPath = null;
+        String referencePath = null;
+        String resultPath = null;
+
+        switch (environment) {
+            case "PC":
+                //Если мы получаем скриншот в кофигурации ПК, то сохранение будет идти в эту папку
+                screenshotPath = "src/test/resources/screenshots/FaqPage/PC/FullPage/current_with_buttons.png";
+                referencePath = "src/test/resources/screenshots/FaqPage/PC/FullPage/reference.png";
+                resultPath = "src/test/resources/screenshots/FaqPage/PC/FullPage/differences.png";
+                break;
+            case "phone":
+                //Если мы получаем скриншот в кофигурации телефон, то сохранение будет идти в эту папку
+                screenshotPath = "src/test/resources/screenshots/HomePage/phone/FullPage/current_with_buttons.png";
+                break;
+            default:
+                throw new IllegalArgumentException("Неверный параметр окружения: " + environment);
+        }
+
+        //вызывается метод создания и сохранения такого скриншота, куда мы передаём путь до папки
+        return super.compareScreenshots(screenshotPath, referencePath, resultPath);
+    }
 
     @Step("Проверка редиректа по ссылке 'Отправить сообщение'")
     public void SendMessageLink_Redirect(){

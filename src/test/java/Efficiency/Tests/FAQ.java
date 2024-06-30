@@ -3,6 +3,7 @@ package Efficiency.Tests;
 import Efficiency.Pages.FaqPage;
 import Efficiency.Providers.ConfigProviderInterface;
 import Efficiency.TestBase;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
@@ -10,6 +11,11 @@ import java.io.IOException;
 import static com.codeborne.selenide.Selenide.open;
 
 public class FAQ extends TestBase {
+
+    public String getEnvironment(){
+        return super.getEnv();
+    }
+
     @Test(priority = 1, description = "Вопросы и ответы. Проверка ссылки 'Отправить сообщение'")
     public void SendMessageLink_TEST() throws IOException {
         FaqPage faqPage = open(ConfigProviderInterface.faqURL,FaqPage.class);
@@ -41,5 +47,22 @@ public class FAQ extends TestBase {
         faqPage.OveragingBusinessQuestion_Visible();
         faqPage.BudgetQuestion_Visible();
         faqPage.PrincipleQuestion_Visible();
+    }
+
+    @Test(priority = 4,description = "Вопросы и ответы. Тест вёрстки через скриншот")
+    public void LayoutScreenshot_TEST() throws IOException{
+        FaqPage faqPage = open(ConfigProviderInterface.faqURL,FaqPage.class);
+        faqPage.AddCookies();
+        faqPage.TakeScreenshotOfFullPage(getEnvironment());
+        boolean ResultOfComparing = faqPage.compareScreenshotsOfFullPage(getEnvironment());
+        Assert.assertTrue(ResultOfComparing,"Скриншоты не совпали. Вёрстка не такая, как в макете");
+    }
+
+    @Test(priority = 5,description = "Вопросы и ответы. Тест вёрстки c раскрытыми вопросами через скриншот")
+    public void LayoutScreenshotWithQuestions_TEST() throws IOException{
+        FaqPage faqPage = open(ConfigProviderInterface.faqURL,FaqPage.class);
+        faqPage.TakeScreenshotOfFullPageWithButtons(getEnvironment());
+        boolean ResultOfComparing = faqPage.compareScreenshotsOfWithButtons(getEnvironment());
+        Assert.assertTrue(ResultOfComparing,"Скриншоты не совпали. Вёрстка не такая, как в макете");
     }
 }
