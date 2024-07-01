@@ -55,6 +55,12 @@ public class HomePage extends CommonFunctions {
     private static final SelenideElement TradingLink = $x("//*[@id=\"root\"]/div/main/section[8]/ul/li[4]/a");
     private static final SelenideElement TransportLink = $x("//*[@id=\"root\"]/div/main/section[8]/ul/li[5]/a");
 
+    //Частые вопросы
+    private static final SelenideElement AllQuestionsLink = $x("//*[@id=\"root\"]/div/main/section[6]/a");
+
+    //Новости
+    private static final SelenideElement AllNewsLink = $x("//*[@id=\"root\"]/div/main/section[7]/footer/span/a");
+
     @Step("Принимаем куки")
     public void AddCookies(){
         CookieButton.shouldBe(visible).click();
@@ -326,8 +332,17 @@ public class HomePage extends CommonFunctions {
     }
 
 
+    @Step("Проверка редиректа по ссылке 'Все вопросы' в разделе 'Часто задаваемые вопросы'")
+    public void AllQuestionsLink_Redirect(){
+        Assert.assertEquals(AllQuestionsLink.getText(), "Все вопросы", "Текст элемента не соответствует заданному");
+        super.Check_Redirect_By_Link(AllQuestionsLink, "https://aksis.dev.qsupport.ru/faq");
+    }
 
-
+    @Step("Проверка редиректа по ссылке 'Все новости' в разделе 'Новости'")
+    public void AllNewsLink_Redirect(){
+        Assert.assertEquals(AllNewsLink.getText(), "Все новости","Текст элемента не соответствует заданному");
+        super.Check_Redirect_By_Link(AllNewsLink, "https://aksis.dev.qsupport.ru/news");
+    }
 
 
 

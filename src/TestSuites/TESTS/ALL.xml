@@ -6,7 +6,7 @@
         <listener class-name="Efficiency.TestListener.TestListener" />
     </listeners>
 
-    <test name="INDUSTRIES_TEST_PHONE">
+    <!--<test name="INDUSTRIES_TEST_PHONE">
         <parameter name="environment" value="phone"/>
         <parameter name="browser" value="chrome"/>
         <classes>
@@ -23,6 +23,14 @@
         <parameter name="browser" value="chrome"/>
         <classes>
         <class name="Efficiency.Tests.INDUSTRIES"/>
+        </classes>
+    </test>-->
+
+    <test name="HOME">
+        <parameter name="environment" value="PC"/>
+        <parameter name="browser" value="chrome"/>
+        <classes>
+            <class name="Efficiency.Tests.HOME"/>
         </classes>
     </test>
 
