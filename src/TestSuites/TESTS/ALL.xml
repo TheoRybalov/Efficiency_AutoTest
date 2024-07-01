@@ -6,26 +6,81 @@
         <listener class-name="Efficiency.TestListener.TestListener" />
     </listeners>
 
-    <test name="INDUSTRIES_TEST_PHONE">
-        <parameter name="environment" value="phone"/>
-        <parameter name="browser" value="chrome"/>
-        <classes>
-            <class name="Efficiency.Tests.INDUSTRIES">
-                <methods>
-                    <include name="MarkupScreenShot_TEST"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
+<!--    <test name="INDUSTRIES_TEST_PHONE">-->
+<!--        <parameter name="environment" value="phone"/>-->
+<!--        <parameter name="browser" value="chrome"/>-->
+<!--        <classes>-->
+<!--            <class name="Efficiency.Tests.INDUSTRIES">-->
+<!--                <methods>-->
+<!--                    <include name="MarkupScreenShot_TEST"/>-->
+<!--                </methods>-->
+<!--            </class>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <test name="INDUSTRIES_TEST_PС">
+<!--    <test name="INDUSTRIES_TEST_PС">-->
+<!--        <parameter name="environment" value="PC"/>-->
+<!--        <parameter name="browser" value="chrome"/>-->
+<!--        <classes>-->
+<!--        <class name="Efficiency.Tests.INDUSTRIES"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+<!--    <test name="HOME_PAGE">-->
+<!--        <parameter name="environment" value="PC"/>-->
+<!--        <parameter name="browser" value="chrome"/>-->
+<!--        <classes>-->
+<!--            <class name="Efficiency.Tests.HOME"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+<!--    <test name="ENTERPRISE_PAGE">-->
+<!--        <parameter name="environment" value="PC"/>-->
+<!--        <parameter name="browser" value="chrome"/>-->
+<!--        <classes>-->
+<!--            <class name="Efficiency.Tests.ENTERPRISE"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+<!--    <test name="PROVIDERS_PAGE">-->
+<!--        <parameter name="environment" value="PC"/>-->
+<!--        <parameter name="browser" value="chrome"/>-->
+<!--        <classes>-->
+<!--            <class name="Efficiency.Tests.PROVIDERS"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+<!--    <test name="PRESS_CENTER_PAGE">-->
+<!--        <parameter name="environment" value="PC"/>-->
+<!--        <parameter name="browser" value="chrome"/>-->
+<!--        <classes>-->
+<!--            <class name="Efficiency.Tests.PRESS_CENTER"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+<!--    <test name="ABOUT_NATIONAL_PROJECT_PAGE">-->
+<!--        <parameter name="environment" value="PC"/>-->
+<!--        <parameter name="browser" value="chrome"/>-->
+<!--        <classes>-->
+<!--            <class name="Efficiency.Tests.ABOUT_NATIONAL_PROJECT"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+<!--    <test name="FAQ_PAGE">-->
+<!--        <parameter name="environment" value="PC"/>-->
+<!--        <parameter name="browser" value="chrome"/>-->
+<!--        <classes>-->
+<!--            <class name="Efficiency.Tests.FAQ"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+<!--    <test name="CONTACTS_PAGE">-->
+<!--        <parameter name="environment" value="PC"/>-->
+<!--        <parameter name="browser" value="chrome"/>-->
+<!--        <classes>-->
+<!--            <class name="Efficiency.Tests.CONTACTS"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+    <test name="SUPERVISORY_BOARDS_PAGE">
         <parameter name="environment" value="PC"/>
         <parameter name="browser" value="chrome"/>
         <classes>
-        <class name="Efficiency.Tests.INDUSTRIES"/>
+            <class name="Efficiency.Tests.SUPERVISORY_BOARDS"/>
         </classes>
     </test>
-
 
 
 
