@@ -10,6 +10,9 @@ import static com.codeborne.selenide.Selenide.switchTo;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 
 public class EnterprisePage extends CommonFunctions {
+
+    //Предприятиям
+    private static final SelenideElement BecomePlatformParticipantLink = $x("//*[@id=\"root\"]/div/main/div/article/section[1]/div/div/div/div/a");
     //Наши отрасли
     private static final SelenideElement SelskoyeHozaystvoLink = $x("//*[@id=\"root\"]/div/main/div/article/section[6]/ul/li[1]/a");
     private static final SelenideElement ManufacrturingIndustriesLink = $x("//*[@id=\"root\"]/div/main/div/article/section[6]/ul/li[2]/a");
@@ -57,5 +60,12 @@ public class EnterprisePage extends CommonFunctions {
     public void PerformanceLink_Redirect(){
         Assert.assertEquals(PerformanceLink.getText(), "производительность.рф ↗", "Текст элемента не соответствует заданному");
         super.Check_RedirectToOtherTab_By_Link(PerformanceLink, "https://xn--b1aedfedwqbdfbnzkf0oe.xn--p1ai/");
+    }
+
+    //Предприятим
+    @Step("Проверка редиректа по ссылке 'Стать участником платформы'")
+    public void BecomePlatformParticipantLink_Redirect_Check(){
+        Assert.assertEquals(BecomePlatformParticipantLink.getText(), "Стать участником платформы", "Текст элемента не соответствует заданному");
+        super.Check_Redirect_By_Link(BecomePlatformParticipantLink, "https://svi.ctp.devops.xn--b1afjhrgvdfla9hb.xn--p1ai/idm/Accounts/RegisterOrganizationMode?accountType=Company");
     }
 }

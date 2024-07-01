@@ -31,4 +31,10 @@ public class ENTERPRISE extends TestBase {
         EnterprisePage enterprisePage = open(ConfigProviderInterface.enterpriseURL, EnterprisePage.class);
         enterprisePage.PerformanceLink_Redirect();
     }
+
+    @Test(priority = 4, description = "Страница 'Предприятиям'. Редирект 'Стать участником платформы'")
+    public void BecomePlatformParticipantLink_TEST() throws IOException {
+        EnterprisePage enterprisePage = open(ConfigProviderInterface.enterpriseURL, EnterprisePage.class);
+        enterprisePage.BecomePlatformParticipantLink_Redirect_Check();
+    }
 }

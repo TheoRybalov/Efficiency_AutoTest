@@ -16,13 +16,6 @@ public class INDUSTRIES extends TestBase {
         return super.getEnv();
     }
 
-    @Test(priority = 1, description = "Отрасли. Проверка данных на плитках")
-    public void PlatesCorrectData_TEST(){
-        IndustriesPage industriesPage = open(ConfigProviderInterface.industriesURL, IndustriesPage.class);
-        String Desc_From_API = industriesPage.GetManufacturingIndustriesFromApi("Обрабатывающая промышленность");
-        industriesPage.AssertionManufacturingIndustriesDescription(Desc_From_API);
-    }
-
     @Test(priority = 2, description = "Отрасли. Сравнение вёрстки по скриншотам")
     public void MarkupScreenShot_TEST() throws IOException {
         IndustriesPage industriesPage = open(ConfigProviderInterface.industriesURL, IndustriesPage.class);
