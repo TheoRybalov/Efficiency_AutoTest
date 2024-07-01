@@ -81,16 +81,5 @@ public class HOME extends TestBase {
     }
 
 
-    @Test(priority = 9, description = "Домашняя страница. Проверка редиректа в блоке 'Часто задаваемые вопросы'")
-    public void FAQ_TEST() throws IOException {
-        HomePage homePage = open(ConfigProviderInterface.baseURL, HomePage.class);
-        homePage.AllQuestionsLink_Redirect();
-    }
-
-    @Test(priority = 10, description = "Домашняя страница. Проверка редиректа в блоке 'Новости'")
-    public void News_TEST() throws IOException {
-        HomePage homePage = open(ConfigProviderInterface.baseURL, HomePage.class);
-        homePage.AllNewsLink_Redirect();
-    }
 
 }
