@@ -6,7 +6,6 @@ import io.qameta.allure.Step;
 import org.testng.Assert;
 
 import java.io.IOException;
-import java.util.HashMap;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$x;
@@ -46,6 +45,7 @@ public class HomePage extends CommonFunctions {
 
     //footer Контакты elements
     public static final SelenideElement VideoAboutPlatformButton = $x("//*[@id=\"root\"]/div/main/section[1]/div/div/div[1]/div[4]");
+    public static final SelenideElement PopupVideoWindow = $x("/html/body/div[2]/div");
     public static final SelenideElement Carousel = $x("//*[@id=\"root\"]/div/main/section[9]");
 
     //Наши отрасли
@@ -55,11 +55,26 @@ public class HomePage extends CommonFunctions {
     private static final SelenideElement TradingLink = $x("//*[@id=\"root\"]/div/main/section[8]/ul/li[4]/a");
     private static final SelenideElement TransportLink = $x("//*[@id=\"root\"]/div/main/section[8]/ul/li[5]/a");
 
-    //Частые вопросы
+// Частые вопросы
     private static final SelenideElement AllQuestionsLink = $x("//*[@id=\"root\"]/div/main/section[6]/a");
 
-    //Новости
+// Новости
     private static final SelenideElement AllNewsLink = $x("//*[@id=\"root\"]/div/main/section[7]/footer/span/a");
+
+// Путь цифровой трансформации
+    private static final SelenideElement Transformation_StrategyServiceLink = $x("//*[@id=\"root\"]/div/main/section[4]/div/div[1]/div[2]/div[1]/article/div/header/div/a");
+    private static final SelenideElement Transformation_InitiationServiceLink = $x("//*[@id=\"root\"]/div/main/section[4]/div/div[1]/div[2]/div[2]/article/div/header/div/a");
+    private static final SelenideElement Transformation_FinancingServiceLink = $x("//*[@id=\"root\"]/div/main/section[4]/div/div[1]/div[2]/div[3]/article/div/header/div/a");
+    private static final SelenideElement Transformation_ImplementationServiceLink = $x("//*[@id=\"root\"]/div/main/section[4]/div/div[1]/div[2]/div[4]/article/div/header/div/a");
+    private static final SelenideElement Transformation_InitiationButton = $x("//*[@id=\"root\"]/div/main/section[4]/div/div[1]/div[1]/div[2]");
+    private static final SelenideElement Transformation_InitiationWindow = $x("//*[@id=\"root\"]/div/main/section[4]/div/div[1]/div[2]/div[2]");
+    private static final SelenideElement Transformation_FinancingButton = $x("//*[@id=\"root\"]/div/main/section[4]/div/div[1]/div[1]/div[3]");
+    private static final SelenideElement Transformation_FinancingWindow = $x("//*[@id=\"root\"]/div/main/section[4]/div/div[1]/div[2]/div[3]");
+    private static final SelenideElement Transformation_ImplementationButton = $x("//*[@id=\"root\"]/div/main/section[4]/div/div[1]/div[1]/div[4]");
+    private static final SelenideElement Transformation_ImplementationWindow = $x("//*[@id=\"root\"]/div/main/section[4]/div/div[1]/div[2]/div[4]");
+    private static final SelenideElement Transformation_StrategyButton = $x("//*[@id=\"root\"]/div/main/section[4]/div/div[1]/div[1]/div[1]");
+    private static final SelenideElement Transformation_StrategyWindow = $x("//*[@id=\"root\"]/div/main/section[4]/div/div[1]/div[2]/div[1]");
+
 
     @Step("Принимаем куки")
     public void AddCookies(){
@@ -330,6 +345,62 @@ public class HomePage extends CommonFunctions {
         Assert.assertEquals(TransportLink.getText(), "Транспортировка и хранение", "Текст элемента не соответствует заданному");
         super.Check_Redirect_By_Link(TransportLink, "https://aksis.dev.qsupport.ru/industries/transport");
     }
+
+    @Step("Проверка редиректа по ссылке 'Подробнее о сервисах платформы' в разделе 'Стратегия'")
+    public void TransformationStrategyServiceLink_Redirect(){
+        Transformation_ImplementationButton.scrollTo().shouldBe(visible).click();
+        Transformation_StrategyButton.scrollTo().shouldBe(visible).click();
+        Assert.assertEquals(Transformation_StrategyServiceLink.getText(), "Подробнее о сервисах платформы", "Текст элемента не соответствует заданному");
+        super.Check_Redirect_By_Link(Transformation_StrategyServiceLink, "https://aksis.dev.qsupport.ru/services");
+    }
+    @Step("Проверка редиректа по ссылке 'Подробнее о сервисах платформы' в разделе 'Инициация'")
+    public void TransformationInitiationServiceLink_Redirect(){
+        Transformation_InitiationButton.scrollTo().shouldBe(visible).click();
+        Assert.assertEquals(Transformation_InitiationServiceLink.getText(), "Подробнее о сервисах платформы", "Текст элемента не соответствует заданному");
+        super.Check_Redirect_By_Link(Transformation_InitiationServiceLink, "https://aksis.dev.qsupport.ru/services");
+    }
+    @Step("Проверка редиректа по ссылке 'Подробнее о сервисах платформы' в разделе 'Финансирование'")
+    public void TransformationFinancingServiceLink_Redirect(){
+        Transformation_FinancingButton.scrollTo().shouldBe(visible).click();
+        Assert.assertEquals(Transformation_FinancingServiceLink.getText(), "Подробнее о сервисах платформы", "Текст элемента не соответствует заданному");
+        super.Check_Redirect_By_Link(Transformation_FinancingServiceLink, "https://aksis.dev.qsupport.ru/services");
+    }
+    @Step("Проверка редиректа по ссылке 'Подробнее о сервисах платформы' в разделе 'Реализация'")
+    public void TransformationImplementationServiceLink_Redirect(){
+        Transformation_ImplementationButton.scrollTo().shouldBe(visible).click();
+        Assert.assertEquals(Transformation_ImplementationServiceLink.getText(), "Подробнее о сервисах платформы", "Текст элемента не соответствует заданному");
+        super.Check_Redirect_By_Link(Transformation_ImplementationServiceLink, "https://aksis.dev.qsupport.ru/services");
+    }
+
+    @Step("Проверка работоспособности кнопки 'Смотреть видео о платформе'")
+    public void VideoAboutPlatformButton_Performance(){
+        VideoAboutPlatformButton.scrollTo().shouldBe(visible).click();
+        sleep(500);
+        PopupVideoWindow.shouldBe(visible);
+    }
+    @Step("Проверка отображения данных по нажатию 'Инициализация'")
+    public void TransformationInitiation_Visible(){
+        Transformation_InitiationButton.scrollTo().shouldBe(visible).click();
+        Transformation_InitiationWindow.shouldBe(visible);
+    }
+    @Step("Проверка отображения данных по нажатию 'Финансирование'")
+    public void TransformationFinancing_Visible(){
+        Transformation_FinancingButton.scrollTo().shouldBe(visible).click();
+        Transformation_FinancingWindow.shouldBe(visible);
+    }
+    @Step("Проверка отображения данных по нажатию 'Реализация'")
+    public void TransformationImplementation_Visible(){
+        Transformation_ImplementationButton.scrollTo().shouldBe(visible).click();
+        Transformation_ImplementationWindow.shouldBe(visible);
+    }
+    @Step("Проверка отображения данных по нажатию 'Стратегия'")
+    public void TransformationStrategy_Visible(){
+        Transformation_ImplementationButton.scrollTo().shouldBe(visible).click();
+        Transformation_StrategyButton.scrollTo().shouldBe(visible).click();
+        Transformation_StrategyWindow.shouldBe(visible);
+    }
+
+
 
 
     @Step("Проверка редиректа по ссылке 'Все вопросы' в разделе 'Часто задаваемые вопросы'")
