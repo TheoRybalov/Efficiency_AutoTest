@@ -58,6 +58,9 @@ public class HomePage extends CommonFunctions {
     //Частые вопросы
     private static final SelenideElement AllQuestionsLink = $x("//*[@id=\"root\"]/div/main/section[6]/a");
 
+    //Путь цифровой трансформации
+    private static final SelenideElement LeaveRequestLink = $x("//*[@id=\"root\"]/div/main/section[4]/div/div[2]/a");
+
     //Новости
     private static final SelenideElement AllNewsLink = $x("//*[@id=\"root\"]/div/main/section[7]/footer/span/a");
 
@@ -344,6 +347,10 @@ public class HomePage extends CommonFunctions {
         super.Check_Redirect_By_Link(AllNewsLink, "https://aksis.dev.qsupport.ru/news");
     }
 
-
+    @Step("Проверка редиректа 'Оставить заявку' в разделе 'Путь цифровой трансформации'")
+    public void LeaveRequestLink_Redirect(){
+        Assert.assertEquals(LeaveRequestLink.getText(), "Оставить заявку", "Текст элемента не соответствует заданному");
+        super.Check_Redirect_By_Link(LeaveRequestLink, "https://aksis.dev.qsupport.ru/contacts#feedback");
+    }
 
 }
