@@ -27,12 +27,31 @@ public class PRESS_CENTER extends TestBase {
         PressCenterPage pressCenterPage = open(ConfigProviderInterface.pressCenterURL, PressCenterPage.class);
         pressCenterPage.MaterialsLink_Redirect();
     }
+
     @Test(priority = 3, description = "Пресс-Центр. Проверка ссылок в разделе 'Материалы'")
     public void DownloadLinks_TEST() throws IOException {
         PressCenterPage pressCenterPage = open(ConfigProviderInterface.pressCenterURL, PressCenterPage.class);
         pressCenterPage.DownloadPresentation_Redirect();
         pressCenterPage.DownloadPlatformLink_Redirect();
         pressCenterPage.PostingRecommendationsLink_Redirect();
+    }
+
+    @Test(priority = 4, description = "Пресс-центр. Проверка ссылки в разделе 'Новости платформы'")
+    public void NewsPlatform_TEST() throws IOException {
+        PressCenterPage pressCenterPage = open(ConfigProviderInterface.pressCenterURL, PressCenterPage.class);
+        pressCenterPage.AllNewsPlatform_Link_Redirect();
+    }
+
+    @Test(priority = 4, description = "Пресс-центр. Проверка ссылки в разделе 'Новости нацпроекта'")
+    public void NewsProject_TEST() throws IOException {
+        PressCenterPage pressCenterPage = open(ConfigProviderInterface.pressCenterURL, PressCenterPage.class);
+        pressCenterPage.AllNewsProject_Link_Redirect();
+    }
+
+    @Test(priority = 4, description = "Пресс-центр. Проверка ссылки в разделе 'Мероприятия'")
+    public void Events_TEST() throws IOException {
+        PressCenterPage pressCenterPage = open(ConfigProviderInterface.pressCenterURL, PressCenterPage.class);
+        pressCenterPage.AllEvents_Link_Redirect();
     }
 
 }
