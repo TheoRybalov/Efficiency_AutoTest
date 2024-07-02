@@ -58,8 +58,6 @@ public class HomePage extends CommonFunctions {
 // Частые вопросы
     private static final SelenideElement AllQuestionsLink = $x("//*[@id=\"root\"]/div/main/section[6]/a");
 
-// Путь цифровой трансформации
-    private static final SelenideElement LeaveRequestLink = $x("//*[@id=\"root\"]/div/main/section[4]/div/div[2]/a");
 
     //Новости
     private static final SelenideElement AllNewsLink = $x("//*[@id=\"root\"]/div/main/section[7]/footer/span/a");
@@ -77,6 +75,7 @@ public class HomePage extends CommonFunctions {
     private static final SelenideElement Transformation_ImplementationWindow = $x("//*[@id=\"root\"]/div/main/section[4]/div/div[1]/div[2]/div[4]");
     private static final SelenideElement Transformation_StrategyButton = $x("//*[@id=\"root\"]/div/main/section[4]/div/div[1]/div[1]/div[1]");
     private static final SelenideElement Transformation_StrategyWindow = $x("//*[@id=\"root\"]/div/main/section[4]/div/div[1]/div[2]/div[1]");
+    private static final SelenideElement LeaveRequestLink = $x("//*[@id=\"root\"]/div/main/section[4]/div/div[2]/a");
 
 
     @Step("Принимаем куки")
