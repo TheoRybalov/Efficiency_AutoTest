@@ -14,11 +14,11 @@ public class ENTERPRISE extends TestBase {
     //Получение окружения для тестирования верстки
     public String getEnvironment() {return super.getEnv();}
 
-    @Test(priority = 4, description = "Сравнение верстки по скриншотам")
+    @Test(priority = 4, description = "Страница 'Предприятиям' Сравнение верстки по скриншотам")
     public void MarkupScreenshot_TEST() throws IOException {
         EnterprisePage enterprisePage = open(ConfigProviderInterface.enterpriseURL, EnterprisePage.class);
         enterprisePage.AcceptCookies();
-        enterprisePage.TakeScreenshotofFullpage(getEnvironment());
+        enterprisePage.TakeScreenshotOfFullPage(getEnvironment());
         Boolean result_of_comparing = enterprisePage.compareScreenshotsOfFullPage(getEnvironment());
         enterprisePage.AssertionCompareScreenshots(result_of_comparing);
     }

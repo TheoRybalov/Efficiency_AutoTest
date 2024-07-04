@@ -27,7 +27,8 @@ public class EnterprisePage extends CommonFunctions {
     @Step("Принимаем куки")
     public void AcceptCookies(){ cookieButton.shouldBe(visible).click();}
 
-    public void TakeScreenshotofFullpage(String environment) throws IOException {
+    @Step("Создание скриншота всей страницы")
+    public void TakeScreenshotOfFullPage(String environment) throws IOException {
         String screenshotPath = null;
 
         switch (environment) {
@@ -44,6 +45,8 @@ public class EnterprisePage extends CommonFunctions {
         super.TakeScreenshotOfFullPage(screenshotPath);
 
         }
+
+    @Step("Сравнение скриншотов")
     public boolean compareScreenshotsOfFullPage(String environment) throws IOException {
         String screenshotPath = null;
         String referencePath = null;

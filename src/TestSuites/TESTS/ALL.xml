@@ -27,7 +27,7 @@
         <class name="Efficiency.Tests.INDUSTRIES"/>
         </classes>
     </test>-->
-    <test name="ENTERPRISE_TEST_PHONE">
+   <!-- <test name="ENTERPRISE_TEST_PHONE">
     <parameter name="environment" value="phone"/>
     <parameter name="browser" value="chrome"/>
     <classes>
@@ -37,7 +37,7 @@
             </methods>
         </class>
     </classes>
-</test>
+</test>-->
 
 <!--    <test name="HOME_PAGE">-->
 <!--        <parameter name="environment" value="PC"/>-->
@@ -67,13 +67,20 @@
 <!--            <class name="Efficiency.Tests.PRESS_CENTER"/>-->
 <!--        </classes>-->
 <!--    </test>-->
-<!--    <test name="ABOUT_NATIONAL_PROJECT_PAGE">-->
-<!--        <parameter name="environment" value="PC"/>-->
-<!--        <parameter name="browser" value="chrome"/>-->
-<!--        <classes>-->
-<!--            <class name="Efficiency.Tests.ABOUT_NATIONAL_PROJECT"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <test name="ABOUT_NATIONAL_PROJECT_PAGE_PC">
+        <parameter name="environment" value="PC"/>
+        <parameter name="browser" value="chrome"/>
+        <classes>
+            <class name="Efficiency.Tests.ABOUT_NATIONAL_PROJECT"/>
+        </classes>
+    </test>
+    <test name="ABOUT_NATIONAL_PROJECT_PAGE_PHONE">
+        <parameter name="environment" value="phone"/>
+        <parameter name="browser" value="chrome"/>
+        <classes>
+            <class name="Efficiency.Tests.ABOUT_NATIONAL_PROJECT"/>
+        </classes>
+    </test>
 <!--    <test name="FAQ_PAGE">-->
 <!--        <parameter name="environment" value="PC"/>-->
 <!--        <parameter name="browser" value="chrome"/>-->
