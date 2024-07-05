@@ -18,8 +18,6 @@
     </classes>
 </test>-->
 
-
-
   <!--  <test name="INDUSTRIES_TEST_PС">
         <parameter name="environment" value="PC"/>
         <parameter name="browser" value="chrome"/>
@@ -67,7 +65,7 @@
 <!--            <class name="Efficiency.Tests.PRESS_CENTER"/>-->
 <!--        </classes>-->
 <!--    </test>-->
-    <test name="ABOUT_NATIONAL_PROJECT_PAGE_PC">
+   <!-- <test name="ABOUT_NATIONAL_PROJECT_PAGE_PC">
         <parameter name="environment" value="PC"/>
         <parameter name="browser" value="chrome"/>
         <classes>
@@ -79,8 +77,12 @@
         <parameter name="browser" value="chrome"/>
         <classes>
             <class name="Efficiency.Tests.ABOUT_NATIONAL_PROJECT"/>
+            <methods>
+                <include name="MarkupScreenshot_TEST"/>
+            </methods>
         </classes>
-    </test>
+
+    </test>-->
 <!--    <test name="FAQ_PAGE">-->
 <!--        <parameter name="environment" value="PC"/>-->
 <!--        <parameter name="browser" value="chrome"/>-->
@@ -110,6 +112,26 @@
             <class name="Efficiency.Tests.HOME"/>
         </classes>
     </test>-->
+    <test name="SERVICES_TEST_PHONE">
+    <parameter name="environment" value="phone"/>
+    <parameter name="browser" value="chrome"/>
+    <classes>
+        <class name="Efficiency.Tests.SERVICES">
+            <methods>
+                <include name="MarkupScreenshot_TEST"/>
+            </methods>
+        </class>
+    </classes>
+</test>
+
+      <!--<test name="SERVICES_TEST_PС">
+          <parameter name="environment" value="PC"/>
+          <parameter name="browser" value="chrome"/>
+          <classes>
+          <class name="Efficiency.Tests.SERVICES"/>
+          </classes>
+      </test>-->
+
 
 
 
