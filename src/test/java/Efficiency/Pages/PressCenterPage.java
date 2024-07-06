@@ -7,15 +7,24 @@ import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.testng.Assert;
 
+import java.io.IOException;
 import java.sql.*;
 import java.util.List;
 import java.util.Map;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$x;
+import static com.codeborne.selenide.Selenide.sleep;
 
 public class PressCenterPage extends CommonFunctions {
 
+    //Разделы на странице
+    private static final SelenideElement PressCenterSection = $x("//*[@id=\"root\"]/div/main/section[1]");
+    private static final SelenideElement MaterialsSection = $x("//*[@id=\"media\"]");
+    private static final SelenideElement ContactsSection = $x("//*[@id=\"contacts\"]");
+    private static final SelenideElement FooterSection = $x("//*[@id=\"root\"]/div/footer");
+
+    //Новости
     private static final SelenideElement News_Platform_1 = $x("//*[@id=\"news-platform\"]/div/div/div[1]/a/div/div[2]/div[1]");
     private static final SelenideElement News_Platform_2 = $x("//*[@id=\"news-platform\"]/div/div/div[2]/a/div/div[2]/div[1]");
     private static final SelenideElement News_Platform_3 = $x("//*[@id=\"news-platform\"]/div/div/div[3]/a/div/div[2]/div[1]");
@@ -37,6 +46,118 @@ public class PressCenterPage extends CommonFunctions {
 
     //Ссылка "Все новости платформы"
     private  static final SelenideElement AllNewsPlatform_Link = $x("//*[@id=\"news-platform\"]/footer/span/a");
+    public static final SelenideElement CookieButton = $x("//*[@id=\"rcc-confirm-button\"]");
+    @Step("Принимаем куки")
+    public void AddCookies(){
+        CookieButton.shouldBe(visible).click();
+    }
+
+    @Step("Создание скриншота секции 'Пресс-центр'")
+    public void TakeScreenshotOfPressCenterSection(String environment) throws IOException {
+        String screenshotPath = null;
+        sleep(2000);
+        switch (environment) {
+            case "PC":
+                //Если мы получаем скриншот в кофигурации ПК, то сохранение будет идти в эту папку
+                screenshotPath = "src/test/resources/screenshots/PressCenterPage/PC/Elements/PressCenterSection/current.png";
+                break;
+            case "phone":
+                //Если мы получаем скриншот в кофигурации телефон, то сохранение будет идти в эту папку
+                screenshotPath = "src/test/resources/screenshots/PressCenterPage/phone/Elements/PressCenterSection/reference.png";
+                break;
+            default:
+                throw new IllegalArgumentException("Неверный параметр окружения: " + environment);
+        }
+        //вызывается метод создания и сохранения такого скриншота, куда мы передаём путь до папки
+        super.TakeScreenshotOfElement(PressCenterSection, screenshotPath);
+    }
+
+    @Step("Создание скриншота секции 'Контакты'")
+    public void TakeScreenshotOfMaterialsSection(String environment) throws IOException {
+        String screenshotPath = null;
+        sleep(2000);
+        switch (environment) {
+            case "PC":
+                //Если мы получаем скриншот в кофигурации ПК, то сохранение будет идти в эту папку
+                screenshotPath = "src/test/resources/screenshots/PressCenterPage/PC/Elements/MaterialsSection/current.png";
+                break;
+            case "phone":
+                //Если мы получаем скриншот в кофигурации телефон, то сохранение будет идти в эту папку
+                screenshotPath = "src/test/resources/screenshots/PressCenterPage/phone/Elements/MaterialsSection/reference.png";
+                break;
+            default:
+                throw new IllegalArgumentException("Неверный параметр окружения: " + environment);
+        }
+        //вызывается метод создания и сохранения такого скриншота, куда мы передаём путь до папки
+        super.TakeScreenshotOfElement(MaterialsSection, screenshotPath);
+    }
+
+    @Step("Создание скриншота секции 'Контакты'")
+    public void TakeScreenshotOfContactsSection(String environment) throws IOException {
+        String screenshotPath = null;
+        sleep(2000);
+        switch (environment) {
+            case "PC":
+                //Если мы получаем скриншот в кофигурации ПК, то сохранение будет идти в эту папку
+                screenshotPath = "src/test/resources/screenshots/PressCenterPage/PC/Elements/ContactsSection/current.png";
+                break;
+            case "phone":
+                //Если мы получаем скриншот в кофигурации телефон, то сохранение будет идти в эту папку
+                screenshotPath = "src/test/resources/screenshots/PressCenterPage/phone/Elements/ContactsSection/reference.png";
+                break;
+            default:
+                throw new IllegalArgumentException("Неверный параметр окружения: " + environment);
+        }
+        //вызывается метод создания и сохранения такого скриншота, куда мы передаём путь до папки
+        super.TakeScreenshotOfElement(ContactsSection, screenshotPath);
+    }
+
+    @Step("Создание скриншота футера")
+    public void TakeScreenshotOfFooterSection(String environment) throws IOException {
+        String screenshotPath = null;
+        sleep(2000);
+        switch (environment) {
+            case "PC":
+                //Если мы получаем скриншот в кофигурации ПК, то сохранение будет идти в эту папку
+                screenshotPath = "src/test/resources/screenshots/PressCenterPage/PC/Elements/FooterSection/current.png";
+                break;
+            case "phone":
+                //Если мы получаем скриншот в кофигурации телефон, то сохранение будет идти в эту папку
+                screenshotPath = "src/test/resources/screenshots/PressCenterPage/phone/Elements/FooterSection/reference.png";
+                break;
+            default:
+                throw new IllegalArgumentException("Неверный параметр окружения: " + environment);
+        }
+        //вызывается метод создания и сохранения такого скриншота, куда мы передаём путь до папки
+        super.TakeScreenshotOfElement(FooterSection, screenshotPath);
+    }
+
+    @Step("Сравнение скриншотов кнопки 'Смотреть видео о платформе' до и после наведения")
+    public boolean compareScreenshotsOfSection(String environment, String NameOfSection) throws IOException{
+        String screenshotPath = null;
+        String referencePath = null;
+        String resultPath = null;
+
+        switch (environment) {
+            case "PC":
+                //Если мы получаем скриншот в кофигурации ПК, то для сравнения current и reference нужно вытащить из этих папок
+                screenshotPath =  String.format("src/test/resources/screenshots/PressCenterPage/PC/Elements/%s/current.png", NameOfSection);
+                referencePath = String.format("src/test/resources/screenshots/PressCenterPage/PC/Elements/%s/reference.png", NameOfSection);
+                resultPath = String.format("src/test/resources/screenshots/PressCenterPage/PC/Elements/%s/differences.png", NameOfSection);
+                break;
+            case "phone":
+                //Если мы получаем скриншот в кофигурации телефона, то для сравнения current и reference нужно вытащить из этих папок
+                screenshotPath =  String.format("src/test/resources/screenshots/PressCenterPage/phone/Elements/%s/current.png", NameOfSection);
+                referencePath = String.format("src/test/resources/screenshots/PressCenterPage/phone/Elements/%s/reference.png", NameOfSection);
+                resultPath = String.format("src/test/resources/screenshots/PressCenterPage/phone/Elements/%s/differences.png", NameOfSection);
+                break;
+            default:
+                throw new IllegalArgumentException("Неверный параметр окружения: " + environment);
+        }
+        //вызывается сравнения скриншотов, куда мы передаём пути до папок
+        return super.compareScreenshots(screenshotPath, referencePath, resultPath);
+    }
+
 
     @Step("Получить первый заголовок новостей с платформы")
     public String getFirstLabelOfNewsPlatform(){
