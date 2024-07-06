@@ -34,7 +34,7 @@ public class PROVIDERS extends TestBase {
         providersPage.LoginAsProviderLink_Redirect();
     }
 
-    @Test(priority = 5, description = "Домашняя страница. Тест вёрстки через скриншот")
+    @Test(priority = 5, description = "Страница 'Поставщикам'. Тест вёрстки через скриншот")
     public void LayoutScreenshot_TEST() throws IOException {
         ProvidersPage providersPage = open(ConfigProviderInterface.providersURL, ProvidersPage.class);
         providersPage.AddCookies();
