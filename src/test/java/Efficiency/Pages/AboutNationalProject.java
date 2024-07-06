@@ -5,9 +5,15 @@ import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 import org.testng.Assert;
 
+import java.io.IOException;
+
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$x;
 
 public class AboutNationalProject extends CommonFunctions {
+
+    private static final SelenideElement cookieButton = $x("//*[@id=\"rcc-confirm-button\"]");
+
     //Паспорт федерального проекта «Адресная поддержка повышения производительности труда на предприятиях» ↗
     private static final SelenideElement PassportTargetedSupportLink = $x("//*[@id=\"root\"]/div/main/section[4]/div/div/div[1]/div/a");
     //Паспорт федерального проекта «Системные меры по повышению производительности труда» ↗
@@ -48,4 +54,50 @@ public class AboutNationalProject extends CommonFunctions {
         Assert.assertEquals(AboutProjectOnSiteLink.getText(), "О проекте на сайте ФЦК ↗", "Текст элемента не соответствует заданному");
         super.Check_Redirect_By_Link(AboutProjectOnSiteLink, "https://xn--b1aedfedwqbdfbnzkf0oe.xn--p1ai/national-project/about_project/");
     }
+
+    @Step("Принимаем куки")
+    public void AcceptCookies() {cookieButton.shouldBe(visible).click();}
+
+    @Step("Создаем скриншот всей страницы")
+    public void TakeScreenshotOfFullPage(String environment) throws IOException {
+        String screenshotPath = null;
+
+        switch (environment){
+            case "PC":
+                screenshotPath = ("src/test/resources/screenshots/aboutNationalProject/PC/current.png");
+                break;
+            case "phone":
+                screenshotPath = ("src/test/resources/screenshots/aboutNationalProject/phone/current.png");
+                break;
+            default:
+                throw new IllegalArgumentException("Неверный параметр окружения: " + environment);
+
+        }
+        super.TakeScreenshotOfFullPage(screenshotPath);
+
+    }
+
+    @Step("Сравниваем скришоты")
+    public boolean compareScreenshotsOfFullPage(String environment) throws IOException {
+        String screenshotPath = null;
+        String referencePath = null;
+        String resultPath = null;
+        switch (environment){
+            case "PC":
+                screenshotPath = "src/test/resources/screenshots/aboutNationalProject/PC/current.png";
+                referencePath = "src/test/resources/screenshots/aboutNationalProject/PC/reference.png";
+                resultPath = "src/test/resources/screenshots/aboutNationalProject/PC/result.png";
+                break;
+            case "phone":
+                screenshotPath = "src/test/resources/screenshots/aboutNationalProject/phone/current.png";
+                referencePath = "src/test/resources/screenshots/aboutNationalProject/phone/reference.png";
+                resultPath = "src/test/resources/screenshots/aboutNationalProject/phone/result.png";
+                break;
+            default:
+                throw new IllegalArgumentException("Неверный параметр окружения: " + environment);
+
+        }
+        return super.compareScreenshots(screenshotPath, referencePath, resultPath);
+
+}
 }

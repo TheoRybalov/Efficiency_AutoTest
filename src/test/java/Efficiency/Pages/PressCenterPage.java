@@ -29,6 +29,15 @@ public class PressCenterPage extends CommonFunctions {
     private static final SelenideElement DownloadPlatformLink = $x("//*[@id=\"media\"]/ul/li[2]/a");
     private static final SelenideElement PostingRecommendationsLink = $x("//*[@id=\"media\"]/ul/li[3]/a");
 
+    //Ссылка "Все новости нац проекта"
+    private static final SelenideElement AllNewsProject_Link = $x("//*[@id=\"news-project\"]/footer/span/a");
+
+    //Ссылка "Все мероприятия"
+    private static final SelenideElement AllEvents_Link = $x("//*[@id=\"root\"]/div/main/section[5]/footer/span/a");
+
+    //Ссылка "Все новости платформы"
+    private  static final SelenideElement AllNewsPlatform_Link = $x("//*[@id=\"news-platform\"]/footer/span/a");
+
     @Step("Получить первый заголовок новостей с платформы")
     public String getFirstLabelOfNewsPlatform(){
         return News_Platform_1.shouldBe(visible).getText();
@@ -118,5 +127,21 @@ public class PressCenterPage extends CommonFunctions {
         super.Check_RedirectToOtherTab_By_Link(PostingRecommendationsLink, "https://cloud.ctprf.ru/index.php/s/P9aESRtr2L1rx2d");
     }
 
+    @Step("Проверка редиректа по ссылке 'Все новости'")
+    public void AllNewsPlatform_Link_Redirect(){
+        Assert.assertEquals(AllNewsPlatform_Link.getText(), "Все новости платформы", "Текст элемента не соответствует заданному");
+        super.Check_Redirect_By_Link(AllNewsPlatform_Link, "https://aksis.dev.qsupport.ru/news?category=platformNews");
+    }
 
+    @Step("Проверка редиректа по ссылке 'Все новости нацпроекта'")
+    public void AllNewsProject_Link_Redirect(){
+        Assert.assertEquals(AllNewsProject_Link.getText(), "Все новости нацпроекта", "Текст элемента не соответствует заданному");
+        super.Check_Redirect_By_Link(AllNewsProject_Link, "https://aksis.dev.qsupport.ru/news?category=projectNews");
+    }
+
+    @Step("Проверка редиректа по ссылке 'Все мероприятия'")
+    public void AllEvents_Link_Redirect(){
+        Assert.assertEquals(AllEvents_Link.getText(), "Все мероприятия", "Текст элемента не соответствует заданному");
+        super.Check_Redirect_By_Link(AllEvents_Link,"https://aksis.dev.qsupport.ru/events");
+    }
 }

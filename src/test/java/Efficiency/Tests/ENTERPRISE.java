@@ -10,6 +10,19 @@ import java.io.IOException;
 import static com.codeborne.selenide.Selenide.open;
 
 public class ENTERPRISE extends TestBase {
+
+    //Получение окружения для тестирования верстки
+    public String getEnvironment() {return super.getEnv();}
+
+    @Test(priority = 4, description = "Страница 'Предприятиям' Сравнение верстки по скриншотам")
+    public void MarkupScreenshot_TEST() throws IOException {
+        EnterprisePage enterprisePage = open(ConfigProviderInterface.enterpriseURL, EnterprisePage.class);
+        enterprisePage.AcceptCookies();
+        enterprisePage.TakeScreenshotOfFullPage(getEnvironment());
+        Boolean result_of_comparing = enterprisePage.compareScreenshotsOfFullPage(getEnvironment());
+        enterprisePage.AssertionCompareScreenshots(result_of_comparing);
+    }
+
     @Test(priority = 1, description = "Страница 'Предприятиям'. Редиректы в разделе 'Наши отрасли'")
     public void OurIndustries_TEST() throws IOException {
         EnterprisePage enterprisePage = open(ConfigProviderInterface.enterpriseURL, EnterprisePage.class);
@@ -32,7 +45,7 @@ public class ENTERPRISE extends TestBase {
         enterprisePage.PerformanceLink_Redirect();
     }
 
-    @Test(priority = 4, description = "Страница 'Предприятиям'. Редирект 'Стать участником платформы'")
+@Test(priority = 4, description = "Страница 'Предприятиям'. Редирект 'Стать участником платформы'")
     public void BecomePlatformParticipantLink_TEST() throws IOException {
         EnterprisePage enterprisePage = open(ConfigProviderInterface.enterpriseURL, EnterprisePage.class);
         enterprisePage.BecomePlatformParticipantLink_Redirect_Check();

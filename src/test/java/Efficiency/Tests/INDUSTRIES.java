@@ -25,6 +25,14 @@ public class INDUSTRIES extends TestBase {
         industriesPage.AssertionCompareScreenshots(result_of_comparing);
     }
 
-
+    @Test(priority = 3, description = "Отрасли. Проверка редиректов")
+    public void Industries_Redirects() throws IOException {
+        IndustriesPage industriesPage = open(ConfigProviderInterface.industriesURL, IndustriesPage.class);
+        industriesPage.SelskoeHozaystvoLink_Redirect();
+        industriesPage.ManufactoringIndustriesLink_Redirect();
+        industriesPage.ConstructionLink_Redirect();
+        industriesPage.TradingLink_Redirect();
+        industriesPage.TransportLink_Redirect();
+    }
 
 }

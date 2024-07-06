@@ -85,6 +85,7 @@ public class HOME extends TestBase {
         homePage.TransformationImplementationServiceLink_Redirect();
         homePage.TransformationInitiationServiceLink_Redirect();
         homePage.TransformationStrategyServiceLink_Redirect();
+        homePage.LeaveRequestLink_Redirect();
     }
     @Test(priority = 7, description = "Домашняя страница. Проверка отображения данных по нажатию на 'Стратегия','Инициация','Финансирование','Реализация'")
     public void TransformationVisible_TEST() throws IOException {
@@ -111,5 +112,6 @@ public class HOME extends TestBase {
         HomePage homePage = open(ConfigProviderInterface.baseURL, HomePage.class);
         homePage.AllNewsLink_Redirect();
     }
+
 
 }

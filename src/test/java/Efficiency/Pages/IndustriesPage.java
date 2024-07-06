@@ -19,7 +19,17 @@ public class IndustriesPage extends CommonFunctions {
     public static final SelenideElement ManufacturingIndustriesHeader = $x("//*[@id=\"root\"]/div/main/div/section[1]/div/div[2]/div/a/div[2]/div[2]/div/p");
     public static final SelenideElement CookieButton = $x("//*[@id=\"rcc-confirm-button\"]");
 
-
+    //Ссылки отраслей
+    public static final SelenideElement SelskoeHozaystvoLink = $x("//*[@id=\"root\"]/div/main/div/section[1]/div/div[1]/div/a");
+    public static final SelenideElement SelskoeHozaystvoTitle = $x("//*[@id=\"root\"]/div/main/div/section[1]/div/div[1]/div/a/div[2]/div[1]");
+    public static final SelenideElement ManufactoringIndustriesLink = $x("//*[@id=\"root\"]/div/main/div/section[1]/div/div[2]/div/a");
+    public static final SelenideElement ManufactoringIndustriesTtle = $x("//*[@id=\"root\"]/div/main/div/section[1]/div/div[2]/div/a/div[2]/div[1]");
+    public static final SelenideElement ConstructionLink = $x("//*[@id=\"root\"]/div/main/div/section[1]/div/div[3]/div/a");
+    public static final SelenideElement ConstructionTitle = $x("//*[@id=\"root\"]/div/main/div/section[1]/div/div[3]/div/a/div[2]/div[1]");
+    public static final SelenideElement TradingLink = $x("//*[@id=\"root\"]/div/main/div/section[1]/div/div[4]/div/a");
+    public static final SelenideElement TradingTitle = $x("//*[@id=\"root\"]/div/main/div/section[1]/div/div[4]/div/a/div[2]/div[1]");
+    public static final SelenideElement TransportLink = $x("//*[@id=\"root\"]/div/main/div/section[1]/div/div[5]/div/a");
+    public static final SelenideElement TransportTitle = $x("//*[@id=\"root\"]/div/main/div/section[1]/div/div[5]/div/a/div[2]/div[1]");
 
     @Step("Проверка совпадения описания для блока 'Обрабатывающая промышленность'")
     public void AssertionManufacturingIndustriesDescription(String desc){
@@ -97,6 +107,37 @@ public class IndustriesPage extends CommonFunctions {
         apiDescription = apiDescription.replaceAll("<p>|</p>", "");
 
         return apiDescription;
+    }
+
+
+    @Step("Проверка редиректа на элементе 'Сельское хозяйство'")
+    public void SelskoeHozaystvoLink_Redirect(){
+        Assert.assertEquals(SelskoeHozaystvoTitle.getText(), "Сельское хозяйство", "Текст элемента не соответствует заданному");
+        super.Check_Redirect_By_Link(SelskoeHozaystvoLink, "https://aksis.dev.qsupport.ru/industries/selskoye-hozaystvo");
+    }
+
+    @Step("Проверка редиректа на элементе 'Обрабатывающая промышленность'")
+    public void ManufactoringIndustriesLink_Redirect(){
+        Assert.assertEquals(ManufactoringIndustriesTtle.getText(), "Обрабатывающая промышленность", "Текст элемента не соответствует заданному");
+        super.Check_Redirect_By_Link(ManufactoringIndustriesLink, "https://aksis.dev.qsupport.ru/industries/manufacturing-industries");
+    }
+
+    @Step("Проверка редиректа на элементе 'Строительство'")
+    public void ConstructionLink_Redirect(){
+        Assert.assertEquals(ConstructionTitle.getText(), "Строительство", "Текст элемента не соответствует заданному");
+        super.Check_Redirect_By_Link(ConstructionLink, "https://aksis.dev.qsupport.ru/industries/construction");
+    }
+
+    @Step("Проверка редиректа на элементе 'Торговля'")
+    public void TradingLink_Redirect(){
+        Assert.assertEquals(TradingTitle.getText(), "Торговля", "Текст элемента не соответствует заданному");
+        super.Check_Redirect_By_Link(TradingLink, "https://aksis.dev.qsupport.ru/industries/trading");
+    }
+
+    @Step("Проверка редиректа на элементе 'Транспортировка и хранение'")
+    public void TransportLink_Redirect(){
+        Assert.assertEquals(TransportTitle.getText(), "Транспортировка и хранение", "Текст элемента не соответствует заданному");
+        super.Check_Redirect_By_Link(TransportLink, "https://aksis.dev.qsupport.ru/industries/transport");
     }
 
 

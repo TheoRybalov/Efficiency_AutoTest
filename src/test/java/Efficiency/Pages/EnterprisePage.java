@@ -5,9 +5,10 @@ import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 import org.testng.Assert;
 
+import java.io.IOException;
+
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$x;
-import static com.codeborne.selenide.Selenide.switchTo;
-import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 
 public class EnterprisePage extends CommonFunctions {
 
@@ -23,6 +24,57 @@ public class EnterprisePage extends CommonFunctions {
     private static final SelenideElement AboutServicesLink = $x("//*[@id=\"root\"]/div/main/div/article/section[4]/div/div/div/a");
     //Производительность.рф
     private static final SelenideElement PerformanceLink = $x("//*[@id=\"root\"]/div/main/div/article/section[2]/div[2]/div/div/p/a");
+
+    private static final SelenideElement cookieButton = $x("//*[@id=\"rcc-confirm-button\"]");
+
+    @Step("Принимаем куки")
+    public void AcceptCookies(){ cookieButton.shouldBe(visible).click();}
+
+    @Step("Создание скриншота всей страницы")
+    public void TakeScreenshotOfFullPage(String environment) throws IOException {
+        String screenshotPath = null;
+
+        switch (environment) {
+            case "PC":
+                screenshotPath = ("src/test/resources/screenshots/enterprise/PC/current.png");
+                break;
+            case "phone":
+                screenshotPath = ("src/test/resources/screenshots/enterprise/phone/current.png");
+                break;
+            default:
+                throw new IllegalArgumentException("Неверный параметр окружения: " + environment);
+
+        }
+        super.TakeScreenshotOfFullPage(screenshotPath);
+
+        }
+
+    @Step("Сравнение скриншотов")
+    public boolean compareScreenshotsOfFullPage(String environment) throws IOException {
+        String screenshotPath = null;
+        String referencePath = null;
+        String resultPath = null;
+
+        switch (environment){
+            case "PC":
+                screenshotPath = "src/test/resources/screenshots/enterprise/PC/current.png";
+                referencePath = "src/test/resources/screenshots/enterprise/PC/reference.png";
+                resultPath = "src/test/resources/screenshots/enterprise/PC/result.png";
+                break;
+            case "phone":
+                screenshotPath = "src/test/resources/screenshots/enterprise/phone/current.png";
+                referencePath = "src/test/resources/screenshots/enterprise/phone/reference.png";
+                resultPath = "src/test/resources/screenshots/enterprise/phone/result.png";
+                break;
+            default:
+                throw new IllegalArgumentException("Неверный параметр окружения: " + environment);
+
+        }
+        return super.compareScreenshots(screenshotPath, referencePath, resultPath);
+    }
+
+
+
     //Наши отрасли
     @Step("Проверка редиректа по ссылке 'Сельское хозяйство' в разделе 'Отрасли'")
     public void SelskoyeHozaystvoLink_Redirect(){

@@ -58,7 +58,8 @@ public class HomePage extends CommonFunctions {
 // Частые вопросы
     private static final SelenideElement AllQuestionsLink = $x("//*[@id=\"root\"]/div/main/section[6]/a");
 
-// Новости
+
+    //Новости
     private static final SelenideElement AllNewsLink = $x("//*[@id=\"root\"]/div/main/section[7]/footer/span/a");
 
 // Путь цифровой трансформации
@@ -74,6 +75,7 @@ public class HomePage extends CommonFunctions {
     private static final SelenideElement Transformation_ImplementationWindow = $x("//*[@id=\"root\"]/div/main/section[4]/div/div[1]/div[2]/div[4]");
     private static final SelenideElement Transformation_StrategyButton = $x("//*[@id=\"root\"]/div/main/section[4]/div/div[1]/div[1]/div[1]");
     private static final SelenideElement Transformation_StrategyWindow = $x("//*[@id=\"root\"]/div/main/section[4]/div/div[1]/div[2]/div[1]");
+    private static final SelenideElement LeaveRequestLink = $x("//*[@id=\"root\"]/div/main/section[4]/div/div[2]/a");
 
 
     @Step("Принимаем куки")
@@ -415,6 +417,10 @@ public class HomePage extends CommonFunctions {
         super.Check_Redirect_By_Link(AllNewsLink, "https://aksis.dev.qsupport.ru/news");
     }
 
-
+    @Step("Проверка редиректа 'Оставить заявку' в разделе 'Путь цифровой трансформации'")
+    public void LeaveRequestLink_Redirect(){
+        Assert.assertEquals(LeaveRequestLink.getText(), "Оставить заявку", "Текст элемента не соответствует заданному");
+        super.Check_Redirect_By_Link(LeaveRequestLink, "https://aksis.dev.qsupport.ru/contacts#feedback");
+    }
 
 }
