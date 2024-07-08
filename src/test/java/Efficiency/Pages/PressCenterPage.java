@@ -9,6 +9,7 @@ import org.testng.Assert;
 
 import java.io.IOException;
 import java.sql.*;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -24,10 +25,16 @@ public class PressCenterPage extends CommonFunctions {
     private static final SelenideElement ContactsSection = $x("//*[@id=\"contacts\"]");
     private static final SelenideElement FooterSection = $x("//*[@id=\"root\"]/div/footer");
 
-    //Новости
+    //Новости платформы
     private static final SelenideElement News_Platform_1 = $x("//*[@id=\"news-platform\"]/div/div/div[1]/a/div/div[2]/div[1]");
     private static final SelenideElement News_Platform_2 = $x("//*[@id=\"news-platform\"]/div/div/div[2]/a/div/div[2]/div[1]");
     private static final SelenideElement News_Platform_3 = $x("//*[@id=\"news-platform\"]/div/div/div[3]/a/div/div[2]/div[1]");
+
+    //Новости платформы
+    private static final SelenideElement News_National_Project_1 = $x("//*[@id=\"news-project\"]/div/div/div[1]/a/div/div[2]/div[1]");
+    private static final SelenideElement News_National_Project_2 = $x("//*[@id=\"news-project\"]/div/div/div[2]/a/div/div[2]/div[1]");
+    private static final SelenideElement News_National_Project_3 = $x("//*[@id=\"news-project\"]/div/div/div[3]/a/div/div[2]/div[1]");
+
     //Ссылки: 'Материалы', 'Новости платформы', 'Новости нацпроекта', 'Контакты'
     private static final SelenideElement MaterialsLink = $x("//*[@id=\"root\"]/div/main/section[1]/header/ul/li[1]/a");
     private static final SelenideElement Header_NewsPlatformLink = $x("//*[@id=\"root\"]/div/main/section[1]/header/ul/li[2]/a");
@@ -159,30 +166,79 @@ public class PressCenterPage extends CommonFunctions {
     }
 
 
-    @Step("Получить первый заголовок новостей с платформы")
+    @Step("Получить первый заголовок новостей платформы")
     public String getFirstLabelOfNewsPlatform(){
         return News_Platform_1.shouldBe(visible).getText();
     }
 
-    @Step("Получить ID новости с API по заголовку: {title}")
-    public long getIdFromApi(String title) {
+    @Step("Получить второй заголовок новостей платформы")
+    public String getSecondLabelOfNewsPlatform(){
+        return News_Platform_2.shouldBe(visible).getText();
+    }
+
+    @Step("Получить третий заголовок новостей платформы")
+    public String getThirdLabelOfNewsPlatform(){
+        return News_Platform_3.shouldBe(visible).getText();
+    }
+
+
+    @Step("Получить первый заголовок новостей нацпроекта")
+    public String getFirstLabelOfNewsNationalProject(){
+        return News_National_Project_1.shouldBe(visible).getText();
+    }
+
+    @Step("Получить второй заголовок новостей нацпроекта")
+    public String getSecondLabelOfNewsNationalProject(){
+        return News_National_Project_2.shouldBe(visible).getText();
+    }
+
+    @Step("Получить третий заголовок новостей нацпроекта")
+    public String getThirdLabelOfNewsNationalProject(){
+        return News_National_Project_3.shouldBe(visible).getText();
+    }
+
+
+    @Step("Получить данные новости платформы с API по заголовку: {title}")
+    public Map<String, Object> getPlatformNewsDataFromApi(String title) {
+
+
         Response response = RestAssured.get("https://aksis.dev.qsupport.ru/api/PressCenter/GetNews?newsTypes=platformNews&pageSize=3");
         Assert.assertFalse(response.asString().isEmpty(), "Response is empty");
 
         List<Map<String, Object>> items = response.jsonPath().getList("items");
-        // Ищем элемент с заданным title
-        long id = items.stream()
+        Map<String, Object> newsData = items.stream()
                 .filter(item -> title.equals(item.get("title")))
-                .map(item -> ((Number) item.get("id")).longValue()) // Извлекаем значение "id" и преобразуем в long
                 .findFirst()
-                .orElseThrow(() -> new AssertionError("Информация не найдена"));
+                .orElseThrow(() -> new AssertionError("Информация не найдена для заголовка: " + title));
 
-        return id;
+        newsData.put("date", ((String) newsData.get("date")).substring(0, 10));
+        newsData.put("image", extractFileName((String) newsData.remove("imageUrl")));
+        return newsData;
     }
 
+    @Step("Получить данные новости платформы с API по заголовку: {title}")
+    public Map<String, Object> getNationalProjectNewsDataFromApi(String title) {
+
+
+        Response response = RestAssured.get("https://aksis.dev.qsupport.ru/api/PressCenter/GetNews?newsTypes=projectNews&pageSize=3");
+        Assert.assertFalse(response.asString().isEmpty(), "Response is empty");
+
+        List<Map<String, Object>> items = response.jsonPath().getList("items");
+        Map<String, Object> newsData = items.stream()
+                .filter(item -> title.equals(item.get("title")))
+                .findFirst()
+                .orElseThrow(() -> new AssertionError("Информация не найдена для заголовка: " + title));
+
+        newsData.put("date", ((String) newsData.get("date")).substring(0, 10));
+        newsData.put("image", extractFileName((String) newsData.remove("imageUrl")));
+        return newsData;
+    }
+
+
+
     @Step("Получить информацию о новости из базы данных по ID: {contentItemId}")
-    public String getNewsTitleFromDatabase(long contentItemId) throws SQLException {
-        String query = "SELECT title FROM public.content_630 WHERE content_item_id = ?";
+    public Map<String, Object> getNewsFromDatabase(long contentItemId) throws SQLException {
+        String query = "SELECT content_item_id, title, date, image FROM public.content_630 WHERE content_item_id = ?";
 
         try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
              PreparedStatement pstmt = conn.prepareStatement(query)) {
@@ -191,19 +247,50 @@ public class PressCenterPage extends CommonFunctions {
 
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
-                    return rs.getString("title");
+                    Map<String, Object> newsData = new HashMap<>();
+                    newsData.put("id", rs.getLong("content_item_id"));
+                    newsData.put("title", rs.getString("title"));
+                    newsData.put("date", rs.getString("date").substring(0, 10));
+                    newsData.put("image", extractFileName(rs.getString("image")));
+                    return newsData;
                 }
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        throw new AssertionError("News title not found for contentItemId: " + contentItemId);
+        throw new AssertionError("News data not found for contentItemId: " + contentItemId);
     }
 
-    @Step("Сравнить новость с сайта и из базы данных")
-    public void compareNewsTitles(String titleFromSite, String titleFromDB) throws SQLException {
-        Assert.assertEquals(titleFromSite, titleFromDB, "Titles do not match");
+
+    private String extractFileName(String path) {
+        if (path == null || path.isEmpty()) {
+            return "";
+        }
+        String[] parts = path.split("/");
+        String fileName = parts[parts.length - 1];
+        return fileName.contains(".") ? fileName.substring(0, fileName.lastIndexOf('.')) : fileName;
+    }
+
+
+    @Step("Сравнить данные новости из базы данных и API")
+    public void compareNewsData(Map<String, Object> dbNewsData, Map<String, Object> apiNewsData) {
+        Assert.assertEquals(dbNewsData.size(), apiNewsData.size(), "Размер данных не совпадает");
+
+        for (String key : dbNewsData.keySet()) {
+            Assert.assertTrue(apiNewsData.containsKey(key), "Ключ " + key + " отсутствует в данных API");
+
+            Object dbValue = dbNewsData.get(key);
+            Object apiValue = apiNewsData.get(key);
+
+            if (dbValue instanceof Number && apiValue instanceof Number) {
+                Assert.assertEquals(((Number) dbValue).doubleValue(), ((Number) apiValue).doubleValue(), "Значение ключа " + key + " не совпадает");
+            } else if (dbValue instanceof String && apiValue instanceof String) {
+                Assert.assertEquals(dbValue, apiValue, "Значение ключа " + key + " не совпадает");
+            } else {
+                Assert.assertEquals(dbValue, apiValue, "Значение ключа " + key + " не совпадает");
+            }
+        }
     }
 
     @Step("Проверка редиректа по ссылке 'Материалы'")
