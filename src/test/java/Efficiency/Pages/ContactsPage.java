@@ -30,6 +30,9 @@ public class ContactsPage extends CommonFunctions {
             case "phone":
                 screenshotPath = "src/test/resources/screenshots/ContactsPage/phone/FullPage/current.png";
                 break;
+            case "tablet":
+                screenshotPath = "src/test/resources/screenshots/ContactsPage/tablet/FullPage/current.png";
+                break;
             default:
                 throw new IllegalArgumentException("Неверный параметр окружения: " + environment);
         }
@@ -50,6 +53,11 @@ public class ContactsPage extends CommonFunctions {
                 screenshotPath = "src/test/resources/screenshots/ContactsPage/phone/FullPage/current.png";
                 referencePath = "src/test/resources/screenshots/ContactsPage/phone/FullPage/reference.png";
                 resultPath = "src/test/resources/screenshots/ContactsPage/phone/FullPage/differences.png";
+                break;
+            case "tablet":
+                screenshotPath = "src/test/resources/screenshots/ContactsPage/tablet/FullPage/current.png";
+                referencePath = "src/test/resources/screenshots/ContactsPage/tablet/FullPage/reference.png";
+                resultPath = "src/test/resources/screenshots/ContactsPage/tablet/FullPage/differences.png";
                 break;
             default:
                 throw new IllegalArgumentException("Неверный параметр окружения: " + environment);

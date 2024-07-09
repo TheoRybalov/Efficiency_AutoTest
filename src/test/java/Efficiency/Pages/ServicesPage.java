@@ -31,6 +31,9 @@ public class ServicesPage extends CommonFunctions {
             case "phone":
                 screenshotPath = ("src/test/resources/screenshots/services/phone/current.png");
                 break;
+            case "tablet":
+                screenshotPath = ("src/test/resources/screenshots/services/tablet/current.png");
+                break;
             default:
                 throw new IllegalArgumentException("Неверный параметр окружения: " + environment);
 
@@ -54,6 +57,11 @@ public class ServicesPage extends CommonFunctions {
                 screenshotPath = "src/test/resources/screenshots/services/phone/current.png";
                 referencePath = "src/test/resources/screenshots/services/phone/reference.png";
                 resultPath = "src/test/resources/screenshots/services/phone/result.png";
+                break;
+            case "tablet":
+                screenshotPath = "src/test/resources/screenshots/services/tablet/current.png";
+                referencePath = "src/test/resources/screenshots/services/tablet/reference.png";
+                resultPath = "src/test/resources/screenshots/services/tablet/result.png";
                 break;
             default:
                 throw new IllegalArgumentException("Неверный параметр окружения: " + environment);

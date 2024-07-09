@@ -56,6 +56,10 @@ public class ProvidersPage extends CommonFunctions {
                 //Если мы получаем скриншот в кофигурации телефон, то сохранение будет идти в эту папку
                 screenshotPath = "src/test/resources/screenshots/ProvidersPage/phone/FullPage/current.png";
                 break;
+            case "tablet":
+                //Если мы получаем скриншот в кофигурации телефон, то сохранение будет идти в эту папку
+                screenshotPath = "src/test/resources/screenshots/ProvidersPage/tablet/FullPage/current.png";
+                break;
             default:
                 throw new IllegalArgumentException("Неверный параметр окружения: " + environment);
         }
@@ -81,6 +85,12 @@ public class ProvidersPage extends CommonFunctions {
                 screenshotPath = "src/test/resources/screenshots/ProvidersPage/phone/FullPage/current.png";
                 referencePath = "src/test/resources/screenshots/ProvidersPage/phone/FullPage/reference.png";
                 resultPath = "src/test/resources/screenshots/ProvidersPage/phone/FullPage/differences.png";
+                break;
+            case "tablet":
+                //Если мы получаем скриншот в кофигурации телефона, то для сравнения current и reference нужно вытащить из этих папок
+                screenshotPath = "src/test/resources/screenshots/ProvidersPage/tablet/FullPage/current.png";
+                referencePath = "src/test/resources/screenshots/ProvidersPage/tablet/FullPage/reference.png";
+                resultPath = "src/test/resources/screenshots/ProvidersPage/tablet/FullPage/differences.png";
                 break;
             default:
                 throw new IllegalArgumentException("Неверный параметр окружения: " + environment);

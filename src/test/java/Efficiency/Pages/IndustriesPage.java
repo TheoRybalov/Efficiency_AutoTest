@@ -1,6 +1,7 @@
 package Efficiency.Pages;
 
 import Efficiency.CommonFunctions;
+import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 import io.restassured.RestAssured;
@@ -11,6 +12,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+import static com.codeborne.selenide.CollectionCondition.sizeGreaterThan;
+import static com.codeborne.selenide.Condition.attribute;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
 
@@ -55,6 +58,10 @@ public class IndustriesPage extends CommonFunctions {
                 //Если мы получаем скриншот в кофигурации телефон, то сохранение будет идти в эту папку
                 screenshotPath = "src/test/resources/screenshots/industries/phone/current.png";
                 break;
+            case "tablet":
+                //Если мы получаем скриншот в кофигурации телефон, то сохранение будет идти в эту папку
+                screenshotPath = "src/test/resources/screenshots/industries/tablet/current.png";
+                break;
             default:
                 throw new IllegalArgumentException("Неверный параметр окружения: " + environment);
         }
@@ -81,6 +88,12 @@ public class IndustriesPage extends CommonFunctions {
                 screenshotPath = "src/test/resources/screenshots/industries/phone/current.png";
                 referencePath = "src/test/resources/screenshots/industries/phone/reference.png";
                 resultPath = "src/test/resources/screenshots/industries/phone/differences.png";
+                break;
+            case "tablet":
+                //Если мы получаем скриншот в кофигурации телефона, то для сравнения current и reference нужно вытащить из этих папок
+                screenshotPath = "src/test/resources/screenshots/industries/tablet/current.png";
+                referencePath = "src/test/resources/screenshots/industries/tablet/reference.png";
+                resultPath = "src/test/resources/screenshots/industries/tablet/differences.png";
                 break;
             default:
                 throw new IllegalArgumentException("Неверный параметр окружения: " + environment);

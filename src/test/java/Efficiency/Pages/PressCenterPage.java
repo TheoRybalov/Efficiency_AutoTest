@@ -132,6 +132,10 @@ public class PressCenterPage extends CommonFunctions {
                 //Если мы получаем скриншот в кофигурации телефон, то сохранение будет идти в эту папку
                 screenshotPath = "src/test/resources/screenshots/PressCenterPage/phone/Elements/FooterSection/reference.png";
                 break;
+            case "tablet":
+                //Если мы получаем скриншот в кофигурации телефон, то сохранение будет идти в эту папку
+                screenshotPath = "src/test/resources/screenshots/PressCenterPage/tablet/Elements/FooterSection/reference.png";
+                break;
             default:
                 throw new IllegalArgumentException("Неверный параметр окружения: " + environment);
         }
@@ -157,6 +161,12 @@ public class PressCenterPage extends CommonFunctions {
                 screenshotPath =  String.format("src/test/resources/screenshots/PressCenterPage/phone/Elements/%s/current.png", NameOfSection);
                 referencePath = String.format("src/test/resources/screenshots/PressCenterPage/phone/Elements/%s/reference.png", NameOfSection);
                 resultPath = String.format("src/test/resources/screenshots/PressCenterPage/phone/Elements/%s/differences.png", NameOfSection);
+                break;
+            case "tablet":
+                //Если мы получаем скриншот в кофигурации телефона, то для сравнения current и reference нужно вытащить из этих папок
+                screenshotPath =  String.format("src/test/resources/screenshots/PressCenterPage/tablet/Elements/%s/current.png", NameOfSection);
+                referencePath = String.format("src/test/resources/screenshots/PressCenterPage/tablet/Elements/%s/reference.png", NameOfSection);
+                resultPath = String.format("src/test/resources/screenshots/PressCenterPage/tablet/Elements/%s/differences.png", NameOfSection);
                 break;
             default:
                 throw new IllegalArgumentException("Неверный параметр окружения: " + environment);

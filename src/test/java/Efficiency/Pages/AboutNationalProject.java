@@ -69,6 +69,9 @@ public class AboutNationalProject extends CommonFunctions {
             case "phone":
                 screenshotPath = ("src/test/resources/screenshots/aboutNationalProject/phone/current.png");
                 break;
+            case "tablet":
+                screenshotPath = ("src/test/resources/screenshots/aboutNationalProject/tablet/current.png");
+                break;
             default:
                 throw new IllegalArgumentException("Неверный параметр окружения: " + environment);
 
@@ -92,6 +95,11 @@ public class AboutNationalProject extends CommonFunctions {
                 screenshotPath = "src/test/resources/screenshots/aboutNationalProject/phone/current.png";
                 referencePath = "src/test/resources/screenshots/aboutNationalProject/phone/reference.png";
                 resultPath = "src/test/resources/screenshots/aboutNationalProject/phone/result.png";
+                break;
+            case "tablet":
+                screenshotPath = "src/test/resources/screenshots/aboutNationalProject/tablet/current.png";
+                referencePath = "src/test/resources/screenshots/aboutNationalProject/tablet/reference.png";
+                resultPath = "src/test/resources/screenshots/aboutNationalProject/tablet/result.png";
                 break;
             default:
                 throw new IllegalArgumentException("Неверный параметр окружения: " + environment);
