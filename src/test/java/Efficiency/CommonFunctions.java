@@ -5,6 +5,7 @@ import com.codeborne.selenide.WebDriverRunner;
 import com.github.romankh3.image.comparison.ImageComparison;
 import com.github.romankh3.image.comparison.ImageComparisonUtil;
 import com.github.romankh3.image.comparison.model.ImageComparisonResult;
+import org.apache.commons.lang3.RandomStringUtils;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.openqa.selenium.JavascriptExecutor;
@@ -39,6 +40,21 @@ public class CommonFunctions {
             .getOrDefault("DB_PASSWORD", "1q2w-p=[");
 
 
+    public String generateRandomFeedbackJson() {
+        String randomName = RandomStringUtils.randomAlphabetic(10);
+        String randomCity = RandomStringUtils.randomAlphabetic(8);
+        String randomPhone = "8" + RandomStringUtils.randomNumeric(10);
+        String randomEmail = RandomStringUtils.randomAlphanumeric(10) + "@mail.com";
+        String randomMessage = RandomStringUtils.randomAlphabetic(20);
+
+        return "{"
+                + "\"name\":\"" + randomName + "\","
+                + "\"city\":\"" + randomCity + "\","
+                + "\"phone\":\"" + randomPhone + "\","
+                + "\"email\":\"" + randomEmail + "\","
+                + "\"message\":\"" + randomMessage + "\""
+                + "}";
+    }
     public void TakeScreenshotOfFullPage(String screenshotPath) throws IOException {
         JavascriptExecutor js = (JavascriptExecutor) WebDriverRunner.getWebDriver();
         js.executeScript("document.body.style.overflow = 'hidden';");

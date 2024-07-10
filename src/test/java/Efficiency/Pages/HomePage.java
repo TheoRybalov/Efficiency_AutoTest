@@ -55,7 +55,14 @@ public class HomePage extends CommonFunctions {
     private static final SelenideElement TradingLink = $x("//*[@id=\"root\"]/div/main/section[8]/ul/li[4]/a");
     private static final SelenideElement TransportLink = $x("//*[@id=\"root\"]/div/main/section[8]/ul/li[5]/a");
 
-    //Путь цифровой трансформации
+// Частые вопросы
+    private static final SelenideElement AllQuestionsLink = $x("//*[@id=\"root\"]/div/main/section[6]/a");
+
+
+    //Новости
+    private static final SelenideElement AllNewsLink = $x("//*[@id=\"root\"]/div/main/section[7]/footer/span/a");
+
+// Путь цифровой трансформации
     private static final SelenideElement Transformation_StrategyServiceLink = $x("//*[@id=\"root\"]/div/main/section[4]/div/div[1]/div[2]/div[1]/article/div/header/div/a");
     private static final SelenideElement Transformation_InitiationServiceLink = $x("//*[@id=\"root\"]/div/main/section[4]/div/div[1]/div[2]/div[2]/article/div/header/div/a");
     private static final SelenideElement Transformation_FinancingServiceLink = $x("//*[@id=\"root\"]/div/main/section[4]/div/div[1]/div[2]/div[3]/article/div/header/div/a");
@@ -68,6 +75,8 @@ public class HomePage extends CommonFunctions {
     private static final SelenideElement Transformation_ImplementationWindow = $x("//*[@id=\"root\"]/div/main/section[4]/div/div[1]/div[2]/div[4]");
     private static final SelenideElement Transformation_StrategyButton = $x("//*[@id=\"root\"]/div/main/section[4]/div/div[1]/div[1]/div[1]");
     private static final SelenideElement Transformation_StrategyWindow = $x("//*[@id=\"root\"]/div/main/section[4]/div/div[1]/div[2]/div[1]");
+    private static final SelenideElement LeaveRequestLink = $x("//*[@id=\"root\"]/div/main/section[4]/div/div[2]/a");
+
 
     @Step("Принимаем куки")
     public void AddCookies(){
@@ -86,6 +95,10 @@ public class HomePage extends CommonFunctions {
             case "phone":
                 //Если мы получаем скриншот в кофигурации телефон, то сохранение будет идти в эту папку
                 screenshotPath = "src/test/resources/screenshots/HomePage/phone/FullPage/current.png";
+                break;
+            case "tablet":
+                //Если мы получаем скриншот в кофигурации телефон, то сохранение будет идти в эту папку
+                screenshotPath = "src/test/resources/screenshots/HomePage/tablet/FullPage/current.png";
                 break;
             default:
                 throw new IllegalArgumentException("Неверный параметр окружения: " + environment);
@@ -112,6 +125,12 @@ public class HomePage extends CommonFunctions {
                 screenshotPath = "src/test/resources/screenshots/HomePage/phone/FullPage/current.png";
                 referencePath = "src/test/resources/screenshots/HomePage/phone/FullPage/reference.png";
                 resultPath = "src/test/resources/screenshots/HomePage/phone/FullPage/differences.png";
+                break;
+            case "tablet":
+                //Если мы получаем скриншот в кофигурации телефона, то для сравнения current и reference нужно вытащить из этих папок
+                screenshotPath = "src/test/resources/screenshots/HomePage/tablet/FullPage/current.png";
+                referencePath = "src/test/resources/screenshots/HomePage/tablet/FullPage/reference.png";
+                resultPath = "src/test/resources/screenshots/HomePage/tablet/FullPage/differences.png";
                 break;
             default:
                 throw new IllegalArgumentException("Неверный параметр окружения: " + environment);
@@ -392,4 +411,29 @@ public class HomePage extends CommonFunctions {
         Transformation_StrategyButton.scrollTo().shouldBe(visible).click();
         Transformation_StrategyWindow.shouldBe(visible);
     }
+<<<<<<< HEAD
+=======
+
+
+
+
+    @Step("Проверка редиректа по ссылке 'Все вопросы' в разделе 'Часто задаваемые вопросы'")
+    public void AllQuestionsLink_Redirect(){
+        Assert.assertEquals(AllQuestionsLink.getText(), "Все вопросы", "Текст элемента не соответствует заданному");
+        super.Check_Redirect_By_Link(AllQuestionsLink, "https://aksis.dev.qsupport.ru/faq");
+    }
+
+    @Step("Проверка редиректа по ссылке 'Все новости' в разделе 'Новости'")
+    public void AllNewsLink_Redirect(){
+        Assert.assertEquals(AllNewsLink.getText(), "Все новости","Текст элемента не соответствует заданному");
+        super.Check_Redirect_By_Link(AllNewsLink, "https://aksis.dev.qsupport.ru/news");
+    }
+
+    @Step("Проверка редиректа 'Оставить заявку' в разделе 'Путь цифровой трансформации'")
+    public void LeaveRequestLink_Redirect(){
+        Assert.assertEquals(LeaveRequestLink.getText(), "Оставить заявку", "Текст элемента не соответствует заданному");
+        super.Check_Redirect_By_Link(LeaveRequestLink, "https://aksis.dev.qsupport.ru/contacts#feedback");
+    }
+
+>>>>>>> 5adb282277f0525aa0134854a0addc20faae3563
 }

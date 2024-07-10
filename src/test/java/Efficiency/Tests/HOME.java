@@ -85,6 +85,7 @@ public class HOME extends TestBase {
         homePage.TransformationImplementationServiceLink_Redirect();
         homePage.TransformationInitiationServiceLink_Redirect();
         homePage.TransformationStrategyServiceLink_Redirect();
+        homePage.LeaveRequestLink_Redirect();
     }
     @Test(priority = 7, description = "Домашняя страница. Проверка отображения данных по нажатию на 'Стратегия','Инициация','Финансирование','Реализация'")
     public void TransformationVisible_TEST() throws IOException {
@@ -99,4 +100,21 @@ public class HOME extends TestBase {
         HomePage homePage = open(ConfigProviderInterface.baseURL, HomePage.class);
         homePage.VideoAboutPlatformButton_Performance();
     }
+<<<<<<< HEAD
+=======
+
+    @Test(priority = 9, description = "Домашняя страница. Проверка редиректа в блоке 'Часто задаваемые вопросы'")
+    public void FAQ_TEST() throws IOException {
+        HomePage homePage = open(ConfigProviderInterface.baseURL, HomePage.class);
+        homePage.AllQuestionsLink_Redirect();
+    }
+
+    @Test(priority = 10, description = "Домашняя страница. Проверка редиректа в блоке 'Новости'")
+    public void News_TEST() throws IOException {
+        HomePage homePage = open(ConfigProviderInterface.baseURL, HomePage.class);
+        homePage.AllNewsLink_Redirect();
+    }
+
+
+>>>>>>> 5adb282277f0525aa0134854a0addc20faae3563
 }

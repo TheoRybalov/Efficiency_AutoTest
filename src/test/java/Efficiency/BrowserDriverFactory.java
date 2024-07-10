@@ -31,8 +31,11 @@ public class BrowserDriverFactory {
             case "pc":
                 driver.manage().window().setSize(new Dimension(1920, 1080));
                 break;
+            case "tablet":
+                driver.manage().window().setSize(new Dimension(1024, 768));
+                break;
             case "phone":
-                driver.manage().window().setSize(new Dimension(992, 1920));
+                driver.manage().window().setSize(new Dimension(640, 360));
                 break;
             default:
                 throw new IllegalArgumentException("Неверный тип устройства: " + environment);
