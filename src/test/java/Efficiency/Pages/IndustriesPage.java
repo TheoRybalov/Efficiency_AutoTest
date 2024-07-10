@@ -34,6 +34,34 @@ public class IndustriesPage extends CommonFunctions {
     public static final SelenideElement TransportLink = $x("//*[@id=\"root\"]/div/main/div/section[1]/div/div[5]/div/a");
     public static final SelenideElement TransportTitle = $x("//*[@id=\"root\"]/div/main/div/section[1]/div/div[5]/div/a/div[2]/div[1]");
 
+    //Карусель
+    private static final SelenideElement parentElement = $x("//div[@class='slick-list']");
+    private static final ElementsCollection dataIndexDivs = parentElement.$$(
+            "div[data-index='0'], div[data-index='1'], div[data-index='2']," +
+                    " div[data-index='3'], div[data-index='4'], div[data-index='5']," +
+                    " div[data-index='6'], div[data-index='7'], div[data-index='8']"
+    );
+
+    private static final SelenideElement bannerNextButton = $x("//*[@id=\"root\"]/div/main/div/section[2]/div[2]/button[2]");
+    @Step("Проверка смены классов баннеров")
+    public void checkBanners() {
+        // Используем dataIndexDivs для проверки количества
+        dataIndexDivs.shouldHave(sizeGreaterThan(0));
+
+        SelenideElement initialBanner = dataIndexDivs.get(0);
+        Assert.assertEquals("slick-slide slick-active slick-current", initialBanner.getAttribute("class"), "Начальный баннер не активен");
+        initialBanner.scrollTo();
+        // Используем dataIndexDivs для получения количества
+        int bannersCount = dataIndexDivs.size();
+
+        for (int i = 0; i < bannersCount; i++) {
+            dataIndexDivs.get(i).shouldBe(attribute("class", "slick-slide slick-active slick-current"));
+            bannerNextButton.click();
+            sleep(500);
+        }
+
+    }
+
     @Step("Проверка совпадения описания для блока 'Обрабатывающая промышленность'")
     public void AssertionManufacturingIndustriesDescription(String desc){
         Assert.assertEquals(desc, ManufacturingIndustriesHeader.shouldBe(visible).getText(), "Видимый текст не совпадает с текстом в запросе");
