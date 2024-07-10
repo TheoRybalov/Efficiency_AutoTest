@@ -392,13 +392,4 @@ public class HomePage extends CommonFunctions {
         Transformation_StrategyButton.scrollTo().shouldBe(visible).click();
         Transformation_StrategyWindow.shouldBe(visible);
     }
-
-
-
-
-
-
-
-
-
 }

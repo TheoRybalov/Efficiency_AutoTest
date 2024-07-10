@@ -25,13 +25,13 @@
 <!--        <class name="Efficiency.Tests.INDUSTRIES"/>-->
 <!--        </classes>-->
 <!--    </test>-->
-<!--    <test name="HOME_PAGE">-->
-<!--        <parameter name="environment" value="PC"/>-->
-<!--        <parameter name="browser" value="chrome"/>-->
-<!--        <classes>-->
-<!--            <class name="Efficiency.Tests.HOME"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <test name="HOME_PAGE">
+        <parameter name="environment" value="PC"/>
+        <parameter name="browser" value="chrome"/>
+        <classes>
+            <class name="Efficiency.Tests.HOME"/>
+        </classes>
+    </test>
 <!--    <test name="ENTERPRISE_PAGE">-->
 <!--        <parameter name="environment" value="PC"/>-->
 <!--        <parameter name="browser" value="chrome"/>-->
@@ -74,13 +74,13 @@
 <!--            <class name="Efficiency.Tests.CONTACTS"/>-->
 <!--        </classes>-->
 <!--    </test>-->
-    <test name="SUPERVISORY_BOARDS_PAGE">
-        <parameter name="environment" value="PC"/>
-        <parameter name="browser" value="chrome"/>
-        <classes>
-            <class name="Efficiency.Tests.SUPERVISORY_BOARDS"/>
-        </classes>
-    </test>
+<!--    <test name="SUPERVISORY_BOARDS_PAGE">-->
+<!--        <parameter name="environment" value="PC"/>-->
+<!--        <parameter name="browser" value="chrome"/>-->
+<!--        <classes>-->
+<!--            <class name="Efficiency.Tests.SUPERVISORY_BOARDS"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
 
 

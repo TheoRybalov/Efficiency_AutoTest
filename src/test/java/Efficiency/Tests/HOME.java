@@ -16,13 +16,13 @@ public class HOME extends TestBase {
         return super.getEnv();
     }
 
-    @Test(priority = 1, description = "Домашняя страница. Изменение кнопки 'Смотреть видео о платформе' ", enabled = false)
+    @Test(priority = 1, description = "Домашняя страница. Изменение кнопки 'Смотреть видео о платформе' ")
     public void PlatesCorrectData_TEST() throws IOException {
         HomePage homePage = open(ConfigProviderInterface.baseURL, HomePage.class);
 
     }
 
-    @Test(priority = 1, description = "Домашняя страница. Редиректы на хэдере", enabled = false)
+    @Test(priority = 1, description = "Домашняя страница. Редиректы на хэдере")
     public void Header_TEST() throws IOException {
         HomePage homePage = open(ConfigProviderInterface.baseURL, HomePage.class);
         homePage.Header_ServicesLink_Redirect();
@@ -34,7 +34,7 @@ public class HOME extends TestBase {
 
     }
 
-    @Test(priority = 2, description = "Домашняя страница. Редиректы на футере ", enabled = false)
+    @Test(priority = 2, description = "Домашняя страница. Редиректы на футере ")
     public void Footer_TEST() throws IOException {
         HomePage homePage = open(ConfigProviderInterface.baseURL, HomePage.class);
         homePage.Footer_ServicesLink_Redirect();
@@ -50,7 +50,7 @@ public class HOME extends TestBase {
 
     }
 
-    @Test(priority = 3, description = "Домашняя страница. Редиректы в разделе 'Наши отрасли'", enabled = false)
+    @Test(priority = 3, description = "Домашняя страница. Редиректы в разделе 'Наши отрасли'")
     public void OurIndustries_TEST() throws IOException {
         HomePage homePage = open(ConfigProviderInterface.baseURL, HomePage.class);
         homePage.SelskoyeHozaystvoLink_Redirect();
@@ -60,7 +60,7 @@ public class HOME extends TestBase {
         homePage.TransportLink_Redirect();
     }
 
-    @Test(priority = 4, description = "Домашняя страница. Анимация кнопки 'Смотреть видео о платформе'", enabled = false)
+    @Test(priority = 4, description = "Домашняя страница. Анимация кнопки 'Смотреть видео о платформе'")
     public void VideoAboutPlatformAnimation_TEST() throws IOException {
         HomePage homePage = open(ConfigProviderInterface.baseURL, HomePage.class);
         homePage.TakeScreenshotOfVideoButtonBeforeAnimation(getEnvironment());
@@ -70,7 +70,7 @@ public class HOME extends TestBase {
         Assert.assertFalse(ResultOfComparing, "Скриншоты совпали. Анимация не сработала");
     }
 
-    @Test(priority = 5, description = "Домашняя страница. Тест вёрстки через скриншот", enabled = false)
+    @Test(priority = 5, description = "Домашняя страница. Тест вёрстки через скриншот")
     public void LayoutScreenshot_TEST() throws IOException {
         HomePage homePage = open(ConfigProviderInterface.baseURL, HomePage.class);
         homePage.AddCookies();
@@ -99,6 +99,4 @@ public class HOME extends TestBase {
         HomePage homePage = open(ConfigProviderInterface.baseURL, HomePage.class);
         homePage.VideoAboutPlatformButton_Performance();
     }
-
-
 }
