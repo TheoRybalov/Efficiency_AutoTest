@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.testng.annotations.*;
 
 public class TestBase {
-    protected static WebDriver driver;
+    public static WebDriver driver;
     protected String env;
 
     @BeforeClass(description = "Set up driver.")
