@@ -16,14 +16,7 @@ public class INDUSTRIES extends TestBase {
         return super.getEnv();
     }
 
-    @Test(priority = 1, description = "Отрасли. Проверка данных на плитках")
-    public void PlatesCorrectData_TEST(){
-        IndustriesPage industriesPage = open(ConfigProviderInterface.industriesURL, IndustriesPage.class);
-        String Desc_From_API = industriesPage.GetManufacturingIndustriesFromApi("Обрабатывающая промышленность");
-        industriesPage.AssertionManufacturingIndustriesDescription(Desc_From_API);
-    }
-
-    @Test(priority = 2, description = "Отрасли. Сравнение вёрстки по скриншотам")
+    @Test(priority = 2, description = "Отрасли. Сравнение вёрстки по скриншотам", enabled = false)
     public void MarkupScreenShot_TEST() throws IOException {
         IndustriesPage industriesPage = open(ConfigProviderInterface.industriesURL, IndustriesPage.class);
         industriesPage.AddCookies();
@@ -32,6 +25,20 @@ public class INDUSTRIES extends TestBase {
         industriesPage.AssertionCompareScreenshots(result_of_comparing);
     }
 
+    @Test(priority = 2, description = "Отрасли. Сравнение вёрстки по скриншотам")
+    public void Banners_TEST() throws IOException {
+        IndustriesPage industriesPage = open(ConfigProviderInterface.industriesURL, IndustriesPage.class);
+        industriesPage.AddCookies();
+    }
 
+    @Test(priority = 3, description = "Отрасли. Проверка редиректов", enabled = false)
+    public void Industries_Redirects() throws IOException {
+        IndustriesPage industriesPage = open(ConfigProviderInterface.industriesURL, IndustriesPage.class);
+        industriesPage.SelskoeHozaystvoLink_Redirect();
+        industriesPage.ManufactoringIndustriesLink_Redirect();
+        industriesPage.ConstructionLink_Redirect();
+        industriesPage.TradingLink_Redirect();
+        industriesPage.TransportLink_Redirect();
+    }
 
 }

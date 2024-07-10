@@ -1,6 +1,7 @@
 package Efficiency.Pages;
 
 import Efficiency.CommonFunctions;
+import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 import io.restassured.RestAssured;
@@ -11,6 +12,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+import static com.codeborne.selenide.CollectionCondition.sizeGreaterThan;
+import static com.codeborne.selenide.Condition.attribute;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
 
@@ -19,7 +22,45 @@ public class IndustriesPage extends CommonFunctions {
     public static final SelenideElement ManufacturingIndustriesHeader = $x("//*[@id=\"root\"]/div/main/div/section[1]/div/div[2]/div/a/div[2]/div[2]/div/p");
     public static final SelenideElement CookieButton = $x("//*[@id=\"rcc-confirm-button\"]");
 
+    //Ссылки отраслей
+    public static final SelenideElement SelskoeHozaystvoLink = $x("//*[@id=\"root\"]/div/main/div/section[1]/div/div[1]/div/a");
+    public static final SelenideElement SelskoeHozaystvoTitle = $x("//*[@id=\"root\"]/div/main/div/section[1]/div/div[1]/div/a/div[2]/div[1]");
+    public static final SelenideElement ManufactoringIndustriesLink = $x("//*[@id=\"root\"]/div/main/div/section[1]/div/div[2]/div/a");
+    public static final SelenideElement ManufactoringIndustriesTtle = $x("//*[@id=\"root\"]/div/main/div/section[1]/div/div[2]/div/a/div[2]/div[1]");
+    public static final SelenideElement ConstructionLink = $x("//*[@id=\"root\"]/div/main/div/section[1]/div/div[3]/div/a");
+    public static final SelenideElement ConstructionTitle = $x("//*[@id=\"root\"]/div/main/div/section[1]/div/div[3]/div/a/div[2]/div[1]");
+    public static final SelenideElement TradingLink = $x("//*[@id=\"root\"]/div/main/div/section[1]/div/div[4]/div/a");
+    public static final SelenideElement TradingTitle = $x("//*[@id=\"root\"]/div/main/div/section[1]/div/div[4]/div/a/div[2]/div[1]");
+    public static final SelenideElement TransportLink = $x("//*[@id=\"root\"]/div/main/div/section[1]/div/div[5]/div/a");
+    public static final SelenideElement TransportTitle = $x("//*[@id=\"root\"]/div/main/div/section[1]/div/div[5]/div/a/div[2]/div[1]");
 
+    //Карусель
+    private static final SelenideElement parentElement = $x("//div[@class='slick-list']");
+    private static final ElementsCollection dataIndexDivs = parentElement.$$(
+            "div[data-index='0'], div[data-index='1'], div[data-index='2']," +
+                    " div[data-index='3'], div[data-index='4'], div[data-index='5']," +
+                    " div[data-index='6'], div[data-index='7'], div[data-index='8']"
+    );
+
+    private static final SelenideElement bannerNextButton = $x("//*[@id=\"root\"]/div/main/div/section[2]/div[2]/button[2]");
+    @Step("Проверка смены классов баннеров")
+    public void checkBanners() {
+        // Используем dataIndexDivs для проверки количества
+        dataIndexDivs.shouldHave(sizeGreaterThan(0));
+
+        SelenideElement initialBanner = dataIndexDivs.get(0);
+        Assert.assertEquals("slick-slide slick-active slick-current", initialBanner.getAttribute("class"), "Начальный баннер не активен");
+        initialBanner.scrollTo();
+        // Используем dataIndexDivs для получения количества
+        int bannersCount = dataIndexDivs.size();
+
+        for (int i = 0; i < bannersCount; i++) {
+            dataIndexDivs.get(i).shouldBe(attribute("class", "slick-slide slick-active slick-current"));
+            bannerNextButton.click();
+            sleep(500);
+        }
+
+    }
 
     @Step("Проверка совпадения описания для блока 'Обрабатывающая промышленность'")
     public void AssertionManufacturingIndustriesDescription(String desc){
@@ -44,6 +85,10 @@ public class IndustriesPage extends CommonFunctions {
             case "phone":
                 //Если мы получаем скриншот в кофигурации телефон, то сохранение будет идти в эту папку
                 screenshotPath = "src/test/resources/screenshots/industries/phone/current.png";
+                break;
+            case "tablet":
+                //Если мы получаем скриншот в кофигурации телефон, то сохранение будет идти в эту папку
+                screenshotPath = "src/test/resources/screenshots/industries/tablet/current.png";
                 break;
             default:
                 throw new IllegalArgumentException("Неверный параметр окружения: " + environment);
@@ -72,6 +117,12 @@ public class IndustriesPage extends CommonFunctions {
                 referencePath = "src/test/resources/screenshots/industries/phone/reference.png";
                 resultPath = "src/test/resources/screenshots/industries/phone/differences.png";
                 break;
+            case "tablet":
+                //Если мы получаем скриншот в кофигурации телефона, то для сравнения current и reference нужно вытащить из этих папок
+                screenshotPath = "src/test/resources/screenshots/industries/tablet/current.png";
+                referencePath = "src/test/resources/screenshots/industries/tablet/reference.png";
+                resultPath = "src/test/resources/screenshots/industries/tablet/differences.png";
+                break;
             default:
                 throw new IllegalArgumentException("Неверный параметр окружения: " + environment);
         }
@@ -97,6 +148,37 @@ public class IndustriesPage extends CommonFunctions {
         apiDescription = apiDescription.replaceAll("<p>|</p>", "");
 
         return apiDescription;
+    }
+
+
+    @Step("Проверка редиректа на элементе 'Сельское хозяйство'")
+    public void SelskoeHozaystvoLink_Redirect(){
+        Assert.assertEquals(SelskoeHozaystvoTitle.getText(), "Сельское хозяйство", "Текст элемента не соответствует заданному");
+        super.Check_Redirect_By_Link(SelskoeHozaystvoLink, "https://aksis.dev.qsupport.ru/industries/selskoye-hozaystvo");
+    }
+
+    @Step("Проверка редиректа на элементе 'Обрабатывающая промышленность'")
+    public void ManufactoringIndustriesLink_Redirect(){
+        Assert.assertEquals(ManufactoringIndustriesTtle.getText(), "Обрабатывающая промышленность", "Текст элемента не соответствует заданному");
+        super.Check_Redirect_By_Link(ManufactoringIndustriesLink, "https://aksis.dev.qsupport.ru/industries/manufacturing-industries");
+    }
+
+    @Step("Проверка редиректа на элементе 'Строительство'")
+    public void ConstructionLink_Redirect(){
+        Assert.assertEquals(ConstructionTitle.getText(), "Строительство", "Текст элемента не соответствует заданному");
+        super.Check_Redirect_By_Link(ConstructionLink, "https://aksis.dev.qsupport.ru/industries/construction");
+    }
+
+    @Step("Проверка редиректа на элементе 'Торговля'")
+    public void TradingLink_Redirect(){
+        Assert.assertEquals(TradingTitle.getText(), "Торговля", "Текст элемента не соответствует заданному");
+        super.Check_Redirect_By_Link(TradingLink, "https://aksis.dev.qsupport.ru/industries/trading");
+    }
+
+    @Step("Проверка редиректа на элементе 'Транспортировка и хранение'")
+    public void TransportLink_Redirect(){
+        Assert.assertEquals(TransportTitle.getText(), "Транспортировка и хранение", "Текст элемента не соответствует заданному");
+        super.Check_Redirect_By_Link(TransportLink, "https://aksis.dev.qsupport.ru/industries/transport");
     }
 
 

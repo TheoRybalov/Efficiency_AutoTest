@@ -95,6 +95,9 @@ public class FaqPage extends CommonFunctions {
             case "phone":
                 screenshotPath = "src/test/resources/screenshots/FaqPage/phone/FullPage/current.png";
                 break;
+            case "tablet":
+                screenshotPath = "src/test/resources/screenshots/FaqPage/tablet/FullPage/current.png";
+                break;
             default:
                 throw new IllegalArgumentException("Неверный параметр окружения: " + environment);
         }
@@ -115,6 +118,11 @@ public class FaqPage extends CommonFunctions {
                 screenshotPath = "src/test/resources/screenshots/FaqPage/phone/FullPage/current.png";
                 referencePath = "src/test/resources/screenshots/FaqPage/phone/FullPage/reference.png";
                 resultPath = "src/test/resources/screenshots/FaqPage/phone/FullPage/differences.png";
+                break;
+            case "tablet":
+                screenshotPath = "src/test/resources/screenshots/FaqPage/tablet/FullPage/current.png";
+                referencePath = "src/test/resources/screenshots/FaqPage/tablet/FullPage/reference.png";
+                resultPath = "src/test/resources/screenshots/FaqPage/tablet/FullPage/differences.png";
                 break;
             default:
                 throw new IllegalArgumentException("Неверный параметр окружения: " + environment);
