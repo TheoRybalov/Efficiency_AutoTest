@@ -411,6 +411,8 @@ public class HomePage extends CommonFunctions {
         Transformation_StrategyButton.scrollTo().shouldBe(visible).click();
         Transformation_StrategyWindow.shouldBe(visible);
     }
+<<<<<<< HEAD
+=======
 
 
 
@@ -433,4 +435,5 @@ public class HomePage extends CommonFunctions {
         super.Check_Redirect_By_Link(LeaveRequestLink, "https://aksis.dev.qsupport.ru/contacts#feedback");
     }
 
+>>>>>>> 5adb282277f0525aa0134854a0addc20faae3563
 }

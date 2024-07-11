@@ -37,6 +37,22 @@
     </classes>
 </test>-->
 
+<<<<<<< HEAD
+<!--    <test name="INDUSTRIES_TEST_PС">-->
+<!--        <parameter name="environment" value="PC"/>-->
+<!--        <parameter name="browser" value="chrome"/>-->
+<!--        <classes>-->
+<!--        <class name="Efficiency.Tests.INDUSTRIES"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+    <test name="HOME_PAGE">
+        <parameter name="environment" value="PC"/>
+        <parameter name="browser" value="chrome"/>
+        <classes>
+            <class name="Efficiency.Tests.HOME"/>
+        </classes>
+    </test>
+=======
 <!--    <test name="HOME_PAGE">-->
 <!--        <parameter name="environment" value="PC"/>-->
 <!--        <parameter name="browser" value="chrome"/>-->
@@ -44,6 +60,7 @@
 <!--            <class name="Efficiency.Tests.HOME"/>-->
 <!--        </classes>-->
 <!--    </test>-->
+>>>>>>> 5adb282277f0525aa0134854a0addc20faae3563
 <!--    <test name="ENTERPRISE_PAGE">-->
 <!--        <parameter name="environment" value="PC"/>-->
 <!--        <parameter name="browser" value="chrome"/>-->
@@ -97,6 +114,15 @@
 <!--            <class name="Efficiency.Tests.CONTACTS"/>-->
 <!--        </classes>-->
 <!--    </test>-->
+<<<<<<< HEAD
+<!--    <test name="SUPERVISORY_BOARDS_PAGE">-->
+<!--        <parameter name="environment" value="PC"/>-->
+<!--        <parameter name="browser" value="chrome"/>-->
+<!--        <classes>-->
+<!--            <class name="Efficiency.Tests.SUPERVISORY_BOARDS"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+=======
   <!--  <test name="SUPERVISORY_BOARDS_PAGE">
         <parameter name="environment" value="PC"/>
         <parameter name="browser" value="chrome"/>
@@ -132,6 +158,7 @@
           </classes>
       </test>-->
 
+>>>>>>> 5adb282277f0525aa0134854a0addc20faae3563
 
 
 
