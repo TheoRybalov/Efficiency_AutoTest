@@ -31,4 +31,14 @@ public class CONTACTS extends TestBase {
         ContactsPage contactsPage = open(ConfigProviderInterface.contactsURL,ContactsPage.class);
         contactsPage.SendFeedback();
     }
+
+    @Test(priority = 3,description = "Контакты. Проверка на полей на обязательность")
+    public void CheckFieldsNecessary(){
+        ContactsPage contactsPage = open(ConfigProviderInterface.contactsURL,ContactsPage.class);
+        contactsPage.CheckNameFieldNecessary();
+        contactsPage.CheckCityFieldNecessary();
+        contactsPage.CheckPhoneFieldNecessary();
+        contactsPage.CheckEmailFieldNecessary();
+        contactsPage.CheckMessageFieldNecessary();
+    }
 }
