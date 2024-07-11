@@ -5,10 +5,14 @@ import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 import org.testng.Assert;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Objects;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$x;
+import static com.codeborne.selenide.Selenide.sleep;
 
 public class FaqPage extends CommonFunctions {
     public static final SelenideElement CookieButton = $x("//*[@id=\"rcc-confirm-button\"]");
@@ -190,18 +194,30 @@ public class FaqPage extends CommonFunctions {
         super.Check_Redirect_By_Link(SendMessageLink, "https://aksis.dev.qsupport.ru/contacts#feedback");
     }
 
-    @Step
-    public void PlatformRecommendationsLink_Redirect(){
-        PlatformRecommendationsButton.scrollTo().shouldBe(visible).click();
-        Assert.assertEquals(PlatformRecommendationsLink.getText(), "офертой", "Текст элемента не соответствует заданному");
-        super.Check_Redirect_By_Link(PlatformRecommendationsLink, "https://qua-storage-qp.xn--b1afjhrgvdfla9hb.xn--p1ai/minpromtorg_catalog/upload/contents/645/Offer_Company.pdf");
+    @Step("Проверка редиректа по ссылке 'офертой'")
+    public void PlatformRecommendationsLink_Redirect(String mode) throws FileNotFoundException {
+        PlatformRecommendationsButton.shouldBe(visible).click();
+        if(!Objects.equals(mode, "headless")){
+            Assert.assertEquals(PlatformRecommendationsLink.scrollTo().getText(), "офертой", "Текст элемента не соответствует заданному");
+            super.Check_Redirect_By_Link(PlatformRecommendationsLink, "https://qua-storage-qp.xn--b1afjhrgvdfla9hb.xn--p1ai/minpromtorg_catalog/upload/contents/645/Offer_Company.pdf");
+        } else {
+            super.CheckDownloadedByLinkFile(PlatformRecommendationsLink, "Offer_Company.pdf");
+        }
+
+
     }
 
-    @Step
-    public void WhoUsePlatformLink_Redirect(){
-        WhoUsePlatformButton.scrollTo().shouldBe(visible).click();
-        Assert.assertEquals(WhoUsePlatformLink.getText(), "Правила подачи заявки на участие в нацпроекте \"Производительность труда\".", "Текст элемента не соответствует заданному");
-        super.Check_Redirect_By_Link(WhoUsePlatformLink, "https://qua-storage-qp.xn--b1afjhrgvdfla9hb.xn--p1ai/minpromtorg_catalog/upload/images/%D0%94%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D1%8B%20%D1%8D%D1%84%D1%84%D0%B5%D0%BA%D1%82%D0%B8%D0%B2%D0%BD%D0%BE%D1%81%D1%82%D1%8C.%D1%80%D1%84/%D0%9F%D0%BE%D0%B4%D0%B0%D1%87%D0%B0_%D0%B7%D0%B0%D1%8F%D0%B2%D0%BA%D0%B8_%D0%B2_%D0%BD%D0%B0%D1%86%D0%B8%D0%BE%D0%BD%D0%B0%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82_%D0%9F%D1%80%D0%BE%D0%B8%D0%B7%D0%B2%D0%BE%D0%B4%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D1%8C_%D1%82%D1%80%D1%83%D0%B4%D0%B0_.pdf");
+    @Step("Проверка редиректа по ссылке 'Правила подачи заявки на участие в нацпроекте'")
+    public void WhoUsePlatformLink_Redirect(String mode){
+        WhoUsePlatformButton.shouldBe(visible).click();
+
+        if(!Objects.equals(mode, "headless")){
+            Assert.assertEquals(WhoUsePlatformLink.scrollTo().getText(), "Правила подачи заявки на участие в нацпроекте \"Производительность труда\".", "Текст элемента не соответствует заданному");
+            super.Check_Redirect_By_Link(WhoUsePlatformLink, "https://qua-storage-qp.xn--b1afjhrgvdfla9hb.xn--p1ai/minpromtorg_catalog/upload/images/%D0%94%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D1%8B%20%D1%8D%D1%84%D1%84%D0%B5%D0%BA%D1%82%D0%B8%D0%B2%D0%BD%D0%BE%D1%81%D1%82%D1%8C.%D1%80%D1%84/%D0%9F%D0%BE%D0%B4%D0%B0%D1%87%D0%B0_%D0%B7%D0%B0%D1%8F%D0%B2%D0%BA%D0%B8_%D0%B2_%D0%BD%D0%B0%D1%86%D0%B8%D0%BE%D0%BD%D0%B0%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82_%D0%9F%D1%80%D0%BE%D0%B8%D0%B7%D0%B2%D0%BE%D0%B4%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D1%8C_%D1%82%D1%80%D1%83%D0%B4%D0%B0_.pdf");
+        } else {
+            super.CheckDownloadedByLinkFile(WhoUsePlatformLink, "Подача_заявки_в_национальный_проект_Производительность_труда_.pdf");
+        }
+
     }
 
     @Step

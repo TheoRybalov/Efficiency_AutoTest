@@ -6,6 +6,7 @@ import Efficiency.TestBase;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import static com.codeborne.selenide.Selenide.open;
@@ -15,21 +16,24 @@ public class FAQ extends TestBase {
     public String getEnvironment(){
         return super.getEnv();
     }
+    public String getMode(){
+        return super.getMode();
+    }
 
-    @Test(priority = 1, description = "Вопросы и ответы. Проверка ссылки 'Отправить сообщение'")
+    @Test(priority = 3, description = "Вопросы и ответы. Проверка ссылки 'Отправить сообщение'")
     public void SendMessageLink_TEST() throws IOException {
         FaqPage faqPage = open(ConfigProviderInterface.faqURL,FaqPage.class);
         faqPage.SendMessageLink_Redirect();
     }
 
-    @Test(priority = 2, description = "Вопросы и ответы. Проверка ссылок в ответах")
-    public void AnswerLinks_TEST() throws IOException{
+    @Test(priority = 1, description = "Вопросы и ответы. Проверка ссылок в ответах")
+    public void AnswerLinks_TEST() throws FileNotFoundException {
         FaqPage faqPage = open(ConfigProviderInterface.faqURL,FaqPage.class);
-        faqPage.PlatformRecommendationsLink_Redirect();
-        faqPage.WhoUsePlatformLink_Redirect();
+        faqPage.PlatformRecommendationsLink_Redirect(getMode());
+        faqPage.WhoUsePlatformLink_Redirect(getMode());
     }
 
-    @Test(priority = 3, description = "Вопросы и ответы. Проверка работы кнопок и отображение ответа")
+    @Test(priority = 2, description = "Вопросы и ответы. Проверка работы кнопок и отображение ответа")
     public void QuestionsAndAnswers_TEST() throws IOException{
         FaqPage faqPage = open(ConfigProviderInterface.faqURL,FaqPage.class);
         faqPage.StartWorkQuestion_Visible();
@@ -49,7 +53,7 @@ public class FAQ extends TestBase {
         faqPage.PrincipleQuestion_Visible();
     }
 
-    @Test(priority = 4,description = "Вопросы и ответы. Тест вёрстки через скриншот")
+    @Test(priority = 2,description = "Вопросы и ответы. Тест вёрстки через скриншот")
     public void LayoutScreenshot_TEST() throws IOException{
         FaqPage faqPage = open(ConfigProviderInterface.faqURL,FaqPage.class);
         faqPage.AddCookies();

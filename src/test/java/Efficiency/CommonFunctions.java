@@ -8,15 +8,16 @@ import com.github.romankh3.image.comparison.model.ImageComparisonResult;
 import org.apache.commons.lang3.RandomStringUtils;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
+import org.bouncycastle.pqc.crypto.util.PQCOtherInfoGenerator;
+import org.openqa.selenium.*;
 import org.testng.Assert;
 import ru.yandex.qatools.ashot.AShot;
 import ru.yandex.qatools.ashot.Screenshot;
+import ru.yandex.qatools.ashot.coordinates.WebDriverCoordsProvider;
 import ru.yandex.qatools.ashot.shooting.ShootingStrategies;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
+
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -39,7 +40,16 @@ public class CommonFunctions {
     protected static final String DB_PASSWORD = System.getenv()
             .getOrDefault("DB_PASSWORD", "1q2w-p=[");
 
-
+    public void CheckDownloadedByLinkFile(SelenideElement link, String expectedFileName){
+        sleep(2000);
+        link.scrollTo().click();
+        sleep(5000);
+        String downloadDir = System.getProperty("user.dir");
+        downloadDir = downloadDir + File.separator + "src" + File.separator + "test" + File.separator + "resources" + File.separator + "pdf" + File.separator + expectedFileName;
+        File downloadedFile = new File(downloadDir);
+        Assert.assertTrue(downloadedFile.exists(), "Файл не был скачан!");
+        downloadedFile.delete();
+    }
     public String generateRandomFeedbackJson() {
         String randomName = RandomStringUtils.randomAlphabetic(10);
         String randomCity = RandomStringUtils.randomAlphabetic(8);
@@ -60,10 +70,11 @@ public class CommonFunctions {
         js.executeScript("document.body.style.overflow = 'hidden';");
 
 
+        sleep(2000);
+
         Screenshot fullPageScreenshot = new AShot()
                 .shootingStrategy(ShootingStrategies.viewportPasting(1000))
                 .takeScreenshot(WebDriverRunner.getWebDriver());
-
         BufferedImage screenshotImage = fullPageScreenshot.getImage();
 
         File screenshotFile = new File(screenshotPath);
