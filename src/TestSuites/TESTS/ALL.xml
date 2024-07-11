@@ -37,7 +37,6 @@
     </classes>
 </test>-->
 
-<<<<<<< HEAD
 <!--    <test name="INDUSTRIES_TEST_PС">-->
 <!--        <parameter name="environment" value="PC"/>-->
 <!--        <parameter name="browser" value="chrome"/>-->
@@ -45,14 +44,6 @@
 <!--        <class name="Efficiency.Tests.INDUSTRIES"/>-->
 <!--        </classes>-->
 <!--    </test>-->
-    <test name="HOME_PAGE">
-        <parameter name="environment" value="PC"/>
-        <parameter name="browser" value="chrome"/>
-        <classes>
-            <class name="Efficiency.Tests.HOME"/>
-        </classes>
-    </test>
-=======
 <!--    <test name="HOME_PAGE">-->
 <!--        <parameter name="environment" value="PC"/>-->
 <!--        <parameter name="browser" value="chrome"/>-->
@@ -60,7 +51,13 @@
 <!--            <class name="Efficiency.Tests.HOME"/>-->
 <!--        </classes>-->
 <!--    </test>-->
->>>>>>> 5adb282277f0525aa0134854a0addc20faae3563
+<!--    <test name="HOME_PAGE">-->
+<!--        <parameter name="environment" value="PC"/>-->
+<!--        <parameter name="browser" value="chrome"/>-->
+<!--        <classes>-->
+<!--            <class name="Efficiency.Tests.HOME"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 <!--    <test name="ENTERPRISE_PAGE">-->
 <!--        <parameter name="environment" value="PC"/>-->
 <!--        <parameter name="browser" value="chrome"/>-->
@@ -75,13 +72,13 @@
 <!--            <class name="Efficiency.Tests.PROVIDERS"/>-->
 <!--        </classes>-->
 <!--    </test>-->
-<!--    <test name="PRESS_CENTER_PAGE">-->
-<!--        <parameter name="environment" value="PC"/>-->
-<!--        <parameter name="browser" value="chrome"/>-->
-<!--        <classes>-->
-<!--            <class name="Efficiency.Tests.PRESS_CENTER"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <test name="PRESS_CENTER_PAGE">
+        <parameter name="environment" value="PC"/>
+        <parameter name="browser" value="chrome"/>
+        <classes>
+            <class name="Efficiency.Tests.PRESS_CENTER"/>
+        </classes>
+    </test>
    <!-- <test name="ABOUT_NATIONAL_PROJECT_PAGE_PC">
         <parameter name="environment" value="PC"/>
         <parameter name="browser" value="chrome"/>
@@ -114,7 +111,6 @@
 <!--            <class name="Efficiency.Tests.CONTACTS"/>-->
 <!--        </classes>-->
 <!--    </test>-->
-<<<<<<< HEAD
 <!--    <test name="SUPERVISORY_BOARDS_PAGE">-->
 <!--        <parameter name="environment" value="PC"/>-->
 <!--        <parameter name="browser" value="chrome"/>-->
@@ -122,7 +118,6 @@
 <!--            <class name="Efficiency.Tests.SUPERVISORY_BOARDS"/>-->
 <!--        </classes>-->
 <!--    </test>-->
-=======
   <!--  <test name="SUPERVISORY_BOARDS_PAGE">
         <parameter name="environment" value="PC"/>
         <parameter name="browser" value="chrome"/>
@@ -138,17 +133,24 @@
             <class name="Efficiency.Tests.HOME"/>
         </classes>
     </test>-->
-    <test name="SERVICES_TEST_PHONE">
-    <parameter name="environment" value="phone"/>
-    <parameter name="browser" value="chrome"/>
-    <classes>
-        <class name="Efficiency.Tests.SERVICES">
-            <methods>
-                <include name="MarkupScreenshot_TEST"/>
-            </methods>
-        </class>
-    </classes>
-</test>
+<!--    <test name="SERVICES_TEST_PHONE">-->
+<!--    <parameter name="environment" value="phone"/>-->
+<!--    <parameter name="browser" value="chrome"/>-->
+<!--    <classes>-->
+<!--        <class name="Efficiency.Tests.SERVICES">-->
+<!--            <methods>-->
+<!--                <include name="MarkupScreenshot_TEST"/>-->
+<!--            </methods>-->
+<!--        </class>-->
+<!--    </classes>-->
+<!--</test>-->
+<!--    <test name="INDUSTRIES">-->
+<!--        <parameter name="environment" value="PC"/>-->
+<!--        <parameter name="browser" value="chrome"/>-->
+<!--        <classes>-->
+<!--            <class name="Efficiency.Tests.INDUSTRIES"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
       <!--<test name="SERVICES_TEST_PС">
           <parameter name="environment" value="PC"/>
@@ -157,9 +159,4 @@
           <class name="Efficiency.Tests.SERVICES"/>
           </classes>
       </test>-->
-
->>>>>>> 5adb282277f0525aa0134854a0addc20faae3563
-
-
-
 </suite>

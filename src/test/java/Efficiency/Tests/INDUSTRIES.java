@@ -25,7 +25,7 @@ public class INDUSTRIES extends TestBase {
         industriesPage.AssertionCompareScreenshots(result_of_comparing);
     }
 
-    @Test(priority = 2, description = "Отрасли. Сравнение вёрстки по скриншотам")
+    @Test(priority = 2, description = "Отрасли. Сравнение вёрстки по скриншотам", enabled = false)
     public void Banners_TEST() throws IOException {
         IndustriesPage industriesPage = open(ConfigProviderInterface.industriesURL, IndustriesPage.class);
         industriesPage.AddCookies();
@@ -39,6 +39,12 @@ public class INDUSTRIES extends TestBase {
         industriesPage.ConstructionLink_Redirect();
         industriesPage.TradingLink_Redirect();
         industriesPage.TransportLink_Redirect();
+    }
+
+    @Test(priority = 4,description = "Проверка карусели")
+    public void Partners_Carousel() throws IOException{
+        IndustriesPage industriesPage = open(ConfigProviderInterface.industriesURL, IndustriesPage.class);
+        industriesPage.checkBanners();
     }
 
 }

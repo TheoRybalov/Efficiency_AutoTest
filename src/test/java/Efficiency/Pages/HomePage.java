@@ -1,12 +1,15 @@
 package Efficiency.Pages;
 
 import Efficiency.CommonFunctions;
+import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 import org.testng.Assert;
 
 import java.io.IOException;
 
+import static com.codeborne.selenide.CollectionCondition.sizeGreaterThan;
+import static com.codeborne.selenide.Condition.attribute;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$x;
 import static com.codeborne.selenide.Selenide.sleep;
@@ -81,6 +84,30 @@ public class HomePage extends CommonFunctions {
     @Step("Принимаем куки")
     public void AddCookies(){
         CookieButton.shouldBe(visible).click();
+    }
+    private static final SelenideElement parentElement = $x("//*[@id=\"root\"]/div/main/section[9]/div/div/div");
+    private static final SelenideElement bannerNextButton = $x("//*[@id=\"root\"]/div/main/section[9]/header/div/button[2]");
+    private static final ElementsCollection dataIndexDivs = parentElement.$$(
+            "div[data-index='0'], div[data-index='1'], div[data-index='2']," +
+                    " div[data-index='3'], div[data-index='4'], div[data-index='5']," +
+                    " div[data-index='6'], div[data-index='7'], div[data-index='8']"
+    );
+    @Step("Проверка смены классов баннеров")
+    public void checkBanners() {
+        // Используем dataIndexDivs для проверки количества
+        dataIndexDivs.shouldHave(sizeGreaterThan(0));
+
+        SelenideElement initialBanner = dataIndexDivs.get(0);
+        Assert.assertEquals("slick-slide slick-active slick-current", initialBanner.getAttribute("class"), "Начальный баннер не активен");
+        initialBanner.scrollTo();
+        // Используем dataIndexDivs для получения количества
+        int bannersCount = dataIndexDivs.size();
+
+        for (int i = 0; i < bannersCount; i++) {
+            dataIndexDivs.get(i).shouldBe(attribute("class", "slick-slide slick-active slick-current"));
+            bannerNextButton.click();
+            sleep(500);
+        }
     }
 
     @Step("Создание скриншота всей страницы")
@@ -411,11 +438,6 @@ public class HomePage extends CommonFunctions {
         Transformation_StrategyButton.scrollTo().shouldBe(visible).click();
         Transformation_StrategyWindow.shouldBe(visible);
     }
-<<<<<<< HEAD
-=======
-
-
-
 
     @Step("Проверка редиректа по ссылке 'Все вопросы' в разделе 'Часто задаваемые вопросы'")
     public void AllQuestionsLink_Redirect(){
@@ -434,6 +456,4 @@ public class HomePage extends CommonFunctions {
         Assert.assertEquals(LeaveRequestLink.getText(), "Оставить заявку", "Текст элемента не соответствует заданному");
         super.Check_Redirect_By_Link(LeaveRequestLink, "https://aksis.dev.qsupport.ru/contacts#feedback");
     }
-
->>>>>>> 5adb282277f0525aa0134854a0addc20faae3563
 }

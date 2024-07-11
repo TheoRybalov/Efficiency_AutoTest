@@ -100,8 +100,6 @@ public class HOME extends TestBase {
         HomePage homePage = open(ConfigProviderInterface.baseURL, HomePage.class);
         homePage.VideoAboutPlatformButton_Performance();
     }
-<<<<<<< HEAD
-=======
 
     @Test(priority = 9, description = "Домашняя страница. Проверка редиректа в блоке 'Часто задаваемые вопросы'")
     public void FAQ_TEST() throws IOException {
@@ -115,6 +113,9 @@ public class HOME extends TestBase {
         homePage.AllNewsLink_Redirect();
     }
 
-
->>>>>>> 5adb282277f0525aa0134854a0addc20faae3563
+    @Test(priority = 11,description = "Домашняя страница. Проверка карусели")
+    public void Partners_Carousel() throws IOException{
+        HomePage homePage = open(ConfigProviderInterface.baseURL, HomePage.class);
+        homePage.checkBanners();
+    }
 }

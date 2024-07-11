@@ -38,7 +38,9 @@ public class PressCenterPage extends CommonFunctions {
     //Ссылки: 'Материалы', 'Новости платформы', 'Новости нацпроекта', 'Контакты'
     private static final SelenideElement MaterialsLink = $x("//*[@id=\"root\"]/div/main/section[1]/header/ul/li[1]/a");
     private static final SelenideElement Header_NewsPlatformLink = $x("//*[@id=\"root\"]/div/main/section[1]/header/ul/li[2]/a");
+    private static final SelenideElement NewsPlatformSection = $x("//*[@id=\"news-platform\"]/div/div");
     private static final SelenideElement NewsProjectLink = $x("//*[@id=\"root\"]/div/main/section[1]/header/ul/li[3]/a");
+    private static final SelenideElement NewsProjectSection = $x("//*[@id=\"news-project\"]/div/div");
     private static final SelenideElement ContactsLink = $x("//*[@id=\"root\"]/div/main/section[1]/header/ul/li[4]/a");
     //Ссылки "Скачать презентацию", "Скачать видео о платформе цифровых решений", 'Рекомендации по размещению информации о платформе'
     private static final SelenideElement DownloadPresentationLink = $x("//*[@id=\"media\"]/ul/li[1]/a");
@@ -361,5 +363,41 @@ public class PressCenterPage extends CommonFunctions {
     public void AllEvents_Link_Redirect(){
         Assert.assertEquals(AllEvents_Link.getText(), "Все мероприятия", "Текст элемента не соответствует заданному");
         super.Check_Redirect_By_Link(AllEvents_Link,"https://aksis.dev.qsupport.ru/events");
+    }
+
+    @Step("Проверка репозиционирования по клику 'Материалы'")
+    public void Materials_Repositioning(){
+        MaterialsLink.scrollTo().shouldBe(visible);
+        Assert.assertEquals(MaterialsLink.getText(), "Материалы", "Текст элемента не соответствует заданному");
+        MaterialsLink.click();
+        MaterialsSection.shouldBe(visible);
+        MaterialsSection.scrollTo();
+    }
+
+    @Step("Проверка репозиционирования по клику 'Новости платформы'")
+    public void NewsPlatform_Repositioning(){
+        Header_NewsPlatformLink.scrollTo().shouldBe(visible);
+        Assert.assertEquals(Header_NewsPlatformLink.getText(), "Новости платформы", "Текст элемента не соответствует заданному");
+        Header_NewsPlatformLink.click();
+        NewsPlatformSection.shouldBe(visible);
+        Header_NewsPlatformLink.scrollTo();
+    }
+
+    @Step("Проверка репозиционирования по клику 'Новости нацпроекта'")
+    public void NewsProject_Repositioning(){
+        NewsProjectLink.scrollTo().shouldBe(visible);
+        Assert.assertEquals(NewsProjectLink.getText(), "Новости нацпроекта", "Текст элемента не соответствует заданному");
+        NewsProjectLink.click();
+        NewsProjectSection.shouldBe(visible);
+        NewsProjectLink.scrollTo();
+    }
+
+    @Step("Проверка репозиционирования по клику 'Контакты'")
+    public void Contacts_Repositioning(){
+        ContactsLink.scrollTo().shouldBe(visible);
+        Assert.assertEquals(ContactsLink.getText(), "Контакты", "Текст элемента не соответствует заданному");
+        ContactsLink.click();
+        ContactsSection.shouldBe(visible);
+        ContactsLink.scrollTo();
     }
 }
