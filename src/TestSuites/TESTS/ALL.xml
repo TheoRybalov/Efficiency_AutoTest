@@ -72,13 +72,13 @@
 <!--            <class name="Efficiency.Tests.PROVIDERS"/>-->
 <!--        </classes>-->
 <!--    </test>-->
-    <test name="PRESS_CENTER_PAGE">
-        <parameter name="environment" value="PC"/>
-        <parameter name="browser" value="chrome"/>
-        <classes>
-            <class name="Efficiency.Tests.PRESS_CENTER"/>
-        </classes>
-    </test>
+<!--    <test name="PRESS_CENTER_PAGE">-->
+<!--        <parameter name="environment" value="PC"/>-->
+<!--        <parameter name="browser" value="chrome"/>-->
+<!--        <classes>-->
+<!--            <class name="Efficiency.Tests.PRESS_CENTER"/>-->
+<!--        </classes>-->
+<!--    </test>-->
    <!-- <test name="ABOUT_NATIONAL_PROJECT_PAGE_PC">
         <parameter name="environment" value="PC"/>
         <parameter name="browser" value="chrome"/>
@@ -104,13 +104,13 @@
 <!--            <class name="Efficiency.Tests.FAQ"/>-->
 <!--        </classes>-->
 <!--    </test>-->
-<!--    <test name="CONTACTS_PAGE">-->
-<!--        <parameter name="environment" value="PC"/>-->
-<!--        <parameter name="browser" value="chrome"/>-->
-<!--        <classes>-->
-<!--            <class name="Efficiency.Tests.CONTACTS"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <test name="CONTACTS_PAGE">
+        <parameter name="environment" value="PC"/>
+        <parameter name="browser" value="chrome"/>
+        <classes>
+            <class name="Efficiency.Tests.CONTACTS"/>
+        </classes>
+    </test>
 <!--    <test name="SUPERVISORY_BOARDS_PAGE">-->
 <!--        <parameter name="environment" value="PC"/>-->
 <!--        <parameter name="browser" value="chrome"/>-->
