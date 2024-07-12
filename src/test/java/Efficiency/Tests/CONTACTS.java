@@ -17,7 +17,7 @@ public class CONTACTS extends TestBase {
         return super.getEnv();
     }
 
-    @Test(priority = 1,description = "Контакты. Тест вёрстки через скриншот",enabled = false)
+    @Test(priority = 1,description = "Контакты. Тест вёрстки через скриншот")
     public void LayoutScreenshot_TEST() throws IOException {
         ContactsPage contactsPage = open(ConfigProviderInterface.contactsURL,ContactsPage.class);
         contactsPage.AddCookies();
