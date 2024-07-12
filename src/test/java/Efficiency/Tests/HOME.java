@@ -16,11 +16,6 @@ public class HOME extends TestBase {
         return super.getEnv();
     }
 
-    @Test(priority = 1, description = "Домашняя страница. Изменение кнопки 'Смотреть видео о платформе' ")
-    public void PlatesCorrectData_TEST() throws IOException {
-        HomePage homePage = open(ConfigProviderInterface.baseURL, HomePage.class);
-
-    }
 
     @Test(priority = 1, description = "Домашняя страница. Редиректы на хэдере")
     public void Header_TEST() throws IOException {
