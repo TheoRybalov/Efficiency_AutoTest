@@ -25,6 +25,7 @@ public class BrowserDriverFactory {
                 ChromeOptions options = new ChromeOptions();
                 options.addArguments("--disable-notifications");
                 options.addArguments("--remote-allow-origins=*");
+                options.addArguments("--disable-background-networking");
 
                 if (mode.equals("headless")) {
                     options.addArguments("--headless");
