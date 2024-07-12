@@ -16,7 +16,7 @@ public class INDUSTRIES extends TestBase {
         return super.getEnv();
     }
 
-    @Test(priority = 2, description = "Отрасли. Сравнение вёрстки по скриншотам", enabled = false)
+    @Test(priority = 2, description = "Отрасли. Сравнение вёрстки по скриншотам")
     public void MarkupScreenShot_TEST() throws IOException {
         IndustriesPage industriesPage = open(ConfigProviderInterface.industriesURL, IndustriesPage.class);
         industriesPage.AddCookies();
@@ -25,13 +25,8 @@ public class INDUSTRIES extends TestBase {
         industriesPage.AssertionCompareScreenshots(result_of_comparing);
     }
 
-    @Test(priority = 2, description = "Отрасли. Сравнение вёрстки по скриншотам", enabled = false)
-    public void Banners_TEST() throws IOException {
-        IndustriesPage industriesPage = open(ConfigProviderInterface.industriesURL, IndustriesPage.class);
-        industriesPage.AddCookies();
-    }
 
-    @Test(priority = 3, description = "Отрасли. Проверка редиректов", enabled = false)
+    @Test(priority = 3, description = "Отрасли. Проверка редиректов")
     public void Industries_Redirects() throws IOException {
         IndustriesPage industriesPage = open(ConfigProviderInterface.industriesURL, IndustriesPage.class);
         industriesPage.SelskoeHozaystvoLink_Redirect();
