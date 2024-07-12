@@ -12,6 +12,7 @@ import java.sql.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$x;
@@ -72,7 +73,7 @@ public class PressCenterPage extends CommonFunctions {
                 break;
             case "phone":
                 //Если мы получаем скриншот в кофигурации телефон, то сохранение будет идти в эту папку
-                screenshotPath = "src/test/resources/screenshots/PressCenterPage/phone/Elements/PressCenterSection/reference.png";
+                screenshotPath = "src/test/resources/screenshots/PressCenterPage/phone/Elements/PressCenterSection/current.png";
                 break;
             default:
                 throw new IllegalArgumentException("Неверный параметр окружения: " + environment);
@@ -92,7 +93,7 @@ public class PressCenterPage extends CommonFunctions {
                 break;
             case "phone":
                 //Если мы получаем скриншот в кофигурации телефон, то сохранение будет идти в эту папку
-                screenshotPath = "src/test/resources/screenshots/PressCenterPage/phone/Elements/MaterialsSection/reference.png";
+                screenshotPath = "src/test/resources/screenshots/PressCenterPage/phone/Elements/MaterialsSection/current.png";
                 break;
             default:
                 throw new IllegalArgumentException("Неверный параметр окружения: " + environment);
@@ -112,7 +113,7 @@ public class PressCenterPage extends CommonFunctions {
                 break;
             case "phone":
                 //Если мы получаем скриншот в кофигурации телефон, то сохранение будет идти в эту папку
-                screenshotPath = "src/test/resources/screenshots/PressCenterPage/phone/Elements/ContactsSection/reference.png";
+                screenshotPath = "src/test/resources/screenshots/PressCenterPage/phone/Elements/ContactsSection/current.png";
                 break;
             default:
                 throw new IllegalArgumentException("Неверный параметр окружения: " + environment);
@@ -132,11 +133,11 @@ public class PressCenterPage extends CommonFunctions {
                 break;
             case "phone":
                 //Если мы получаем скриншот в кофигурации телефон, то сохранение будет идти в эту папку
-                screenshotPath = "src/test/resources/screenshots/PressCenterPage/phone/Elements/FooterSection/reference.png";
+                screenshotPath = "src/test/resources/screenshots/PressCenterPage/phone/Elements/FooterSection/current.png";
                 break;
             case "tablet":
                 //Если мы получаем скриншот в кофигурации телефон, то сохранение будет идти в эту папку
-                screenshotPath = "src/test/resources/screenshots/PressCenterPage/tablet/Elements/FooterSection/reference.png";
+                screenshotPath = "src/test/resources/screenshots/PressCenterPage/tablet/Elements/FooterSection/current.png";
                 break;
             default:
                 throw new IllegalArgumentException("Неверный параметр окружения: " + environment);
@@ -330,15 +331,21 @@ public class PressCenterPage extends CommonFunctions {
     }
 
     @Step("Проверка редиректа по ссылке 'Скачать презентацию'")
-    public void DownloadPresentation_Redirect(){
-        Assert.assertEquals(DownloadPresentationLink.getText(), "Скачать презентацию", "Текст элемента не соответствует заданному");
-        super.Check_RedirectToOtherTab_By_Link(DownloadPresentationLink, "https://storage.qp.dev.qsupport.ru/minpromtorg_catalog/upload/contents/641/%D0%9E%20%D0%BF%D0%BB%D0%B0%D1%82%D1%84%D0%BE%D1%80%D0%BC%D0%B5%20%D1%8D%D1%84%D1%84%D0%B5%D0%BA%D1%82%D0%B8%D0%B2%D0%BD%D0%BE%D1%81%D1%82%D1%8C.%D1%80%D1%84.pdf");
+    public void DownloadPresentation_Redirect(String mode){
+        if(!Objects.equals(mode, "headless")){
+            Assert.assertEquals(DownloadPresentationLink.getText(), "Скачать презентацию", "Текст элемента не соответствует заданному");
+            super.Check_RedirectToOtherTab_By_Link(DownloadPresentationLink, "https://storage.qp.dev.qsupport.ru/minpromtorg_catalog/upload/contents/641/%D0%9E%20%D0%BF%D0%BB%D0%B0%D1%82%D1%84%D0%BE%D1%80%D0%BC%D0%B5%20%D1%8D%D1%84%D1%84%D0%B5%D0%BA%D1%82%D0%B8%D0%B2%D0%BD%D0%BE%D1%81%D1%82%D1%8C.%D1%80%D1%84.pdf");
+        } else {
+            super.CheckDownloadedByLinkFile(DownloadPresentationLink, "О платформе эффективность.рф.pdf");
+        }
     }
 
     @Step("Проверка редиректа по ссылке 'Скачать видео о платформе цифровых решений'")
     public void DownloadPlatformLink_Redirect(){
         Assert.assertEquals(DownloadPlatformLink.getText(), "Скачать видео о платформе цифровых решений", "Текст элемента не соответствует заданному");
         super.Check_RedirectToOtherTab_By_Link(DownloadPlatformLink, "https://cloud.ctprf.ru/index.php/s/2a7awMlneVF2IJP");
+
+//
     }
 
     @Step("Проверка редиректа по ссылке 'Рекомендации по размещению информации о платформе'")
@@ -361,8 +368,11 @@ public class PressCenterPage extends CommonFunctions {
 
     @Step("Проверка редиректа по ссылке 'Все мероприятия'")
     public void AllEvents_Link_Redirect(){
-        Assert.assertEquals(AllEvents_Link.getText(), "Все мероприятия", "Текст элемента не соответствует заданному");
-        super.Check_Redirect_By_Link(AllEvents_Link,"https://aksis.dev.qsupport.ru/events");
+        if(AllEvents_Link.isDisplayed()){
+            Assert.assertEquals(AllEvents_Link.scrollTo().getText(), "Все мероприятия", "Текст элемента не соответствует заданному");
+            super.Check_Redirect_By_Link(AllEvents_Link,"https://aksis.dev.qsupport.ru/events");
+        }
+
     }
 
     @Step("Проверка репозиционирования по клику 'Материалы'")

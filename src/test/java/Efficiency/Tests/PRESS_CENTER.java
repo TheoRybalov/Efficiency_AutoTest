@@ -1,10 +1,8 @@
 package Efficiency.Tests;
 
 import Efficiency.Pages.PressCenterPage;
-import Efficiency.Pages.ProvidersPage;
 import Efficiency.Providers.ConfigProviderInterface;
 import Efficiency.TestBase;
-import com.typesafe.config.ConfigException;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -20,7 +18,12 @@ public class PRESS_CENTER extends TestBase {
         return super.getEnv();
     }
 
-    @Test(priority = 1, description = "Пресс-Центр. Новости платформы. Проверка заголовков новостей")
+    @Override
+    public String getMode() {
+        return super.getMode();
+    }
+
+    @Test(priority = 2, description = "Пресс-Центр. Новости платформы. Проверка заголовков новостей")
     public void PlatformNews_TEST() throws IOException, SQLException {
         PressCenterPage pressCenterPage = open(ConfigProviderInterface.pressCenterURL, PressCenterPage.class);
 
@@ -44,7 +47,7 @@ public class PRESS_CENTER extends TestBase {
 
     }
 
-    @Test(priority = 2, description = "Пресс-Центр. Новости нацпроекта. Проверка заголовков новостей")
+    @Test(priority = 3, description = "Пресс-Центр. Новости нацпроекта. Проверка заголовков новостей")
     public void NationalProjectNews_TEST() throws IOException, SQLException {
         PressCenterPage pressCenterPage = open(ConfigProviderInterface.pressCenterURL, PressCenterPage.class);
 
@@ -68,7 +71,7 @@ public class PRESS_CENTER extends TestBase {
 
     }
 
-    @Test(priority = 5, description = "Пресс-Центр. Тест вёрстки через скриншот")
+    @Test(priority = 1, description = "Пресс-Центр. Тест вёрстки через скриншот")
     public void LayoutScreenshot_TEST() throws IOException {
         PressCenterPage pressCenterPage = open(ConfigProviderInterface.pressCenterURL, PressCenterPage.class);
         pressCenterPage.AddCookies();
@@ -96,12 +99,12 @@ public class PRESS_CENTER extends TestBase {
         pressCenterPage.MaterialsLink_Redirect();
     }
 
-    @Test(priority = 3, description = "Пресс-Центр. Проверка ссылок в разделе 'Материалы'")
+    @Test(priority = 4, description = "Пресс-Центр. Проверка ссылок в разделе 'Материалы'")
     public void DownloadLinks_TEST() throws IOException {
         PressCenterPage pressCenterPage = open(ConfigProviderInterface.pressCenterURL, PressCenterPage.class);
-        pressCenterPage.DownloadPresentation_Redirect();
         pressCenterPage.DownloadPlatformLink_Redirect();
         pressCenterPage.PostingRecommendationsLink_Redirect();
+        pressCenterPage.DownloadPresentation_Redirect(getMode());
     }
 
     @Test(priority = 4, description = "Пресс-центр. Проверка ссылки в разделе 'Новости платформы'")
