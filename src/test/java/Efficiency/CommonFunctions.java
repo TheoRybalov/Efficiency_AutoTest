@@ -43,10 +43,19 @@ public class CommonFunctions {
     public void CheckDownloadedByLinkFile(SelenideElement link, String expectedFileName){
         sleep(2000);
         link.scrollTo().click();
-        sleep(5000);
+//        sleep(5000);
         String downloadDir = System.getProperty("user.dir");
         downloadDir = downloadDir + File.separator + "src" + File.separator + "test" + File.separator + "resources" + File.separator + "pdf" + File.separator + expectedFileName;
         File downloadedFile = new File(downloadDir);
+        int attempts = 0;
+        while (attempts < 20) {
+            if (downloadedFile.exists() && !new File(downloadDir + ".crdownload").exists()) {
+                break;
+            }
+            sleep(1000);
+            attempts++;
+        }
+
         Assert.assertTrue(downloadedFile.exists(), "Файл не был скачан!");
         downloadedFile.delete();
     }
