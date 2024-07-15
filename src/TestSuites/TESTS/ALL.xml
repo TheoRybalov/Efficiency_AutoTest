@@ -4,6 +4,7 @@
 
     <listeners>
         <listener class-name="Efficiency.TestListener.TestListener" />
+        <listener class-name="Efficiency.TestListener.SuiteListener" />
     </listeners>
 
 
