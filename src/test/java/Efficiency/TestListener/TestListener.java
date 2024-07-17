@@ -5,6 +5,10 @@ import org.testng.ITestListener;
 import org.testng.ITestResult;
 
 public class TestListener implements ITestListener {
+    public static int passedTests = 0;
+    public static int failedTests = 0;
+    public static int skippedTests = 0;
+
     @Override
     public void onTestStart(ITestResult res) {
         System.out.println("Started test case is "+ res.getName());
@@ -24,11 +28,13 @@ public class TestListener implements ITestListener {
     @Override
     public void onTestSuccess(ITestResult res) {
         System.out.println("Test case PASSED is " + res.getName());
+        passedTests++;
     }
     // Run when the test case fails
     @Override
     public void onTestFailure(ITestResult res) {
         System.out.println("Test case FAILED is " + res.getName());
+        failedTests++;
     }
     // Run when test case pass with some failures
     @Override
@@ -39,5 +45,6 @@ public class TestListener implements ITestListener {
     @Override
     public void onTestSkipped(ITestResult res) {
         System.out.println("Test case SKIPPED is :" + res.getName());
+        skippedTests++;
     }
 }
