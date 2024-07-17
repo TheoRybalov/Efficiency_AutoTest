@@ -19,8 +19,8 @@ public class SuiteListener implements ISuiteListener {
 
         try {
             String reportLink = "http://172.16.6.41:8085";
-            String subject = "Отчет по тестам Эффектинвность.рф для набора " + suite.getName();
-            String body = "Отчет по тестам Эффектинвность.рф доступен по ссылке: " + reportLink;
+            String subject = "Отчет по тестам Эффективность.рф для набора " + suite.getName();
+            String body = "Отчет по тестам Эффективность.рф доступен по ссылке: " + reportLink;
             EmailUtil.sendEmail("fedorrybalov@gmail.com", subject, body);
 
         } catch (Exception e) {
