@@ -32,8 +32,8 @@ public class SuiteListener implements ISuiteListener {
                     "Количество пропущенных тестов: " + skippedTests + "\n" +
                     "Количество проваленных тестов: " + failedTests;
             EmailUtil.sendEmail("fedorrybalov@gmail.com", subject, body);
-//            EmailUtil.sendEmail("betliyk@quantumart.ru", subject, body);
-//            EmailUtil.sendEmail("paliys@quantumart.ru", subject, body);
+            EmailUtil.sendEmail("betliyk@quantumart.ru", subject, body);
+            EmailUtil.sendEmail("paliys@quantumart.ru", subject, body);
 
         } catch (Exception e) {
             e.printStackTrace();
