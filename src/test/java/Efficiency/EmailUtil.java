@@ -26,8 +26,8 @@ public class EmailUtil {
             MimeMessage message = new MimeMessage(session);
             message.setFrom(new InternetAddress(from));
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
-            message.setSubject(subject);
-            message.setText(body);
+            message.setSubject(subject, "UTF-8");
+            message.setText(body, "UTF-8");
             Transport.send(message);
             System.out.println("Email отправлен успешно...");
         } catch (MessagingException mex) {
