@@ -13,7 +13,7 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
-public class BrowserDriverFactory {
+public class  BrowserDriverFactory {
 
     private WebDriver driver = null;
 
