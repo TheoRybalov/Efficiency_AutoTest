@@ -68,12 +68,16 @@ public class PressCenterPage extends CommonFunctions {
         sleep(2000);
         switch (environment) {
             case "PC":
-                //Если мы получаем скриншот в кофигурации ПК, то сохранение будет идти в эту папку
+                //Если мы получаем скриншот в конфигурации ПК, то сохранение будет идти в эту папку
                 screenshotPath = "src/test/resources/screenshots/PressCenterPage/PC/Elements/PressCenterSection/current.png";
                 break;
             case "phone":
-                //Если мы получаем скриншот в кофигурации телефон, то сохранение будет идти в эту папку
+                //Если мы получаем скриншот в конфигурации телефон, то сохранение будет идти в эту папку
                 screenshotPath = "src/test/resources/screenshots/PressCenterPage/phone/Elements/PressCenterSection/current.png";
+                break;
+            case "tablet":
+                //Если мы получаем скриншот в конфигурации телефон, то сохранение будет идти в эту папку
+                screenshotPath = "src/test/resources/screenshots/PressCenterPage/tablet/Elements/PressCenterSection/current.png";
                 break;
             default:
                 throw new IllegalArgumentException("Неверный параметр окружения: " + environment);
@@ -88,12 +92,16 @@ public class PressCenterPage extends CommonFunctions {
         sleep(2000);
         switch (environment) {
             case "PC":
-                //Если мы получаем скриншот в кофигурации ПК, то сохранение будет идти в эту папку
+                //Если мы получаем скриншот в конфигурации ПК, то сохранение будет идти в эту папку
                 screenshotPath = "src/test/resources/screenshots/PressCenterPage/PC/Elements/MaterialsSection/current.png";
                 break;
             case "phone":
-                //Если мы получаем скриншот в кофигурации телефон, то сохранение будет идти в эту папку
+                //Если мы получаем скриншот в конфигурации телефон, то сохранение будет идти в эту папку
                 screenshotPath = "src/test/resources/screenshots/PressCenterPage/phone/Elements/MaterialsSection/current.png";
+                break;
+            case "tablet":
+                //Если мы получаем скриншот в конфигурации телефон, то сохранение будет идти в эту папку
+                screenshotPath = "src/test/resources/screenshots/PressCenterPage/tablet/Elements/MaterialsSection/current.png";
                 break;
             default:
                 throw new IllegalArgumentException("Неверный параметр окружения: " + environment);
@@ -108,12 +116,16 @@ public class PressCenterPage extends CommonFunctions {
         sleep(2000);
         switch (environment) {
             case "PC":
-                //Если мы получаем скриншот в кофигурации ПК, то сохранение будет идти в эту папку
+                //Если мы получаем скриншот в конфигурации ПК, то сохранение будет идти в эту папку
                 screenshotPath = "src/test/resources/screenshots/PressCenterPage/PC/Elements/ContactsSection/current.png";
                 break;
             case "phone":
-                //Если мы получаем скриншот в кофигурации телефон, то сохранение будет идти в эту папку
+                //Если мы получаем скриншот в конфигурации телефон, то сохранение будет идти в эту папку
                 screenshotPath = "src/test/resources/screenshots/PressCenterPage/phone/Elements/ContactsSection/current.png";
+                break;
+            case "tablet":
+                //Если мы получаем скриншот в конфигурации телефон, то сохранение будет идти в эту папку
+                screenshotPath = "src/test/resources/screenshots/PressCenterPage/tablet/Elements/ContactsSection/current.png";
                 break;
             default:
                 throw new IllegalArgumentException("Неверный параметр окружения: " + environment);
@@ -128,15 +140,15 @@ public class PressCenterPage extends CommonFunctions {
         sleep(2000);
         switch (environment) {
             case "PC":
-                //Если мы получаем скриншот в кофигурации ПК, то сохранение будет идти в эту папку
+                //Если мы получаем скриншот в конфигурации ПК, то сохранение будет идти в эту папку
                 screenshotPath = "src/test/resources/screenshots/PressCenterPage/PC/Elements/FooterSection/current.png";
                 break;
             case "phone":
-                //Если мы получаем скриншот в кофигурации телефон, то сохранение будет идти в эту папку
+                //Если мы получаем скриншот в конфигурации телефон, то сохранение будет идти в эту папку
                 screenshotPath = "src/test/resources/screenshots/PressCenterPage/phone/Elements/FooterSection/current.png";
                 break;
             case "tablet":
-                //Если мы получаем скриншот в кофигурации телефон, то сохранение будет идти в эту папку
+                //Если мы получаем скриншот в конфигурации телефон, то сохранение будет идти в эту папку
                 screenshotPath = "src/test/resources/screenshots/PressCenterPage/tablet/Elements/FooterSection/current.png";
                 break;
             default:
@@ -154,19 +166,19 @@ public class PressCenterPage extends CommonFunctions {
 
         switch (environment) {
             case "PC":
-                //Если мы получаем скриншот в кофигурации ПК, то для сравнения current и reference нужно вытащить из этих папок
+                //Если мы получаем скриншот в конфигурации ПК, то для сравнения current и reference нужно вытащить из этих папок
                 screenshotPath =  String.format("src/test/resources/screenshots/PressCenterPage/PC/Elements/%s/current.png", NameOfSection);
                 referencePath = String.format("src/test/resources/screenshots/PressCenterPage/PC/Elements/%s/reference.png", NameOfSection);
                 resultPath = String.format("src/test/resources/screenshots/PressCenterPage/PC/Elements/%s/differences.png", NameOfSection);
                 break;
             case "phone":
-                //Если мы получаем скриншот в кофигурации телефона, то для сравнения current и reference нужно вытащить из этих папок
+                //Если мы получаем скриншот в конфигурации телефона, то для сравнения current и reference нужно вытащить из этих папок
                 screenshotPath =  String.format("src/test/resources/screenshots/PressCenterPage/phone/Elements/%s/current.png", NameOfSection);
                 referencePath = String.format("src/test/resources/screenshots/PressCenterPage/phone/Elements/%s/reference.png", NameOfSection);
                 resultPath = String.format("src/test/resources/screenshots/PressCenterPage/phone/Elements/%s/differences.png", NameOfSection);
                 break;
             case "tablet":
-                //Если мы получаем скриншот в кофигурации телефона, то для сравнения current и reference нужно вытащить из этих папок
+                //Если мы получаем скриншот в конфигурации телефона, то для сравнения current и reference нужно вытащить из этих папок
                 screenshotPath =  String.format("src/test/resources/screenshots/PressCenterPage/tablet/Elements/%s/current.png", NameOfSection);
                 referencePath = String.format("src/test/resources/screenshots/PressCenterPage/tablet/Elements/%s/reference.png", NameOfSection);
                 resultPath = String.format("src/test/resources/screenshots/PressCenterPage/tablet/Elements/%s/differences.png", NameOfSection);

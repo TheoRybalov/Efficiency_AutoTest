@@ -75,7 +75,6 @@ public class PRESS_CENTER extends TestBase {
     public void LayoutScreenshot_TEST() throws IOException {
         PressCenterPage pressCenterPage = open(ConfigProviderInterface.pressCenterURL, PressCenterPage.class);
         pressCenterPage.AddCookies();
-
         pressCenterPage.TakeScreenshotOfPressCenterSection(getEnvironment());
         boolean ResultOfComparing = pressCenterPage.compareScreenshotsOfSection(getEnvironment(), "PressCenterSection");
         Assert.assertTrue(ResultOfComparing, "Скриншоты не совпали. Вёрстка не такая, как в макете");
