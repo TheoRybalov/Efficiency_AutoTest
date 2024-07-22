@@ -11,8 +11,6 @@ public class TestBase {
     public static WebDriver driver;
     protected String env;
     protected String md;
-
-
     @BeforeClass(description = "Set up driver.")
     @Parameters({"environment", "browser", "mode"})
     public void preConditions(String environment, String browser, String mode){
