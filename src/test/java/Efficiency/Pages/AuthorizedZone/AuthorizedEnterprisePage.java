@@ -14,6 +14,7 @@ import java.util.Map;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$x;
+import static io.restassured.RestAssured.given;
 
 public class AuthorizedEnterprisePage extends CommonFunctions {
 
@@ -42,11 +43,11 @@ public class AuthorizedEnterprisePage extends CommonFunctions {
 
     @Step("Получить данные из API для виджета диагностика")
     public void getDiagnosticWidgetDataFromApi() {
-        Response response = RestAssured
-                .given()
-                .auth()
-                .digest("test_quantum29@test.com", "QWERY123")
-                .when()
+
+
+
+
+        Response response = given()
                 .get("https://aksis.dev.qsupport.ru/onboarding/api/DiagnosticsWidget/GetDiagnostics");
         Assert.assertFalse(response.asString().isEmpty(), "Response is empty");
         System.out.println("Response body:");
@@ -60,24 +61,31 @@ public class AuthorizedEnterprisePage extends CommonFunctions {
         DiagnosticsWidgetData.put("surveyTemplatesPassedCount", data.get("surveyTemplatesPassedCount"));
     }
 
-    @Step("Получить информацию о новости из базы данных по ID: {contentItemId}")
+//    @Step("Получить информацию о новости из базы данных")
+//    public void getDiagnosticWidgetDataFromDB() throws SQLException {
+//        String query = "SELECT title, text, errorhref FROM public.content_30767 WHERE content_item_id = 741576";
+//
+//        try (Connection conn = DriverManager.getConnection(DB_URL_MINPROMTORG, DB_USER, DB_PASSWORD);
+//             PreparedStatement pstmt = conn.prepareStatement(query)) {
+//
+//            try (ResultSet rs = pstmt.executeQuery()) {
+//                if (rs.next()) {
+//                    DiagnosticsWidgetData.put("title", rs.getString("title"));
+//                    DiagnosticsWidgetData.put("text", rs.getString("text"));
+//                    DiagnosticsWidgetData.put("errorhref", rs.getString("errorhref"));
+//                }
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//    }
+
+    @Step("Получить информацию о виджете Диагностика из базы данных")
     public void getDiagnosticWidgetDataFromDB() throws SQLException {
-        String query = "SELECT title, text, errorhref FROM public.content_30767 WHERE content_item_id = 741576";
-
-        try (Connection conn = DriverManager.getConnection(DB_URL_MINPROMTORG, DB_USER, DB_PASSWORD);
-             PreparedStatement pstmt = conn.prepareStatement(query)) {
-
-            try (ResultSet rs = pstmt.executeQuery()) {
-                if (rs.next()) {
-                    DiagnosticsWidgetData.put("title", rs.getString("title"));
-                    DiagnosticsWidgetData.put("text", rs.getString("text"));
-                    DiagnosticsWidgetData.put("errorhref", rs.getString("errorhref"));
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        DiagnosticsWidgetData = super.getWidgetDataFromDB("public.content_30767", "741576");
     }
+
+
 
     @Step("Проверка корректности заголовка виджета Диагностика")
     public void Assert_MyFeed_Diagnostics_Header(){

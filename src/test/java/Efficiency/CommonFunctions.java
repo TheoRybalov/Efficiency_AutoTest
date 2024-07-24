@@ -5,6 +5,7 @@ import com.codeborne.selenide.WebDriverRunner;
 import com.github.romankh3.image.comparison.ImageComparison;
 import com.github.romankh3.image.comparison.ImageComparisonUtil;
 import com.github.romankh3.image.comparison.model.ImageComparisonResult;
+import io.qameta.allure.Step;
 import org.apache.commons.lang3.RandomStringUtils;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
@@ -21,10 +22,9 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -41,6 +41,35 @@ public class CommonFunctions {
             .getOrDefault("DB_USER", "postgres");
     protected static final String DB_PASSWORD = System.getenv()
             .getOrDefault("DB_PASSWORD", "1q2w-p=[");
+
+
+    @Step("Получить информацию о новости из базы данных")
+    public Map<String, Object> getWidgetDataFromDB(String tableName, String contentItemId) throws SQLException {
+        String query = "SELECT * FROM " + tableName + " WHERE content_item_id = " + contentItemId;
+        Map<String, Object> WidgetDataQP = new HashMap<>();
+
+        try (Connection conn = DriverManager.getConnection(DB_URL_MINPROMTORG, DB_USER, DB_PASSWORD);
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                ResultSetMetaData rsMetaData = rs.getMetaData();
+                int columnCount = rsMetaData.getColumnCount();
+
+                if (rs.next()) {
+                    for (int i = 1; i <= columnCount; i++) {
+                        String columnName = rsMetaData.getColumnName(i);
+                        Object columnValue = rs.getString(i);
+                        WidgetDataQP.put(columnName, columnValue);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return WidgetDataQP;
+
+    }
 
     public void CheckDownloadedByLinkFile(SelenideElement link, String expectedFileName){
         sleep(2000);
