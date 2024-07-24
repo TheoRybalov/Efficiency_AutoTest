@@ -35,6 +35,8 @@ import static com.codeborne.selenide.WebDriverRunner.url;
 public class CommonFunctions {
     protected static final String DB_URL = System.getenv()
             .getOrDefault("DB_URL", "jdbc:postgresql://172.16.4.238/minpromtorg_catalog");
+    protected static final String DB_URL_MINPROMTORG = System.getenv()
+            .getOrDefault("DB_URL", "jdbc:postgresql://172.16.4.238/minpromtorg");
     protected static final String DB_USER = System.getenv()
             .getOrDefault("DB_USER", "postgres");
     protected static final String DB_PASSWORD = System.getenv()

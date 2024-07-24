@@ -382,5 +382,15 @@
     </test>
 
 
+    <test name="AUTHORIZED_ZONE_ENTERPRISE_PC">
+        <parameter name="environment" value="PC"/>
+        <parameter name="browser" value="chrome"/>
+        <parameter name="mode" value=""/>
+        <classes>
+            <class name="Efficiency.Tests.AuthorizedZone.AUTHORIZED_ENTERPRISE"/>
+        </classes>
+    </test>
+
+
 
 </suite>

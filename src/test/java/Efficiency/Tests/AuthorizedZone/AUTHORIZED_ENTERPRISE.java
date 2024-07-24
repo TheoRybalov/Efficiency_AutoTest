@@ -1,7 +1,6 @@
 package Efficiency.Tests.AuthorizedZone;
 
 import Efficiency.Pages.AuthorizedZone.AuthorizedEnterprisePage;
-import Efficiency.Pages.HomePage;
 import Efficiency.Providers.ConfigProviderInterface;
 import Efficiency.TestBase;
 import org.testng.annotations.BeforeClass;
@@ -9,6 +8,7 @@ import org.testng.annotations.Test;
 import Efficiency.Pages.LoginPage;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.Selenide.sleep;
@@ -30,9 +30,15 @@ public class AUTHORIZED_ENTERPRISE extends TestBase {
     }
 
 
-    @Test(priority = 1, description = "Домашняя страница. Редиректы на хэдере")
-    public void Header_TEST() throws IOException {
+    @Test(priority = 1, description = "Авторизованная зона. Предприятие. Моя Лента. Диагностика")
+    public void Header_TEST() throws SQLException {
         AuthorizedEnterprisePage authorizedEnterprisePage = open(ConfigProviderInterface.authorizedEnterpriseURL, AuthorizedEnterprisePage.class);
+        authorizedEnterprisePage.getDiagnosticWidgetDataFromApi();
+        authorizedEnterprisePage.getDiagnosticWidgetDataFromDB();
+        authorizedEnterprisePage.Assert_MyFeed_Diagnostics_Header();
+        authorizedEnterprisePage.Assert_MyFeed_Diagnostics_Text();
+        authorizedEnterprisePage.Assert_MyFeed_Diagnostics_Percentage();
+        authorizedEnterprisePage.Assert_MyFeed_Diagnostics_Application();
     }
 
 }
