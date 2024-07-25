@@ -38,4 +38,17 @@ public class HOME_EXPERT extends TestBase {
         homeExpertPage.Assert_MyFeed_Solutions_Quantity();
         homeExpertPage.Assert_MyFeed_Solutions_Href();
     }
+
+    @Test(priority = 1, description = "Авторизованная зона. Эксперт. Моя Лента. 'Сообщения в чате'")
+    public void MyFeed_ChatStatistic_TEST() throws SQLException {
+        HomeExpertPage homeExpertPage = open(ConfigProviderInterface.authorizedExpertURL, HomeExpertPage.class);
+        homeExpertPage.getChatStatisticWidgetDataFromDB();
+        homeExpertPage.getChatStatisticWidgetDataFromApi();
+        homeExpertPage.Assert_MyFeed_ChatStatistic_Header();
+        homeExpertPage.Assert_MyFeed_ChatStatistic_Unread_Text();
+        homeExpertPage.Assert_MyFeed_ChatStatistic_Unread_Quantity();
+        homeExpertPage.Assert_MyFeed_ChatStatistic_Unanswered_Quantity();
+        homeExpertPage.Assert_MyFeed_ChatStatistic_Href();
+    }
+
 }
