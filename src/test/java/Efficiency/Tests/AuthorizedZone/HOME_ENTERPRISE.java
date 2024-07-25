@@ -1,6 +1,6 @@
 package Efficiency.Tests.AuthorizedZone;
 
-import Efficiency.Pages.AuthorizedZone.Enterprise.HomeEnterprisePage;
+import Efficiency.Pages.AuthorizedZone.HomeEnterprisePage;
 import Efficiency.Providers.ConfigProviderInterface;
 import Efficiency.TestBase;
 import org.testng.annotations.BeforeClass;

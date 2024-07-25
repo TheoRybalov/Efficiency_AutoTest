@@ -1,4 +1,4 @@
-package Efficiency.Pages.AuthorizedZone.Enterprise;
+package Efficiency.Pages.AuthorizedZone;
 
 import Efficiency.AuthorizedCommonFunctions;
 import com.codeborne.selenide.SelenideElement;
