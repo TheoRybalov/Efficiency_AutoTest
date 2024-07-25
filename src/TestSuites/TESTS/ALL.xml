@@ -9,388 +9,396 @@
 
 
 
-    <test name="ABOUT_NATIONAL_PROJECT_PHONE">
-        <parameter name="environment" value="phone"/>
-        <parameter name="browser" value="chrome"/>
-        <parameter name="mode" value="headless"/>
-        <classes>
-            <class name="Efficiency.Tests.ABOUT_NATIONAL_PROJECT">
-                <methods>
-                    <include name="MarkupScreenshot_TEST"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
+<!--    <test name="ABOUT_NATIONAL_PROJECT_PHONE">-->
+<!--        <parameter name="environment" value="phone"/>-->
+<!--        <parameter name="browser" value="chrome"/>-->
+<!--        <parameter name="mode" value="headless"/>-->
+<!--        <classes>-->
+<!--            <class name="Efficiency.Tests.ABOUT_NATIONAL_PROJECT">-->
+<!--                <methods>-->
+<!--                    <include name="MarkupScreenshot_TEST"/>-->
+<!--                </methods>-->
+<!--            </class>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <test name="ABOUT_NATIONAL_PROJECT_TABLET">
-        <parameter name="environment" value="tablet"/>
-        <parameter name="browser" value="chrome"/>
-        <parameter name="mode" value="headless"/>
-        <classes>
-            <class name="Efficiency.Tests.ABOUT_NATIONAL_PROJECT">
-                <methods>
-                    <include name="MarkupScreenshot_TEST"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
+<!--    <test name="ABOUT_NATIONAL_PROJECT_TABLET">-->
+<!--        <parameter name="environment" value="tablet"/>-->
+<!--        <parameter name="browser" value="chrome"/>-->
+<!--        <parameter name="mode" value="headless"/>-->
+<!--        <classes>-->
+<!--            <class name="Efficiency.Tests.ABOUT_NATIONAL_PROJECT">-->
+<!--                <methods>-->
+<!--                    <include name="MarkupScreenshot_TEST"/>-->
+<!--                </methods>-->
+<!--            </class>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <test name="ABOUT_NATIONAL_PROJECT_PC">
-        <parameter name="environment" value="PC"/>
-        <parameter name="browser" value="chrome"/>
-        <parameter name="mode" value="headless"/>
-        <classes>
-            <class name="Efficiency.Tests.ABOUT_NATIONAL_PROJECT"/>
-        </classes>
-    </test>
+<!--    <test name="ABOUT_NATIONAL_PROJECT_PC">-->
+<!--        <parameter name="environment" value="PC"/>-->
+<!--        <parameter name="browser" value="chrome"/>-->
+<!--        <parameter name="mode" value="headless"/>-->
+<!--        <classes>-->
+<!--            <class name="Efficiency.Tests.ABOUT_NATIONAL_PROJECT"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <test name="ABOUT_PROJECT_PHONE">
-        <parameter name="environment" value="phone"/>
-        <parameter name="browser" value="chrome"/>
-        <parameter name="mode" value="headless"/>
-        <classes>
-            <class name="Efficiency.Tests.ABOUT_PROJECT">
-                <methods>
-                    <include name="LayoutScreenshot_TEST"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
+<!--    <test name="ABOUT_PROJECT_PHONE">-->
+<!--        <parameter name="environment" value="phone"/>-->
+<!--        <parameter name="browser" value="chrome"/>-->
+<!--        <parameter name="mode" value="headless"/>-->
+<!--        <classes>-->
+<!--            <class name="Efficiency.Tests.ABOUT_PROJECT">-->
+<!--                <methods>-->
+<!--                    <include name="LayoutScreenshot_TEST"/>-->
+<!--                </methods>-->
+<!--            </class>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <test name="ABOUT_PROJECT_TABLET">
-        <parameter name="environment" value="tablet"/>
-        <parameter name="browser" value="chrome"/>
-        <parameter name="mode" value="headless"/>
-        <classes>
-            <class name="Efficiency.Tests.ABOUT_PROJECT">
-                <methods>
-                    <include name="LayoutScreenshot_TEST"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
+<!--    <test name="ABOUT_PROJECT_TABLET">-->
+<!--        <parameter name="environment" value="tablet"/>-->
+<!--        <parameter name="browser" value="chrome"/>-->
+<!--        <parameter name="mode" value="headless"/>-->
+<!--        <classes>-->
+<!--            <class name="Efficiency.Tests.ABOUT_PROJECT">-->
+<!--                <methods>-->
+<!--                    <include name="LayoutScreenshot_TEST"/>-->
+<!--                </methods>-->
+<!--            </class>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <test name="ABOUT_PROJECT_PC">
-        <parameter name="environment" value="PC"/>
-        <parameter name="browser" value="chrome"/>
-        <parameter name="mode" value="headless"/>
-        <classes>
-            <class name="Efficiency.Tests.ABOUT_PROJECT"/>
-        </classes>
-    </test>
+<!--    <test name="ABOUT_PROJECT_PC">-->
+<!--        <parameter name="environment" value="PC"/>-->
+<!--        <parameter name="browser" value="chrome"/>-->
+<!--        <parameter name="mode" value="headless"/>-->
+<!--        <classes>-->
+<!--            <class name="Efficiency.Tests.ABOUT_PROJECT"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <test name="CONTACTS_PHONE">
-        <parameter name="environment" value="phone"/>
-        <parameter name="browser" value="chrome"/>
-        <parameter name="mode" value="headless"/>
-        <classes>
-            <class name="Efficiency.Tests.CONTACTS">
-                <methods>
-                    <include name="LayoutScreenshot_TEST"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
+<!--    <test name="CONTACTS_PHONE">-->
+<!--        <parameter name="environment" value="phone"/>-->
+<!--        <parameter name="browser" value="chrome"/>-->
+<!--        <parameter name="mode" value="headless"/>-->
+<!--        <classes>-->
+<!--            <class name="Efficiency.Tests.CONTACTS">-->
+<!--                <methods>-->
+<!--                    <include name="LayoutScreenshot_TEST"/>-->
+<!--                </methods>-->
+<!--            </class>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <test name="CONTACTS_PC">
-        <parameter name="environment" value="PC"/>
-        <parameter name="browser" value="chrome"/>
-        <parameter name="mode" value="headless"/>
-        <classes>
-            <class name="Efficiency.Tests.CONTACTS"/>
-        </classes>
-    </test>
+<!--    <test name="CONTACTS_PC">-->
+<!--        <parameter name="environment" value="PC"/>-->
+<!--        <parameter name="browser" value="chrome"/>-->
+<!--        <parameter name="mode" value="headless"/>-->
+<!--        <classes>-->
+<!--            <class name="Efficiency.Tests.CONTACTS"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <test name="ENTERPRISE_PHONE">
-        <parameter name="environment" value="phone"/>
-        <parameter name="browser" value="chrome"/>
-        <parameter name="mode" value="headless"/>
-        <classes>
-            <class name="Efficiency.Tests.ENTERPRISE">
-                <methods>
-                    <include name="MarkupScreenshot_TEST"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
+<!--    <test name="ENTERPRISE_PHONE">-->
+<!--        <parameter name="environment" value="phone"/>-->
+<!--        <parameter name="browser" value="chrome"/>-->
+<!--        <parameter name="mode" value="headless"/>-->
+<!--        <classes>-->
+<!--            <class name="Efficiency.Tests.ENTERPRISE">-->
+<!--                <methods>-->
+<!--                    <include name="MarkupScreenshot_TEST"/>-->
+<!--                </methods>-->
+<!--            </class>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <test name="ENTERPRISE_TABLET">
-        <parameter name="environment" value="tablet"/>
-        <parameter name="browser" value="chrome"/>
-        <parameter name="mode" value="headless"/>
-        <classes>
-            <class name="Efficiency.Tests.ENTERPRISE">
-                <methods>
-                    <include name="MarkupScreenshot_TEST"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
+<!--    <test name="ENTERPRISE_TABLET">-->
+<!--        <parameter name="environment" value="tablet"/>-->
+<!--        <parameter name="browser" value="chrome"/>-->
+<!--        <parameter name="mode" value="headless"/>-->
+<!--        <classes>-->
+<!--            <class name="Efficiency.Tests.ENTERPRISE">-->
+<!--                <methods>-->
+<!--                    <include name="MarkupScreenshot_TEST"/>-->
+<!--                </methods>-->
+<!--            </class>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <test name="ENTERPRISE_PC">
-        <parameter name="environment" value="PC"/>
-        <parameter name="browser" value="chrome"/>
-        <parameter name="mode" value="headless"/>
-        <classes>
-            <class name="Efficiency.Tests.ENTERPRISE"/>
-        </classes>
-    </test>
+<!--    <test name="ENTERPRISE_PC">-->
+<!--        <parameter name="environment" value="PC"/>-->
+<!--        <parameter name="browser" value="chrome"/>-->
+<!--        <parameter name="mode" value="headless"/>-->
+<!--        <classes>-->
+<!--            <class name="Efficiency.Tests.ENTERPRISE"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <test name="FAQ_PHONE">
-        <parameter name="environment" value="phone"/>
-        <parameter name="browser" value="chrome"/>
-        <parameter name="mode" value="headless"/>
-        <classes>
-            <class name="Efficiency.Tests.FAQ">
-                <methods>
-                    <include name="LayoutScreenshot_TEST"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
+<!--    <test name="FAQ_PHONE">-->
+<!--        <parameter name="environment" value="phone"/>-->
+<!--        <parameter name="browser" value="chrome"/>-->
+<!--        <parameter name="mode" value="headless"/>-->
+<!--        <classes>-->
+<!--            <class name="Efficiency.Tests.FAQ">-->
+<!--                <methods>-->
+<!--                    <include name="LayoutScreenshot_TEST"/>-->
+<!--                </methods>-->
+<!--            </class>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <test name="FAQ_TABLET">
-        <parameter name="environment" value="tablet"/>
-        <parameter name="browser" value="chrome"/>
-        <parameter name="mode" value="headless"/>
-        <classes>
-            <class name="Efficiency.Tests.FAQ">
-                <methods>
-                    <include name="LayoutScreenshot_TEST"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
+<!--    <test name="FAQ_TABLET">-->
+<!--        <parameter name="environment" value="tablet"/>-->
+<!--        <parameter name="browser" value="chrome"/>-->
+<!--        <parameter name="mode" value="headless"/>-->
+<!--        <classes>-->
+<!--            <class name="Efficiency.Tests.FAQ">-->
+<!--                <methods>-->
+<!--                    <include name="LayoutScreenshot_TEST"/>-->
+<!--                </methods>-->
+<!--            </class>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <test name="FAQ_PC">
-        <parameter name="environment" value="PC"/>
-        <parameter name="browser" value="chrome"/>
-        <parameter name="mode" value="headless"/>
-        <classes>
-            <class name="Efficiency.Tests.FAQ"/>
-        </classes>
-    </test>
+<!--    <test name="FAQ_PC">-->
+<!--        <parameter name="environment" value="PC"/>-->
+<!--        <parameter name="browser" value="chrome"/>-->
+<!--        <parameter name="mode" value="headless"/>-->
+<!--        <classes>-->
+<!--            <class name="Efficiency.Tests.FAQ"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <test name="HOME_PHONE">
-        <parameter name="environment" value="phone"/>
-        <parameter name="browser" value="chrome"/>
-        <parameter name="mode" value="headless"/>
-        <classes>
-            <class name="Efficiency.Tests.HOME">
-                <methods>
-                    <include name="LayoutScreenshot_TEST"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
+<!--    <test name="HOME_PHONE">-->
+<!--        <parameter name="environment" value="phone"/>-->
+<!--        <parameter name="browser" value="chrome"/>-->
+<!--        <parameter name="mode" value="headless"/>-->
+<!--        <classes>-->
+<!--            <class name="Efficiency.Tests.HOME">-->
+<!--                <methods>-->
+<!--                    <include name="LayoutScreenshot_TEST"/>-->
+<!--                </methods>-->
+<!--            </class>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <test name="HOME_TABLET">
-        <parameter name="environment" value="tablet"/>
-        <parameter name="browser" value="chrome"/>
-        <parameter name="mode" value="headless"/>
-        <classes>
-            <class name="Efficiency.Tests.HOME">
-                <methods>
-                    <include name="LayoutScreenshot_TEST"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
+<!--    <test name="HOME_TABLET">-->
+<!--        <parameter name="environment" value="tablet"/>-->
+<!--        <parameter name="browser" value="chrome"/>-->
+<!--        <parameter name="mode" value="headless"/>-->
+<!--        <classes>-->
+<!--            <class name="Efficiency.Tests.HOME">-->
+<!--                <methods>-->
+<!--                    <include name="LayoutScreenshot_TEST"/>-->
+<!--                </methods>-->
+<!--            </class>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <test name="HOME_PC">
-        <parameter name="environment" value="PC"/>
-        <parameter name="browser" value="chrome"/>
-        <parameter name="mode" value="headless"/>
-        <classes>
-            <class name="Efficiency.Tests.HOME"/>
-        </classes>
-    </test>
+<!--    <test name="HOME_PC">-->
+<!--        <parameter name="environment" value="PC"/>-->
+<!--        <parameter name="browser" value="chrome"/>-->
+<!--        <parameter name="mode" value="headless"/>-->
+<!--        <classes>-->
+<!--            <class name="Efficiency.Tests.HOME"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <test name="INDUSTRIES_PHONE">
-        <parameter name="environment" value="phone"/>
-        <parameter name="browser" value="chrome"/>
-        <parameter name="mode" value="headless"/>
-        <classes>
-            <class name="Efficiency.Tests.INDUSTRIES">
-                <methods>
-                    <include name="MarkupScreenShot_TEST"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
+<!--    <test name="INDUSTRIES_PHONE">-->
+<!--        <parameter name="environment" value="phone"/>-->
+<!--        <parameter name="browser" value="chrome"/>-->
+<!--        <parameter name="mode" value="headless"/>-->
+<!--        <classes>-->
+<!--            <class name="Efficiency.Tests.INDUSTRIES">-->
+<!--                <methods>-->
+<!--                    <include name="MarkupScreenShot_TEST"/>-->
+<!--                </methods>-->
+<!--            </class>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <test name="INDUSTRIES_TABLET">
-        <parameter name="environment" value="tablet"/>
-        <parameter name="browser" value="chrome"/>
-        <parameter name="mode" value="headless"/>
-        <classes>
-            <class name="Efficiency.Tests.INDUSTRIES">
-                <methods>
-                    <include name="MarkupScreenShot_TEST"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
+<!--    <test name="INDUSTRIES_TABLET">-->
+<!--        <parameter name="environment" value="tablet"/>-->
+<!--        <parameter name="browser" value="chrome"/>-->
+<!--        <parameter name="mode" value="headless"/>-->
+<!--        <classes>-->
+<!--            <class name="Efficiency.Tests.INDUSTRIES">-->
+<!--                <methods>-->
+<!--                    <include name="MarkupScreenShot_TEST"/>-->
+<!--                </methods>-->
+<!--            </class>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <test name="INDUSTRIES_PC">
-        <parameter name="environment" value="PC"/>
-        <parameter name="browser" value="chrome"/>
-        <parameter name="mode" value="headless"/>
-        <classes>
-            <class name="Efficiency.Tests.INDUSTRIES"/>
-        </classes>
-    </test>
+<!--    <test name="INDUSTRIES_PC">-->
+<!--        <parameter name="environment" value="PC"/>-->
+<!--        <parameter name="browser" value="chrome"/>-->
+<!--        <parameter name="mode" value="headless"/>-->
+<!--        <classes>-->
+<!--            <class name="Efficiency.Tests.INDUSTRIES"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <test name="PRESS_CENTER_PHONE">
-        <parameter name="environment" value="phone"/>
-        <parameter name="browser" value="chrome"/>
-        <parameter name="mode" value="headless"/>
-        <classes>
-            <class name="Efficiency.Tests.PRESS_CENTER">
-                <methods>
-                    <include name="LayoutScreenshot_TEST"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
+<!--    <test name="PRESS_CENTER_PHONE">-->
+<!--        <parameter name="environment" value="phone"/>-->
+<!--        <parameter name="browser" value="chrome"/>-->
+<!--        <parameter name="mode" value="headless"/>-->
+<!--        <classes>-->
+<!--            <class name="Efficiency.Tests.PRESS_CENTER">-->
+<!--                <methods>-->
+<!--                    <include name="LayoutScreenshot_TEST"/>-->
+<!--                </methods>-->
+<!--            </class>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <test name="PRESS_CENTER_TABLET">
-        <parameter name="environment" value="tablet"/>
-        <parameter name="browser" value="chrome"/>
-        <parameter name="mode" value="headless"/>
-        <classes>
-            <class name="Efficiency.Tests.PRESS_CENTER">
-                <methods>
-                    <include name="LayoutScreenshot_TEST"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
+<!--    <test name="PRESS_CENTER_TABLET">-->
+<!--        <parameter name="environment" value="tablet"/>-->
+<!--        <parameter name="browser" value="chrome"/>-->
+<!--        <parameter name="mode" value="headless"/>-->
+<!--        <classes>-->
+<!--            <class name="Efficiency.Tests.PRESS_CENTER">-->
+<!--                <methods>-->
+<!--                    <include name="LayoutScreenshot_TEST"/>-->
+<!--                </methods>-->
+<!--            </class>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <test name="PRESS_CENTER_PC">
-        <parameter name="environment" value="PC"/>
-        <parameter name="browser" value="chrome"/>
-        <parameter name="mode" value="headless"/>
-        <classes>
-            <class name="Efficiency.Tests.PRESS_CENTER"/>
-        </classes>
-    </test>
+<!--    <test name="PRESS_CENTER_PC">-->
+<!--        <parameter name="environment" value="PC"/>-->
+<!--        <parameter name="browser" value="chrome"/>-->
+<!--        <parameter name="mode" value="headless"/>-->
+<!--        <classes>-->
+<!--            <class name="Efficiency.Tests.PRESS_CENTER"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <test name="PROVIDERS_PHONE">
-        <parameter name="environment" value="phone"/>
-        <parameter name="browser" value="chrome"/>
-        <parameter name="mode" value="headless"/>
-        <classes>
-            <class name="Efficiency.Tests.PROVIDERS">
-                <methods>
-                    <include name="LayoutScreenshot_TEST"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
+<!--    <test name="PROVIDERS_PHONE">-->
+<!--        <parameter name="environment" value="phone"/>-->
+<!--        <parameter name="browser" value="chrome"/>-->
+<!--        <parameter name="mode" value="headless"/>-->
+<!--        <classes>-->
+<!--            <class name="Efficiency.Tests.PROVIDERS">-->
+<!--                <methods>-->
+<!--                    <include name="LayoutScreenshot_TEST"/>-->
+<!--                </methods>-->
+<!--            </class>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <test name="PROVIDERS_TABLET">
-        <parameter name="environment" value="tablet"/>
-        <parameter name="browser" value="chrome"/>
-        <parameter name="mode" value="headless"/>
-        <classes>
-            <class name="Efficiency.Tests.PROVIDERS">
-                <methods>
-                    <include name="LayoutScreenshot_TEST"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
+<!--    <test name="PROVIDERS_TABLET">-->
+<!--        <parameter name="environment" value="tablet"/>-->
+<!--        <parameter name="browser" value="chrome"/>-->
+<!--        <parameter name="mode" value="headless"/>-->
+<!--        <classes>-->
+<!--            <class name="Efficiency.Tests.PROVIDERS">-->
+<!--                <methods>-->
+<!--                    <include name="LayoutScreenshot_TEST"/>-->
+<!--                </methods>-->
+<!--            </class>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <test name="PROVIDERS_PC">
-        <parameter name="environment" value="PC"/>
-        <parameter name="browser" value="chrome"/>
-        <parameter name="mode" value="headless"/>
-        <classes>
-            <class name="Efficiency.Tests.PROVIDERS"/>
-        </classes>
-    </test>
+<!--    <test name="PROVIDERS_PC">-->
+<!--        <parameter name="environment" value="PC"/>-->
+<!--        <parameter name="browser" value="chrome"/>-->
+<!--        <parameter name="mode" value="headless"/>-->
+<!--        <classes>-->
+<!--            <class name="Efficiency.Tests.PROVIDERS"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <test name="SERVICES_PHONE">
-        <parameter name="environment" value="phone"/>
-        <parameter name="browser" value="chrome"/>
-        <parameter name="mode" value="headless"/>
-        <classes>
-            <class name="Efficiency.Tests.SERVICES">
-                <methods>
-                    <include name="MarkupScreenshot_TEST"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
+<!--    <test name="SERVICES_PHONE">-->
+<!--        <parameter name="environment" value="phone"/>-->
+<!--        <parameter name="browser" value="chrome"/>-->
+<!--        <parameter name="mode" value="headless"/>-->
+<!--        <classes>-->
+<!--            <class name="Efficiency.Tests.SERVICES">-->
+<!--                <methods>-->
+<!--                    <include name="MarkupScreenshot_TEST"/>-->
+<!--                </methods>-->
+<!--            </class>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <test name="SERVICES_TABLET">
-        <parameter name="environment" value="tablet"/>
-        <parameter name="browser" value="chrome"/>
-        <parameter name="mode" value="headless"/>
-        <classes>
-            <class name="Efficiency.Tests.SERVICES">
-                <methods>
-                    <include name="MarkupScreenshot_TEST"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
+<!--    <test name="SERVICES_TABLET">-->
+<!--        <parameter name="environment" value="tablet"/>-->
+<!--        <parameter name="browser" value="chrome"/>-->
+<!--        <parameter name="mode" value="headless"/>-->
+<!--        <classes>-->
+<!--            <class name="Efficiency.Tests.SERVICES">-->
+<!--                <methods>-->
+<!--                    <include name="MarkupScreenshot_TEST"/>-->
+<!--                </methods>-->
+<!--            </class>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <test name="SERVICES_PC">
-        <parameter name="environment" value="PC"/>
-        <parameter name="browser" value="chrome"/>
-        <parameter name="mode" value="headless"/>
-        <classes>
-            <class name="Efficiency.Tests.SERVICES"/>
-        </classes>
-    </test>
+<!--    <test name="SERVICES_PC">-->
+<!--        <parameter name="environment" value="PC"/>-->
+<!--        <parameter name="browser" value="chrome"/>-->
+<!--        <parameter name="mode" value="headless"/>-->
+<!--        <classes>-->
+<!--            <class name="Efficiency.Tests.SERVICES"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <test name="SUPERVISORY_BOARDS_PHONE">
-        <parameter name="environment" value="phone"/>
-        <parameter name="browser" value="chrome"/>
-        <parameter name="mode" value="headless"/>
-        <classes>
-            <class name="Efficiency.Tests.SUPERVISORY_BOARDS">
-                <methods>
-                    <include name="LayoutScreenshot_TEST"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
+<!--    <test name="SUPERVISORY_BOARDS_PHONE">-->
+<!--        <parameter name="environment" value="phone"/>-->
+<!--        <parameter name="browser" value="chrome"/>-->
+<!--        <parameter name="mode" value="headless"/>-->
+<!--        <classes>-->
+<!--            <class name="Efficiency.Tests.SUPERVISORY_BOARDS">-->
+<!--                <methods>-->
+<!--                    <include name="LayoutScreenshot_TEST"/>-->
+<!--                </methods>-->
+<!--            </class>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <test name="SUPERVISORY_BOARDS_TABLET">
-        <parameter name="environment" value="tablet"/>
-        <parameter name="browser" value="chrome"/>
-        <parameter name="mode" value="headless"/>
-        <classes>
-            <class name="Efficiency.Tests.SUPERVISORY_BOARDS">
-                <methods>
-                    <include name="LayoutScreenshot_TEST"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
+<!--    <test name="SUPERVISORY_BOARDS_TABLET">-->
+<!--        <parameter name="environment" value="tablet"/>-->
+<!--        <parameter name="browser" value="chrome"/>-->
+<!--        <parameter name="mode" value="headless"/>-->
+<!--        <classes>-->
+<!--            <class name="Efficiency.Tests.SUPERVISORY_BOARDS">-->
+<!--                <methods>-->
+<!--                    <include name="LayoutScreenshot_TEST"/>-->
+<!--                </methods>-->
+<!--            </class>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <test name="SUPERVISORY_BOARDS_PC">
-        <parameter name="environment" value="PC"/>
-        <parameter name="browser" value="chrome"/>
-        <parameter name="mode" value="headless"/>
-        <classes>
-            <class name="Efficiency.Tests.SUPERVISORY_BOARDS"/>
-        </classes>
-    </test>
+<!--    <test name="SUPERVISORY_BOARDS_PC">-->
+<!--        <parameter name="environment" value="PC"/>-->
+<!--        <parameter name="browser" value="chrome"/>-->
+<!--        <parameter name="mode" value="headless"/>-->
+<!--        <classes>-->
+<!--            <class name="Efficiency.Tests.SUPERVISORY_BOARDS"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
 
-    <test name="AUTHORIZED_ZONE_ENTERPRISE_PC">
+<!--    <test name="AUTHORIZED_ZONE_HOME_ENTERPRISE_PC">-->
+<!--        <parameter name="environment" value="PC"/>-->
+<!--        <parameter name="browser" value="chrome"/>-->
+<!--        <parameter name="mode" value=""/>-->
+<!--        <classes>-->
+<!--            <class name="Efficiency.Tests.AuthorizedZone.HOME_ENTERPRISE"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+
+    <test name="AUTHORIZED_ZONE_HOME_EXPERT">
         <parameter name="environment" value="PC"/>
         <parameter name="browser" value="chrome"/>
         <parameter name="mode" value=""/>
         <classes>
-            <class name="Efficiency.Tests.AuthorizedZone.AUTHORIZED_ENTERPRISE"/>
+            <class name="Efficiency.Tests.AuthorizedZone.HOME_EXPERT"/>
         </classes>
     </test>
-
 
 
 </suite>

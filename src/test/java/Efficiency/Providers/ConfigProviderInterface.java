@@ -22,5 +22,5 @@ public interface ConfigProviderInterface {
     String faqURL = readConfig().getString("FaqURL");
     String contactsURL = readConfig().getString("ContactsURL");
     String authorizedEnterpriseURL = readConfig().getString("AuthorizedEnterpriseURL");
-
+    String authorizedExpertURL = readConfig().getString("AuthorizedExpertURL");
 }
