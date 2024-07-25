@@ -13,7 +13,7 @@ import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$x;
 import static io.restassured.RestAssured.given;
 
-public class AuthorizedEnterprisePage extends AuthorizedCommonFunctions {
+public class HomeEnterprisePage extends AuthorizedCommonFunctions {
 
 
 
@@ -48,7 +48,7 @@ public class AuthorizedEnterprisePage extends AuthorizedCommonFunctions {
 
     @Step("Получить информацию о виджете Диагностика из базы данных")
     public void getDiagnosticWidgetDataFromDB() throws SQLException {
-        Map<String, Object> dbData = super.getDataFromDB("public.content_30767", "741576");
+        Map<String, Object> dbData = super.getDataFromDB("public.content_30767", "741585");
         DiagnosticsWidgetData.putAll(dbData);
     }
 

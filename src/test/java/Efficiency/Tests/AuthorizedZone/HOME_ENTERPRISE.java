@@ -1,19 +1,18 @@
 package Efficiency.Tests.AuthorizedZone;
 
-import Efficiency.Pages.AuthorizedZone.AuthorizedEnterprisePage;
+import Efficiency.Pages.AuthorizedZone.HomeEnterprisePage;
 import Efficiency.Providers.ConfigProviderInterface;
 import Efficiency.TestBase;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import Efficiency.Pages.LoginPage;
 
-import java.io.IOException;
 import java.sql.SQLException;
 
 import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.Selenide.sleep;
 
-public class AUTHORIZED_ENTERPRISE extends TestBase {
+public class HOME_ENTERPRISE extends TestBase {
 
     public String getEnvironment(){
         return super.getEnv();
@@ -32,13 +31,13 @@ public class AUTHORIZED_ENTERPRISE extends TestBase {
 
     @Test(priority = 1, description = "Авторизованная зона. Предприятие. Моя Лента. Диагностика")
     public void MyFeed_Diagnostics_TEST() throws SQLException {
-        AuthorizedEnterprisePage authorizedEnterprisePage = open(ConfigProviderInterface.authorizedEnterpriseURL, AuthorizedEnterprisePage.class);
-        authorizedEnterprisePage.getDiagnosticWidgetDataFromDB();
-        authorizedEnterprisePage.getDiagnosticWidgetDataFromApi();
-        authorizedEnterprisePage.Assert_MyFeed_Diagnostics_Header();
-        authorizedEnterprisePage.Assert_MyFeed_Diagnostics_Text();
-        authorizedEnterprisePage.Assert_MyFeed_Diagnostics_Percentage();
-        authorizedEnterprisePage.Assert_MyFeed_Diagnostics_Application();
+        HomeEnterprisePage homeEnterprisePage = open(ConfigProviderInterface.authorizedEnterpriseURL, HomeEnterprisePage.class);
+        homeEnterprisePage.getDiagnosticWidgetDataFromDB();
+        homeEnterprisePage.getDiagnosticWidgetDataFromApi();
+        homeEnterprisePage.Assert_MyFeed_Diagnostics_Header();
+        homeEnterprisePage.Assert_MyFeed_Diagnostics_Text();
+        homeEnterprisePage.Assert_MyFeed_Diagnostics_Percentage();
+        homeEnterprisePage.Assert_MyFeed_Diagnostics_Application();
     }
 
 }
