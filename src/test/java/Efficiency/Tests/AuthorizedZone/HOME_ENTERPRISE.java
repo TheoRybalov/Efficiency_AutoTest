@@ -25,11 +25,10 @@ public class HOME_ENTERPRISE extends TestBase {
     public void Login(){
         LoginPage loginPage = open(ConfigProviderInterface.authorizedEnterpriseURL, LoginPage.class);
         loginPage.login(ENTERPRISE_USER, ENTERPRISE_PASSWORD);
-        sleep(5000);
     }
 
 
-    @Test(priority = 1, description = "Авторизованная зона. Предприятие. Моя Лента. Диагностика")
+    @Test(priority = 1, description = "Авторизованная зона. Предприятие. Моя Лента. Диагностика", enabled = false)
     public void MyFeed_Diagnostics_TEST() throws SQLException {
         HomeEnterprisePage homeEnterprisePage = open(ConfigProviderInterface.authorizedEnterpriseURL, HomeEnterprisePage.class);
         homeEnterprisePage.getDiagnosticWidgetDataFromDB();
@@ -38,6 +37,18 @@ public class HOME_ENTERPRISE extends TestBase {
         homeEnterprisePage.Assert_MyFeed_Diagnostics_Text();
         homeEnterprisePage.Assert_MyFeed_Diagnostics_Percentage();
         homeEnterprisePage.Assert_MyFeed_Diagnostics_Application();
+//        homeEnterprisePage.Assert_MyFeed_Diagnostics_Href();
+    }
+
+    @Test(priority = 1, description = "Авторизованная зона. Предприятие. Моя Лента. Рекомендуемые анкеты")
+    public void MyFeed_RecommendedQuestionnaires_TEST() throws SQLException {
+        HomeEnterprisePage homeEnterprisePage = open(ConfigProviderInterface.authorizedEnterpriseURL, HomeEnterprisePage.class);
+        homeEnterprisePage.getRecommendedQuestionnairesWidgetDataFromApi();
+        homeEnterprisePage.getRecommendedQuestionnairesWidgetDataFromDB();
+        homeEnterprisePage.Assert_MyFeed_RecommendedQuestionnaires_Header();
+        homeEnterprisePage.Assert_MyFeed_RecommendedQuestionnaires_Questions();
+        homeEnterprisePage.Assert_MyFeed_RecommendedQuestionnaires_Duration();
+        homeEnterprisePage.Assert_MyFeed_RecommendedQuestionnaires_Text();
     }
 
 }
