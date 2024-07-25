@@ -48,7 +48,7 @@ public class HomeEnterprisePage extends AuthorizedCommonFunctions {
 
     @Step("Получить информацию о виджете Диагностика из базы данных")
     public void getDiagnosticWidgetDataFromDB() throws SQLException {
-        Map<String, Object> dbData = super.getDataFromDB("public.content_30767", "741585");
+        Map<String, Object> dbData = super.getDataFromDB("public.content_30767", "741576");
         DiagnosticsWidgetData.putAll(dbData);
     }
 
