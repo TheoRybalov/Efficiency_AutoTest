@@ -31,10 +31,10 @@ public class AUTHORIZED_ENTERPRISE extends TestBase {
 
 
     @Test(priority = 1, description = "Авторизованная зона. Предприятие. Моя Лента. Диагностика")
-    public void Header_TEST() throws SQLException {
+    public void MyFeed_Diagnostics_TEST() throws SQLException {
         AuthorizedEnterprisePage authorizedEnterprisePage = open(ConfigProviderInterface.authorizedEnterpriseURL, AuthorizedEnterprisePage.class);
-        authorizedEnterprisePage.getDiagnosticWidgetDataFromApi();
         authorizedEnterprisePage.getDiagnosticWidgetDataFromDB();
+        authorizedEnterprisePage.getDiagnosticWidgetDataFromApi();
         authorizedEnterprisePage.Assert_MyFeed_Diagnostics_Header();
         authorizedEnterprisePage.Assert_MyFeed_Diagnostics_Text();
         authorizedEnterprisePage.Assert_MyFeed_Diagnostics_Percentage();

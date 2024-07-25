@@ -1,11 +1,8 @@
 package Efficiency.Pages.AuthorizedZone;
 
-import Efficiency.CommonFunctions;
+import Efficiency.AuthorizedCommonFunctions;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
-import io.restassured.RestAssured;
-import io.restassured.authentication.FormAuthConfig;
-import io.restassured.response.Response;
 import org.testng.Assert;
 
 import java.sql.*;
@@ -16,7 +13,7 @@ import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$x;
 import static io.restassured.RestAssured.given;
 
-public class AuthorizedEnterprisePage extends CommonFunctions {
+public class AuthorizedEnterprisePage extends AuthorizedCommonFunctions {
 
 
 
@@ -43,46 +40,16 @@ public class AuthorizedEnterprisePage extends CommonFunctions {
 
     @Step("Получить данные из API для виджета диагностика")
     public void getDiagnosticWidgetDataFromApi() {
+        Map<String, Object> apiData = super.getMyFeedWidgetDataFromApi("https://aksis.dev.qsupport.ru/onboarding/api/DiagnosticsWidget/GetDiagnostics");
+        DiagnosticsWidgetData.putAll(apiData);
 
-
-
-
-        Response response = given()
-                .get("https://aksis.dev.qsupport.ru/onboarding/api/DiagnosticsWidget/GetDiagnostics");
-        Assert.assertFalse(response.asString().isEmpty(), "Response is empty");
-        System.out.println("Response body:");
-        response.prettyPrint();
-
-
-
-        Map<String, Object> data = response.jsonPath().getMap("");
-        DiagnosticsWidgetData.put("digitalization", data.get("digitalization"));
-        DiagnosticsWidgetData.put("surveyTemplatesAvailableCount", data.get("surveyTemplatesAvailableCount"));
-        DiagnosticsWidgetData.put("surveyTemplatesPassedCount", data.get("surveyTemplatesPassedCount"));
     }
 
-//    @Step("Получить информацию о новости из базы данных")
-//    public void getDiagnosticWidgetDataFromDB() throws SQLException {
-//        String query = "SELECT title, text, errorhref FROM public.content_30767 WHERE content_item_id = 741576";
-//
-//        try (Connection conn = DriverManager.getConnection(DB_URL_MINPROMTORG, DB_USER, DB_PASSWORD);
-//             PreparedStatement pstmt = conn.prepareStatement(query)) {
-//
-//            try (ResultSet rs = pstmt.executeQuery()) {
-//                if (rs.next()) {
-//                    DiagnosticsWidgetData.put("title", rs.getString("title"));
-//                    DiagnosticsWidgetData.put("text", rs.getString("text"));
-//                    DiagnosticsWidgetData.put("errorhref", rs.getString("errorhref"));
-//                }
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//    }
 
     @Step("Получить информацию о виджете Диагностика из базы данных")
     public void getDiagnosticWidgetDataFromDB() throws SQLException {
-        DiagnosticsWidgetData = super.getWidgetDataFromDB("public.content_30767", "741576");
+        Map<String, Object> dbData = super.getDataFromDB("public.content_30767", "741576");
+        DiagnosticsWidgetData.putAll(dbData);
     }
 
 
@@ -112,28 +79,34 @@ public class AuthorizedEnterprisePage extends CommonFunctions {
 
     @Step("Проверка корректности процента цифровизации в виджете Диагностика")
     public void Assert_MyFeed_Diagnostics_Percentage(){
-        for (Map.Entry<String, Object> entry : DiagnosticsWidgetData.entrySet()) {
-            System.out.println("Ключ: " + entry.getKey() + ", Значение: " + entry.getValue());
-        }
         MyFeed_Diagnostics_Percentage.scrollTo().shouldBe(visible);
-        String actualTitle = MyFeed_Diagnostics_Percentage.getText().replace("%", "");
-        String expectedTitle = (String) DiagnosticsWidgetData.get("digitalization");
-        Assert.assertEquals(actualTitle, expectedTitle, "Процент цифровизации не соответствует ожидаемому значению.");
+
+        int actualPercentage = Integer.parseInt(MyFeed_Diagnostics_Percentage.getText().replace("%", ""));
+        int roundedExpectedPercentage = (int) Math.round(((Number) DiagnosticsWidgetData.get("digitalization")).doubleValue());
+
+        Assert.assertEquals(actualPercentage, roundedExpectedPercentage, "Процент цифровизации не соответствует ожидаемому значению.");
     }
 
     @Step("Проверка количества анкет в виджете Диагностика")
     public void Assert_MyFeed_Diagnostics_Application(){
         MyFeed_Diagnostics_Applications.scrollTo().shouldBe(visible);
-        String[] parts = MyFeed_Diagnostics_Percentage.getText().split(" — | из ");
-        int firstValue = Integer.parseInt(parts[0]);
-        int secondValue = Integer.parseInt(parts[1]);
+
+        String text = MyFeed_Diagnostics_Applications.getText();
+        String[] numbers = text.replaceAll("[^0-9]+", " ").trim().split(" ");
+
+        if (numbers.length != 2) {
+            throw new IllegalArgumentException("Текст виджета не соответствует ожидаемому формату");
+        }
+
+        int firstValue = Integer.parseInt(numbers[0].trim());
+        int secondValue = Integer.parseInt(numbers[1].trim());
         int difference = secondValue - firstValue;
 
-        int expectedFirstValue = (int) DiagnosticsWidgetData.get("surveyTemplatesAvailableCount");
-        int expectedSeconfValue = (int) DiagnosticsWidgetData.get("surveyTemplatesPassedCount");
+        int expectedFirstValue = ((Number) DiagnosticsWidgetData.get("surveyTemplatesPassedCount")).intValue();
+        int expectedSecondValue = ((Number) DiagnosticsWidgetData.get("surveyTemplatesAvailableCount")).intValue();
 
         Assert.assertEquals(firstValue, expectedFirstValue, "Значение пройденных анкет не совпало");
-        Assert.assertEquals(difference, expectedSeconfValue, "Значение доступных анкет не совпало");
+        Assert.assertEquals(difference, expectedSecondValue, "Значение доступных анкет не совпало");
     }
 
 
