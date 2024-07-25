@@ -1,4 +1,4 @@
-package Efficiency.Pages.AuthorizedZone;
+package Efficiency.Pages.AuthorizedZone.Enterprise;
 
 import Efficiency.AuthorizedCommonFunctions;
 import com.codeborne.selenide.SelenideElement;
@@ -13,7 +13,7 @@ import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$x;
 import static io.restassured.RestAssured.given;
 
-public class AuthorizedEnterprisePage extends AuthorizedCommonFunctions {
+public class HomeEnterprisePage extends AuthorizedCommonFunctions {
 
 
 
