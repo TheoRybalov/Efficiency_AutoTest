@@ -5,6 +5,7 @@ import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 import org.testng.Assert;
 
+import java.io.IOException;
 import java.sql.*;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -68,6 +69,18 @@ public class HomeEnterprisePage extends AuthorizedCommonFunctions {
     private static final SelenideElement MyFeed_SolutionShowcase_Count = $x("//*[@id=\"root\"]/div/div[2]/main/div/div/div/div[2]/div[2]/div[2]/div[4]/div/div[2]/dl/dd");
     private static final SelenideElement MyFeed_SolutionShowcase_href = $x("//*[@id=\"root\"]/div/div[2]/main/div/div/div/div[2]/div[2]/div[2]/div[4]/div/div[1]/a");
     private Map<String, Object> SolutionShowcaseWidgetData = new HashMap<>();
+
+
+    //Виджет Рекомендуемая статья
+    private static final SelenideElement MyFeed_RecommendedArticle_Title = $x("//*[@id=\"root\"]/div/div[2]/main/div/div/div/div[2]/div[2]/div[2]/div[4]/div/div[1]/span");
+    private static final SelenideElement MyFeed_RecommendedArticle_Description = $x("//*[@id=\"root\"]/div/div[2]/main/div/div/div/div[2]/div[2]/div[2]/div[4]/div/div[2]/dl/dt");
+    private Map<String, Object> RecommendedArticleWidgetData = new HashMap<>();
+
+    //Виджет контрагента 1
+    private static final SelenideElement HTML_Widget_Counterparty_1 = $x("//*[@id=\"root\"]/div/div[2]/main/div/div/div/div[2]/div[2]/div[3]/div/div/div[1]/div[1]");
+
+    //Виджет контрагента 2
+    private static final SelenideElement HTML_Widget_Counterparty_2 = $x("//*[@id=\"root\"]/div/div[2]/main/div/div/div/div[2]/div[2]/div[3]/div/div/div[1]/div[2]");
 
     @Step("Получить данные из API для виджета диагностика")
     public void getDiagnosticWidgetDataFromApi() {
@@ -335,6 +348,106 @@ public class HomeEnterprisePage extends AuthorizedCommonFunctions {
         String expectedTitle = (String) SolutionShowcaseWidgetData.get("errorhref");
         Assert.assertEquals(actualTitle, expectedTitle, "Ссылка не соответствует ожидаемому значению.");
     }
+
+
+    //пока на паузе
+    @Step("Получить данные из API для виджета Рекомендуемая статья")
+    public void getRecommendedArticleWidgetDataFromApi() {
+        Map<String, Object> apiData = super.getMyFeedWidgetDataFromApi("https://aksis.dev.qsupport.ru/wp-graphql/graphql");
+        RecommendedArticleWidgetData.putAll(apiData);
+
+        for (String key : RecommendedArticleWidgetData.keySet()) {
+            Object value = RecommendedArticleWidgetData.get(key);
+            System.out.println(key + " " + value);
+        }
+
+    }
+
+
+    //пока на паузе
+    @Step("Проверка корректности заголовка статьи внутри виджета Рекомендуемая статья")
+    public void Assert_MyFeed_RecommendedArticle_Title(){
+        MyFeed_RecommendedArticle_Title.scrollTo().shouldBe(visible);
+        String actualTitle1 = MyFeed_RecommendedArticle_Title.getText();
+        String expectedTitle1 = (String) SolutionShowcaseWidgetData.get("text");
+        Assert.assertEquals(actualTitle1, expectedTitle1, "Текст внутри виджета не соответсвует ожидаемому значению");
+    }
+
+
+    @Step("Создание скриншота виджета первого контрагента")
+    public void TakeScreenshotOfCounterpartyWidget1(String environment) throws IOException {
+        HTML_Widget_Counterparty_1.scrollTo().shouldBe(visible);
+        String screenshotPath = null;
+        switch (environment) {
+            case "PC":
+                //Если мы получаем скриншот в кофигурации ПК, то сохранение будет идти в эту папку
+                screenshotPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/PC/Elements/CounterpartyWidget1/current.png";
+                break;
+            default:
+                throw new IllegalArgumentException("Неверный параметр окружения: " + environment);
+        }
+        //вызывается метод создания и сохранения такого скриншота, куда мы передаём путь до папки
+        super.TakeScreenshotOfElement(HTML_Widget_Counterparty_1, screenshotPath);
+    }
+
+    @Step("Сравнение скриншотов виджета первого контрагента")
+    public boolean compareScreenshotsOfCounterpartyWidget1(String environment) throws IOException{
+        String screenshotPath = null;
+        String referencePath = null;
+        String resultPath = null;
+
+        switch (environment) {
+            case "PC":
+                //Если мы получаем скриншот в кофигурации ПК, то для сравнения current и reference нужно вытащить из этих папок
+                screenshotPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/PC/Elements/CounterpartyWidget1/current.png";
+                referencePath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/PC/Elements/CounterpartyWidget1/reference.png";
+                resultPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/PC/Elements/CounterpartyWidget1/difference.png";
+                break;
+            default:
+                throw new IllegalArgumentException("Неверный параметр окружения: " + environment);
+        }
+        //вызывается сравнения скриншотов, куда мы передаём пути до папок
+        return super.compareScreenshots(screenshotPath, referencePath, resultPath);
+    }
+
+
+    @Step("Создание скриншота виджета второго контрагента")
+    public void TakeScreenshotOfCounterpartyWidget2(String environment) throws IOException {
+        HTML_Widget_Counterparty_2.scrollTo().shouldBe(visible);
+        String screenshotPath = null;
+        switch (environment) {
+            case "PC":
+                //Если мы получаем скриншот в кофигурации ПК, то сохранение будет идти в эту папку
+                screenshotPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/PC/Elements/CounterpartyWidget2/current.png";
+                break;
+            default:
+                throw new IllegalArgumentException("Неверный параметр окружения: " + environment);
+        }
+        //вызывается метод создания и сохранения такого скриншота, куда мы передаём путь до папки
+        super.TakeScreenshotOfElement(HTML_Widget_Counterparty_2, screenshotPath);
+    }
+
+    @Step("Сравнение скриншотов виджета второго контрагента")
+    public boolean compareScreenshotsOfCounterpartyWidget2(String environment) throws IOException{
+        String screenshotPath = null;
+        String referencePath = null;
+        String resultPath = null;
+
+        switch (environment) {
+            case "PC":
+                //Если мы получаем скриншот в кофигурации ПК, то для сравнения current и reference нужно вытащить из этих папок
+                screenshotPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/PC/Elements/CounterpartyWidget2/current.png";
+                referencePath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/PC/Elements/CounterpartyWidget2/reference.png";
+                resultPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/PC/Elements/CounterpartyWidget2/difference.png";
+                break;
+            default:
+                throw new IllegalArgumentException("Неверный параметр окружения: " + environment);
+        }
+        //вызывается сравнения скриншотов, куда мы передаём пути до папок
+        return super.compareScreenshots(screenshotPath, referencePath, resultPath);
+    }
+
+
 
 
 

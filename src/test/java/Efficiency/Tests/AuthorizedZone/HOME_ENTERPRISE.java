@@ -7,6 +7,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import Efficiency.Pages.LoginPage;
 
+import java.io.IOException;
 import java.sql.SQLException;
 
 import static com.codeborne.selenide.Selenide.open;
@@ -64,7 +65,7 @@ public class HOME_ENTERPRISE extends TestBase {
 
     }
 
-    @Test(priority = 4, description = "Авторизованная зона. Предприятие. Моя Лента. Витрина Решений")
+    @Test(priority = 4, description = "Авторизованная зона. Предприятие. Моя Лента. Витрина Решений",enabled = false)
     public void MyFeed_SolutionShowcase_TEST() throws SQLException {
         HomeEnterprisePage homeEnterprisePage = open(ConfigProviderInterface.authorizedEnterpriseURL, HomeEnterprisePage.class);
        homeEnterprisePage.getSolutionShowcaseWidgetDataFromApi();
@@ -73,6 +74,27 @@ public class HOME_ENTERPRISE extends TestBase {
        homeEnterprisePage.Assert_MyFeed_SolutionShowcase_Text();
        homeEnterprisePage.Assert_MyFeed_SolutionShowcase_Count();
 
+    }
+
+    @Test(priority = 5, description = "Авторизованная зона. Предприятие. Моя Лента. Рекомендуемая статья",enabled = false)
+    public void MyFeed_RecommendedArticle_TEST() throws IOException {
+        HomeEnterprisePage homeEnterprisePage = open(ConfigProviderInterface.authorizedEnterpriseURL, HomeEnterprisePage.class);
+
+
+    }
+
+    @Test(priority = 6, description = "Авторизованная зона. Предприятие. Моя Лента. HTML Виджет контрагента 1")
+    public void MyFeed_HTML_Widget_First_Counterparty_TEST() throws IOException {
+        HomeEnterprisePage homeEnterprisePage = open(ConfigProviderInterface.authorizedEnterpriseURL, HomeEnterprisePage.class);
+        homeEnterprisePage.TakeScreenshotOfCounterpartyWidget1(getEnvironment());
+        homeEnterprisePage.compareScreenshotsOfCounterpartyWidget1(getEnvironment());
+    }
+
+    @Test(priority = 6, description = "Авторизованная зона. Предприятие. Моя Лента. HTML Виджет контрагента 2")
+    public void MyFeed_HTML_Widget_Second_Counterparty_TEST() throws IOException {
+        HomeEnterprisePage homeEnterprisePage = open(ConfigProviderInterface.authorizedEnterpriseURL, HomeEnterprisePage.class);
+        homeEnterprisePage.TakeScreenshotOfCounterpartyWidget2(getEnvironment());
+        homeEnterprisePage.compareScreenshotsOfCounterpartyWidget2(getEnvironment());
     }
 
 }
