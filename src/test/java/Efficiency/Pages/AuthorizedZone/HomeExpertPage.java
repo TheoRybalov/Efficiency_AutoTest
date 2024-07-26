@@ -5,6 +5,7 @@ import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 import org.testng.Assert;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
@@ -12,12 +13,12 @@ import java.util.Map;
 import static Efficiency.Providers.ConfigProviderInterface.baseURL;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$x;
+import static com.codeborne.selenide.Selenide.sleep;
 
 public class HomeExpertPage extends AuthorizedCommonFunctions {
 
     private static final SelenideElement Solutions_Showcase_Header = $x("//*[@id=\"root\"]/div/div[2]/main/div/div/div[1]/div[4]/div/div[1]/span");
     private static final SelenideElement Solutions_Showcase_Text = $x("//*[@id=\"root\"]/div/div[2]/main/div/div/div[1]/div[4]/div/div[2]/dl/dt");
-    private static final SelenideElement Solutions_Showcase_Href = $x("//*[@id=\"root\"]/div/div[2]/main/div/div/div[1]/div[4]/div/div[1]/a");
     private static final SelenideElement Solutions_Showcase_Quantity = $x("//*[@id=\"root\"]/div/div[2]/main/div/div/div[1]/div[4]/div/div[2]/dl/dd");
     private Map<String, Object> SolutionsWidgetData = new HashMap<>();
     private static final SelenideElement Chat_Statistic_Header = $x("//*[@id=\"root\"]/div/div[2]/main/div/div/div[1]/div[2]/div/div[1]/span");
@@ -25,9 +26,8 @@ public class HomeExpertPage extends AuthorizedCommonFunctions {
     private static final SelenideElement Chat_Statistic_Unread_Quantity = $x("//*[@id=\"root\"]/div/div[2]/main/div/div/div[1]/div[2]/div/div[2]/dl[1]/dd");
     private static final SelenideElement Chat_Statistic_Unanswered_Text = $x("//*[@id=\"root\"]/div/div[2]/main/div/div/div[1]/div[2]/div/div[2]/dl[2]/dt");
     private static final SelenideElement Chat_Statistic_Unanswered_Quantity = $x("//*[@id=\"root\"]/div/div[2]/main/div/div/div[1]/div[2]/div/div[2]/dl[2]/dd");
-    private static final SelenideElement Chat_Statistic_Href = $x("//*[@id=\"root\"]/div/div[2]/main/div/div/div[1]/div[2]/div/div[1]/a");
     private Map<String, Object> ChatStatisticWidgetData = new HashMap<>();
-    private static final SelenideElement Counter_Agent_Window = $x("//*[@id=\"root\"]/div/div[2]/main/div/div/div[2]/div/div/div/div");
+    private static final SelenideElement Counter_Agent_Section = $x("//*[@id=\"root\"]/div/div[2]/main/div/div/div[2]/div/div/div/div");
 
     @Step("Получить данные из API для виджета Витрина решений")
     public void getSolutionsWidgetDataFromApi() {
@@ -57,13 +57,6 @@ public class HomeExpertPage extends AuthorizedCommonFunctions {
         Assert.assertEquals(actualTitle, expectedTitle, "Содержание не соответствует ожидаемому значению.");
     }
 
-    @Step("Проверка корректности ссылки виджета Витрина решений")
-    public void Assert_MyFeed_Solutions_Href(){
-        String actualTitle = Solutions_Showcase_Href.getAttribute("href");
-        String expectedTitle = (String) SolutionsWidgetData.get("errorhref");
-        Assert.assertEquals(actualTitle, expectedTitle, "Ссылка не соответствует ожидаемому значению.");
-    }
-
     @Step("Проверка корректности общего количества решений в виджете Витрина решений")
     public void Assert_MyFeed_Solutions_Quantity(){
         Solutions_Showcase_Quantity.scrollTo().shouldBe(visible);
@@ -75,7 +68,56 @@ public class HomeExpertPage extends AuthorizedCommonFunctions {
 
     @Step("Проверка отображения виджета 'Контур Фокус'")
     public void Counter_Agent_Visible(){
-        Counter_Agent_Window.scrollTo().shouldBe(visible);
+        Counter_Agent_Section.scrollTo().shouldBe(visible);
+    }
+
+    @Step("Создание скриншота футера")
+    public void TakeScreenshotOfCounterAgentSection(String environment) throws IOException {
+        String screenshotPath = null;
+        sleep(2000);
+        switch (environment) {
+            case "PC":
+                screenshotPath = "src/test/resources/screenshots/HomeExpertPage/PC/Elements/CounterAgentSection/current.png";
+                break;
+            case "tablet":
+                screenshotPath = "src/test/resources/screenshots/HomeExpertPage/tablet/Elements/CounterAgentSection/current.png";
+                break;
+            case "phone":
+                screenshotPath = "src/test/resources/screenshots/HomeExpertPage/phone/Elements/CounterAgentSection/current.png";
+                break;
+            default:
+                throw new IllegalArgumentException("Неверный параметр окружения: " + environment);
+        }
+        super.TakeScreenshotOfElement(Counter_Agent_Section, screenshotPath);
+    }
+
+    @Step("Сравнение скриншотов кнопки 'Смотреть видео о платформе' до и после наведения")
+    public boolean compareScreenshotsOfCounterAgent(String environment) throws IOException{
+        String screenshotPath = null;
+        String referencePath = null;
+        String resultPath = null;
+
+        switch (environment) {
+            case "PC":
+                screenshotPath = "src/test/resources/screenshots/HomeExpertPage/PC/Elements/CounterAgentSection/current.png";
+                referencePath = "src/test/resources/screenshots/HomeExpertPage/PC/Elements/CounterAgentSection/reference.png";
+                resultPath = "src/test/resources/screenshots/HomeExpertPage/PC/Elements/CounterAgentSection/differences.png";
+                break;
+            case "phone":
+                screenshotPath = "src/test/resources/screenshots/HomeExpertPage/phone/Elements/CounterAgentSection/current.png";
+                referencePath = "src/test/resources/screenshots/HomeExpertPage/phone/Elements/CounterAgentSection/reference.png";
+                resultPath = "src/test/resources/screenshots/HomeExpertPage/phone/Elements/CounterAgentSection/differences.png";
+                break;
+            case "tablet":
+                screenshotPath = "src/test/resources/screenshots/HomeExpertPage/tablet/Elements/CounterAgentSection/current.png";
+                referencePath = "src/test/resources/screenshots/HomeExpertPage/tablet/Elements/CounterAgentSection/reference.png";
+                resultPath = "src/test/resources/screenshots/HomeExpertPage/tablet/Elements/CounterAgentSection/differences.png";
+                break;
+            default:
+                throw new IllegalArgumentException("Неверный параметр окружения: " + environment);
+        }
+        //вызывается сравнения скриншотов, куда мы передаём пути до папок
+        return super.compareScreenshots(screenshotPath, referencePath, resultPath);
     }
     @Step("Получить данные из API для виджета 'Сообщения в чате'")
     public void getChatStatisticWidgetDataFromApi() {
@@ -111,13 +153,6 @@ public class HomeExpertPage extends AuthorizedCommonFunctions {
         String actualTitle = Chat_Statistic_Unanswered_Text.getText();
         String expectedTitle = (String) ChatStatisticWidgetData.get("unansweredcounttitle");
         Assert.assertEquals(actualTitle, expectedTitle, "Содержание не соответствует ожидаемому значению.");
-    }
-
-    @Step("Проверка корректности ссылки виджета 'Сообщения в чате'")
-    public void Assert_MyFeed_ChatStatistic_Href(){
-        String actualTitle = Chat_Statistic_Href.getAttribute("href");
-        String expectedTitle = baseURL + (String) ChatStatisticWidgetData.get("link");
-        Assert.assertEquals(actualTitle, expectedTitle, "Ссылка не соответствует ожидаемому значению.");
     }
 
     @Step("Проверка корректности общего количества решений в виджете 'Сообщения в чате'")

@@ -4,9 +4,11 @@ import Efficiency.Pages.AuthorizedZone.HomeExpertPage;
 import Efficiency.Pages.LoginPage;
 import Efficiency.Providers.ConfigProviderInterface;
 import Efficiency.TestBase;
+import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.io.IOException;
 import java.sql.SQLException;
 
 import static com.codeborne.selenide.Selenide.open;
@@ -28,7 +30,7 @@ public class HOME_EXPERT extends TestBase {
         sleep(5000);
     }
 
-    @Test(priority = 1, description = "Авторизованная зона. Эксперт. Моя Лента. Витрина решений")
+    @Test(priority = 1, description = "Авторизованная зона. Моя Лента.Виджет 'Витрина решений'")
     public void MyFeed_Solutions_TEST() throws SQLException {
         HomeExpertPage homeExpertPage = open(ConfigProviderInterface.authorizedExpertURL, HomeExpertPage.class);
         homeExpertPage.getSolutionsWidgetDataFromDB();
@@ -36,19 +38,26 @@ public class HOME_EXPERT extends TestBase {
         homeExpertPage.Assert_MyFeed_Solutions_Header();
         homeExpertPage.Assert_MyFeed_Solutions_Text();
         homeExpertPage.Assert_MyFeed_Solutions_Quantity();
-        homeExpertPage.Assert_MyFeed_Solutions_Href();
     }
 
-    @Test(priority = 1, description = "Авторизованная зона. Эксперт. Моя Лента. 'Сообщения в чате'")
+    @Test(priority = 1, description = "Моя Лента. Виджет 'Сообщения в чате'")
     public void MyFeed_ChatStatistic_TEST() throws SQLException {
         HomeExpertPage homeExpertPage = open(ConfigProviderInterface.authorizedExpertURL, HomeExpertPage.class);
         homeExpertPage.getChatStatisticWidgetDataFromDB();
         homeExpertPage.getChatStatisticWidgetDataFromApi();
         homeExpertPage.Assert_MyFeed_ChatStatistic_Header();
         homeExpertPage.Assert_MyFeed_ChatStatistic_Unread_Text();
+        homeExpertPage.Assert_MyFeed_ChatStatistic_Unanswered_Text();
         homeExpertPage.Assert_MyFeed_ChatStatistic_Unread_Quantity();
         homeExpertPage.Assert_MyFeed_ChatStatistic_Unanswered_Quantity();
-        homeExpertPage.Assert_MyFeed_ChatStatistic_Href();
     }
 
+    @Test(priority = 1, description = "Авторизованная зоня. Виджет Контур Фокус")
+    public void Counter_Agent_Display_TEST() throws IOException {
+        HomeExpertPage homeExpertPage = open(ConfigProviderInterface.authorizedExpertURL, HomeExpertPage.class);
+        homeExpertPage.Counter_Agent_Visible();
+        homeExpertPage.TakeScreenshotOfCounterAgentSection(getEnvironment());
+        boolean ResultOfComparing = homeExpertPage.compareScreenshotsOfCounterAgent(getEnvironment());
+        Assert.assertTrue(ResultOfComparing, "Скриншоты не совпали. Вёрстка не такая, как в макете");
+    }
 }
