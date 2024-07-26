@@ -51,7 +51,7 @@ public class HOME_ENTERPRISE extends TestBase {
         homeEnterprisePage.Assert_MyFeed_RecommendedQuestionnaires_Text();
     }
 
-    @Test(priority = 3, description = "Авторизованная зона. Предприятие. Моя Лента. Бенчмаркинг")
+    @Test(priority = 3, description = "Авторизованная зона. Предприятие. Моя Лента. Бенчмаркинг", enabled = false)
     public void MyFeed_Benchmarking_TEST() throws SQLException {
         HomeEnterprisePage homeEnterprisePage = open(ConfigProviderInterface.authorizedEnterpriseURL, HomeEnterprisePage.class);
         homeEnterprisePage.getBenchmarkingWidgetDataFromDB();
@@ -61,6 +61,17 @@ public class HOME_ENTERPRISE extends TestBase {
         homeEnterprisePage.Assert_MyFeed_Benchmarking_companiesCount();
         homeEnterprisePage.Assert_MyFeed_Benchmarking_companiesByOkvedCount();
 //        homeEnterprisePage.Assert_MyFeed_Benchmarking_Href();
+
+    }
+
+    @Test(priority = 4, description = "Авторизованная зона. Предприятие. Моя Лента. Витрина Решений")
+    public void MyFeed_SolutionShowcase_TEST() throws SQLException {
+        HomeEnterprisePage homeEnterprisePage = open(ConfigProviderInterface.authorizedEnterpriseURL, HomeEnterprisePage.class);
+       homeEnterprisePage.getSolutionShowcaseWidgetDataFromApi();
+       homeEnterprisePage.getSolutionShowcaseWidgetDataFromDB();
+       homeEnterprisePage.Assert_MyFeed_SolutionShowcase_Header();
+       homeEnterprisePage.Assert_MyFeed_SolutionShowcase_Text();
+       homeEnterprisePage.Assert_MyFeed_SolutionShowcase_Count();
 
     }
 

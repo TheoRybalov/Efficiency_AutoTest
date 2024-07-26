@@ -61,6 +61,14 @@ public class HomeEnterprisePage extends AuthorizedCommonFunctions {
     private static final SelenideElement MyFeed_Benchmarking_href = $x("//*[@id=\"root\"]/div/div[2]/main/div/div/div/div[2]/div[2]/div[2]/div[3]/div/div[1]/a");
     private Map<String, Object> BenchmarkingWidgetData = new HashMap<>();
 
+
+    //Виджет Бенчмаркинг
+    private static final SelenideElement MyFeed_SolutionShowcase_Header = $x("//*[@id=\"root\"]/div/div[2]/main/div/div/div/div[2]/div[2]/div[2]/div[4]/div/div[1]/span");
+    private static final SelenideElement MyFeed_SolutionShowcase_Text = $x("//*[@id=\"root\"]/div/div[2]/main/div/div/div/div[2]/div[2]/div[2]/div[4]/div/div[2]/dl/dt");
+    private static final SelenideElement MyFeed_SolutionShowcase_Count = $x("//*[@id=\"root\"]/div/div[2]/main/div/div/div/div[2]/div[2]/div[2]/div[4]/div/div[2]/dl/dd");
+    private static final SelenideElement MyFeed_SolutionShowcase_href = $x("//*[@id=\"root\"]/div/div[2]/main/div/div/div/div[2]/div[2]/div[2]/div[4]/div/div[1]/a");
+    private Map<String, Object> SolutionShowcaseWidgetData = new HashMap<>();
+
     @Step("Получить данные из API для виджета диагностика")
     public void getDiagnosticWidgetDataFromApi() {
         Map<String, Object> apiData = super.getMyFeedWidgetDataFromApi("https://aksis.dev.qsupport.ru/onboarding/api/DiagnosticsWidget/GetDiagnostics");
@@ -214,10 +222,6 @@ public class HomeEnterprisePage extends AuthorizedCommonFunctions {
     public void getBenchmarkingWidgetDataFromApi() {
         Map<String, Object> apiData = super.getMyFeedWidgetDataFromApi("https://aksis.dev.qsupport.ru/onboarding/api/BenchmarksWidget/GetBenchmarks");
         BenchmarkingWidgetData.putAll(apiData);
-        for (String key : BenchmarkingWidgetData.keySet()) {
-            Object value = BenchmarkingWidgetData.get(key);
-            System.out.println("Key: " + key + ", Value: " + value);
-        }
 
     }
 
@@ -225,10 +229,6 @@ public class HomeEnterprisePage extends AuthorizedCommonFunctions {
     public void getBenchmarkingWidgetDataFromDB() throws SQLException {
         Map<String, Object> dbData = super.getDataFromDB("public.content_30766", "741574");
         BenchmarkingWidgetData.putAll(dbData);
-        for (String key : BenchmarkingWidgetData.keySet()) {
-            Object value = BenchmarkingWidgetData.get(key);
-            System.out.println("Key: " + key + ", Value: " + value);
-        }
     }
 
 
@@ -274,12 +274,68 @@ public class HomeEnterprisePage extends AuthorizedCommonFunctions {
 
     }
 
-    @Step("Проверка корректности ссылки виджета Диагностика")
+    @Step("Проверка корректности ссылки виджета Бенчмаркинг")
     public void Assert_MyFeed_Benchmarking_Href(){
         String actualTitle = MyFeed_Benchmarking_href.getAttribute("href");
         String expectedTitle = (String) DiagnosticsWidgetData.get("errorhref");
         Assert.assertEquals(actualTitle, expectedTitle, "Ссылка не соответствует ожидаемому значению.");
     }
+
+
+    @Step("Получить данные из API для виджета Витрина решений")
+    public void getSolutionShowcaseWidgetDataFromApi() {
+        Map<String, Object> apiData = super.getMyFeedWidgetDataFromApi("https://aksis.dev.qsupport.ru/onboarding/api/SolutionsShowcaseWidget/GetSolutionsShowcase");
+        SolutionShowcaseWidgetData.putAll(apiData);
+
+//        for (String key : SolutionShowcaseWidgetData.keySet()) {
+//            Object value = SolutionShowcaseWidgetData.get(key);
+//            System.out.println(key + " " + value);
+//        }
+
+    }
+
+    @Step("Получить информацию о виджете Витрина решений из базы данных")
+    public void getSolutionShowcaseWidgetDataFromDB() throws SQLException {
+        Map<String, Object> dbData = super.getDataFromDB("public.content_30771", "741586");
+        SolutionShowcaseWidgetData.putAll(dbData);
+
+    }
+
+
+    @Step("Проверка корректности заголовка виджета Витрина решений")
+    public void Assert_MyFeed_SolutionShowcase_Header(){
+        MyFeed_SolutionShowcase_Header.scrollTo().shouldBe(visible);
+        String actualTitle = MyFeed_SolutionShowcase_Header.getText();
+        String expectedTitle = (String) SolutionShowcaseWidgetData.get("title");
+        Assert.assertEquals(actualTitle, expectedTitle, "Заголовок не соответствует ожидаемому значению.");
+    }
+
+
+    @Step("Проверка корректности текста внутри виджета Витрина решений")
+    public void Assert_MyFeed_SolutionShowcase_Text(){
+        MyFeed_SolutionShowcase_Text.scrollTo().shouldBe(visible);
+        String actualTitle1 = MyFeed_SolutionShowcase_Text.getText();
+        String expectedTitle1 = (String) SolutionShowcaseWidgetData.get("text");
+        Assert.assertEquals(actualTitle1, expectedTitle1, "Текст внутри виджета не соответсвует ожидаемому значению");
+    }
+
+
+    @Step("Проверка корректности отображения количества решений внутри виджета Витрина решений")
+    public void Assert_MyFeed_SolutionShowcase_Count(){
+        MyFeed_SolutionShowcase_Count.scrollTo().shouldBe(visible);
+        int actualCompaniesCount = Integer.parseInt(MyFeed_SolutionShowcase_Count.getText());
+        int expectedCompaniesCount = (Integer) SolutionShowcaseWidgetData.get("totalCount");
+        Assert.assertEquals(actualCompaniesCount, expectedCompaniesCount, "Количество решений не соответсвует ожидаемому значению");
+
+    }
+
+    @Step("Проверка корректности ссылки виджета Витрина решений")
+    public void Assert_MyFeed_SolutionShowcase_Href(){
+        String actualTitle = MyFeed_SolutionShowcase_href.getAttribute("href");
+        String expectedTitle = (String) SolutionShowcaseWidgetData.get("errorhref");
+        Assert.assertEquals(actualTitle, expectedTitle, "Ссылка не соответствует ожидаемому значению.");
+    }
+
 
 
 
