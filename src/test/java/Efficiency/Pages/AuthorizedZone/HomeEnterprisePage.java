@@ -51,6 +51,16 @@ public class HomeEnterprisePage extends AuthorizedCommonFunctions {
     private static final SelenideElement MyFeed_RecommendedQuestionnaires_Duration = $x("//*[@id=\"root\"]/div/div[2]/main/div/div/div/div[2]/div[2]/div[2]/div[2]/div/div[2]/div/div[3]/p");
     private Map<String, Object> RecommendedQuestionnairesWidgetData = new HashMap<>();
 
+
+    //Виджет Бенчмаркинг
+    private static final SelenideElement MyFeed_Benchmarking_Header = $x("//*[@id=\"root\"]/div/div[2]/main/div/div/div/div[2]/div[2]/div[2]/div[3]/div/div[1]/span");
+    private static final SelenideElement MyFeed_Benchmarking_companiesCount = $x("//*[@id=\"root\"]/div/div[2]/main/div/div/div/div[2]/div[2]/div[2]/div[3]/div/div[2]/dl[1]/dd");
+    private static final SelenideElement MyFeed_Benchmarking_companiesByOkvedCount = $x("//*[@id=\"root\"]/div/div[2]/main/div/div/div/div[2]/div[2]/div[2]/div[3]/div/div[2]/dl[2]/dd");
+    private static final SelenideElement MyFeed_Benchmarking_countText = $x("//*[@id=\"root\"]/div/div[2]/main/div/div/div/div[2]/div[2]/div[2]/div[3]/div/div[2]/dl[1]/dt");
+    private static final SelenideElement MyFeed_Benchmarking_companiesbyokvedcountText = $x("//*[@id=\"root\"]/div/div[2]/main/div/div/div/div[2]/div[2]/div[2]/div[3]/div/div[2]/dl[2]/dt");
+    private static final SelenideElement MyFeed_Benchmarking_href = $x("//*[@id=\"root\"]/div/div[2]/main/div/div/div/div[2]/div[2]/div[2]/div[3]/div/div[1]/a");
+    private Map<String, Object> BenchmarkingWidgetData = new HashMap<>();
+
     @Step("Получить данные из API для виджета диагностика")
     public void getDiagnosticWidgetDataFromApi() {
         Map<String, Object> apiData = super.getMyFeedWidgetDataFromApi("https://aksis.dev.qsupport.ru/onboarding/api/DiagnosticsWidget/GetDiagnostics");
@@ -197,6 +207,84 @@ public class HomeEnterprisePage extends AuthorizedCommonFunctions {
         Assert.assertEquals(duration, expectedDuration, "Время не совпало");
 
     }
+
+
+
+    @Step("Получить данные из API для виджета Бенчмаркинг")
+    public void getBenchmarkingWidgetDataFromApi() {
+        Map<String, Object> apiData = super.getMyFeedWidgetDataFromApi("https://aksis.dev.qsupport.ru/onboarding/api/BenchmarksWidget/GetBenchmarks");
+        BenchmarkingWidgetData.putAll(apiData);
+        for (String key : BenchmarkingWidgetData.keySet()) {
+            Object value = BenchmarkingWidgetData.get(key);
+            System.out.println("Key: " + key + ", Value: " + value);
+        }
+
+    }
+
+    @Step("Получить информацию о виджете Бенчмаркинг из базы данных")
+    public void getBenchmarkingWidgetDataFromDB() throws SQLException {
+        Map<String, Object> dbData = super.getDataFromDB("public.content_30766", "741574");
+        BenchmarkingWidgetData.putAll(dbData);
+        for (String key : BenchmarkingWidgetData.keySet()) {
+            Object value = BenchmarkingWidgetData.get(key);
+            System.out.println("Key: " + key + ", Value: " + value);
+        }
+    }
+
+
+    @Step("Проверка корректности заголовка виджета Бенчмаркинг")
+    public void Assert_MyFeed_Benchmarking_Header(){
+        MyFeed_Benchmarking_Header.scrollTo().shouldBe(visible);
+        String actualTitle = MyFeed_Benchmarking_Header.getText();
+        String expectedTitle = (String) BenchmarkingWidgetData.get("title");
+        Assert.assertEquals(actualTitle, expectedTitle, "Заголовок не соответствует ожидаемому значению.");
+    }
+
+
+    @Step("Проверка корректности текста внутри виджета Бенчмаркинг")
+    public void Assert_MyFeed_Benchmarking_Text(){
+        MyFeed_Benchmarking_countText.scrollTo().shouldBe(visible);
+        String actualTitle1 = MyFeed_Benchmarking_countText.getText();
+        String expectedTitle1 = (String) BenchmarkingWidgetData.get("companiescounttext");
+        Assert.assertEquals(actualTitle1, expectedTitle1, "Текст первого абзаца не соответсвует ожидаемому значению");
+
+        MyFeed_Benchmarking_companiesbyokvedcountText.scrollTo().shouldBe(visible);
+        String actualTitle2 = MyFeed_Benchmarking_companiesbyokvedcountText.getText();
+        String expectedTitle2 = (String) BenchmarkingWidgetData.get("companiesbyokvedcounttext");
+        Assert.assertEquals(actualTitle2, expectedTitle2, "Текст второго абзаца не соответсвует ожидаемому значению");
+    }
+
+
+    @Step("Проверка корректности отображения общего количества предприятий внутри виджета Бенчмаркинг")
+    public void Assert_MyFeed_Benchmarking_companiesCount(){
+        MyFeed_Benchmarking_companiesCount.scrollTo().shouldBe(visible);
+        int actualCompaniesCount = Integer.parseInt(MyFeed_Benchmarking_companiesCount.getText().replace(" ", ""));
+        int expectedCompaniesCount = (Integer) BenchmarkingWidgetData.get("companiesCount");
+        Assert.assertEquals(actualCompaniesCount, expectedCompaniesCount, "Общее количество предприятий не соответсвует ожидаемому значению");
+
+    }
+
+
+    @Step("Проверка корректности отображения общего количества предприятий из вашей отрасли внутри виджета Бенчмаркинг")
+    public void Assert_MyFeed_Benchmarking_companiesByOkvedCount(){
+        MyFeed_Benchmarking_companiesByOkvedCount.scrollTo().shouldBe(visible);
+        int actualCompaniesCount = Integer.parseInt(MyFeed_Benchmarking_companiesByOkvedCount.getText().replace(" ", ""));
+        int expectedCompaniesCount = (Integer) BenchmarkingWidgetData.get("companiesByOkvedCount");
+        Assert.assertEquals(actualCompaniesCount, expectedCompaniesCount, "Общее количество предприятий из вашей отрасли не соответсвует ожидаемому значению");
+
+    }
+
+    @Step("Проверка корректности ссылки виджета Диагностика")
+    public void Assert_MyFeed_Benchmarking_Href(){
+        String actualTitle = MyFeed_Benchmarking_href.getAttribute("href");
+        String expectedTitle = (String) DiagnosticsWidgetData.get("errorhref");
+        Assert.assertEquals(actualTitle, expectedTitle, "Ссылка не соответствует ожидаемому значению.");
+    }
+
+
+
+
+
 
 
 

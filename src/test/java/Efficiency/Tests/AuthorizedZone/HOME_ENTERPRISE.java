@@ -40,7 +40,7 @@ public class HOME_ENTERPRISE extends TestBase {
 //        homeEnterprisePage.Assert_MyFeed_Diagnostics_Href();
     }
 
-    @Test(priority = 1, description = "Авторизованная зона. Предприятие. Моя Лента. Рекомендуемые анкеты")
+    @Test(priority = 2, description = "Авторизованная зона. Предприятие. Моя Лента. Рекомендуемые анкеты",enabled = false)
     public void MyFeed_RecommendedQuestionnaires_TEST() throws SQLException {
         HomeEnterprisePage homeEnterprisePage = open(ConfigProviderInterface.authorizedEnterpriseURL, HomeEnterprisePage.class);
         homeEnterprisePage.getRecommendedQuestionnairesWidgetDataFromApi();
@@ -49,6 +49,19 @@ public class HOME_ENTERPRISE extends TestBase {
         homeEnterprisePage.Assert_MyFeed_RecommendedQuestionnaires_Questions();
         homeEnterprisePage.Assert_MyFeed_RecommendedQuestionnaires_Duration();
         homeEnterprisePage.Assert_MyFeed_RecommendedQuestionnaires_Text();
+    }
+
+    @Test(priority = 3, description = "Авторизованная зона. Предприятие. Моя Лента. Бенчмаркинг")
+    public void MyFeed_Benchmarking_TEST() throws SQLException {
+        HomeEnterprisePage homeEnterprisePage = open(ConfigProviderInterface.authorizedEnterpriseURL, HomeEnterprisePage.class);
+        homeEnterprisePage.getBenchmarkingWidgetDataFromDB();
+        homeEnterprisePage.getBenchmarkingWidgetDataFromApi();
+        homeEnterprisePage.Assert_MyFeed_Benchmarking_Header();
+        homeEnterprisePage.Assert_MyFeed_Benchmarking_Text();
+        homeEnterprisePage.Assert_MyFeed_Benchmarking_companiesCount();
+        homeEnterprisePage.Assert_MyFeed_Benchmarking_companiesByOkvedCount();
+//        homeEnterprisePage.Assert_MyFeed_Benchmarking_Href();
+
     }
 
 }
