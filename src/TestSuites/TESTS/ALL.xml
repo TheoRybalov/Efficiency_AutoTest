@@ -382,48 +382,76 @@
 <!--    </test>-->
 
 
-<!--    <test name="AUTHORIZED_ZONE_HOME_ENTERPRISE_PC">-->
-<!--        <parameter name="environment" value="PC"/>-->
-<!--        <parameter name="browser" value="chrome"/>-->
-<!--        <parameter name="mode" value=""/>-->
-<!--        <classes>-->
-<!--            <class name="Efficiency.Tests.AuthorizedZone.HOME_ENTERPRISE"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-
-    <test name="AUTHORIZED_ZONE_HOME_EXPERT_PC">
+    <test name="AUTHORIZED_ZONE_HOME_ENTERPRISE_PC">
         <parameter name="environment" value="PC"/>
         <parameter name="browser" value="chrome"/>
         <parameter name="mode" value=""/>
         <classes>
-            <class name="Efficiency.Tests.AuthorizedZone.HOME_EXPERT"/>
+            <class name="Efficiency.Tests.AuthorizedZone.HOME_ENTERPRISE"/>
         </classes>
     </test>
 
-    <test name="AUTHORIZED_ZONE_HOME_TABLET">
+    <test name="AUTHORIZED_ZONE_HOME_ENTERPRISE_TABLET">
         <parameter name="environment" value="tablet"/>
         <parameter name="browser" value="chrome"/>
         <parameter name="mode" value="headless"/>
         <classes>
-            <class name="Efficiency.Tests.AuthorizedZone.HOME_EXPERT">
+            <class name="Efficiency.Tests.AuthorizedZone.HOME_ENTERPRISE">
                 <methods>
-                    <include name="Counter_Agent_Display_TEST"/>
+                    <include name="MyFeed_HTML_Widget_First_Counterparty_TEST"/>
+                    <include name="MyFeed_HTML_Widget_Second_Counterparty_TEST"/>
                 </methods>
             </class>
         </classes>
     </test>
 
-    <test name="AUTHORIZED_ZONE_HOME_PHONE">
+    <test name="AUTHORIZED_ZONE_HOME_ENTERPRISE_PHONE">
         <parameter name="environment" value="phone"/>
         <parameter name="browser" value="chrome"/>
         <parameter name="mode" value="headless"/>
         <classes>
-            <class name="Efficiency.Tests.AuthorizedZone.HOME_EXPERT">
+            <class name="Efficiency.Tests.AuthorizedZone.HOME_ENTERPRISE">
                 <methods>
-                    <include name="Counter_Agent_Display_TEST"/>
+                    <include name="MyFeed_HTML_Widget_First_Counterparty_TEST"/>
+                    <include name="MyFeed_HTML_Widget_Second_Counterparty_TEST"/>
                 </methods>
             </class>
         </classes>
     </test>
+
+<!--    <test name="AUTHORIZED_ZONE_HOME_EXPERT_PC">-->
+<!--        <parameter name="environment" value="PC"/>-->
+<!--        <parameter name="browser" value="chrome"/>-->
+<!--        <parameter name="mode" value=""/>-->
+<!--        <classes>-->
+<!--            <class name="Efficiency.Tests.AuthorizedZone.HOME_EXPERT"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+
+<!--    <test name="AUTHORIZED_ZONE_HOME_TABLET">-->
+<!--        <parameter name="environment" value="tablet"/>-->
+<!--        <parameter name="browser" value="chrome"/>-->
+<!--        <parameter name="mode" value="headless"/>-->
+<!--        <classes>-->
+<!--            <class name="Efficiency.Tests.AuthorizedZone.HOME_EXPERT">-->
+<!--                <methods>-->
+<!--                    <include name="Counter_Agent_Display_TEST"/>-->
+<!--                </methods>-->
+<!--            </class>-->
+<!--        </classes>-->
+<!--    </test>-->
+
+<!--    <test name="AUTHORIZED_ZONE_HOME_PHONE">-->
+<!--        <parameter name="environment" value="phone"/>-->
+<!--        <parameter name="browser" value="chrome"/>-->
+<!--        <parameter name="mode" value="headless"/>-->
+<!--        <classes>-->
+<!--            <class name="Efficiency.Tests.AuthorizedZone.HOME_EXPERT">-->
+<!--                <methods>-->
+<!--                    <include name="Counter_Agent_Display_TEST"/>-->
+<!--                </methods>-->
+<!--            </class>-->
+<!--        </classes>-->
+<!--    </test>-->
 
 </suite>

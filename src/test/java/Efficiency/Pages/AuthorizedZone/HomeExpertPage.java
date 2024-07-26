@@ -17,16 +17,21 @@ import static com.codeborne.selenide.Selenide.sleep;
 
 public class HomeExpertPage extends AuthorizedCommonFunctions {
 
+    //Виджет "Витрина решений"
     private static final SelenideElement Solutions_Showcase_Header = $x("//*[@id=\"root\"]/div/div[2]/main/div/div/div[1]/div[4]/div/div[1]/span");
     private static final SelenideElement Solutions_Showcase_Text = $x("//*[@id=\"root\"]/div/div[2]/main/div/div/div[1]/div[4]/div/div[2]/dl/dt");
     private static final SelenideElement Solutions_Showcase_Quantity = $x("//*[@id=\"root\"]/div/div[2]/main/div/div/div[1]/div[4]/div/div[2]/dl/dd");
     private Map<String, Object> SolutionsWidgetData = new HashMap<>();
+
+    //Виджет общее количество чатов
     private static final SelenideElement Chat_Statistic_Header = $x("//*[@id=\"root\"]/div/div[2]/main/div/div/div[1]/div[2]/div/div[1]/span");
     private static final SelenideElement Chat_Statistic_Unread_Text = $x("//*[@id=\"root\"]/div/div[2]/main/div/div/div[1]/div[2]/div/div[2]/dl[1]/dt");
     private static final SelenideElement Chat_Statistic_Unread_Quantity = $x("//*[@id=\"root\"]/div/div[2]/main/div/div/div[1]/div[2]/div/div[2]/dl[1]/dd");
     private static final SelenideElement Chat_Statistic_Unanswered_Text = $x("//*[@id=\"root\"]/div/div[2]/main/div/div/div[1]/div[2]/div/div[2]/dl[2]/dt");
     private static final SelenideElement Chat_Statistic_Unanswered_Quantity = $x("//*[@id=\"root\"]/div/div[2]/main/div/div/div[1]/div[2]/div/div[2]/dl[2]/dd");
     private Map<String, Object> ChatStatisticWidgetData = new HashMap<>();
+
+    //Виджет Контур Фокус
     private static final SelenideElement Counter_Agent_Section = $x("//*[@id=\"root\"]/div/div[2]/main/div/div/div[2]/div/div/div/div");
 
     @Step("Получить данные из API для виджета Витрина решений")
@@ -71,7 +76,7 @@ public class HomeExpertPage extends AuthorizedCommonFunctions {
         Counter_Agent_Section.scrollTo().shouldBe(visible);
     }
 
-    @Step("Создание скриншота футера")
+    @Step("Создание скриншота 'Контур Фокус'")
     public void TakeScreenshotOfCounterAgentSection(String environment) throws IOException {
         String screenshotPath = null;
         sleep(2000);
@@ -91,7 +96,7 @@ public class HomeExpertPage extends AuthorizedCommonFunctions {
         super.TakeScreenshotOfElement(Counter_Agent_Section, screenshotPath);
     }
 
-    @Step("Сравнение скриншотов кнопки 'Смотреть видео о платформе' до и после наведения")
+    @Step("Сравнение скриншотов виджета Контур Фокус")
     public boolean compareScreenshotsOfCounterAgent(String environment) throws IOException{
         String screenshotPath = null;
         String referencePath = null;

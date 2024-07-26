@@ -97,4 +97,5 @@ public class HOME_ENTERPRISE extends TestBase {
         homeEnterprisePage.compareScreenshotsOfCounterpartyWidget2(getEnvironment());
     }
 
+
 }

@@ -2,7 +2,9 @@ package Efficiency.Pages.AuthorizedZone;
 
 import Efficiency.AuthorizedCommonFunctions;
 import com.codeborne.selenide.SelenideElement;
+import com.codeborne.selenide.WebDriverRunner;
 import io.qameta.allure.Step;
+import org.openqa.selenium.JavascriptExecutor;
 import org.testng.Assert;
 
 import java.io.IOException;
@@ -81,6 +83,12 @@ public class HomeEnterprisePage extends AuthorizedCommonFunctions {
 
     //Виджет контрагента 2
     private static final SelenideElement HTML_Widget_Counterparty_2 = $x("//*[@id=\"root\"]/div/div[2]/main/div/div/div/div[2]/div[2]/div[3]/div/div/div[1]/div[2]");
+
+    //Блок со столбцами из 'Проекты с Экспертной поддержкой'
+    private static final SelenideElement Elemental_Support_Column_1 = $x("//*[@id=\"root\"]/div/div[2]/main/div/div/div/div[2]/div[2]/div[3]/div/div/div[3]/div/div/div[1]");
+    private static final SelenideElement Elemental_Support_Column_2 = $x("//*[@id=\"root\"]/div/div[2]/main/div/div/div/div[2]/div[2]/div[3]/div/div/div[3]/div/div/div[2]");
+    private static final SelenideElement Elemental_Support_Column_3 = $x("//*[@id=\"root\"]/div/div[2]/main/div/div/div/div[2]/div[2]/div[3]/div/div/div[3]/div/div/div[3]");
+    private static final SelenideElement Elemental_Support_Column_4 = $x("//*[@id=\"root\"]/div/div[2]/main/div/div/div/div[2]/div[2]/div[3]/div/div/div[3]/div/div/div[4]");
 
     @Step("Получить данные из API для виджета диагностика")
     public void getDiagnosticWidgetDataFromApi() {
@@ -377,17 +385,26 @@ public class HomeEnterprisePage extends AuthorizedCommonFunctions {
     @Step("Создание скриншота виджета первого контрагента")
     public void TakeScreenshotOfCounterpartyWidget1(String environment) throws IOException {
         HTML_Widget_Counterparty_1.scrollTo().shouldBe(visible);
+        JavascriptExecutor js = (JavascriptExecutor) WebDriverRunner.getWebDriver();
+        js.executeScript("document.querySelector('#layout-header').style.display = 'none';");
         String screenshotPath = null;
         switch (environment) {
             case "PC":
-                //Если мы получаем скриншот в кофигурации ПК, то сохранение будет идти в эту папку
                 screenshotPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/PC/Elements/CounterpartyWidget1/current.png";
+                break;
+            case "tablet":
+                screenshotPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/tablet/Elements/CounterpartyWidget1/current.png";
+                break;
+            case "phone":
+                //Если мы получаем скриншот в кофигурации ПК, то сохранение будет идти в эту папку
+                screenshotPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/phone/Elements/CounterpartyWidget1/current.png";
                 break;
             default:
                 throw new IllegalArgumentException("Неверный параметр окружения: " + environment);
         }
         //вызывается метод создания и сохранения такого скриншота, куда мы передаём путь до папки
         super.TakeScreenshotOfElement(HTML_Widget_Counterparty_1, screenshotPath);
+        js.executeScript("document.querySelector('#layout-header').style.display = 'block';");
     }
 
     @Step("Сравнение скриншотов виджета первого контрагента")
@@ -403,6 +420,16 @@ public class HomeEnterprisePage extends AuthorizedCommonFunctions {
                 referencePath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/PC/Elements/CounterpartyWidget1/reference.png";
                 resultPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/PC/Elements/CounterpartyWidget1/difference.png";
                 break;
+            case "phone":
+                screenshotPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/phone/Elements/CounterpartyWidget1/current.png";
+                referencePath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/phone/Elements/CounterpartyWidget1/reference.png";
+                resultPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/phone/Elements/CounterpartyWidget1/difference.png";
+                break;
+            case "tablet":
+                screenshotPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/tablet/Elements/CounterpartyWidget1/current.png";
+                referencePath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/tablet/Elements/CounterpartyWidget1/reference.png";
+                resultPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/tablet/Elements/CounterpartyWidget1/difference.png";
+                break;
             default:
                 throw new IllegalArgumentException("Неверный параметр окружения: " + environment);
         }
@@ -414,17 +441,25 @@ public class HomeEnterprisePage extends AuthorizedCommonFunctions {
     @Step("Создание скриншота виджета второго контрагента")
     public void TakeScreenshotOfCounterpartyWidget2(String environment) throws IOException {
         HTML_Widget_Counterparty_2.scrollTo().shouldBe(visible);
+        JavascriptExecutor js = (JavascriptExecutor) WebDriverRunner.getWebDriver();
+        js.executeScript("document.querySelector('#layout-header').style.display = 'none';");
         String screenshotPath = null;
         switch (environment) {
             case "PC":
-                //Если мы получаем скриншот в кофигурации ПК, то сохранение будет идти в эту папку
                 screenshotPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/PC/Elements/CounterpartyWidget2/current.png";
+                break;
+            case "tablet":
+                screenshotPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/tablet/Elements/CounterpartyWidget2/current.png";
+                break;
+            case "phone":
+                screenshotPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/phone/Elements/CounterpartyWidget2/current.png";
                 break;
             default:
                 throw new IllegalArgumentException("Неверный параметр окружения: " + environment);
         }
         //вызывается метод создания и сохранения такого скриншота, куда мы передаём путь до папки
         super.TakeScreenshotOfElement(HTML_Widget_Counterparty_2, screenshotPath);
+        js.executeScript("document.querySelector('#layout-header').style.display = 'block';");
     }
 
     @Step("Сравнение скриншотов виджета второго контрагента")
@@ -432,13 +467,24 @@ public class HomeEnterprisePage extends AuthorizedCommonFunctions {
         String screenshotPath = null;
         String referencePath = null;
         String resultPath = null;
-
+        JavascriptExecutor js = (JavascriptExecutor) WebDriverRunner.getWebDriver();
+        js.executeScript("document.querySelector('#layout-header').style.display = 'none';");
+        js.executeScript("document.querySelector('#layout-header').style.display = 'block';");
         switch (environment) {
             case "PC":
-                //Если мы получаем скриншот в кофигурации ПК, то для сравнения current и reference нужно вытащить из этих папок
                 screenshotPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/PC/Elements/CounterpartyWidget2/current.png";
                 referencePath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/PC/Elements/CounterpartyWidget2/reference.png";
                 resultPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/PC/Elements/CounterpartyWidget2/difference.png";
+                break;
+            case "tablet":
+                screenshotPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/tablet/Elements/CounterpartyWidget2/current.png";
+                referencePath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/tablet/Elements/CounterpartyWidget2/reference.png";
+                resultPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/tablet/Elements/CounterpartyWidget2/difference.png";
+                break;
+            case "phone":
+                screenshotPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/phone/Elements/CounterpartyWidget2/current.png";
+                referencePath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/phone/Elements/CounterpartyWidget2/reference.png";
+                resultPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/phone/Elements/CounterpartyWidget2/difference.png";
                 break;
             default:
                 throw new IllegalArgumentException("Неверный параметр окружения: " + environment);
@@ -447,6 +493,39 @@ public class HomeEnterprisePage extends AuthorizedCommonFunctions {
         return super.compareScreenshots(screenshotPath, referencePath, resultPath);
     }
 
+    @Step("Сравнение скриншотов для блока 'Проекты с Экспертной поддержкой'")
+    public void TakeScreenshotOfElementalSupportWindow(String environment) throws IOException {
+        Elemental_Support_Column_1.scrollTo().shouldBe(visible);
+        String screenshotPath = null;
+        switch (environment) {
+            case "PC":
+                screenshotPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/PC/Elements/Elemental_Support_Column_1/current.png";
+                break;
+            default:
+                throw new IllegalArgumentException("Неверный параметр окружения: " + environment);
+        }
+        //вызывается метод создания и сохранения такого скриншота, куда мы передаём путь до папки
+        super.TakeScreenshotOfElement( Elemental_Support_Column_1, screenshotPath);
+    }
+
+    @Step("Сравнение скриншотов виджета второго контрагента")
+    public boolean compareScreenshotsOfElementalSupportWindow(String environment) throws IOException{
+        String screenshotPath = null;
+        String referencePath = null;
+        String resultPath = null;
+
+        switch (environment) {
+            case "PC":
+                screenshotPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/PC/Elements/Elemental_Support_Column_1/current.png";
+                referencePath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/PC/Elements/Elemental_Support_Column_1/reference.png";
+                resultPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/PC/Elements/Elemental_Support_Column_1/difference.png";
+                break;
+            default:
+                throw new IllegalArgumentException("Неверный параметр окружения: " + environment);
+        }
+        //вызывается сравнения скриншотов, куда мы передаём пути до папок
+        return super.compareScreenshots(screenshotPath, referencePath, resultPath);
+    }
 
 
 
