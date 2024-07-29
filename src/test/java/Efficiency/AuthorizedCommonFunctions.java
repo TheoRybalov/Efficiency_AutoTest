@@ -5,7 +5,6 @@ import io.qameta.allure.Step;
 import io.restassured.response.Response;
 import org.openqa.selenium.Cookie;
 import org.testng.Assert;
-
 import java.sql.*;
 import java.util.HashMap;
 import java.util.Map;

@@ -4,20 +4,30 @@ import Efficiency.AuthorizedCommonFunctions;
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.WebDriverRunner;
 import io.qameta.allure.Step;
+import net.lightbody.bmp.BrowserMobProxy;
+import net.lightbody.bmp.core.har.Har;
+import net.lightbody.bmp.core.har.HarEntry;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.logging.LogEntries;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.Assert;
 
+import org.json.JSONObject;
 import java.io.IOException;
 import java.sql.*;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import org.openqa.selenium.logging.LogEntries;
+import org.openqa.selenium.logging.LogEntry;
+import org.openqa.selenium.logging.LogType;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selenide.$x;
-import static com.codeborne.selenide.Selenide.sleep;
+import static com.codeborne.selenide.Selenide.*;
 import static io.restassured.RestAssured.given;
 
 public class HomeEnterprisePage extends AuthorizedCommonFunctions {
@@ -74,8 +84,8 @@ public class HomeEnterprisePage extends AuthorizedCommonFunctions {
 
 
     //Виджет Рекомендуемая статья
-    private static final SelenideElement MyFeed_RecommendedArticle_Title = $x("//*[@id=\"root\"]/div/div[2]/main/div/div/div/div[2]/div[2]/div[2]/div[4]/div/div[1]/span");
-    private static final SelenideElement MyFeed_RecommendedArticle_Description = $x("//*[@id=\"root\"]/div/div[2]/main/div/div/div/div[2]/div[2]/div[2]/div[4]/div/div[2]/dl/dt");
+    private static final SelenideElement MyFeed_RecommendedArticle_Title = $x("//*[@id=\"root\"]/div/div[2]/main/div/div/div/div[2]/div[2]/div[2]/div[7]/div/div[2]/div/h4/a");
+    private static final SelenideElement MyFeed_RecommendedArticle_Description = $x("//*[@id=\"root\"]/div/div[2]/main/div/div/div/div[2]/div[2]/div[2]/div[7]/div/div[2]/div/p");
     private Map<String, Object> RecommendedArticleWidgetData = new HashMap<>();
 
     //Виджет контрагента 1
@@ -360,14 +370,34 @@ public class HomeEnterprisePage extends AuthorizedCommonFunctions {
 
     //пока на паузе
     @Step("Получить данные из API для виджета Рекомендуемая статья")
-    public void getRecommendedArticleWidgetDataFromApi() {
-        Map<String, Object> apiData = super.getMyFeedWidgetDataFromApi("https://aksis.dev.qsupport.ru/wp-graphql/graphql");
-        RecommendedArticleWidgetData.putAll(apiData);
+    public void getRecommendedArticleWidgetDataFromApi(BrowserMobProxy proxyTest) {
+        proxyTest.newHar("RecommendedArticle");
+        refresh();
+        sleep(5000);
+        MyFeed_RecommendedArticle_Title.scrollTo().shouldBe(visible);
+        Har har = proxyTest.getHar();
+        Map<String, Object> responseMap = new HashMap<>();
 
-        for (String key : RecommendedArticleWidgetData.keySet()) {
-            Object value = RecommendedArticleWidgetData.get(key);
-            System.out.println(key + " " + value);
+        List<HarEntry> entries = har.getLog().getEntries();
+        for (HarEntry entry : entries) {
+            if (entry.getRequest().getMethod().equals("POST") &&
+                    entry.getRequest().getUrl().equals("https://aksis.dev.qsupport.ru/onboarding/api/KnowledgeBaseWidget/GraphQl")) {
+
+                String responseContent = entry.getResponse().getContent().getText();
+                JSONObject jsonResponse = new JSONObject(responseContent);
+                JSONObject widgetRandomArticle = jsonResponse.getJSONObject("data").getJSONObject("widgetRandomArticle");
+
+                responseMap.put("id", widgetRandomArticle.getString("id"));
+                responseMap.put("name", widgetRandomArticle.getString("name"));
+                responseMap.put("description", widgetRandomArticle.getString("description"));
+                break;
+            }
         }
+
+        RecommendedArticleWidgetData.putAll(responseMap);
+
+
+
 
     }
 
@@ -377,7 +407,15 @@ public class HomeEnterprisePage extends AuthorizedCommonFunctions {
     public void Assert_MyFeed_RecommendedArticle_Title(){
         MyFeed_RecommendedArticle_Title.scrollTo().shouldBe(visible);
         String actualTitle1 = MyFeed_RecommendedArticle_Title.getText();
-        String expectedTitle1 = (String) SolutionShowcaseWidgetData.get("text");
+        String expectedTitle1 = (String) RecommendedArticleWidgetData.get("name");
+        Assert.assertEquals(actualTitle1, expectedTitle1, "Текст внутри виджета не соответсвует ожидаемому значению");
+    }
+
+    @Step("Проверка корректности описания статьи внутри виджета Рекомендуемая статья")
+    public void Assert_MyFeed_RecommendedArticle_Description(){
+        MyFeed_RecommendedArticle_Description.scrollTo().shouldBe(visible);
+        String actualTitle1 = MyFeed_RecommendedArticle_Description.getText();
+        String expectedTitle1 = (String) RecommendedArticleWidgetData.get("description");
         Assert.assertEquals(actualTitle1, expectedTitle1, "Текст внутри виджета не соответсвует ожидаемому значению");
     }
 
