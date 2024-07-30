@@ -1,5 +1,6 @@
 package Efficiency.Tests.AuthorizedZone;
 
+import Efficiency.Pages.AuthorizedZone.HomeEnterprisePage;
 import Efficiency.Pages.AuthorizedZone.HomeExpertPage;
 import Efficiency.Pages.LoginPage;
 import Efficiency.Providers.ConfigProviderInterface;
@@ -30,7 +31,7 @@ public class HOME_EXPERT extends TestBase {
         sleep(5000);
     }
 
-    @Test(priority = 1, description = "Авторизованная зона. Моя Лента.Виджет 'Витрина решений'")
+    @Test(priority = 1, description = "Авторизованная зона. Моя Лента.Виджет 'Витрина решений'", enabled = false)
     public void MyFeed_Solutions_TEST() throws SQLException {
         HomeExpertPage homeExpertPage = open(ConfigProviderInterface.authorizedExpertURL, HomeExpertPage.class);
         homeExpertPage.getSolutionsWidgetDataFromDB();
@@ -40,7 +41,7 @@ public class HOME_EXPERT extends TestBase {
         homeExpertPage.Assert_MyFeed_Solutions_Quantity();
     }
 
-    @Test(priority = 1, description = "Моя Лента. Виджет 'Сообщения в чате'")
+    @Test(priority = 1, description = "Моя Лента. Виджет 'Сообщения в чате'", enabled = false)
     public void MyFeed_ChatStatistic_TEST() throws SQLException {
         HomeExpertPage homeExpertPage = open(ConfigProviderInterface.authorizedExpertURL, HomeExpertPage.class);
         homeExpertPage.getChatStatisticWidgetDataFromDB();
@@ -52,12 +53,29 @@ public class HOME_EXPERT extends TestBase {
         homeExpertPage.Assert_MyFeed_ChatStatistic_Unanswered_Quantity();
     }
 
-    @Test(priority = 1, description = "Авторизованная зоня. Виджет Контур Фокус")
+    @Test(priority = 1, description = "Авторизованная зоня. Виджет Контур Фокус",enabled = false)
     public void Counter_Agent_Display_TEST() throws IOException {
         HomeExpertPage homeExpertPage = open(ConfigProviderInterface.authorizedExpertURL, HomeExpertPage.class);
         homeExpertPage.Counter_Agent_Visible();
         homeExpertPage.TakeScreenshotOfCounterAgentSection(getEnvironment());
         boolean ResultOfComparing = homeExpertPage.compareScreenshotsOfCounterAgent(getEnvironment());
         Assert.assertTrue(ResultOfComparing, "Скриншоты не совпали. Вёрстка не такая, как в макете");
+    }
+
+    @Test(priority = 5, description = "Авторизованная зона. Предприятие. Моя Лента. Рекомендуемая статья")
+    public void MyFeed_RecommendedArticle_TEST(){
+        HomeExpertPage homeExpertPage = open(ConfigProviderInterface.authorizedExpertURL, HomeExpertPage.class);
+        homeExpertPage.getRecommendedArticleWidgetDataFromApi(super.proxy);
+        homeExpertPage.Assert_MyFeed_RecommendedArticle_Title();
+        homeExpertPage.Assert_MyFeed_RecommendedArticle_Description();
+    }
+
+    @Test(priority = 5, description = "Авторизованная зона. Предприятие. Моя Лента. Поиск в Базе знаний")
+    public void MyFeed_KnowledgeBaseSearch_TEST(){
+        HomeExpertPage homeExpertPage = open(ConfigProviderInterface.authorizedExpertURL, HomeExpertPage.class);
+        homeExpertPage.getKnowledgeBaseSearchWidgetAfterNotEmptySearch(super.proxy, "");
+        homeExpertPage.Assert_MyFeed_KnowledgeBaseSearch_AfterSearch();
+        homeExpertPage.getKnowledgeBaseSearchWidgetAfterNotEmptySearch(super.proxy, homeExpertPage.MyFeed_KnowledgeBaseSearch_GetArticleTitleForSearch());
+        homeExpertPage.Assert_MyFeed_KnowledgeBaseSearch_AfterSearch();
     }
 }

@@ -18,8 +18,6 @@ public class AuthorizedCommonFunctions extends CommonFunctions{
     public Map<String, Object> getMyFeedWidgetDataFromApi(String requestURL) {
 
         Set<Cookie> seleniumCookies = WebDriverRunner.getWebDriver().manage().getCookies();
-
-        // Преобразуем куки в формат RestAssured
         Map<String, String> restAssuredCookies = new HashMap<>();
 
         // Преобразуем куки Selenium в формат Map

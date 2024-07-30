@@ -43,9 +43,9 @@ public class  BrowserDriverFactory {
                     seleniumProxy.setSslProxy(hostIp + ":" + proxy.getPort());
                     proxy.enableHarCaptureTypes(CaptureType.REQUEST_CONTENT, CaptureType.RESPONSE_CONTENT);
 
-                    options.setProxy(seleniumProxy);}
+                    options.setProxy(seleniumProxy);
+                    options.setAcceptInsecureCerts(true);}
 
-                options.setAcceptInsecureCerts(true);
                 options.addArguments("--disable-notifications");
                 options.addArguments("--remote-allow-origins=*");
                 options.addArguments("--disable-background-networking");

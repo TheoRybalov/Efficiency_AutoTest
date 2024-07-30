@@ -2,6 +2,7 @@ package Efficiency.Tests.AuthorizedZone;
 
 import Efficiency.BrowserDriverFactory;
 import Efficiency.Pages.AuthorizedZone.HomeEnterprisePage;
+import Efficiency.Pages.AuthorizedZone.HomeExpertPage;
 import Efficiency.Providers.ConfigProviderInterface;
 import Efficiency.TestBase;
 import com.codeborne.selenide.WebDriverRunner;
@@ -113,14 +114,23 @@ public class HOME_ENTERPRISE extends TestBase {
         homeEnterprisePage.Assert_MyFeed_RecommendedArticle_Description();
     }
 
-    @Test(priority = 6, description = "Авторизованная зона. Предприятие. Моя Лента. HTML Виджет контрагента 1")
+    @Test(priority = 6, description = "Авторизованная зона. Предприятие. Моя Лента. Поиск в Базе знаний")
+    public void MyFeed_KnowledgeBaseSearch_TEST(){
+        HomeEnterprisePage homeEnterprisePage = open(ConfigProviderInterface.authorizedEnterpriseURL, HomeEnterprisePage.class);
+        homeEnterprisePage.getKnowledgeBaseSearchWidgetAfterNotEmptySearch(super.proxy, "");
+        homeEnterprisePage.Assert_MyFeed_KnowledgeBaseSearch_AfterSearch();
+        homeEnterprisePage.getKnowledgeBaseSearchWidgetAfterNotEmptySearch(super.proxy, homeEnterprisePage.MyFeed_KnowledgeBaseSearch_GetArticleTitleForSearch());
+        homeEnterprisePage.Assert_MyFeed_KnowledgeBaseSearch_AfterSearch();
+    }
+
+    @Test(priority = 7, description = "Авторизованная зона. Предприятие. Моя Лента. HTML Виджет контрагента 1")
     public void MyFeed_HTML_Widget_First_Counterparty_TEST() throws IOException {
         HomeEnterprisePage homeEnterprisePage = open(ConfigProviderInterface.authorizedEnterpriseURL, HomeEnterprisePage.class);
         homeEnterprisePage.TakeScreenshotOfCounterpartyWidget1(getEnvironment());
         homeEnterprisePage.compareScreenshotsOfCounterpartyWidget1(getEnvironment());
     }
 
-    @Test(priority = 6, description = "Авторизованная зона. Предприятие. Моя Лента. HTML Виджет контрагента 2")
+    @Test(priority = 8, description = "Авторизованная зона. Предприятие. Моя Лента. HTML Виджет контрагента 2")
     public void MyFeed_HTML_Widget_Second_Counterparty_TEST() throws IOException {
         HomeEnterprisePage homeEnterprisePage = open(ConfigProviderInterface.authorizedEnterpriseURL, HomeEnterprisePage.class);
         homeEnterprisePage.TakeScreenshotOfCounterpartyWidget2(getEnvironment());
