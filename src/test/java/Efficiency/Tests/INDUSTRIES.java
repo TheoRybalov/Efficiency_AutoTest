@@ -3,6 +3,7 @@ package Efficiency.Tests;
 import Efficiency.Pages.IndustriesPage;
 import Efficiency.Providers.ConfigProviderInterface;
 import Efficiency.TestBase;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
@@ -22,7 +23,7 @@ public class INDUSTRIES extends TestBase {
         industriesPage.AddCookies();
         industriesPage.TakeScreenshotOfFullPage(getEnvironment());
         Boolean result_of_comparing = industriesPage.compareScreenshotsOfFullPage(getEnvironment());
-        industriesPage.AssertionCompareScreenshots(result_of_comparing);
+        Assert.assertTrue(result_of_comparing, "Скриншоты не совпали. Вёрстка не такая, как в макете");
     }
 
 

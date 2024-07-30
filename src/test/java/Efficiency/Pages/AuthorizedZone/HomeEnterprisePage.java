@@ -569,9 +569,6 @@ public class HomeEnterprisePage extends AuthorizedCommonFunctions {
         String screenshotPath = null;
         String referencePath = null;
         String resultPath = null;
-        JavascriptExecutor js = (JavascriptExecutor) WebDriverRunner.getWebDriver();
-        js.executeScript("document.querySelector('#layout-header').style.display = 'none';");
-        js.executeScript("document.querySelector('#layout-header').style.display = 'block';");
         switch (environment) {
             case "PC":
                 screenshotPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/PC/Elements/CounterpartyWidget2/current.png";
@@ -595,23 +592,101 @@ public class HomeEnterprisePage extends AuthorizedCommonFunctions {
         return super.compareScreenshots(screenshotPath, referencePath, resultPath);
     }
 
-    @Step("Сравнение скриншотов для блока 'Проекты с Экспертной поддержкой'")
-    public void TakeScreenshotOfElementalSupportWindow(String environment) throws IOException {
+    @Step("Создание скриншота для первой колонки блока 'Проекты с Экспертной поддержкой'")
+    public void TakeScreenshotOfElementalSupportWindow_Column1(String environment) throws IOException {
         Elemental_Support_Column_1.scrollTo().shouldBe(visible);
+        JavascriptExecutor js = (JavascriptExecutor) WebDriverRunner.getWebDriver();
+        js.executeScript("document.querySelector('#layout-header').style.display = 'none';");
         String screenshotPath = null;
         switch (environment) {
             case "PC":
                 screenshotPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/PC/Elements/Elemental_Support_Column_1/current.png";
                 break;
+            case "tablet":
+                screenshotPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/tablet/Elements/Elemental_Support_Column_1/current.png";
+                break;
+            case "phone":
+                screenshotPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/phone/Elements/Elemental_Support_Column_1/current.png";
+                break;
             default:
                 throw new IllegalArgumentException("Неверный параметр окружения: " + environment);
         }
-        //вызывается метод создания и сохранения такого скриншота, куда мы передаём путь до папки
         super.TakeScreenshotOfElement( Elemental_Support_Column_1, screenshotPath);
+        js.executeScript("document.querySelector('#layout-header').style.display = 'block';");
     }
 
-    @Step("Сравнение скриншотов виджета второго контрагента")
-    public boolean compareScreenshotsOfElementalSupportWindow(String environment) throws IOException{
+    @Step("Создание скриншота для второй колонки блока 'Проекты с Экспертной поддержкой'")
+    public void TakeScreenshotOfElementalSupportWindow_Column2(String environment) throws IOException {
+        Elemental_Support_Column_2.scrollTo().shouldBe(visible);
+        JavascriptExecutor js = (JavascriptExecutor) WebDriverRunner.getWebDriver();
+        js.executeScript("document.querySelector('#layout-header').style.display = 'none';");
+        String screenshotPath = null;
+        switch (environment) {
+            case "PC":
+                screenshotPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/PC/Elements/Elemental_Support_Column_2/current.png";
+                break;
+            case "tablet":
+                screenshotPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/tablet/Elements/Elemental_Support_Column_2/current.png";
+                break;
+            case "phone":
+                screenshotPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/phone/Elements/Elemental_Support_Column_2/current.png";
+                break;
+            default:
+                throw new IllegalArgumentException("Неверный параметр окружения: " + environment);
+        }
+        super.TakeScreenshotOfElement( Elemental_Support_Column_2, screenshotPath);
+        js.executeScript("document.querySelector('#layout-header').style.display = 'block';");
+    }
+
+    @Step("Создание скриншота для третьей колонки блока 'Проекты с Экспертной поддержкой'")
+    public void TakeScreenshotOfElementalSupportWindow_Column3(String environment) throws IOException {
+        Elemental_Support_Column_3.scrollTo().shouldBe(visible);
+        JavascriptExecutor js = (JavascriptExecutor) WebDriverRunner.getWebDriver();
+        js.executeScript("document.querySelector('#layout-header').style.display = 'none';");
+        String screenshotPath = null;
+        switch (environment) {
+            case "PC":
+                screenshotPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/PC/Elements/Elemental_Support_Column_3/current.png";
+                break;
+            case "tablet":
+                screenshotPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/tablet/Elements/Elemental_Support_Column_3/current.png";
+                break;
+            case "phone":
+                screenshotPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/phone/Elements/Elemental_Support_Column_3/current.png";
+                break;
+            default:
+                throw new IllegalArgumentException("Неверный параметр окружения: " + environment);
+        }
+        super.TakeScreenshotOfElement( Elemental_Support_Column_3, screenshotPath);
+        js.executeScript("document.querySelector('#layout-header').style.display = 'block';");
+    }
+
+
+    @Step("Создание скриншота для четвёртой колонки блока 'Проекты с Экспертной поддержкой'")
+    public void TakeScreenshotOfElementalSupportWindow_Column4(String environment) throws IOException {
+        Elemental_Support_Column_4.scrollTo().shouldBe(visible);
+        JavascriptExecutor js = (JavascriptExecutor) WebDriverRunner.getWebDriver();
+        js.executeScript("document.querySelector('#layout-header').style.display = 'none';");
+        String screenshotPath = null;
+        switch (environment) {
+            case "PC":
+                screenshotPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/PC/Elements/Elemental_Support_Column_4/current.png";
+                break;
+            case "tablet":
+                screenshotPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/tablet/Elements/Elemental_Support_Column_4/current.png";
+                break;
+            case "phone":
+                screenshotPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/phone/Elements/Elemental_Support_Column_4/current.png";
+                break;
+            default:
+                throw new IllegalArgumentException("Неверный параметр окружения: " + environment);
+        }
+        super.TakeScreenshotOfElement( Elemental_Support_Column_4, screenshotPath);
+        js.executeScript("document.querySelector('#layout-header').style.display = 'block';");
+    }
+
+    @Step("Сравнение скриншота для первой колонки блока 'Проекты с Экспертной поддержкой'")
+    public boolean compareScreenshotsOfElementalSupportWindow_Column1(String environment) throws IOException{
         String screenshotPath = null;
         String referencePath = null;
         String resultPath = null;
@@ -621,6 +696,103 @@ public class HomeEnterprisePage extends AuthorizedCommonFunctions {
                 screenshotPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/PC/Elements/Elemental_Support_Column_1/current.png";
                 referencePath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/PC/Elements/Elemental_Support_Column_1/reference.png";
                 resultPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/PC/Elements/Elemental_Support_Column_1/difference.png";
+                break;
+            case "tablet":
+                screenshotPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/tablet/Elements/Elemental_Support_Column_1/current.png";
+                referencePath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/tablet/Elements/Elemental_Support_Column_1/reference.png";
+                resultPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/tablet/Elements/Elemental_Support_Column_1/difference.png";
+                break;
+            case "phone":
+                screenshotPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/phone/Elements/Elemental_Support_Column_1/current.png";
+                referencePath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/phone/Elements/Elemental_Support_Column_1/reference.png";
+                resultPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/phone/Elements/Elemental_Support_Column_1/difference.png";
+                break;
+            default:
+                throw new IllegalArgumentException("Неверный параметр окружения: " + environment);
+        }
+        //вызывается сравнения скриншотов, куда мы передаём пути до папок
+        return super.compareScreenshots(screenshotPath, referencePath, resultPath);
+    }
+
+    @Step("Сравнение скриншота для второй колонки блока 'Проекты с Экспертной поддержкой'")
+    public boolean compareScreenshotsOfElementalSupportWindow_Column2(String environment) throws IOException{
+        String screenshotPath = null;
+        String referencePath = null;
+        String resultPath = null;
+
+        switch (environment) {
+            case "PC":
+                screenshotPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/PC/Elements/Elemental_Support_Column_2/current.png";
+                referencePath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/PC/Elements/Elemental_Support_Column_2/reference.png";
+                resultPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/PC/Elements/Elemental_Support_Column_2/difference.png";
+                break;
+            case "tablet":
+                screenshotPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/tablet/Elements/Elemental_Support_Column_2/current.png";
+                referencePath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/tablet/Elements/Elemental_Support_Column_2/reference.png";
+                resultPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/tablet/Elements/Elemental_Support_Column_2/difference.png";
+                break;
+            case "phone":
+                screenshotPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/phone/Elements/Elemental_Support_Column_2/current.png";
+                referencePath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/phone/Elements/Elemental_Support_Column_2/reference.png";
+                resultPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/phone/Elements/Elemental_Support_Column_2/difference.png";
+                break;
+            default:
+                throw new IllegalArgumentException("Неверный параметр окружения: " + environment);
+        }
+        //вызывается сравнения скриншотов, куда мы передаём пути до папок
+        return super.compareScreenshots(screenshotPath, referencePath, resultPath);
+    }
+
+    @Step("Сравнение скриншота для третьей колонки блока 'Проекты с Экспертной поддержкой'")
+    public boolean compareScreenshotsOfElementalSupportWindow_Column3(String environment) throws IOException{
+        String screenshotPath = null;
+        String referencePath = null;
+        String resultPath = null;
+
+        switch (environment) {
+            case "PC":
+                screenshotPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/PC/Elements/Elemental_Support_Column_3/current.png";
+                referencePath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/PC/Elements/Elemental_Support_Column_3/reference.png";
+                resultPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/PC/Elements/Elemental_Support_Column_3/difference.png";
+                break;
+            case "tablet":
+                screenshotPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/tablet/Elements/Elemental_Support_Column_3/current.png";
+                referencePath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/tablet/Elements/Elemental_Support_Column_3/reference.png";
+                resultPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/tablet/Elements/Elemental_Support_Column_3/difference.png";
+                break;
+            case "phone":
+                screenshotPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/phone/Elements/Elemental_Support_Column_3/current.png";
+                referencePath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/phone/Elements/Elemental_Support_Column_3/reference.png";
+                resultPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/phone/Elements/Elemental_Support_Column_3/difference.png";
+                break;
+            default:
+                throw new IllegalArgumentException("Неверный параметр окружения: " + environment);
+        }
+        //вызывается сравнения скриншотов, куда мы передаём пути до папок
+        return super.compareScreenshots(screenshotPath, referencePath, resultPath);
+    }
+
+    @Step("Сравнение скриншота для четвёртой колонки блока 'Проекты с Экспертной поддержкой'")
+    public boolean compareScreenshotsOfElementalSupportWindow_Column4(String environment) throws IOException{
+        String screenshotPath = null;
+        String referencePath = null;
+        String resultPath = null;
+
+        switch (environment) {
+            case "PC":
+                screenshotPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/PC/Elements/Elemental_Support_Column_4/current.png";
+                referencePath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/PC/Elements/Elemental_Support_Column_4/reference.png";
+                resultPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/PC/Elements/Elemental_Support_Column_4/difference.png";
+                break;
+            case "tablet":
+                screenshotPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/tablet/Elements/Elemental_Support_Column_4/current.png";
+                referencePath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/tablet/Elements/Elemental_Support_Column_4/reference.png";
+                resultPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/tablet/Elements/Elemental_Support_Column_4/difference.png";
+                break;
+            case "phone":
+                screenshotPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/phone/Elements/Elemental_Support_Column_4/current.png";
+                referencePath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/phone/Elements/Elemental_Support_Column_4/reference.png";
+                resultPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/phone/Elements/Elemental_Support_Column_4/difference.png";
                 break;
             default:
                 throw new IllegalArgumentException("Неверный параметр окружения: " + environment);
