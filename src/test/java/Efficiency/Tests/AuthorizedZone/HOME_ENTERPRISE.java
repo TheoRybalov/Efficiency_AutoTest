@@ -50,8 +50,6 @@ public class HOME_ENTERPRISE extends TestBase {
             .getOrDefault("ENTERPRISE_PASSWORD", "QWERTY123");
     @BeforeClass
     public void Login(){
-
-
         LoginPage loginPage = open(ConfigProviderInterface.authorizedEnterpriseURL, LoginPage.class);
         loginPage.login(ENTERPRISE_USER, ENTERPRISE_PASSWORD);
     }
