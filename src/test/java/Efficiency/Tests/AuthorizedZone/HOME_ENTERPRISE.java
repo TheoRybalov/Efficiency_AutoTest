@@ -1,41 +1,20 @@
 package Efficiency.Tests.AuthorizedZone;
 
-import Efficiency.BrowserDriverFactory;
 import Efficiency.Pages.AuthorizedZone.HomeEnterprisePage;
-import Efficiency.Pages.AuthorizedZone.HomeExpertPage;
 import Efficiency.Providers.ConfigProviderInterface;
 import Efficiency.TestBase;
-import com.codeborne.selenide.WebDriverRunner;
-import net.lightbody.bmp.BrowserMobProxy;
-import net.lightbody.bmp.core.har.Har;
-import net.lightbody.bmp.core.har.HarEntry;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.devtools.DevTools;
-
 
 
 //import org.openqa.selenium.devtools.v127.network.Network;
 //import org.openqa.selenium.devtools.v127.network.model.Request;
 //import org.openqa.selenium.devtools.v127.network.model.Response;
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-import org.openqa.selenium.logging.LogEntries;
-import org.openqa.selenium.logging.LogEntry;
-import org.openqa.selenium.logging.LogType;
-import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import Efficiency.Pages.LoginPage;
 
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.nio.file.Paths;
 import java.sql.SQLException;
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
 
 import static com.codeborne.selenide.Selenide.*;
 
@@ -55,10 +34,19 @@ public class HOME_ENTERPRISE extends TestBase {
         loginPage.login(ENTERPRISE_USER, ENTERPRISE_PASSWORD);
     }
 
+    @Test(priority = 1, description = "Авторизованная зона. Боковое меню")
+    public void Side_Menu_TEST(){
+        HomeEnterprisePage homeEnterprisePage = open(ConfigProviderInterface.authorizedEnterpriseURL, HomeEnterprisePage.class);
+        homeEnterprisePage.getSideMenuDataFromApi();
+        homeEnterprisePage.Assert_SideMenu_WidgetData_Titles();
+        homeEnterprisePage.Assert_SideMenu_WidgetData_URLs();
+        homeEnterprisePage.Assert_SideMenu_ServicesData_Titles();
+        homeEnterprisePage.Assert_SideMenu_ServicesData_URLs();
+    }
 
 
 
-    @Test(priority = 1, description = "Авторизованная зона. Предприятие. Моя Лента. Диагностика")
+    @Test(priority = 2, description = "Авторизованная зона. Предприятие. Моя Лента. Диагностика")
     public void MyFeed_Diagnostics_TEST() throws SQLException {
         HomeEnterprisePage homeEnterprisePage = open(ConfigProviderInterface.authorizedEnterpriseURL, HomeEnterprisePage.class);
         homeEnterprisePage.getDiagnosticWidgetDataFromDB();
@@ -70,10 +58,10 @@ public class HOME_ENTERPRISE extends TestBase {
 //        homeEnterprisePage.Assert_MyFeed_Diagnostics_Href();
     }
 
-    @Test(priority = 2, description = "Авторизованная зона. Предприятие. Моя Лента. Рекомендуемые анкеты")
+    @Test(priority = 3, description = "Авторизованная зона. Предприятие. Моя Лента. Рекомендуемые анкеты")
     public void MyFeed_RecommendedQuestionnaires_TEST() throws SQLException {
         HomeEnterprisePage homeEnterprisePage = open(ConfigProviderInterface.authorizedEnterpriseURL, HomeEnterprisePage.class);
-        homeEnterprisePage.getRecommendedQuestionnairesWidgetDataFromApi();
+        homeEnterprisePage.getRecommendedQuestionnairesWidgetDataFromApi(super.proxy);
         homeEnterprisePage.getRecommendedQuestionnairesWidgetDataFromDB();
         homeEnterprisePage.Assert_MyFeed_RecommendedQuestionnaires_Header();
         homeEnterprisePage.Assert_MyFeed_RecommendedQuestionnaires_Questions();
@@ -81,7 +69,7 @@ public class HOME_ENTERPRISE extends TestBase {
         homeEnterprisePage.Assert_MyFeed_RecommendedQuestionnaires_Text();
     }
 
-    @Test(priority = 3, description = "Авторизованная зона. Предприятие. Моя Лента. Бенчмаркинг")
+    @Test(priority = 4, description = "Авторизованная зона. Предприятие. Моя Лента. Бенчмаркинг")
     public void MyFeed_Benchmarking_TEST() throws SQLException {
         HomeEnterprisePage homeEnterprisePage = open(ConfigProviderInterface.authorizedEnterpriseURL, HomeEnterprisePage.class);
         homeEnterprisePage.getBenchmarkingWidgetDataFromDB();
@@ -94,7 +82,7 @@ public class HOME_ENTERPRISE extends TestBase {
 
     }
 
-    @Test(priority = 4, description = "Авторизованная зона. Предприятие. Моя Лента. Витрина Решений")
+    @Test(priority = 5, description = "Авторизованная зона. Предприятие. Моя Лента. Витрина Решений")
     public void MyFeed_SolutionShowcase_TEST() throws SQLException {
         HomeEnterprisePage homeEnterprisePage = open(ConfigProviderInterface.authorizedEnterpriseURL, HomeEnterprisePage.class);
        homeEnterprisePage.getSolutionShowcaseWidgetDataFromApi();
@@ -105,7 +93,7 @@ public class HOME_ENTERPRISE extends TestBase {
 
     }
 
-    @Test(priority = 5, description = "Авторизованная зона. Предприятие. Моя Лента. Рекомендуемая статья")
+    @Test(priority = 6, description = "Авторизованная зона. Предприятие. Моя Лента. Рекомендуемая статья")
     public void MyFeed_RecommendedArticle_TEST() throws IOException {
         HomeEnterprisePage homeEnterprisePage = open(ConfigProviderInterface.authorizedEnterpriseURL, HomeEnterprisePage.class);
         homeEnterprisePage.getRecommendedArticleWidgetDataFromApi(super.proxy);
@@ -113,7 +101,7 @@ public class HOME_ENTERPRISE extends TestBase {
         homeEnterprisePage.Assert_MyFeed_RecommendedArticle_Description();
     }
 
-    @Test(priority = 6, description = "Авторизованная зона. Предприятие. Моя Лента. Поиск в Базе знаний")
+    @Test(priority = 7, description = "Авторизованная зона. Предприятие. Моя Лента. Поиск в Базе знаний")
     public void MyFeed_KnowledgeBaseSearch_TEST(){
         HomeEnterprisePage homeEnterprisePage = open(ConfigProviderInterface.authorizedEnterpriseURL, HomeEnterprisePage.class);
         homeEnterprisePage.getKnowledgeBaseSearchWidgetAfterNotEmptySearch(super.proxy, "");
@@ -122,7 +110,7 @@ public class HOME_ENTERPRISE extends TestBase {
         homeEnterprisePage.Assert_MyFeed_KnowledgeBaseSearch_AfterSearch();
     }
 
-    @Test(priority = 7, description = "Авторизованная зона. Предприятие. Моя Лента. HTML Виджет контрагента 1")
+    @Test(priority = 8, description = "Авторизованная зона. Предприятие. Моя Лента. HTML Виджет контрагента 1")
     public void MyFeed_HTML_Widget_First_Counterparty_TEST() throws IOException {
         HomeEnterprisePage homeEnterprisePage = open(ConfigProviderInterface.authorizedEnterpriseURL, HomeEnterprisePage.class);
         homeEnterprisePage.TakeScreenshotOfCounterpartyWidget1(getEnvironment());
@@ -130,7 +118,7 @@ public class HOME_ENTERPRISE extends TestBase {
         Assert.assertTrue(result_of_comparing, "Скриншоты не совпали. Вёрстка не такая, как в макете");
     }
 
-    @Test(priority = 8, description = "Авторизованная зона. Предприятие. Моя Лента. HTML Виджет контрагента 2")
+    @Test(priority = 9, description = "Авторизованная зона. Предприятие. Моя Лента. HTML Виджет контрагента 2")
     public void MyFeed_HTML_Widget_Second_Counterparty_TEST() throws IOException {
         HomeEnterprisePage homeEnterprisePage = open(ConfigProviderInterface.authorizedEnterpriseURL, HomeEnterprisePage.class);
         homeEnterprisePage.TakeScreenshotOfCounterpartyWidget2(getEnvironment());
@@ -138,7 +126,7 @@ public class HOME_ENTERPRISE extends TestBase {
         Assert.assertTrue(result_of_comparing, "Скриншоты не совпали. Вёрстка не такая, как в макете");
     }
 
-    @Test(priority = 9, description = "Авторизованная зона. Предприятие. Проекты с экспертной поддержкой")
+    @Test(priority = 10, description = "Авторизованная зона. Предприятие. Проекты с экспертной поддержкой")
     public void ElementalSupportWindow_TEST() throws IOException {
         HomeEnterprisePage homeEnterprisePage = open(ConfigProviderInterface.authorizedEnterpriseURL, HomeEnterprisePage.class);
         homeEnterprisePage.TakeScreenshotOfElementalSupportWindow_Column1(getEnvironment());
