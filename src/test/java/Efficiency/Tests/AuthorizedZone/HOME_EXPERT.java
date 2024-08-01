@@ -21,9 +21,9 @@ public class HOME_EXPERT extends TestBase {
         return super.getEnv();
     }
     private static final String EXPERT_USER = System.getenv()
-            .getOrDefault("ENTERPRISE_USER", "test_quantum22@test.com");
+            .getOrDefault("EXPERT_USER", "test_quantum22@test.com");
     private static final String EXPERT_PASSWORD = System.getenv()
-            .getOrDefault("ENTERPRISE_PASSWORD", "BJMD9~");
+            .getOrDefault("EXPERT_PASSWORD", "BJMD9~");
     @BeforeClass
     public void Login(){
         LoginPage loginPage = open(ConfigProviderInterface.authorizedExpertURL, LoginPage.class);
