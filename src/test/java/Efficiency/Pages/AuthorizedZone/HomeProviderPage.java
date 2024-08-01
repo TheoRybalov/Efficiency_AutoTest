@@ -119,7 +119,9 @@ public class HomeProviderPage extends AuthorizedCommonFunctions {
 
                 responseMap.put("id", widgetRandomArticle.getString("id"));
                 responseMap.put("name", widgetRandomArticle.getString("name"));
-                responseMap.put("description", widgetRandomArticle.getString("description"));
+                if (widgetRandomArticle.getString("description") != null) {
+                    responseMap.put("description", widgetRandomArticle.getString("description"));
+                }
                 break;
             }
         }
@@ -154,7 +156,7 @@ public class HomeProviderPage extends AuthorizedCommonFunctions {
         return name;
     }
 
-    @Step("Получить данные из API для после ввода в поисковую строку База Знаний не пустого значения")
+    @Step("Получить данные из API для после ввода в поисковую строку База Знаний")
     public void getKnowledgeBaseSearchWidgetAfterNotEmptySearch(BrowserMobProxy proxyTest, String inputData ) {
         proxyTest.newHar("KnowledgeBaseSearch");
         MyFeed_KnowledgeBaseSearch_Input

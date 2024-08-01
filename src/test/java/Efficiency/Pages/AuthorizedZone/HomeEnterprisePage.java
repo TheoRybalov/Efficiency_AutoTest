@@ -459,7 +459,9 @@ public class HomeEnterprisePage extends AuthorizedCommonFunctions {
 
                 responseMap.put("id", widgetRandomArticle.getString("id"));
                 responseMap.put("name", widgetRandomArticle.getString("name"));
-                responseMap.put("description", widgetRandomArticle.getString("description"));
+                if (widgetRandomArticle.getString("description") != null) {
+                    responseMap.put("description", widgetRandomArticle.getString("description"));
+                }
                 break;
             }
         }

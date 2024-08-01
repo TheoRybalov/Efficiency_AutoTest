@@ -171,7 +171,9 @@ public class HomeExpertPage extends AuthorizedCommonFunctions {
 
                 responseMap.put("id", widgetRandomArticle.getString("id"));
                 responseMap.put("name", widgetRandomArticle.get("name").toString());
-                responseMap.put("description", widgetRandomArticle.get("description").toString());
+                if (widgetRandomArticle.getString("description") != null) {
+                    responseMap.put("description", widgetRandomArticle.getString("description"));
+                }
                 break;
             }
         }
