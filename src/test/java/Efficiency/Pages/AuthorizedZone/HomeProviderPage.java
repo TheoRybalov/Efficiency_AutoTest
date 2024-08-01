@@ -11,6 +11,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.testng.Assert;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,6 +37,9 @@ public class HomeProviderPage extends AuthorizedCommonFunctions {
     private static final SelenideElement MyFeed_KnowledgeBaseSearch_Input = $x("//*[@id=\"root\"]/div/div[2]/main/div/div/div[1]/div[2]/div/div[2]/div/div/div[2]/input");
     private static final ElementsCollection MyFeed_KnowledgeBaseSearch_items = $$x("//*[@id=\"root\"]/div/div[2]/main/div/div/div[1]/div[2]/div/div[2]/div/div[2]/div/ul/li[@class='select-list__item']");
     private Map<String, Object> KnowledgeBaseSearchWidgetData = new HashMap<>();
+
+    //Виджет контрагента 1
+    private static final SelenideElement Counter_Agent_Section = $x("//*[@id=\"root\"]/div/div[2]/main/div/div/div[3]/div/div/div/div");
 
 
 
@@ -199,6 +203,61 @@ public class HomeProviderPage extends AuthorizedCommonFunctions {
             elementText = elementText.replace("  ", " ");
             Assert.assertEquals(apiName, elementText, "Название элемента #" + (i + 1) + " не совпадает");
         }
+    }
+
+
+    @Step("Проверка отображения виджета 'Контур Фокус'")
+    public void Counter_Agent_Visible(){
+        Counter_Agent_Section.scrollTo().shouldBe(visible);
+    }
+
+    @Step("Создание скриншота 'Контур Фокус'")
+    public void TakeScreenshotOfCounterAgentSection(String environment) throws IOException {
+        String screenshotPath = null;
+        sleep(2000);
+        switch (environment) {
+            case "PC":
+                screenshotPath = "src/test/resources/screenshots/HomeProviderPage/PC/Elements/CounterAgentSection/current.png";
+                break;
+            case "tablet":
+                screenshotPath = "src/test/resources/screenshots/HomeProviderPage/tablet/Elements/CounterAgentSection/current.png";
+                break;
+            case "phone":
+                screenshotPath = "src/test/resources/screenshots/HomeProviderPage/phone/Elements/CounterAgentSection/current.png";
+                break;
+            default:
+                throw new IllegalArgumentException("Неверный параметр окружения: " + environment);
+        }
+        super.TakeScreenshotOfElement(Counter_Agent_Section, screenshotPath);
+    }
+
+    @Step("Сравнение скриншотов виджета Контур Фокус")
+    public boolean compareScreenshotsOfCounterAgent(String environment) throws IOException{
+        String screenshotPath = null;
+        String referencePath = null;
+        String resultPath = null;
+
+        switch (environment) {
+            case "PC":
+                screenshotPath = "src/test/resources/screenshots/HomeProviderPage/PC/Elements/CounterAgentSection/current.png";
+                referencePath = "src/test/resources/screenshots/HomeProviderPage/PC/Elements/CounterAgentSection/reference.png";
+                resultPath = "src/test/resources/screenshots/HomeProviderPage/PC/Elements/CounterAgentSection/differences.png";
+                break;
+            case "phone":
+                screenshotPath = "src/test/resources/screenshots/HomeProviderPage/phone/Elements/CounterAgentSection/current.png";
+                referencePath = "src/test/resources/screenshots/HomeProviderPage/phone/Elements/CounterAgentSection/reference.png";
+                resultPath = "src/test/resources/screenshots/HomeProviderPage/phone/Elements/CounterAgentSection/differences.png";
+                break;
+            case "tablet":
+                screenshotPath = "src/test/resources/screenshots/HomeProviderPage/tablet/Elements/CounterAgentSection/current.png";
+                referencePath = "src/test/resources/screenshots/HomeProviderPage/tablet/Elements/CounterAgentSection/reference.png";
+                resultPath = "src/test/resources/screenshots/HomeProviderPage/tablet/Elements/CounterAgentSection/differences.png";
+                break;
+            default:
+                throw new IllegalArgumentException("Неверный параметр окружения: " + environment);
+        }
+        //вызывается сравнения скриншотов, куда мы передаём пути до папок
+        return super.compareScreenshots(screenshotPath, referencePath, resultPath);
     }
 
 

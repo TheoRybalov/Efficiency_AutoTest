@@ -6,6 +6,7 @@ import Efficiency.Pages.AuthorizedZone.HomeProviderPage;
 import Efficiency.Pages.LoginPage;
 import Efficiency.Providers.ConfigProviderInterface;
 import Efficiency.TestBase;
+import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -52,5 +53,14 @@ public class HOME_PROVIDER extends TestBase {
         homeProviderPage.Assert_MyFeed_KnowledgeBaseSearch_AfterSearch();
         homeProviderPage.getKnowledgeBaseSearchWidgetAfterNotEmptySearch(super.proxy, homeProviderPage.MyFeed_KnowledgeBaseSearch_GetArticleTitleForSearch());
         homeProviderPage.Assert_MyFeed_KnowledgeBaseSearch_AfterSearch();
+    }
+
+    @Test(priority = 5, description = "Авторизованная зоня. Виджет Контур Фокус")
+    public void Counter_Agent_Display_TEST() throws IOException {
+        HomeProviderPage homeProviderPage = open(ConfigProviderInterface.authorizedProviderURL, HomeProviderPage.class);
+        homeProviderPage.Counter_Agent_Visible();
+        homeProviderPage.TakeScreenshotOfCounterAgentSection(getEnvironment());
+        boolean ResultOfComparing = homeProviderPage.compareScreenshotsOfCounterAgent(getEnvironment());
+        Assert.assertTrue(ResultOfComparing, "Скриншоты не совпали. Вёрстка не такая, как в макете");
     }
 }
