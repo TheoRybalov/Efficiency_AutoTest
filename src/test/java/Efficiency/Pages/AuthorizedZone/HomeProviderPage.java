@@ -7,6 +7,7 @@ import io.qameta.allure.Step;
 import net.lightbody.bmp.BrowserMobProxy;
 import net.lightbody.bmp.core.har.Har;
 import net.lightbody.bmp.core.har.HarEntry;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.testng.Assert;
 
@@ -30,6 +31,11 @@ public class HomeProviderPage extends AuthorizedCommonFunctions {
     private static final SelenideElement MyFeed_RecommendedArticle_Title = $x("//*[@id=\"root\"]/div/div[2]/main/div/div/div[1]/div[1]/div/div[2]/div/h4/a");
     private static final SelenideElement MyFeed_RecommendedArticle_Description = $x("//*[@id=\"root\"]/div/div[2]/main/div/div/div[1]/div[1]/div/div[2]/div/p");
     private Map<String, Object> RecommendedArticleWidgetData = new HashMap<>();
+
+    //Виджет Поиск в Базе знаний
+    private static final SelenideElement MyFeed_KnowledgeBaseSearch_Input = $x("//*[@id=\"root\"]/div/div[2]/main/div/div/div[1]/div[2]/div/div[2]/div/div/div[2]/input");
+    private static final ElementsCollection MyFeed_KnowledgeBaseSearch_items = $$x("//*[@id=\"root\"]/div/div[2]/main/div/div/div[1]/div[2]/div/div[2]/div/div[2]/div/ul/li[@class='select-list__item']");
+    private Map<String, Object> KnowledgeBaseSearchWidgetData = new HashMap<>();
 
 
 
@@ -134,6 +140,64 @@ public class HomeProviderPage extends AuthorizedCommonFunctions {
             Assert.assertEquals(actualTitle1, expectedTitle1, "Текст внутри виджета не соответствует ожидаемому значению");
         } else {
             System.out.println("Description в состоянии hidden, проверка не выполняется.");
+        }
+    }
+
+
+    @Step("Получить название статьи для поиска")
+    public String MyFeed_KnowledgeBaseSearch_GetArticleTitleForSearch(){
+        String name = MyFeed_RecommendedArticle_Title.scrollTo().shouldBe(visible).getText();
+        return name;
+    }
+
+    @Step("Получить данные из API для после ввода в поисковую строку База Знаний не пустого значения")
+    public void getKnowledgeBaseSearchWidgetAfterNotEmptySearch(BrowserMobProxy proxyTest, String inputData ) {
+        proxyTest.newHar("KnowledgeBaseSearch");
+        MyFeed_KnowledgeBaseSearch_Input
+                .scrollTo()
+                .shouldBe(visible)
+                .clear();
+        MyFeed_KnowledgeBaseSearch_Input.sendKeys(inputData);
+        sleep(3000);
+        Har har = proxyTest.getHar();
+        Map<String, Object> responseMap = new HashMap<>();
+
+        List<HarEntry> entries = har.getLog().getEntries();
+        // Находим последний подходящий запрос
+        HarEntry targetEntry = null;
+        for (int i = entries.size() - 1; i >= 0; i--) {
+            HarEntry entry = entries.get(i);
+            if (entry.getRequest().getMethod().equals("POST") &&
+                    entry.getRequest().getUrl().equals("https://aksis.dev.qsupport.ru/onboarding/api/KnowledgeBaseWidget/GraphQl")) {
+                targetEntry = entry;
+                break;
+            }
+        }
+
+        if (targetEntry != null) {
+            String responseContent = targetEntry.getResponse().getContent().getText();
+            JSONObject jsonResponse = new JSONObject(responseContent);
+            JSONArray dataArray = jsonResponse.getJSONObject("data").getJSONObject("widgetCategorySearch").getJSONArray("data");
+
+            for (int i = 0; i < dataArray.length(); i++) {
+                JSONObject item = dataArray.getJSONObject(i);
+                responseMap.put("name_" + (i + 1), item.get("name").toString());
+            }
+        }
+
+        KnowledgeBaseSearchWidgetData.putAll(responseMap);
+    }
+
+    @Step("Проверка корректности первых десяти строк в поиске Базы знаний после ввода")
+    public void Assert_MyFeed_KnowledgeBaseSearch_AfterSearch(){
+        for (int i = 0; i < MyFeed_KnowledgeBaseSearch_items.size(); i++) {
+            String apiName = (String) KnowledgeBaseSearchWidgetData.get("name_" + (i + 1));
+            String elementText = MyFeed_KnowledgeBaseSearch_items.get(i).getText();
+
+            // Замена двойных пробелов на одинарные
+            apiName = apiName.replace("  ", " ");
+            elementText = elementText.replace("  ", " ");
+            Assert.assertEquals(apiName, elementText, "Название элемента #" + (i + 1) + " не совпадает");
         }
     }
 

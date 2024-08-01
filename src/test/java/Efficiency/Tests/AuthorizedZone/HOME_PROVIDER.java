@@ -44,4 +44,13 @@ public class HOME_PROVIDER extends TestBase {
         homeProviderPage.Assert_MyFeed_RecommendedArticle_Title();
         homeProviderPage.Assert_MyFeed_RecommendedArticle_Description();
     }
+
+    @Test(priority = 3, description = "Авторизованная зона. Предприятие. Моя Лента. Поиск в Базе знаний")
+    public void MyFeed_KnowledgeBaseSearch_TEST(){
+        HomeProviderPage homeProviderPage = open(ConfigProviderInterface.authorizedProviderURL, HomeProviderPage.class);
+        homeProviderPage.getKnowledgeBaseSearchWidgetAfterNotEmptySearch(super.proxy, "");
+        homeProviderPage.Assert_MyFeed_KnowledgeBaseSearch_AfterSearch();
+        homeProviderPage.getKnowledgeBaseSearchWidgetAfterNotEmptySearch(super.proxy, homeProviderPage.MyFeed_KnowledgeBaseSearch_GetArticleTitleForSearch());
+        homeProviderPage.Assert_MyFeed_KnowledgeBaseSearch_AfterSearch();
+    }
 }
