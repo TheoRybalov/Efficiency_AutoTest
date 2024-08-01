@@ -100,7 +100,7 @@ public class  BrowserDriverFactory {
         Map<String, Dimension> environmentDimensions = Map.of(
                 "pc", new Dimension(1920, 1080),
                 "tablet", new Dimension(768, 1024),
-                "phone", new Dimension(390, 884) // Разрешение для Samsung Galaxy S21
+                "phone", new Dimension(390, 884)
         );
 
         if (environmentDimensions.containsKey(environment.toLowerCase())) {

@@ -30,6 +30,15 @@ public class HOME_EXPERT extends TestBase {
         loginPage.login(EXPERT_USER, EXPERT_PASSWORD);
     }
 
+    @Test(priority = 1, description = "Авторизованная зона. Боковое меню")
+    public void Side_Menu_TEST(){
+        HomeExpertPage homeExpertPage = open(ConfigProviderInterface.authorizedExpertURL, HomeExpertPage.class);
+        homeExpertPage.getSideMenuDataFromApi();
+        homeExpertPage.Assert_SideMenu_WidgetData_Titles();
+        homeExpertPage.Assert_SideMenu_WidgetData_URLs();
+        homeExpertPage.Assert_SideMenu_ServicesData_Titles();
+        homeExpertPage.Assert_SideMenu_ServicesData_URLs();
+    }
     @Test(priority = 1, description = "Авторизованная зона. Моя Лента.Виджет 'Витрина решений'")
     public void MyFeed_Solutions_TEST() throws SQLException {
         HomeExpertPage homeExpertPage = open(ConfigProviderInterface.authorizedExpertURL, HomeExpertPage.class);
