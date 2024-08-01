@@ -439,8 +439,6 @@ public class HomeEnterprisePage extends AuthorizedCommonFunctions {
         Assert.assertEquals(actualTitle, expectedTitle, "Ссылка не соответствует ожидаемому значению.");
     }
 
-
-    //пока на паузе
     @Step("Получить данные из API для виджета Рекомендуемая статья")
     public void getRecommendedArticleWidgetDataFromApi(BrowserMobProxy proxyTest) {
         proxyTest.newHar("RecommendedArticle");

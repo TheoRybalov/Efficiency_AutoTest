@@ -2,7 +2,12 @@ package Efficiency.Pages.AuthorizedZone;
 
 import Efficiency.AuthorizedCommonFunctions;
 import com.codeborne.selenide.ElementsCollection;
+import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
+import net.lightbody.bmp.BrowserMobProxy;
+import net.lightbody.bmp.core.har.Har;
+import net.lightbody.bmp.core.har.HarEntry;
+import org.json.JSONObject;
 import org.testng.Assert;
 
 import java.util.HashMap;
@@ -10,7 +15,8 @@ import java.util.List;
 import java.util.Map;
 
 import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selenide.$$x;
+import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Selenide.sleep;
 
 public class HomeProviderPage extends AuthorizedCommonFunctions {
     //Боковое меню
@@ -19,6 +25,13 @@ public class HomeProviderPage extends AuthorizedCommonFunctions {
     private static final ElementsCollection SideMenu_Services = $$x("//*[@id=\"root\"]/div/div[2]/main/aside/div/div/nav/div/div[2]/div/div/div[1]/div/ul/li");
     private static final ElementsCollection SideMenu_Services_hrefs = $$x("//*[@id=\"root\"]/div/div[2]/main/aside/div/div/nav/div/div[2]/div/div/div[1]/div/ul/a");
     private Map<String, Object> SideMenuData = new HashMap<>();
+
+    //Виджет Рекомендуемая статья
+    private static final SelenideElement MyFeed_RecommendedArticle_Title = $x("//*[@id=\"root\"]/div/div[2]/main/div/div/div[1]/div[1]/div/div[2]/div/h4/a");
+    private static final SelenideElement MyFeed_RecommendedArticle_Description = $x("//*[@id=\"root\"]/div/div[2]/main/div/div/div[1]/div[1]/div/div[2]/div/p");
+    private Map<String, Object> RecommendedArticleWidgetData = new HashMap<>();
+
+
 
 
     @Step("Получить данные из API для Бокового меню")
@@ -73,6 +86,55 @@ public class HomeProviderPage extends AuthorizedCommonFunctions {
             Assert.assertEquals(apiUrl, elementUrl, "Ссылка для элемента " + SideMenu_Widgets.get(i).getText() + " не совпадает");
         }
 
+    }
+
+
+    @Step("Получить данные из API для виджета Рекомендуемая статья")
+    public void getRecommendedArticleWidgetDataFromApi(BrowserMobProxy proxyTest) {
+        proxyTest.newHar("RecommendedArticle");
+        refresh();
+        sleep(1000);
+        MyFeed_RecommendedArticle_Title.scrollTo().shouldBe(visible);
+        Har har = proxyTest.getHar();
+        Map<String, Object> responseMap = new HashMap<>();
+
+        List<HarEntry> entries = har.getLog().getEntries();
+        for (HarEntry entry : entries) {
+            if (entry.getRequest().getMethod().equals("POST") &&
+                    entry.getRequest().getUrl().equals("https://aksis.dev.qsupport.ru/onboarding/api/KnowledgeBaseWidget/GraphQl")) {
+
+                String responseContent = entry.getResponse().getContent().getText();
+                JSONObject jsonResponse = new JSONObject(responseContent);
+                JSONObject widgetRandomArticle = jsonResponse.getJSONObject("data").getJSONObject("widgetRandomArticle");
+
+                responseMap.put("id", widgetRandomArticle.getString("id"));
+                responseMap.put("name", widgetRandomArticle.getString("name"));
+                responseMap.put("description", widgetRandomArticle.getString("description"));
+                break;
+            }
+        }
+
+        RecommendedArticleWidgetData.putAll(responseMap);
+
+    }
+
+    @Step("Проверка корректности заголовка статьи внутри виджета Рекомендуемая статья")
+    public void Assert_MyFeed_RecommendedArticle_Title(){
+        MyFeed_RecommendedArticle_Title.scrollTo().shouldBe(visible);
+        String actualTitle1 = MyFeed_RecommendedArticle_Title.getText();
+        String expectedTitle1 = (String) RecommendedArticleWidgetData.get("name");
+        Assert.assertEquals(actualTitle1, expectedTitle1, "Текст внутри виджета не соответсвует ожидаемому значению");
+    }
+
+    @Step("Проверка корректности описания статьи внутри виджета Рекомендуемая статья")
+    public void Assert_MyFeed_RecommendedArticle_Description(){
+        if (MyFeed_RecommendedArticle_Description.is(visible)) {
+            String actualTitle1 = MyFeed_RecommendedArticle_Description.getText();
+            String expectedTitle1 = (String) RecommendedArticleWidgetData.get("description");
+            Assert.assertEquals(actualTitle1, expectedTitle1, "Текст внутри виджета не соответствует ожидаемому значению");
+        } else {
+            System.out.println("Description в состоянии hidden, проверка не выполняется.");
+        }
     }
 
 
