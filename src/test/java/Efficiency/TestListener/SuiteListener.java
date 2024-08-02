@@ -34,7 +34,7 @@ public class SuiteListener implements ISuiteListener {
             EmailUtil.sendEmail("fedorrybalov@gmail.com", subject, body);
             EmailUtil.sendEmail("betliyk@quantumart.ru", subject, body);
             EmailUtil.sendEmail("paliys@quantumart.ru", subject, body);
-
+            EmailUtil.sendEmail("rubina@quantumart.ru", subject, body);
         } catch (Exception e) {
             e.printStackTrace();
         }
