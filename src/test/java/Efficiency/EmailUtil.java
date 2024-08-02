@@ -7,7 +7,7 @@ import javax.mail.internet.*;
 public class EmailUtil {
 
     public static void sendEmail(String to, String subject, String body) {
-        String from = "rybalovtesting@gmail.com"; // email отправителя
+        String from = "quantumartspb1@gmail.com"; // email отправителя
         String host = "smtp.gmail.com"; // SMTP сервер
 
         Properties properties = System.getProperties();
@@ -18,7 +18,7 @@ public class EmailUtil {
 
         Session session = Session.getDefaultInstance(properties, new javax.mail.Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication("rybalovtesting@gmail.com", "uyuo vsdz khbr hioa");
+                return new PasswordAuthentication("quantumartspb1@gmail.com", "imka ohig skbw qqet");
             }
         });
 
