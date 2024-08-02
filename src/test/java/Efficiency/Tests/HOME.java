@@ -4,6 +4,7 @@ import Efficiency.Pages.HomePage;
 import Efficiency.Providers.ConfigProviderInterface;
 import Efficiency.TestBase;
 import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
@@ -15,7 +16,6 @@ public class HOME extends TestBase {
     public String getEnvironment(){
         return super.getEnv();
     }
-
 
     @Test(priority = 1, description = "Домашняя страница. Редиректы на хэдере")
     public void Header_TEST() throws IOException {

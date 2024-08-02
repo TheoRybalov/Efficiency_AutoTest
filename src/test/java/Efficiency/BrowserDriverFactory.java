@@ -1,31 +1,55 @@
 package Efficiency;
 import com.codeborne.selenide.WebDriverRunner;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import net.lightbody.bmp.BrowserMobProxy;
+import net.lightbody.bmp.BrowserMobProxyServer;
+import net.lightbody.bmp.BrowserMobProxy;
+import net.lightbody.bmp.BrowserMobProxyServer;
+import net.lightbody.bmp.proxy.CaptureType;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.remote.RemoteWebDriver;
-
+import net.lightbody.bmp.client.ClientUtil;
+import org.openqa.selenium.Proxy;
 import java.io.File;
+import java.net.Inet4Address;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.Map;
 
 public class  BrowserDriverFactory {
 
     private WebDriver driver = null;
+    public BrowserMobProxy proxy;
+    private Proxy seleniumProxy;
 
-    public WebDriver createDriver(String browser, String environment, String mode) {
+
+    public WebDriver createDriver(String browser, String environment, String mode, boolean useProxy) throws UnknownHostException {
         switch (browser.toLowerCase()) {
             case "chrome":
                 System.out.println("Starting " + browser + " locally");
+
                 WebDriverManager.chromedriver().setup();
+                HashMap<String, Object> chromePrefs = new HashMap<>();
                 ChromeOptions options = new ChromeOptions();
+                if(useProxy){proxy = new BrowserMobProxyServer();
+                    proxy.start(8080);
+                    seleniumProxy = ClientUtil.createSeleniumProxy(proxy);
+                    String hostIp = Inet4Address.getLocalHost().getHostAddress();
+                    seleniumProxy.setHttpProxy(hostIp + ":" + proxy.getPort());
+                    seleniumProxy.setSslProxy(hostIp + ":" + proxy.getPort());
+                    proxy.enableHarCaptureTypes(CaptureType.REQUEST_CONTENT, CaptureType.RESPONSE_CONTENT);
+
+                    options.setProxy(seleniumProxy);
+                    options.setAcceptInsecureCerts(true);}
+
                 options.addArguments("--disable-notifications");
                 options.addArguments("--remote-allow-origins=*");
                 options.addArguments("--disable-background-networking");
+
 
                 if (mode.equals("headless")) {
                     options.addArguments("--headless");
@@ -37,7 +61,7 @@ public class  BrowserDriverFactory {
                         dir.mkdirs();
                     }
 
-                    HashMap<String, Object> chromePrefs = new HashMap<>();
+
                     chromePrefs.put("download.default_directory", downloadDir);
                     chromePrefs.put("download.prompt_for_download", false);
                     chromePrefs.put("plugins.always_open_pdf_externally", true); // Добавлено для принудительного сохранения PDF
@@ -76,7 +100,7 @@ public class  BrowserDriverFactory {
         Map<String, Dimension> environmentDimensions = Map.of(
                 "pc", new Dimension(1920, 1080),
                 "tablet", new Dimension(768, 1024),
-                "phone", new Dimension(390, 884) // Разрешение для Samsung Galaxy S21
+                "phone", new Dimension(390, 884)
         );
 
         if (environmentDimensions.containsKey(environment.toLowerCase())) {
@@ -89,6 +113,11 @@ public class  BrowserDriverFactory {
     private String getDownloadDirectory() {
         String projectDir = System.getProperty("user.dir");
         return projectDir + File.separator + "src" + File.separator + "test" + File.separator + "resources";
+    }
+
+
+    public BrowserMobProxy getProxy() {
+        return proxy;
     }
 
 }

@@ -5,45 +5,70 @@ import com.codeborne.selenide.WebDriverRunner;
 import com.github.romankh3.image.comparison.ImageComparison;
 import com.github.romankh3.image.comparison.ImageComparisonUtil;
 import com.github.romankh3.image.comparison.model.ImageComparisonResult;
+import io.qameta.allure.Step;
 import org.apache.commons.lang3.RandomStringUtils;
-import io.restassured.RestAssured;
 import io.restassured.response.Response;
-import org.bouncycastle.pqc.crypto.util.PQCOtherInfoGenerator;
 import org.openqa.selenium.*;
 import org.testng.Assert;
 import ru.yandex.qatools.ashot.AShot;
 import ru.yandex.qatools.ashot.Screenshot;
-import ru.yandex.qatools.ashot.coordinates.WebDriverCoordsProvider;
 import ru.yandex.qatools.ashot.shooting.ShootingStrategies;
 
 import javax.imageio.ImageIO;
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.sql.*;
+import java.util.*;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.WebDriverRunner.url;
+import static io.restassured.RestAssured.given;
 
 public class CommonFunctions {
     protected static final String DB_URL = System.getenv()
             .getOrDefault("DB_URL", "jdbc:postgresql://172.16.4.238/minpromtorg_catalog");
+    protected static final String DB_URL_MINPROMTORG = System.getenv()
+            .getOrDefault("DB_URL", "jdbc:postgresql://172.16.4.238/minpromtorg");
     protected static final String DB_USER = System.getenv()
             .getOrDefault("DB_USER", "postgres");
     protected static final String DB_PASSWORD = System.getenv()
             .getOrDefault("DB_PASSWORD", "1q2w-p=[");
 
+
+    @Step("Получить информацию о виджете из базы данных")
+    public Map<String, Object> getDataFromDB(String tableName, String contentItemId) throws SQLException {
+
+        String query = "SELECT * FROM " + tableName + " WHERE content_item_id = " + contentItemId;
+        Map<String, Object> WidgetDataQP = new HashMap<>();
+
+        try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                ResultSetMetaData rsMetaData = rs.getMetaData();
+                int columnCount = rsMetaData.getColumnCount();
+
+                if (rs.next()) {
+                    for (int i = 1; i <= columnCount; i++) {
+                        String columnName = rsMetaData.getColumnName(i);
+                        Object columnValue = rs.getString(i);
+                        WidgetDataQP.put(columnName, columnValue);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return WidgetDataQP;
+
+    }
+
     public void CheckDownloadedByLinkFile(SelenideElement link, String expectedFileName){
         sleep(2000);
         link.scrollTo().click();
-//        sleep(5000);
         String downloadDir = System.getProperty("user.dir");
         downloadDir = downloadDir + File.separator + "src" + File.separator + "test" + File.separator + "resources" + File.separator + "pdf" + File.separator + expectedFileName;
         File downloadedFile = new File(downloadDir);
@@ -99,7 +124,7 @@ public class CommonFunctions {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].scrollIntoView();", element);
         js.executeScript("document.body.style.overflow = 'hidden';");
-
+        sleep(4000);
         File screenshotFile = element.screenshot();
 
         BufferedImage fullImg = ImageIO.read(screenshotFile);

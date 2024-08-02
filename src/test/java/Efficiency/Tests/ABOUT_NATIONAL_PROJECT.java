@@ -4,6 +4,7 @@ import Efficiency.Pages.AboutNationalProject;
 import Efficiency.Pages.PressCenterPage;
 import Efficiency.Providers.ConfigProviderInterface;
 import Efficiency.TestBase;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
@@ -32,6 +33,6 @@ public class ABOUT_NATIONAL_PROJECT extends TestBase {
         aboutNationalProject.AcceptCookies();
         aboutNationalProject.TakeScreenshotOfFullPage(getEnvironment());
         Boolean result_of_comparing = aboutNationalProject.compareScreenshotsOfFullPage(getEnvironment());
-        aboutNationalProject.AssertionCompareScreenshots(result_of_comparing);
+        Assert.assertTrue(result_of_comparing, "Скриншоты не совпали. Вёрстка не такая, как в макете");
     }
 }

@@ -21,5 +21,7 @@ public interface ConfigProviderInterface {
     String nationalProjectURL = readConfig().getString("NationalProjectURL");
     String faqURL = readConfig().getString("FaqURL");
     String contactsURL = readConfig().getString("ContactsURL");
-
+    String authorizedEnterpriseURL = readConfig().getString("AuthorizedEnterpriseURL");
+    String authorizedExpertURL = readConfig().getString("AuthorizedExpertURL");
+    String authorizedProviderURL = readConfig().getString("AuthorizedProviderURL");
 }

@@ -3,6 +3,7 @@ package Efficiency.Tests;
 import Efficiency.Pages.EnterprisePage;
 import Efficiency.Providers.ConfigProviderInterface;
 import Efficiency.TestBase;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
@@ -20,7 +21,7 @@ public class ENTERPRISE extends TestBase {
         enterprisePage.AcceptCookies();
         enterprisePage.TakeScreenshotOfFullPage(getEnvironment());
         Boolean result_of_comparing = enterprisePage.compareScreenshotsOfFullPage(getEnvironment());
-        enterprisePage.AssertionCompareScreenshots(result_of_comparing);
+        Assert.assertTrue(result_of_comparing, "Скриншоты не совпали. Вёрстка не такая, как в макете");
     }
 
     @Test(priority = 1, description = "Страница 'Предприятиям'. Редиректы в разделе 'Наши отрасли'")

@@ -158,6 +158,7 @@ public class PressCenterPage extends CommonFunctions {
         super.TakeScreenshotOfElement(FooterSection, screenshotPath);
     }
 
+
     @Step("Сравнение скриншотов кнопки 'Смотреть видео о платформе' до и после наведения")
     public boolean compareScreenshotsOfSection(String environment, String NameOfSection) throws IOException{
         String screenshotPath = null;
