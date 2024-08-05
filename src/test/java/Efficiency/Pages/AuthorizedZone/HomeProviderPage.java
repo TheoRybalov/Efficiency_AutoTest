@@ -220,10 +220,10 @@ public class HomeProviderPage extends AuthorizedCommonFunctions {
                 screenshotPath = "src/test/resources/screenshots/AuthZone/HomeProviderPage/PC/Elements/CounterAgentSection/current.png";
                 break;
             case "tablet":
-                screenshotPath = "src/test/resources/screenshots/AuthZone/HomeProviderPage/phone/Elements/CounterAgentSection/current.png";
+                screenshotPath = "src/test/resources/screenshots/AuthZone/HomeProviderPage/tablet/Elements/CounterAgentSection/current.png";
                 break;
             case "phone":
-                screenshotPath = "src/test/resources/screenshots/AuthZone/HomeProviderPage/tablet/Elements/CounterAgentSection/current.png";
+                screenshotPath = "src/test/resources/screenshots/AuthZone/HomeProviderPage/phone/Elements/CounterAgentSection/current.png";
                 break;
             default:
                 throw new IllegalArgumentException("Неверный параметр окружения: " + environment);
