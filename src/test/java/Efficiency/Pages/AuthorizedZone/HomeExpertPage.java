@@ -269,13 +269,13 @@ public class HomeExpertPage extends AuthorizedCommonFunctions {
         sleep(2000);
         switch (environment) {
             case "PC":
-                screenshotPath = "src/test/resources/screenshots/HomeExpertPage/PC/Elements/CounterAgentSection/current.png";
+                screenshotPath = "src/test/resources/screenshots/AuthZone/HomeExpertPage/PC/Elements/CounterAgentSection/current.png";
                 break;
             case "tablet":
-                screenshotPath = "src/test/resources/screenshots/HomeExpertPage/tablet/Elements/CounterAgentSection/current.png";
+                screenshotPath = "src/test/resources/screenshots/AuthZone/HomeExpertPage/tablet/Elements/CounterAgentSection/current.png";
                 break;
             case "phone":
-                screenshotPath = "src/test/resources/screenshots/HomeExpertPage/phone/Elements/CounterAgentSection/current.png";
+                screenshotPath = "src/test/resources/screenshots/AuthZone/HomeExpertPage/phone/Elements/CounterAgentSection/current.png";
                 break;
             default:
                 throw new IllegalArgumentException("Неверный параметр окружения: " + environment);
@@ -291,19 +291,19 @@ public class HomeExpertPage extends AuthorizedCommonFunctions {
 
         switch (environment) {
             case "PC":
-                screenshotPath = "src/test/resources/screenshots/HomeExpertPage/PC/Elements/CounterAgentSection/current.png";
-                referencePath = "src/test/resources/screenshots/HomeExpertPage/PC/Elements/CounterAgentSection/reference.png";
-                resultPath = "src/test/resources/screenshots/HomeExpertPage/PC/Elements/CounterAgentSection/differences.png";
+                screenshotPath = "src/test/resources/screenshots/AuthZone/HomeExpertPage/PC/Elements/CounterAgentSection/current.png";
+                referencePath = "src/test/resources/screenshots/AuthZone/HomeExpertPage/PC/Elements/CounterAgentSection/reference.png";
+                resultPath = "src/test/resources/screenshots/AuthZone/HomeExpertPage/PC/Elements/CounterAgentSection/differences.png";
                 break;
             case "phone":
-                screenshotPath = "src/test/resources/screenshots/HomeExpertPage/phone/Elements/CounterAgentSection/current.png";
-                referencePath = "src/test/resources/screenshots/HomeExpertPage/phone/Elements/CounterAgentSection/reference.png";
-                resultPath = "src/test/resources/screenshots/HomeExpertPage/phone/Elements/CounterAgentSection/differences.png";
+                screenshotPath = "src/test/resources/screenshots/AuthZone/HomeExpertPage/phone/Elements/CounterAgentSection/current.png";
+                referencePath = "src/test/resources/screenshots/AuthZone/HomeExpertPage/phone/Elements/CounterAgentSection/reference.png";
+                resultPath = "src/test/resources/screenshots/AuthZone/HomeExpertPage/phone/Elements/CounterAgentSection/differences.png";
                 break;
             case "tablet":
-                screenshotPath = "src/test/resources/screenshots/HomeExpertPage/tablet/Elements/CounterAgentSection/current.png";
-                referencePath = "src/test/resources/screenshots/HomeExpertPage/tablet/Elements/CounterAgentSection/reference.png";
-                resultPath = "src/test/resources/screenshots/HomeExpertPage/tablet/Elements/CounterAgentSection/differences.png";
+                screenshotPath = "src/test/resources/screenshots/AuthZone/HomeExpertPage/tablet/Elements/CounterAgentSection/current.png";
+                referencePath = "src/test/resources/screenshots/AuthZone/HomeExpertPage/tablet/Elements/CounterAgentSection/reference.png";
+                resultPath = "src/test/resources/screenshots/AuthZone/HomeExpertPage/tablet/Elements/CounterAgentSection/differences.png";
                 break;
             default:
                 throw new IllegalArgumentException("Неверный параметр окружения: " + environment);
