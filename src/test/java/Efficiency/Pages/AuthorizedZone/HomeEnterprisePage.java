@@ -553,14 +553,14 @@ public class HomeEnterprisePage extends AuthorizedCommonFunctions {
         String screenshotPath = null;
         switch (environment) {
             case "PC":
-                screenshotPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/PC/Elements/CounterpartyWidget1/current.png";
+                screenshotPath = "src/test/resources/screenshots/AuthZone/HomeEnterprisePage/PC/Elements/CounterpartyWidget1/current.png";
                 break;
             case "tablet":
-                screenshotPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/tablet/Elements/CounterpartyWidget1/current.png";
+                screenshotPath = "src/test/resources/screenshots/AuthZone/HomeEnterprisePage/tablet/Elements/CounterpartyWidget1/current.png";
                 break;
             case "phone":
                 //Если мы получаем скриншот в кофигурации ПК, то сохранение будет идти в эту папку
-                screenshotPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/phone/Elements/CounterpartyWidget1/current.png";
+                screenshotPath = "src/test/resources/screenshots/AuthZone/HomeEnterprisePage/phone/Elements/CounterpartyWidget1/current.png";
                 break;
             default:
                 throw new IllegalArgumentException("Неверный параметр окружения: " + environment);
@@ -579,19 +579,19 @@ public class HomeEnterprisePage extends AuthorizedCommonFunctions {
         switch (environment) {
             case "PC":
                 //Если мы получаем скриншот в кофигурации ПК, то для сравнения current и reference нужно вытащить из этих папок
-                screenshotPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/PC/Elements/CounterpartyWidget1/current.png";
+                screenshotPath = "src/test/resources/screenshots/AuthZone/HomeEnterprisePage/PC/Elements/CounterpartyWidget1/current.png";
                 referencePath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/PC/Elements/CounterpartyWidget1/reference.png";
                 resultPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/PC/Elements/CounterpartyWidget1/difference.png";
                 break;
             case "phone":
-                screenshotPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/phone/Elements/CounterpartyWidget1/current.png";
-                referencePath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/phone/Elements/CounterpartyWidget1/reference.png";
-                resultPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/phone/Elements/CounterpartyWidget1/difference.png";
+                screenshotPath = "src/test/resources/screenshots/AuthZone/HomeEnterprisePage/phone/Elements/CounterpartyWidget1/current.png";
+                referencePath = "src/test/resources/screenshots/AuthZone/HomeEnterprisePage/phone/Elements/CounterpartyWidget1/reference.png";
+                resultPath = "src/test/resources/screenshots/AuthZone/HomeEnterprisePage/phone/Elements/CounterpartyWidget1/difference.png";
                 break;
             case "tablet":
-                screenshotPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/tablet/Elements/CounterpartyWidget1/current.png";
-                referencePath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/tablet/Elements/CounterpartyWidget1/reference.png";
-                resultPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/tablet/Elements/CounterpartyWidget1/difference.png";
+                screenshotPath = "src/test/resources/screenshots/AuthZone/HomeEnterprisePage/tablet/Elements/CounterpartyWidget1/current.png";
+                referencePath = "src/test/resources/screenshots/AuthZone/HomeEnterprisePage/tablet/Elements/CounterpartyWidget1/reference.png";
+                resultPath = "src/test/resources/screenshots/AuthZone/HomeEnterprisePage/tablet/Elements/CounterpartyWidget1/difference.png";
                 break;
             default:
                 throw new IllegalArgumentException("Неверный параметр окружения: " + environment);
@@ -609,13 +609,13 @@ public class HomeEnterprisePage extends AuthorizedCommonFunctions {
         String screenshotPath = null;
         switch (environment) {
             case "PC":
-                screenshotPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/PC/Elements/CounterpartyWidget2/current.png";
+                screenshotPath = "src/test/resources/screenshots/AuthZone/HomeEnterprisePage/PC/Elements/CounterpartyWidget2/current.png";
                 break;
             case "tablet":
-                screenshotPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/tablet/Elements/CounterpartyWidget2/current.png";
+                screenshotPath = "src/test/resources/screenshots/AuthZone/HomeEnterprisePage/tablet/Elements/CounterpartyWidget2/current.png";
                 break;
             case "phone":
-                screenshotPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/phone/Elements/CounterpartyWidget2/current.png";
+                screenshotPath = "src/test/resources/screenshots/AuthZone/HomeEnterprisePage/phone/Elements/CounterpartyWidget2/current.png";
                 break;
             default:
                 throw new IllegalArgumentException("Неверный параметр окружения: " + environment);
@@ -632,19 +632,19 @@ public class HomeEnterprisePage extends AuthorizedCommonFunctions {
         String resultPath = null;
         switch (environment) {
             case "PC":
-                screenshotPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/PC/Elements/CounterpartyWidget2/current.png";
-                referencePath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/PC/Elements/CounterpartyWidget2/reference.png";
-                resultPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/PC/Elements/CounterpartyWidget2/difference.png";
+                screenshotPath = "src/test/resources/screenshots/AuthZone/HomeEnterprisePage/PC/Elements/CounterpartyWidget2/current.png";
+                referencePath = "src/test/resources/screenshots/AuthZone/HomeEnterprisePage/PC/Elements/CounterpartyWidget2/reference.png";
+                resultPath = "src/test/resources/screenshots/AuthZone/HomeEnterprisePage/PC/Elements/CounterpartyWidget2/difference.png";
                 break;
             case "tablet":
-                screenshotPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/tablet/Elements/CounterpartyWidget2/current.png";
-                referencePath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/tablet/Elements/CounterpartyWidget2/reference.png";
-                resultPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/tablet/Elements/CounterpartyWidget2/difference.png";
+                screenshotPath = "src/test/resources/screenshots/AuthZone/HomeEnterprisePage/tablet/Elements/CounterpartyWidget2/current.png";
+                referencePath = "src/test/resources/screenshots/AuthZone/HomeEnterprisePage/tablet/Elements/CounterpartyWidget2/reference.png";
+                resultPath = "src/test/resources/screenshots/AuthZone/HomeEnterprisePage/tablet/Elements/CounterpartyWidget2/difference.png";
                 break;
             case "phone":
-                screenshotPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/phone/Elements/CounterpartyWidget2/current.png";
-                referencePath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/phone/Elements/CounterpartyWidget2/reference.png";
-                resultPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/phone/Elements/CounterpartyWidget2/difference.png";
+                screenshotPath = "src/test/resources/screenshots/AuthZone/HomeEnterprisePage/phone/Elements/CounterpartyWidget2/current.png";
+                referencePath = "src/test/resources/screenshots/AuthZone/HomeEnterprisePage/phone/Elements/CounterpartyWidget2/reference.png";
+                resultPath = "src/test/resources/screenshots/AuthZone/HomeEnterprisePage/phone/Elements/CounterpartyWidget2/difference.png";
                 break;
             default:
                 throw new IllegalArgumentException("Неверный параметр окружения: " + environment);
@@ -661,13 +661,13 @@ public class HomeEnterprisePage extends AuthorizedCommonFunctions {
         String screenshotPath = null;
         switch (environment) {
             case "PC":
-                screenshotPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/PC/Elements/Elemental_Support_Column_1/current.png";
+                screenshotPath = "src/test/resources/screenshots/AuthZone/HomeEnterprisePage/PC/Elements/Elemental_Support_Column_1/current.png";
                 break;
             case "tablet":
-                screenshotPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/tablet/Elements/Elemental_Support_Column_1/current.png";
+                screenshotPath = "src/test/resources/screenshots/AuthZone/HomeEnterprisePage/tablet/Elements/Elemental_Support_Column_1/current.png";
                 break;
             case "phone":
-                screenshotPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/phone/Elements/Elemental_Support_Column_1/current.png";
+                screenshotPath = "src/test/resources/screenshots/AuthZone/HomeEnterprisePage/phone/Elements/Elemental_Support_Column_1/current.png";
                 break;
             default:
                 throw new IllegalArgumentException("Неверный параметр окружения: " + environment);
@@ -684,13 +684,13 @@ public class HomeEnterprisePage extends AuthorizedCommonFunctions {
         String screenshotPath = null;
         switch (environment) {
             case "PC":
-                screenshotPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/PC/Elements/Elemental_Support_Column_2/current.png";
+                screenshotPath = "src/test/resources/screenshots/AuthZone/HomeEnterprisePage/PC/Elements/Elemental_Support_Column_2/current.png";
                 break;
             case "tablet":
-                screenshotPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/tablet/Elements/Elemental_Support_Column_2/current.png";
+                screenshotPath = "src/test/resources/screenshots/AuthZone/HomeEnterprisePage/tablet/Elements/Elemental_Support_Column_2/current.png";
                 break;
             case "phone":
-                screenshotPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/phone/Elements/Elemental_Support_Column_2/current.png";
+                screenshotPath = "src/test/resources/screenshots/AuthZone/HomeEnterprisePage/phone/Elements/Elemental_Support_Column_2/current.png";
                 break;
             default:
                 throw new IllegalArgumentException("Неверный параметр окружения: " + environment);
@@ -707,13 +707,13 @@ public class HomeEnterprisePage extends AuthorizedCommonFunctions {
         String screenshotPath = null;
         switch (environment) {
             case "PC":
-                screenshotPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/PC/Elements/Elemental_Support_Column_3/current.png";
+                screenshotPath = "src/test/resources/screenshots/AuthZone/HomeEnterprisePage/PC/Elements/Elemental_Support_Column_3/current.png";
                 break;
             case "tablet":
-                screenshotPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/tablet/Elements/Elemental_Support_Column_3/current.png";
+                screenshotPath = "src/test/resources/screenshots/AuthZone/HomeEnterprisePage/tablet/Elements/Elemental_Support_Column_3/current.png";
                 break;
             case "phone":
-                screenshotPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/phone/Elements/Elemental_Support_Column_3/current.png";
+                screenshotPath = "src/test/resources/screenshots/AuthZone/HomeEnterprisePage/phone/Elements/Elemental_Support_Column_3/current.png";
                 break;
             default:
                 throw new IllegalArgumentException("Неверный параметр окружения: " + environment);
@@ -731,13 +731,13 @@ public class HomeEnterprisePage extends AuthorizedCommonFunctions {
         String screenshotPath = null;
         switch (environment) {
             case "PC":
-                screenshotPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/PC/Elements/Elemental_Support_Column_4/current.png";
+                screenshotPath = "src/test/resources/screenshots/AuthZone/HomeEnterprisePage/PC/Elements/Elemental_Support_Column_4/current.png";
                 break;
             case "tablet":
-                screenshotPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/tablet/Elements/Elemental_Support_Column_4/current.png";
+                screenshotPath = "src/test/resources/screenshots/AuthZone/HomeEnterprisePage/tablet/Elements/Elemental_Support_Column_4/current.png";
                 break;
             case "phone":
-                screenshotPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/phone/Elements/Elemental_Support_Column_4/current.png";
+                screenshotPath = "src/test/resources/screenshots/AuthZone/HomeEnterprisePage/phone/Elements/Elemental_Support_Column_4/current.png";
                 break;
             default:
                 throw new IllegalArgumentException("Неверный параметр окружения: " + environment);
@@ -754,19 +754,19 @@ public class HomeEnterprisePage extends AuthorizedCommonFunctions {
 
         switch (environment) {
             case "PC":
-                screenshotPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/PC/Elements/Elemental_Support_Column_1/current.png";
-                referencePath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/PC/Elements/Elemental_Support_Column_1/reference.png";
-                resultPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/PC/Elements/Elemental_Support_Column_1/difference.png";
+                screenshotPath = "src/test/resources/screenshots/AuthZone/HomeEnterprisePage/PC/Elements/Elemental_Support_Column_1/current.png";
+                referencePath = "src/test/resources/screenshots/AuthZone/HomeEnterprisePage/PC/Elements/Elemental_Support_Column_1/reference.png";
+                resultPath = "src/test/resources/screenshots/AuthZone/HomeEnterprisePage/PC/Elements/Elemental_Support_Column_1/difference.png";
                 break;
             case "tablet":
-                screenshotPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/tablet/Elements/Elemental_Support_Column_1/current.png";
-                referencePath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/tablet/Elements/Elemental_Support_Column_1/reference.png";
-                resultPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/tablet/Elements/Elemental_Support_Column_1/difference.png";
+                screenshotPath = "src/test/resources/screenshots/AuthZone/HomeEnterprisePage/tablet/Elements/Elemental_Support_Column_1/current.png";
+                referencePath = "src/test/resources/screenshots/AuthZone/HomeEnterprisePage/tablet/Elements/Elemental_Support_Column_1/reference.png";
+                resultPath = "src/test/resources/screenshots/AuthZone/HomeEnterprisePage/tablet/Elements/Elemental_Support_Column_1/difference.png";
                 break;
             case "phone":
-                screenshotPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/phone/Elements/Elemental_Support_Column_1/current.png";
-                referencePath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/phone/Elements/Elemental_Support_Column_1/reference.png";
-                resultPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/phone/Elements/Elemental_Support_Column_1/difference.png";
+                screenshotPath = "src/test/resources/screenshots/AuthZone/HomeEnterprisePage/phone/Elements/Elemental_Support_Column_1/current.png";
+                referencePath = "src/test/resources/screenshots/AuthZone/HomeEnterprisePage/phone/Elements/Elemental_Support_Column_1/reference.png";
+                resultPath = "src/test/resources/screenshots/AuthZone/HomeEnterprisePage/phone/Elements/Elemental_Support_Column_1/difference.png";
                 break;
             default:
                 throw new IllegalArgumentException("Неверный параметр окружения: " + environment);
@@ -783,19 +783,19 @@ public class HomeEnterprisePage extends AuthorizedCommonFunctions {
 
         switch (environment) {
             case "PC":
-                screenshotPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/PC/Elements/Elemental_Support_Column_2/current.png";
-                referencePath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/PC/Elements/Elemental_Support_Column_2/reference.png";
-                resultPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/PC/Elements/Elemental_Support_Column_2/difference.png";
+                screenshotPath = "src/test/resources/screenshots/AuthZone/HomeEnterprisePage/PC/Elements/Elemental_Support_Column_2/current.png";
+                referencePath = "src/test/resources/screenshots/AuthZone/HomeEnterprisePage/PC/Elements/Elemental_Support_Column_2/reference.png";
+                resultPath = "src/test/resources/screenshots/AuthZone/HomeEnterprisePage/PC/Elements/Elemental_Support_Column_2/difference.png";
                 break;
             case "tablet":
-                screenshotPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/tablet/Elements/Elemental_Support_Column_2/current.png";
-                referencePath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/tablet/Elements/Elemental_Support_Column_2/reference.png";
-                resultPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/tablet/Elements/Elemental_Support_Column_2/difference.png";
+                screenshotPath = "src/test/resources/screenshots/AuthZone/HomeEnterprisePage/tablet/Elements/Elemental_Support_Column_2/current.png";
+                referencePath = "src/test/resources/screenshots/AuthZone/HomeEnterprisePage/tablet/Elements/Elemental_Support_Column_2/reference.png";
+                resultPath = "src/test/resources/screenshots/AuthZone/HomeEnterprisePage/tablet/Elements/Elemental_Support_Column_2/difference.png";
                 break;
             case "phone":
-                screenshotPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/phone/Elements/Elemental_Support_Column_2/current.png";
-                referencePath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/phone/Elements/Elemental_Support_Column_2/reference.png";
-                resultPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/phone/Elements/Elemental_Support_Column_2/difference.png";
+                screenshotPath = "src/test/resources/screenshots/AuthZone/HomeEnterprisePage/phone/Elements/Elemental_Support_Column_2/current.png";
+                referencePath = "src/test/resources/screenshots/AuthZone/HomeEnterprisePage/phone/Elements/Elemental_Support_Column_2/reference.png";
+                resultPath = "src/test/resources/screenshots/AuthZone/HomeEnterprisePage/phone/Elements/Elemental_Support_Column_2/difference.png";
                 break;
             default:
                 throw new IllegalArgumentException("Неверный параметр окружения: " + environment);
@@ -812,19 +812,19 @@ public class HomeEnterprisePage extends AuthorizedCommonFunctions {
 
         switch (environment) {
             case "PC":
-                screenshotPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/PC/Elements/Elemental_Support_Column_3/current.png";
-                referencePath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/PC/Elements/Elemental_Support_Column_3/reference.png";
-                resultPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/PC/Elements/Elemental_Support_Column_3/difference.png";
+                screenshotPath = "src/test/resources/screenshots/AuthZone/HomeEnterprisePage/PC/Elements/Elemental_Support_Column_3/current.png";
+                referencePath = "src/test/resources/screenshots/AuthZone/HomeEnterprisePage/PC/Elements/Elemental_Support_Column_3/reference.png";
+                resultPath = "src/test/resources/screenshots/AuthZone/HomeEnterprisePage/PC/Elements/Elemental_Support_Column_3/difference.png";
                 break;
             case "tablet":
-                screenshotPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/tablet/Elements/Elemental_Support_Column_3/current.png";
-                referencePath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/tablet/Elements/Elemental_Support_Column_3/reference.png";
-                resultPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/tablet/Elements/Elemental_Support_Column_3/difference.png";
+                screenshotPath = "src/test/resources/screenshots/AuthZone/HomeEnterprisePage/tablet/Elements/Elemental_Support_Column_3/current.png";
+                referencePath = "src/test/resources/screenshots/AuthZone/HomeEnterprisePage/tablet/Elements/Elemental_Support_Column_3/reference.png";
+                resultPath = "src/test/resources/screenshots/AuthZone/HomeEnterprisePage/tablet/Elements/Elemental_Support_Column_3/difference.png";
                 break;
             case "phone":
-                screenshotPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/phone/Elements/Elemental_Support_Column_3/current.png";
-                referencePath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/phone/Elements/Elemental_Support_Column_3/reference.png";
-                resultPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/phone/Elements/Elemental_Support_Column_3/difference.png";
+                screenshotPath = "src/test/resources/screenshots/AuthZone/HomeEnterprisePage/phone/Elements/Elemental_Support_Column_3/current.png";
+                referencePath = "src/test/resources/screenshots/AuthZone/HomeEnterprisePage/phone/Elements/Elemental_Support_Column_3/reference.png";
+                resultPath = "src/test/resources/screenshots/AuthZone/HomeEnterprisePage/phone/Elements/Elemental_Support_Column_3/difference.png";
                 break;
             default:
                 throw new IllegalArgumentException("Неверный параметр окружения: " + environment);
@@ -841,19 +841,19 @@ public class HomeEnterprisePage extends AuthorizedCommonFunctions {
 
         switch (environment) {
             case "PC":
-                screenshotPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/PC/Elements/Elemental_Support_Column_4/current.png";
+                screenshotPath = "src/test/resources/screenshots/AuthZone/HomeEnterprisePage/PC/Elements/Elemental_Support_Column_4/current.png";
                 referencePath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/PC/Elements/Elemental_Support_Column_4/reference.png";
                 resultPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/PC/Elements/Elemental_Support_Column_4/difference.png";
                 break;
             case "tablet":
-                screenshotPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/tablet/Elements/Elemental_Support_Column_4/current.png";
-                referencePath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/tablet/Elements/Elemental_Support_Column_4/reference.png";
-                resultPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/tablet/Elements/Elemental_Support_Column_4/difference.png";
+                screenshotPath = "src/test/resources/screenshots/AuthZone/HomeEnterprisePage/tablet/Elements/Elemental_Support_Column_4/current.png";
+                referencePath = "src/test/resources/screenshots/AuthZone/HomeEnterprisePage/tablet/Elements/Elemental_Support_Column_4/reference.png";
+                resultPath = "src/test/resources/screenshots/AuthZone/HomeEnterprisePage/tablet/Elements/Elemental_Support_Column_4/difference.png";
                 break;
             case "phone":
-                screenshotPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/phone/Elements/Elemental_Support_Column_4/current.png";
-                referencePath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/phone/Elements/Elemental_Support_Column_4/reference.png";
-                resultPath = "src/test/resources/screenshots/AuthorizedZone/HomeEnterprisePage/phone/Elements/Elemental_Support_Column_4/difference.png";
+                screenshotPath = "src/test/resources/screenshots/AuthZone/HomeEnterprisePage/phone/Elements/Elemental_Support_Column_4/current.png";
+                referencePath = "src/test/resources/screenshots/AuthZone/HomeEnterprisePage/phone/Elements/Elemental_Support_Column_4/reference.png";
+                resultPath = "src/test/resources/screenshots/AuthZone/HomeEnterprisePage/phone/Elements/Elemental_Support_Column_4/difference.png";
                 break;
             default:
                 throw new IllegalArgumentException("Неверный параметр окружения: " + environment);
