@@ -1,24 +1,26 @@
 package Efficiency.Pages.AuthorizedZone;
 
 import Efficiency.AuthorizedCommonFunctions;
+import Efficiency.Providers.ConfigProviderInterface;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.WebDriverRunner;
 import io.qameta.allure.Step;
+import io.restassured.response.Response;
 import net.lightbody.bmp.BrowserMobProxy;
 import net.lightbody.bmp.core.har.Har;
 import net.lightbody.bmp.core.har.HarEntry;
 import org.json.JSONArray;
+import org.openqa.selenium.Cookie;
 import org.openqa.selenium.JavascriptExecutor;
 import org.testng.Assert;
 
 import org.json.JSONObject;
+
+import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.*;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.visible;
@@ -33,6 +35,34 @@ public class HomeEnterprisePage extends AuthorizedCommonFunctions {
     private static final ElementsCollection SideMenu_Services = $$x("//*[@id=\"root\"]/div/div[2]/main/aside/div/div/nav/div/div[2]/div/div/div[1]/div/ul/li");
     private static final ElementsCollection SideMenu_Services_hrefs = $$x("//*[@id=\"root\"]/div/div[2]/main/aside/div/div/nav/div/div[2]/div/div/div[1]/div/ul/a");
     private Map<String, Object> SideMenuData = new HashMap<>();
+
+    //Путь цифровизации
+    private static final SelenideElement CustomerRoute_Diagnostics_Header = $x("//*[@id=\"root\"]/div/div[2]/main/div/div/div/div[1]/div/div[2]/section/div[1]/a/div[1]/p");
+    private static final SelenideElement CustomerRoute_Diagnostics_Href = $x("//*[@id=\"root\"]/div/div[2]/main/div/div/div/div[1]/div/div[2]/section/div[1]/a");
+    private static final SelenideElement CustomerRoute_Diagnostics_Description = $x("//*[@id=\"root\"]/div/div[2]/main/div/div/div/div[1]/div/div[2]/section/div[1]/p");
+    private static final SelenideElement CustomerRoute_Diagnostics_Status = $x("//*[@id=\"root\"]/div/div[2]/main/div/div/div/div[1]/div/div[2]/section/div[1]/p[2]");
+
+    private static final SelenideElement CustomerRoute_Benchmarking_Header = $x("//*[@id=\"root\"]/div/div[2]/main/div/div/div/div[1]/div/div[2]/section/div[2]/a/div[1]/p");
+    private static final SelenideElement CustomerRoute_Benchmarking_Description = $x("//*[@id=\"root\"]/div/div[2]/main/div/div/div/div[1]/div/div[2]/section/div[2]/p");
+    private static final SelenideElement CustomerRoute_Benchmarking_Status = $x("//*[@id=\"root\"]/div/div[2]/main/div/div/div/div[1]/div/div[2]/section/div[2]/p[2]");
+
+    private static final SelenideElement CustomerRoute_DigitalizationPlan_Header = $x("//*[@id=\"root\"]/div/div[2]/main/div/div/div/div[1]/div/div[2]/section/div[3]/a/div[1]/p");
+    private static final SelenideElement CustomerRoute_DigitalizationPlan_Description = $x("//*[@id=\"root\"]/div/div[2]/main/div/div/div/div[1]/div/div[2]/section/div[3]/p");
+    private static final SelenideElement CustomerRoute_DigitalizationPlan_Status = $x("//*[@id=\"root\"]/div/div[2]/main/div/div/div/div[1]/div/div[2]/section/div[3]/p[2]");
+
+    private static final SelenideElement CustomerRoute_StandardSolution_Header = $x("//*[@id=\"root\"]/div/div[2]/main/div/div/div/div[1]/div/div[2]/section/div[4]/a/div[1]/p");
+    private static final SelenideElement CustomerRoute_StandardSolution_Description = $x("//*[@id=\"root\"]/div/div[2]/main/div/div/div/div[1]/div/div[2]/section/div[4]/p[1]");
+    private static final SelenideElement CustomerRoute_StandardSolution_Status = $x("//*[@id=\"root\"]/div/div[2]/main/div/div/div/div[1]/div/div[2]/section/div[4]/p[2]");
+
+    private static final SelenideElement CustomerRoute_ImplementationPlan_Header = $x("//*[@id=\"root\"]/div/div[2]/main/div/div/div/div[1]/div/div[2]/section/div[5]/a/div[1]/p");
+    private static final SelenideElement CustomerRoute_ImplementationPlan_Description = $x("//*[@id=\"root\"]/div/div[2]/main/div/div/div/div[1]/div/div[2]/section/div[5]/p[1]");
+    private static final SelenideElement CustomerRoute_ImplementationPlan_Status = $x("//*[@id=\"root\"]/div/div[2]/main/div/div/div/div[1]/div/div[2]/section/div[5]/p[2]");
+
+    private static final SelenideElement CustomerRoute_SupportMeasures_Header = $x("//*[@id=\"root\"]/div/div[2]/main/div/div/div/div[1]/div/div[2]/section/div[6]/a/div[1]/p");
+    private static final SelenideElement CustomerRoute_SupportMeasures_Description = $x("//*[@id=\"root\"]/div/div[2]/main/div/div/div/div[1]/div/div[2]/section/div[6]/p[1]");
+    private static final SelenideElement CustomerRoute_SupportMeasures_Status = $x("//*[@id=\"root\"]/div/div[2]/main/div/div/div/div[1]/div/div[2]/section/div[6]/p[2]");
+
+    private Map<String, Object> CustomerRouteData = new HashMap<>();
 
     //Моя лента
 
@@ -148,6 +178,240 @@ public class HomeEnterprisePage extends AuthorizedCommonFunctions {
         }
 
     }
+
+    @Step("Получить данные из Базы данных для Путь цифровизации.Диагностика")
+    public void getCustomerRouteDiagnosticsDataFromDB() throws SQLException {
+        CustomerRouteData.clear();
+        Map<String, Object> dbData = super.getDataFromDB("public.content_30776", "741648");
+        CustomerRouteData.putAll(dbData);
+    }
+    @Step("Проверка корректности заголовка плажки Путь цифровизации.Диагностика")
+    public void Assert_CustomerRoute_Diagnostics_Header(){
+        CustomerRoute_Diagnostics_Header.scrollTo().shouldBe(visible);
+        String actualTitle = CustomerRoute_Diagnostics_Header.getText();
+        String expectedTitle = (String) CustomerRouteData.get("title");
+        Assert.assertEquals(actualTitle, expectedTitle, "Заголовок не соответствует ожидаемому значению.");
+    }
+    @Step("Проверка корректности текстового содержания плажки Путь цифровизации.Диагностика")
+    public void Assert_CustomerRoute_Diagnostics_Text(){
+        CustomerRoute_Diagnostics_Description.scrollTo().shouldBe(visible);
+        String actualTitle = CustomerRoute_Diagnostics_Description.getText();
+        String expectedTitle = (String) CustomerRouteData.get("description");
+        Assert.assertEquals(actualTitle, expectedTitle, "Содержание не соответствует ожидаемому значению.");
+    }
+    @Step("Измение статуса на Пройдено для плажки Путь цифровизации.Диагностика, через нажатие")
+    public void Click_CustomerRoute_Diagnostics(){
+        executeJavaScript("window.scrollTo(0, 0);");
+        CustomerRoute_Diagnostics_Header.click();
+        $("#content").shouldBe(visible);
+        open(ConfigProviderInterface.authorizedEnterpriseURL);
+    }
+    @Step("Проверка отображения статуса Пройдено для плажки Путь цифровизации.Диагностика")
+    public void Assert_CustomerRoute_Diagnostics_Status_Enabled(){
+        String actualTitle = CustomerRoute_Diagnostics_Status.shouldBe(visible).getText();
+        Assert.assertEquals(actualTitle, "Пройдено", "Статус не соответствует ожидаемому значению.");
+    }
+    @Step("Проверка отсутствия статуса Пройдено для плажки Путь цифровизации.Диагностика")
+    public void Assert_CustomerRoute_Diagnostics_Status_NotEnabled(){
+        Assert.assertNotEquals( CustomerRoute_Diagnostics_Status.exists(), true, "Статус не пропал после удаления данных из БД");
+    }
+
+
+    @Step("Получить данные из Базы данных для Путь цифровизации.Бенчмаркинг")
+    public void getCustomerRouteBenchmarkingDataFromDB() throws SQLException {
+        CustomerRouteData.clear();
+        Map<String, Object> dbData = super.getDataFromDB("public.content_30776", "741647");
+        CustomerRouteData.putAll(dbData);
+    }
+    @Step("Проверка корректности заголовка плажки Путь цифровизации.Бенчмаркинг")
+    public void Assert_CustomerRoute_Benchmarking_Header(){
+        CustomerRoute_Benchmarking_Header.scrollTo().shouldBe(visible);
+        String actualTitle = CustomerRoute_Benchmarking_Header.getText();
+        String expectedTitle = (String) CustomerRouteData.get("title");
+        Assert.assertEquals(actualTitle, expectedTitle, "Заголовок не соответствует ожидаемому значению.");
+    }
+    @Step("Проверка корректности текстового содержания плажки Путь цифровизации.Бенчмаркинг")
+    public void Assert_CustomerRoute_Benchmarking_Text(){
+        CustomerRoute_Benchmarking_Description.scrollTo().shouldBe(visible);
+        String actualTitle = CustomerRoute_Benchmarking_Description.getText();
+        String expectedTitle = (String) CustomerRouteData.get("description");
+        Assert.assertEquals(actualTitle, expectedTitle, "Содержание не соответствует ожидаемому значению.");
+    }
+    @Step("Измение статуса на Пройдено для плажки Путь цифровизации.Бенчмаркинг, через нажатие")
+    public void Click_CustomerRoute_Benchmarking(){
+        executeJavaScript("window.scrollTo(0, 0);");
+        CustomerRoute_Benchmarking_Header.click();
+        $("#content").shouldBe(visible);
+        open(ConfigProviderInterface.authorizedEnterpriseURL);
+    }
+    @Step("Проверка отображения статуса пройдено для плажки Путь цифровизации.Бенчмаркинг")
+    public void Assert_CustomerRoute_Benchmarking_Status_Enabled(){
+        String actualTitle = CustomerRoute_Benchmarking_Status.shouldBe(visible).getText();
+        Assert.assertEquals(actualTitle, "Пройдено", "Статус не соответствует ожидаемому значению.");
+    }
+    @Step("Проверка отсутствия статуса Пройдено для плажки Путь цифровизации.Бенчмаркинг")
+    public void Assert_CustomerRoute_Benchmarking_Status_NotEnabled(){
+        Assert.assertNotEquals( CustomerRoute_Benchmarking_Status.exists(), true, "Статус не пропал после удаления данных из БД");
+    }
+
+    @Step("Получить данные из Базы данных для Путь цифровизации.План Цифровизации")
+    public void getCustomerRouteDigitalizationPlanDataFromDB() throws SQLException {
+        CustomerRouteData.clear();
+        Map<String, Object> dbData = super.getDataFromDB("public.content_30776", "741649");
+        CustomerRouteData.putAll(dbData);
+    }
+    @Step("Проверка корректности заголовка плажки Путь цифровизации.План Цифровизации")
+    public void Assert_CustomerRoute_DigitalizationPlan_Header(){
+        CustomerRoute_DigitalizationPlan_Header.scrollTo().shouldBe(visible);
+        String actualTitle = CustomerRoute_DigitalizationPlan_Header.getText();
+        String expectedTitle = (String) CustomerRouteData.get("title");
+        Assert.assertEquals(actualTitle, expectedTitle, "Заголовок не соответствует ожидаемому значению.");
+    }
+    @Step("Проверка корректности текстового содержания плажки Путь цифровизации.План Цифровизации")
+    public void Assert_CustomerRoute_DigitalizationPlan_Text(){
+        CustomerRoute_DigitalizationPlan_Description.scrollTo().shouldBe(visible);
+        String actualTitle = CustomerRoute_DigitalizationPlan_Description.getText();
+        String expectedTitle = (String) CustomerRouteData.get("description");
+        Assert.assertEquals(actualTitle, expectedTitle, "Содержание не соответствует ожидаемому значению.");
+    }
+    @Step("Измение статуса на Пройдено для плажки Путь цифровизации.План Цифровизации, через нажатие")
+    public void Click_CustomerRoute_DigitalizationPlan(){
+        executeJavaScript("window.scrollTo(0, 0);");
+        CustomerRoute_DigitalizationPlan_Header.click();
+        $("#content").shouldBe(visible);
+        open(ConfigProviderInterface.authorizedEnterpriseURL);
+    }
+    @Step("Проверка отображения статуса пройдено для плажки Путь цифровизации.План Цифровизации")
+    public void Assert_CustomerRoute_DigitalizationPlan_Status_Enabled(){
+        String actualTitle = CustomerRoute_DigitalizationPlan_Status.shouldBe(visible).getText();
+        Assert.assertEquals(actualTitle, "Пройдено", "Статус не соответствует ожидаемому значению.");
+    }
+    @Step("Проверка отсутствия статуса Пройдено для плажки Путь цифровизации.План Цифровизации")
+    public void Assert_CustomerRoute_DigitalizationPlan_Status_NotEnabled(){
+        Assert.assertNotEquals( CustomerRoute_DigitalizationPlan_Status.exists(), true, "Статус не пропал после удаления данных из БД");
+    }
+
+
+
+    @Step("Получить данные из Базы данных для Путь цифровизации.Подбор типовых решений")
+    public void getCustomerRouteStandardSolutionDataFromDB() throws SQLException {
+        CustomerRouteData.clear();
+        Map<String, Object> dbData = super.getDataFromDB("public.content_30776", "741646");
+        CustomerRouteData.putAll(dbData);
+    }
+    @Step("Проверка корректности заголовка плажки Путь цифровизации.Подбор типовых решений")
+    public void Assert_CustomerRoute_StandardSolution_Header(){
+        CustomerRoute_StandardSolution_Header.scrollTo().shouldBe(visible);
+        String actualTitle = CustomerRoute_StandardSolution_Header.getText();
+        String expectedTitle = (String) CustomerRouteData.get("title");
+        Assert.assertEquals(actualTitle, expectedTitle, "Заголовок не соответствует ожидаемому значению.");
+    }
+    @Step("Проверка корректности текстового содержания плажки Путь цифровизации.Подбор типовых решений")
+    public void Assert_CustomerRoute_StandardSolution_Text(){
+        CustomerRoute_StandardSolution_Description.scrollTo().shouldBe(visible);
+        String actualTitle = CustomerRoute_StandardSolution_Description.getText();
+        String expectedTitle = (String) CustomerRouteData.get("description");
+        Assert.assertEquals(actualTitle, expectedTitle, "Содержание не соответствует ожидаемому значению.");
+    }
+    @Step("Измение статуса на Пройдено для плажки Путь цифровизации.Подбор типовых решений, через нажатие")
+    public void Click_CustomerRoute_StandardSolution(){
+        executeJavaScript("window.scrollTo(0, 0);");
+        CustomerRoute_StandardSolution_Header.click();
+        $("#content").shouldBe(visible);
+        open(ConfigProviderInterface.authorizedEnterpriseURL);
+    }
+    @Step("Проверка отображения статуса пройдено для плажки Путь цифровизации.Подбор типовых решений")
+    public void Assert_CustomerRoute_StandardSolution_Status_Enabled(){
+        String actualTitle = CustomerRoute_StandardSolution_Status.shouldBe(visible).getText();
+        Assert.assertEquals(actualTitle, "Пройдено", "Статус не соответствует ожидаемому значению.");
+    }
+    @Step("Проверка отсутствия статуса Пройдено для плажки Путь цифровизации.План Цифровизации")
+    public void Assert_CustomerRoute_StandardSolution_Status_NotEnabled(){
+        Assert.assertNotEquals( CustomerRoute_StandardSolution_Status.exists(), true, "Статус не пропал после удаления данных из БД");
+    }
+
+
+    @Step("Получить данные из Базы данных для Путь цифровизации.План внедрения")
+    public void getCustomerRouteImplementationPlanDataFromDB() throws SQLException {
+        CustomerRouteData.clear();
+        Map<String, Object> dbData = super.getDataFromDB("public.content_30776", "741645");
+        CustomerRouteData.putAll(dbData);
+    }
+    @Step("Проверка корректности заголовка плажки Путь цифровизации.План внедрения")
+    public void Assert_CustomerRoute_ImplementationPlan_Header(){
+        CustomerRoute_ImplementationPlan_Header.scrollTo().shouldBe(visible);
+        String actualTitle = CustomerRoute_ImplementationPlan_Header.getText();
+        String expectedTitle = (String) CustomerRouteData.get("title");
+        Assert.assertEquals(actualTitle, expectedTitle, "Заголовок не соответствует ожидаемому значению.");
+    }
+    @Step("Проверка корректности текстового содержания плажки Путь цифровизации.План внедрения")
+    public void Assert_CustomerRoute_ImplementationPlan_Text(){
+        CustomerRoute_ImplementationPlan_Description.scrollTo().shouldBe(visible);
+        String actualTitle = CustomerRoute_ImplementationPlan_Description.getText();
+        String expectedTitle = (String) CustomerRouteData.get("description");
+        Assert.assertEquals(actualTitle, expectedTitle, "Содержание не соответствует ожидаемому значению.");
+    }
+    @Step("Измение статуса на Пройдено для плажки Путь цифровизации.План внедрения, через нажатие")
+    public void Click_CustomerRoute_ImplementationPlan(){
+        executeJavaScript("window.scrollTo(0, 0);");
+        CustomerRoute_ImplementationPlan_Header.click();
+        $("#content").shouldBe(visible);
+        open(ConfigProviderInterface.authorizedEnterpriseURL);
+    }
+    @Step("Проверка отображения статуса пройдено для плажки Путь цифровизации.План внедрения")
+    public void Assert_CustomerRoute_ImplementationPlan_Status_Enabled(){
+        String actualTitle = CustomerRoute_ImplementationPlan_Status.shouldBe(visible).getText();
+        Assert.assertEquals(actualTitle, "Пройдено", "Статус не соответствует ожидаемому значению.");
+    }
+    @Step("Проверка отсутствия статуса Пройдено для плажки Путь цифровизации.План Цифровизации")
+    public void Assert_CustomerRoute_ImplementationPlan_Status_NotEnabled(){
+        Assert.assertNotEquals( CustomerRoute_ImplementationPlan_Status.exists(), true, "Статус не пропал после удаления данных из БД");
+    }
+
+    @Step("Получить данные из Базы данных для Путь цифровизации.Меры поддержки")
+    public void getCustomerRouteSupportMeasuresDataFromDB() throws SQLException {
+        CustomerRouteData.clear();
+        Map<String, Object> dbData = super.getDataFromDB("public.content_30776", "741692");
+        CustomerRouteData.putAll(dbData);
+    }
+    @Step("Проверка корректности заголовка плажки Путь цифровизации.Меры поддержки")
+    public void Assert_CustomerRoute_SupportMeasures_Header(){
+        CustomerRoute_SupportMeasures_Header.scrollTo().shouldBe(visible);
+        String actualTitle = CustomerRoute_SupportMeasures_Header.getText();
+        String expectedTitle = (String) CustomerRouteData.get("title");
+        Assert.assertEquals(actualTitle, expectedTitle, "Заголовок не соответствует ожидаемому значению.");
+    }
+    @Step("Проверка корректности текстового содержания плажки Путь цифровизации.Меры поддержки")
+    public void Assert_CustomerRoute_SupportMeasures_Text(){
+        CustomerRoute_SupportMeasures_Description.scrollTo().shouldBe(visible);
+        String actualTitle = CustomerRoute_SupportMeasures_Description.getText();
+        String expectedTitle = (String) CustomerRouteData.get("description");
+        Assert.assertEquals(actualTitle, expectedTitle, "Содержание не соответствует ожидаемому значению.");
+    }
+    @Step("Измение статуса на Пройдено для плажки Путь цифровизации.Меры поддержки, через нажатие")
+    public void Click_CustomerRoute_SupportMeasures(){
+        executeJavaScript("window.scrollTo(0, 0);");
+        CustomerRoute_SupportMeasures_Header.click();
+        $("#content").shouldBe(visible);
+        open(ConfigProviderInterface.authorizedEnterpriseURL);
+    }
+    @Step("Проверка отображения статуса пройдено для плажки Путь цифровизации.Меры поддержки")
+    public void Assert_CustomerRoute_SupportMeasures_Status_Enabled(){
+        String actualTitle = CustomerRoute_SupportMeasures_Status.shouldBe(visible).getText();
+        Assert.assertEquals(actualTitle, "Пройдено", "Статус не соответствует ожидаемому значению.");
+    }
+    @Step("Проверка отсутствия статуса Пройдено для плажки Путь цифровизации.План Цифровизации")
+    public void Assert_CustomerRoute_SupportMeasures_Status_NotEnabled(){
+        Assert.assertNotEquals( CustomerRoute_SupportMeasures_Status.exists(), true, "Статус не пропал после удаления данных из БД");
+    }
+
+    @Step("Удалить информацию о пройденном пути цифровизации из базы данных")
+    public void deleteCustomerRouteFromDB() throws SQLException {
+      super.deleteDataFromDB("efficiency.steps_customer_route", "86e4a76b-75e0-4dd7-950e-fdc993c35ebc");
+      refresh();
+    }
+
+
 
     @Step("Получить данные из API для виджета диагностика")
     public void getDiagnosticWidgetDataFromApi() {

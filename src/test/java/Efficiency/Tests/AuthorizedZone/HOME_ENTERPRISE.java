@@ -44,6 +44,81 @@ public class HOME_ENTERPRISE extends TestBase {
         homeEnterprisePage.Assert_SideMenu_ServicesData_URLs();
     }
 
+    @Test(priority = 2, description = "Путь цифровизации. Диагностика")
+    public void Customer_Route_Diagnostics_Tab_TEST() throws SQLException {
+        HomeEnterprisePage homeEnterprisePage = open(ConfigProviderInterface.authorizedEnterpriseURL, HomeEnterprisePage.class);
+        homeEnterprisePage.getCustomerRouteDiagnosticsDataFromDB();
+        homeEnterprisePage.Assert_CustomerRoute_Diagnostics_Header();
+        homeEnterprisePage.Assert_CustomerRoute_Diagnostics_Text();
+        homeEnterprisePage.Click_CustomerRoute_Diagnostics();
+        homeEnterprisePage.Assert_CustomerRoute_Diagnostics_Status_Enabled();
+        homeEnterprisePage.deleteCustomerRouteFromDB();
+        homeEnterprisePage.Assert_CustomerRoute_Diagnostics_Status_NotEnabled();
+
+    }
+
+    @Test(priority = 3, description = "Путь цифровизации. Бенчмаркинг")
+    public void Customer_Route_Benchmarking_Tab_TEST() throws SQLException {
+        HomeEnterprisePage homeEnterprisePage = open(ConfigProviderInterface.authorizedEnterpriseURL, HomeEnterprisePage.class);
+        homeEnterprisePage.getCustomerRouteBenchmarkingDataFromDB();
+        homeEnterprisePage.Assert_CustomerRoute_Benchmarking_Header();
+        homeEnterprisePage.Assert_CustomerRoute_Benchmarking_Text();
+        homeEnterprisePage.Click_CustomerRoute_Benchmarking();
+        homeEnterprisePage.Assert_CustomerRoute_Benchmarking_Status_Enabled();
+        homeEnterprisePage.deleteCustomerRouteFromDB();
+        homeEnterprisePage.Assert_CustomerRoute_Benchmarking_Status_NotEnabled();
+
+    }
+
+    @Test(priority = 4, description = "Путь цифровизации. План цифровизации")
+    public void Customer_Route_DigitalizationPlan_Tab_TEST() throws SQLException {
+        HomeEnterprisePage homeEnterprisePage = open(ConfigProviderInterface.authorizedEnterpriseURL, HomeEnterprisePage.class);
+        homeEnterprisePage.getCustomerRouteDigitalizationPlanDataFromDB();
+        homeEnterprisePage.Assert_CustomerRoute_DigitalizationPlan_Header();
+        homeEnterprisePage.Assert_CustomerRoute_DigitalizationPlan_Text();
+        homeEnterprisePage.Click_CustomerRoute_DigitalizationPlan();
+        homeEnterprisePage.Assert_CustomerRoute_DigitalizationPlan_Status_Enabled();
+        homeEnterprisePage.deleteCustomerRouteFromDB();
+        homeEnterprisePage.Assert_CustomerRoute_DigitalizationPlan_Status_NotEnabled();
+
+    }
+
+    @Test(priority = 5, description = "Путь цифровизации. Подбор типовых решений")
+    public void Customer_Route_StandardSolution_Tab_TEST() throws SQLException {
+        HomeEnterprisePage homeEnterprisePage = open(ConfigProviderInterface.authorizedEnterpriseURL, HomeEnterprisePage.class);
+        homeEnterprisePage.getCustomerRouteStandardSolutionDataFromDB();
+        homeEnterprisePage.Assert_CustomerRoute_StandardSolution_Header();
+        homeEnterprisePage.Assert_CustomerRoute_StandardSolution_Text();
+        homeEnterprisePage.Click_CustomerRoute_StandardSolution();
+        homeEnterprisePage.Assert_CustomerRoute_StandardSolution_Status_Enabled();
+        homeEnterprisePage.deleteCustomerRouteFromDB();
+        homeEnterprisePage.Assert_CustomerRoute_StandardSolution_Status_NotEnabled();
+    }
+
+    @Test(priority = 6, description = "Путь цифровизации. План внедрения")
+    public void Customer_Route_ImplementationPlan_Tab_TEST() throws SQLException {
+        HomeEnterprisePage homeEnterprisePage = open(ConfigProviderInterface.authorizedEnterpriseURL, HomeEnterprisePage.class);
+        homeEnterprisePage.getCustomerRouteImplementationPlanDataFromDB();
+        homeEnterprisePage.Assert_CustomerRoute_ImplementationPlan_Header();
+        homeEnterprisePage.Assert_CustomerRoute_ImplementationPlan_Text();
+        homeEnterprisePage.Click_CustomerRoute_ImplementationPlan();
+        homeEnterprisePage.Assert_CustomerRoute_ImplementationPlan_Status_Enabled();
+        homeEnterprisePage.deleteCustomerRouteFromDB();
+        homeEnterprisePage.Assert_CustomerRoute_ImplementationPlan_Status_NotEnabled();
+    }
+
+    @Test(priority = 2, description = "Путь цифровизации. Меры поддержки")
+    public void Customer_Route_SupportMeasures_Tab_TEST() throws SQLException {
+        HomeEnterprisePage homeEnterprisePage = open(ConfigProviderInterface.authorizedEnterpriseURL, HomeEnterprisePage.class);
+        homeEnterprisePage.getCustomerRouteSupportMeasuresDataFromDB();
+        homeEnterprisePage.Assert_CustomerRoute_SupportMeasures_Header();
+        homeEnterprisePage.Assert_CustomerRoute_SupportMeasures_Text();
+        homeEnterprisePage.Click_CustomerRoute_SupportMeasures();
+        homeEnterprisePage.Assert_CustomerRoute_SupportMeasures_Status_Enabled();
+        homeEnterprisePage.deleteCustomerRouteFromDB();
+        homeEnterprisePage.Assert_CustomerRoute_SupportMeasures_Status_NotEnabled();
+    }
+
 
 
     @Test(priority = 2, description = "Авторизованная зона. Предприятие. Моя Лента. Диагностика")

@@ -103,4 +103,23 @@ public class AuthorizedCommonFunctions extends CommonFunctions{
 
     }
 
+
+    @Step("Удалить информацию из базы данных")
+    public void deleteDataFromDB(String tableName, String UserId) throws SQLException {
+        String query = "DELETE FROM " + tableName + " WHERE user_id = ?::UUID";
+
+        try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            // Установить значение userId в запрос
+            pstmt.setString(1, UserId);
+
+            // Выполнить запрос
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
