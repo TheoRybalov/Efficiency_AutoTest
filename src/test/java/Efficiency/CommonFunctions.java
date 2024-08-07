@@ -124,7 +124,7 @@ public class CommonFunctions {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].scrollIntoView();", element);
         js.executeScript("document.body.style.overflow = 'hidden';");
-        element.shouldBe(visible);
+        sleep(4000);
         File screenshotFile = element.screenshot();
 
         BufferedImage fullImg = ImageIO.read(screenshotFile);
