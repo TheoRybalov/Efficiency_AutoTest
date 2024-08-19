@@ -6,8 +6,10 @@ import io.qameta.allure.Step;
 import org.openqa.selenium.Keys;
 import org.testng.Assert;
 
+import static com.codeborne.selenide.Condition.value;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$x;
+import static com.codeborne.selenide.Selenide.sleep;
 
 public class LoginPage {
     private static final SelenideElement loginField = $x("//*[@id=\"Login\"]");
@@ -16,13 +18,11 @@ public class LoginPage {
 
     @Step("Ввести имя пользователя в поле Логин")
     public void enterLogin(String login){
-        loginField.sendKeys(login);
-        Assert.assertEquals(loginField.getValue(), login);
+        loginField.setValue(login).shouldHave(value(login));
     }
     @Step("Ввести пароль для пользователя")
     public void enterPassword(String password){
-        passwordField.sendKeys(password);
-        Assert.assertEquals(passwordField.getValue(), password);
+        passwordField.setValue(password).shouldHave(value(password));
     }
     @Step("Нажать кнопку 'Войти'")
     public void loginButton_click(){

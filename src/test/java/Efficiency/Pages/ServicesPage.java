@@ -18,7 +18,7 @@ public class ServicesPage extends CommonFunctions {
     private static final SelenideElement cookieButton = $x("//*[@id=\"rcc-confirm-button\"]");
 
     @Step("Принимаем куки")
-    public void AcceptCookie(){cookieButton.shouldBe(visible).getText();}
+    public void AcceptCookie(){cookieButton.shouldBe(visible).click();}
 
     @Step("Скриншот страницы полностью")
     public void TakeScreenshotOfFullPage(String environment) throws IOException {
