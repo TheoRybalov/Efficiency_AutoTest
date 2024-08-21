@@ -1,0 +1,394 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="ONBOARDING">
+
+
+    <listeners>
+        <listener class-name="Efficiency.TestListener.TestListener" />
+
+    </listeners>
+
+    <test name="About National Project (version for Phone)">
+        <parameter name="environment" value="phone"/>
+        <parameter name="browser" value="chrome"/>
+        <parameter name="mode" value="headless"/>
+        <classes>
+            <class name="Efficiency.Tests.ABOUT_NATIONAL_PROJECT">
+                <methods>
+                    <include name="MarkupScreenshot_TEST"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="About National Project (version for Tablet)">
+        <parameter name="environment" value="tablet"/>
+        <parameter name="browser" value="chrome"/>
+        <parameter name="mode" value="headless"/>
+        <classes>
+            <class name="Efficiency.Tests.ABOUT_NATIONAL_PROJECT">
+                <methods>
+                    <include name="MarkupScreenshot_TEST"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="About National Project (version for PC)">
+        <parameter name="environment" value="PC"/>
+        <parameter name="browser" value="chrome"/>
+        <parameter name="mode" value="headless"/>
+        <classes>
+            <class name="Efficiency.Tests.ABOUT_NATIONAL_PROJECT"/>
+        </classes>
+    </test>
+
+    <test name="About Project (version for Phone)">
+        <parameter name="environment" value="phone"/>
+        <parameter name="browser" value="chrome"/>
+        <parameter name="mode" value="headless"/>
+        <classes>
+            <class name="Efficiency.Tests.ABOUT_PROJECT">
+                <methods>
+                    <include name="LayoutScreenshot_TEST"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="About Project (version for Tablet)">
+        <parameter name="environment" value="tablet"/>
+        <parameter name="browser" value="chrome"/>
+        <parameter name="mode" value="headless"/>
+        <classes>
+            <class name="Efficiency.Tests.ABOUT_PROJECT">
+                <methods>
+                    <include name="LayoutScreenshot_TEST"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="About Project (version for PC)">
+        <parameter name="environment" value="PC"/>
+        <parameter name="browser" value="chrome"/>
+        <parameter name="mode" value="headless"/>
+        <classes>
+            <class name="Efficiency.Tests.ABOUT_PROJECT"/>
+        </classes>
+    </test>
+
+    <test name="Contacts (version for Phone)">
+        <parameter name="environment" value="phone"/>
+        <parameter name="browser" value="chrome"/>
+        <parameter name="mode" value="headless"/>
+        <classes>
+            <class name="Efficiency.Tests.CONTACTS">
+                <methods>
+                    <include name="LayoutScreenshot_TEST"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Contacts (version for Tablet)">
+        <parameter name="environment" value="tablet"/>
+        <parameter name="browser" value="chrome"/>
+        <parameter name="mode" value="headless"/>
+        <classes>
+            <class name="Efficiency.Tests.CONTACTS">
+                <methods>
+                    <include name="LayoutScreenshot_TEST"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Contacts (version for PC)">
+        <parameter name="environment" value="PC"/>
+        <parameter name="browser" value="chrome"/>
+        <parameter name="mode" value="headless"/>
+        <classes>
+            <class name="Efficiency.Tests.CONTACTS"/>
+        </classes>
+    </test>
+
+    <test name="Enterprise (version for Phone)">
+        <parameter name="environment" value="phone"/>
+        <parameter name="browser" value="chrome"/>
+        <parameter name="mode" value="headless"/>
+        <classes>
+            <class name="Efficiency.Tests.ENTERPRISE">
+                <methods>
+                    <include name="MarkupScreenshot_TEST"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Enterprise (version for Tablet)">
+        <parameter name="environment" value="tablet"/>
+        <parameter name="browser" value="chrome"/>
+        <parameter name="mode" value="headless"/>
+        <classes>
+            <class name="Efficiency.Tests.ENTERPRISE">
+                <methods>
+                    <include name="MarkupScreenshot_TEST"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Enterprise (version for PC)">
+        <parameter name="environment" value="PC"/>
+        <parameter name="browser" value="chrome"/>
+        <parameter name="mode" value="headless"/>
+        <classes>
+            <class name="Efficiency.Tests.ENTERPRISE"/>
+        </classes>
+    </test>
+
+    <test name="FAQ (version for Phone)">
+        <parameter name="environment" value="phone"/>
+        <parameter name="browser" value="chrome"/>
+        <parameter name="mode" value="headless"/>
+        <classes>
+            <class name="Efficiency.Tests.FAQ">
+                <methods>
+                    <include name="LayoutScreenshot_TEST"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="FAQ (version for Tablet)">
+        <parameter name="environment" value="tablet"/>
+        <parameter name="browser" value="chrome"/>
+        <parameter name="mode" value="headless"/>
+        <classes>
+            <class name="Efficiency.Tests.FAQ">
+                <methods>
+                    <include name="LayoutScreenshot_TEST"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="FAQ (version for PC)">
+        <parameter name="environment" value="PC"/>
+        <parameter name="browser" value="chrome"/>
+        <parameter name="mode" value="headless"/>
+        <classes>
+            <class name="Efficiency.Tests.FAQ"/>
+        </classes>
+    </test>
+
+    <test name="Home (version for Phone)">
+        <parameter name="environment" value="phone"/>
+        <parameter name="browser" value="chrome"/>
+        <parameter name="mode" value="headless"/>
+        <classes>
+            <class name="Efficiency.Tests.HOME">
+                <methods>
+                    <include name="LayoutScreenshot_TEST"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Home (version for Tablet)">
+        <parameter name="environment" value="tablet"/>
+        <parameter name="browser" value="chrome"/>
+        <parameter name="mode" value="headless"/>
+        <classes>
+            <class name="Efficiency.Tests.HOME">
+                <methods>
+                    <include name="LayoutScreenshot_TEST"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Home (version for PC)">
+        <parameter name="environment" value="PC"/>
+        <parameter name="browser" value="chrome"/>
+        <parameter name="mode" value="headless"/>
+        <classes>
+            <class name="Efficiency.Tests.HOME"/>
+        </classes>
+    </test>
+
+    <test name="Industries (version for Phone)">
+        <parameter name="environment" value="phone"/>
+        <parameter name="browser" value="chrome"/>
+        <parameter name="mode" value="headless"/>
+        <classes>
+            <class name="Efficiency.Tests.INDUSTRIES">
+                <methods>
+                    <include name="MarkupScreenShot_TEST"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Industries (version for Tablet)">
+        <parameter name="environment" value="tablet"/>
+        <parameter name="browser" value="chrome"/>
+        <parameter name="mode" value="headless"/>
+        <classes>
+            <class name="Efficiency.Tests.INDUSTRIES">
+                <methods>
+                    <include name="MarkupScreenShot_TEST"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Industries (version for PC)">
+        <parameter name="environment" value="PC"/>
+        <parameter name="browser" value="chrome"/>
+        <parameter name="mode" value="headless"/>
+        <classes>
+            <class name="Efficiency.Tests.INDUSTRIES"/>
+        </classes>
+    </test>
+
+    <test name="Press-center (version for Phone)">
+        <parameter name="environment" value="phone"/>
+        <parameter name="browser" value="chrome"/>
+        <parameter name="mode" value="headless"/>
+        <classes>
+            <class name="Efficiency.Tests.PRESS_CENTER">
+                <methods>
+                    <include name="LayoutScreenshot_TEST"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Press-center (version for Tablet)">
+        <parameter name="environment" value="tablet"/>
+        <parameter name="browser" value="chrome"/>
+        <parameter name="mode" value="headless"/>
+        <classes>
+            <class name="Efficiency.Tests.PRESS_CENTER">
+                <methods>
+                    <include name="LayoutScreenshot_TEST"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Press-center (version for PC)">
+        <parameter name="environment" value="PC"/>
+        <parameter name="browser" value="chrome"/>
+        <parameter name="mode" value="headless"/>
+        <classes>
+            <class name="Efficiency.Tests.PRESS_CENTER"/>
+        </classes>
+    </test>
+
+    <test name="Providers (version for Phone)">
+        <parameter name="environment" value="phone"/>
+        <parameter name="browser" value="chrome"/>
+        <parameter name="mode" value="headless"/>
+        <classes>
+            <class name="Efficiency.Tests.PROVIDERS">
+                <methods>
+                    <include name="LayoutScreenshot_TEST"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Providers (version for Tablet)">
+        <parameter name="environment" value="tablet"/>
+        <parameter name="browser" value="chrome"/>
+        <parameter name="mode" value="headless"/>
+        <classes>
+            <class name="Efficiency.Tests.PROVIDERS">
+                <methods>
+                    <include name="LayoutScreenshot_TEST"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Providers (version for PC)">
+        <parameter name="environment" value="PC"/>
+        <parameter name="browser" value="chrome"/>
+        <parameter name="mode" value="headless"/>
+        <classes>
+            <class name="Efficiency.Tests.PROVIDERS"/>
+        </classes>
+    </test>
+
+    <test name="Services (version for Phone)">
+        <parameter name="environment" value="phone"/>
+        <parameter name="browser" value="chrome"/>
+        <parameter name="mode" value="headless"/>
+        <classes>
+            <class name="Efficiency.Tests.SERVICES">
+                <methods>
+                    <include name="MarkupScreenshot_TEST"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Services (version for Tablet)">
+        <parameter name="environment" value="tablet"/>
+        <parameter name="browser" value="chrome"/>
+        <parameter name="mode" value="headless"/>
+        <classes>
+            <class name="Efficiency.Tests.SERVICES">
+                <methods>
+                    <include name="MarkupScreenshot_TEST"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Services (version for PC)">
+        <parameter name="environment" value="PC"/>
+        <parameter name="browser" value="chrome"/>
+        <parameter name="mode" value="headless"/>
+        <classes>
+            <class name="Efficiency.Tests.SERVICES"/>
+        </classes>
+    </test>
+
+    <test name="Supervisory Boards (version for Phone)">
+        <parameter name="environment" value="phone"/>
+        <parameter name="browser" value="chrome"/>
+        <parameter name="mode" value="headless"/>
+        <classes>
+            <class name="Efficiency.Tests.SUPERVISORY_BOARDS">
+                <methods>
+                    <include name="LayoutScreenshot_TEST"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Supervisory Boards (version for Tablet)">
+        <parameter name="environment" value="tablet"/>
+        <parameter name="browser" value="chrome"/>
+        <parameter name="mode" value="headless"/>
+        <classes>
+            <class name="Efficiency.Tests.SUPERVISORY_BOARDS">
+                <methods>
+                    <include name="LayoutScreenshot_TEST"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Supervisory Boards (version for PC)">
+        <parameter name="environment" value="PC"/>
+        <parameter name="browser" value="chrome"/>
+        <parameter name="mode" value="headless"/>
+        <classes>
+            <class name="Efficiency.Tests.SUPERVISORY_BOARDS"/>
+        </classes>
+    </test>
+</suite>

@@ -1,0 +1,122 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="AUTHORIZED ZONE">
+
+    <listeners>
+        <listener class-name="Efficiency.TestListener.TestListener" />
+    </listeners>
+
+    <test name="Enterprise (version for PC)">
+        <parameter name="environment" value="PC"/>
+        <parameter name="browser" value="chrome"/>
+        <parameter name="mode" value="headless"/>
+        <parameter name="proxy" value="true"/>
+        <classes>
+            <class name="Efficiency.Tests.AuthorizedZone.HOME_ENTERPRISE"/>
+        </classes>
+    </test>
+
+    <test name="Enterprise (version for Tablet)">
+        <parameter name="environment" value="tablet"/>
+        <parameter name="browser" value="chrome"/>
+        <parameter name="mode" value="headless"/>
+        <classes>
+            <class name="Efficiency.Tests.AuthorizedZone.HOME_ENTERPRISE">
+                <methods>
+                    <include name="MyFeed_HTML_Widget_First_Counterparty_TEST"/>
+                    <include name="MyFeed_HTML_Widget_Second_Counterparty_TEST"/>
+                    <include name="ElementalSupportWindow_TEST"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Enterprise (version for Phone)">
+        <parameter name="environment" value="phone"/>
+        <parameter name="browser" value="chrome"/>
+        <parameter name="mode" value="headless"/>
+        <classes>
+            <class name="Efficiency.Tests.AuthorizedZone.HOME_ENTERPRISE">
+                <methods>
+                    <include name="MyFeed_HTML_Widget_First_Counterparty_TEST"/>
+                    <include name="MyFeed_HTML_Widget_Second_Counterparty_TEST"/>
+                    <include name="ElementalSupportWindow_TEST"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Expert (version for PC)">
+        <parameter name="environment" value="PC"/>
+        <parameter name="browser" value="chrome"/>
+        <parameter name="mode" value="headless"/>
+        <parameter name="proxy" value="true"/>
+        <classes>
+            <class name="Efficiency.Tests.AuthorizedZone.HOME_EXPERT"/>
+        </classes>
+    </test>
+
+    <test name="Expert (version for Tablet)">
+        <parameter name="environment" value="tablet"/>
+        <parameter name="browser" value="chrome"/>
+        <parameter name="mode" value="headless"/>
+        <classes>
+            <class name="Efficiency.Tests.AuthorizedZone.HOME_EXPERT">
+                <methods>
+                    <include name="Counter_Agent_Display_TEST"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Expert (version for Phone)">
+        <parameter name="environment" value="phone"/>
+        <parameter name="browser" value="chrome"/>
+        <parameter name="mode" value="headless"/>
+        <classes>
+            <class name="Efficiency.Tests.AuthorizedZone.HOME_EXPERT">
+                <methods>
+                    <include name="Counter_Agent_Display_TEST"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+
+    <test name="Provider (version for PC)">
+        <parameter name="environment" value="PC"/>
+        <parameter name="browser" value="chrome"/>
+        <parameter name="mode" value="headless"/>
+        <parameter name="proxy" value="true"/>
+        <classes>
+            <class name="Efficiency.Tests.AuthorizedZone.HOME_PROVIDER"/>
+        </classes>
+    </test>
+
+    <test name="Provider (version for Tablet)">
+        <parameter name="environment" value="tablet"/>
+        <parameter name="browser" value="chrome"/>
+        <parameter name="mode" value="headless"/>
+        <classes>
+            <class name="Efficiency.Tests.AuthorizedZone.HOME_PROVIDER">
+                <methods>
+                    <include name="Counter_Agent_Display_TEST"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Provider (version for Phone)">
+        <parameter name="environment" value="phone"/>
+        <parameter name="browser" value="chrome"/>
+        <parameter name="mode" value="headless"/>
+        <classes>
+            <class name="Efficiency.Tests.AuthorizedZone.HOME_PROVIDER">
+                <methods>
+                    <include name="Counter_Agent_Display_TEST"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+
+</suite>
